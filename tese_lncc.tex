@@ -38,10 +38,10 @@
 	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
 	sumario=tradicional,% sumário tradicional, com tabulação
 	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
 	french,				% idioma adicional para hifenização
 	spanish,			% idioma adicional para hifenização
-	brazil				% o último idioma é o principal do documento (mude se precisar)
+	brazil,				% o último idioma é o principal do documento (mude se precisar)
+    english
 	]{abntex2}
 
 % ---
@@ -112,13 +112,13 @@
 
 % ---
 % Título
-\titulo{Meu título}
+\titulo{Network Science applied to Biodiversity}
 % Nome do aluno
-\nomeAutor{João da Silva}{Souza}
+\nomeAutor{Pedro Correia de}{Siracusa}
 % Nome do orientador
-\nomeOrientador{Pedro Costa}{dos Santos}
+\nomeOrientador{Artur}{Ziviani}
 % Coorientador(es)
-\coorientador{José Oliveira Pereira}
+\coorientador{Luiz Manoel Rocha Gadelha Júnior}
 %\coorientador[Coorientadores:]{Coorientador 1 e Coorientador 2}
 % ---
 
@@ -201,8 +201,8 @@
 \begin{document}
 
 % Seleciona o idioma do documento (conforme pacotes do babel)
-%\selectlanguage{english}
-\selectlanguage{brazil}
+\selectlanguage{english}
+%\selectlanguage{brazil}
 
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing
@@ -316,7 +316,7 @@
 
    \assinatura{\textbf{Prof. \imprimirorientador, D.Sc.} \\ (Presidente)}
    \assinatura{\textbf{Prof. Minch Yoda, M.Sc.}}
-   \assinatura{\textbf{Prof. Kendall E. Atkinson, Ph.D.}}
+   \assinatura{\textbf{Prof. Charles Darwin, a naturalist}}
    \assinatura{\textbf{Prof. Isaac Newton}}
    \assinatura{\textbf{Prof. Alan Mathison Turing, Ph.D.}}
 
@@ -385,22 +385,22 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 \end{resumo}
 
 % resumo em inglês
-\begin{resumo}[Abstract]
- \begin{otherlanguage*}{english}
-   This is the english abstract.
-
-   \textbf{Keywords}: latex. abntex. text editoration.
- \end{otherlanguage*}
-\end{resumo}
-
-%% resumo em português-br
-%\begin{resumo}[Resumo]
-% \begin{otherlanguage*}{brazil}
-%    Este é um resumo em português do Brasil.
+%\begin{resumo}[Abstract]
+% \begin{otherlanguage*}{english}
+%   This is the english abstract.
 %
-%   \textbf{Palavras-chave}: latex. abntex. editoração de texto.
+%   \textbf{Keywords}: latex. abntex. text editoration.
 % \end{otherlanguage*}
 %\end{resumo}
+
+%% resumo em português-br
+\begin{resumo}[Resumo]
+ \begin{otherlanguage*}{brazil}
+    Este é um resumo em português do Brasil.
+
+   \textbf{Palavras-chave}: latex. abntex. editoração de texto.
+ \end{otherlanguage*}
+\end{resumo}
 
 %% resumo em francês
 %\begin{resumo}[Résumé]
