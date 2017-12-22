@@ -74,8 +74,14 @@
 \usepackage{amsmath,amssymb}	% Permite ambientes matem\'aticos e o uso do \eqref
 
 % ---
+% My Custom packages
+% ---
+\usepackage{float}
+
+% ---
 % CONFIGURAÇÕES DE PACOTES
 % ---
+
 
 % ---
 % Configurações do pacote backref
@@ -124,14 +130,16 @@
 
 % ---
 % Local
-\local{Petrópolis, RJ - Brasil}
+\local{Petrópolis, RJ - Brazil}
 % Data
-\data{Junho de 2016}
+\data{\today}
 % Instituição
 \instituicao{%
-  Laboratório Nacional de Computação Científica
+  %Laboratório Nacional de Computação Científica
+  National Laboratory for Scientific Computing
   \par
-  Programa de Pós-Graduação em Modelagem Computacional}
+  %Programa de Pós-Graduação em Modelagem Computacional
+  Computational Modeling Graduate Program}
 % ---
 
 % ---
@@ -173,7 +181,7 @@
     	citecolor=blue,        		% color of links to bibliography
     	filecolor=magenta,      		% color of file links
 		urlcolor=blue,
-		bookmarksdepth=4
+		bookmarksdepth=3
 }
 \makeatother
 % ---
@@ -197,7 +205,6 @@
 % ----
 % Início do documento
 % ----
-
 \begin{document}
 
 % Seleciona o idioma do documento (conforme pacotes do babel)
@@ -267,9 +274,9 @@
 	\imprimirdata.}\\
 	
 	\hspace{0.5cm}
-		1. Palavra-chave1.
-		2. Palavra-chave2.
-		2. Palavra-chave3.
+		1. Data Science.
+		2. Networks.
+		2. Biodiversity.
 		I. \imprimirUltimoSobrenomeOrientador,{ }\imprimirNomeOrientador.
 		II. LNCC/MCTIC.
 		III. \labelTitulo
@@ -465,8 +472,6 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 \cleardoublepage
 % ---
 
-
-
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
 % ----------------------------------------------------------
@@ -475,10 +480,12 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % ----------------------------------------------------------
 % Capítulos
 % ----------------------------------------------------------
-\include{capitulos/introducao}
-\include{capitulos/capitulo2} 
-\include{capitulos/capitulo3}
-\include{capitulos/capitulo4}
+\setcounter{secnumdepth}{3}
+\include{chapters/introduction}
+\include{chapters/biodiversity_data}
+\include{chapters/network_models}
+\include{chapters/casestudy_ub}
+\include{chapters/conclusion_perspectives}
 
 % ---
 
@@ -492,7 +499,7 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % ---
 % Conclusão
 % ---
-\include{capitulos/conclusao}
+%\include{capitulos/conclusao}
 % ---
 
 % ----------------------------------------------------------
@@ -504,7 +511,7 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{bibliografia}
+\bibliography{bibliography}
 
 % ----------------------------------------------------------
 % Glossário
