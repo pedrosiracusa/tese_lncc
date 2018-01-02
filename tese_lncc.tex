@@ -77,6 +77,8 @@
 % My Custom packages
 % ---
 \usepackage{float}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{subcaption}
 
 % ---
 % CONFIGURAÇÕES DE PACOTES
@@ -450,6 +452,9 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 \begin{siglas}
   \item[ABNT] Associação Brasileira de Normas Técnicas
   \item[abnTeX] ABsurdas Normas para TeX
+  \item[SCN] Species-collectors Network
+  \item[CWN] Collectors Coworking Network
+  
 \end{siglas}
 % ---
 
@@ -457,10 +462,10 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % inserir lista de símbolos
 % ---
 \begin{simbolos}
-  \item[$ \Gamma $] Letra grega Gama
-  \item[$ \Lambda $] Lambda
+  \item[$ \iota $] Greek letter iota (lower case)
+  \item[$ \sigma $] Greek letter sigma (lower case)
   \item[$ \zeta $] Letra grega minúscula zeta
-  \item[$ \in $] Pertence
+  \item[$ \in $] Is a member of
 \end{simbolos}
 % ---
 
@@ -481,6 +486,9 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % Capítulos
 % ----------------------------------------------------------
 \setcounter{secnumdepth}{3}
+%\counterwithin{figure}{section}
+%\counterwithin{table}{section}
+
 \include{chapters/introduction}
 \include{chapters/biodiversity_data}
 \include{chapters/network_models}

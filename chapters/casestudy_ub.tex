@@ -36,7 +36,7 @@ Collectors had historical contributions to the herbarium \ref{table:ub_collector
   \label{table:ub_collectors_florescer}
 \end{table}
 
-\subsection{Dataset Characterization}
+\section{Dataset Characterization}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Taxonomic characterization
@@ -150,7 +150,7 @@ In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely 
 %% Temporal characterization
 Almost $98\%$ of the records contain information about their collection dates.
 The oldest records in the herbarium dataset date from 1800.
-However, more intensive collection activity started around 1960. Around 8000 records in the herbarium date up to that time (Figure \ref{fig:ub_records_timeseries}(c)). %reference cumulative-log figure
+However, more intensive collection activity started around 1960. Around 8000 records in the herbarium date up to that time (Figure \ref{fig:ub_records_timeseries}(c)). 
 From 1950 to present, there are two apparent peaks in collection activity around year 1965 and 2013 (Figure \ref{fig:ub_records_timeseries}(a)). % Why?
 
   \begin{figure}[h!]
@@ -161,7 +161,7 @@ From 1950 to present, there are two apparent peaks in collection activity around
   \end{figure}
 
 
-\subsection{Network models construction}
+\section{Network models construction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Network models construction
@@ -170,6 +170,34 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Build SCN
 % What is the species with more collectors? What is the collector with more species?
 % Average collector/species & species/collector  (with percentages)
+We initially built a Species-collectors network model.
+
+The degree distribution of collectors and species are shown in Figure \ref{fig:ub_cwn_degree_dist}.
+The average number of species per collector (or collectors nodes average degree) is approximately $20.2$.
+Approximately $86.8\%$ of all species nodes have degrees below or equal the average.
+
+The average degree for species nodes (or the average number of collectors per species) is approximately $9.5$.
+Approximately $76.7\%$ of all collectors nodes have degrees below or equal the average.
+
+  \begin{figure}[h!]
+  	\centering
+    \begin{subfigure}[t]{0.8\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/casestudy_ub/cwn_degree_dist_cols.pdf}
+        \caption{}
+        \label{fig:ub_cwn_degree_dist_cols}
+    \end{subfigure}
+    
+    \begin{subfigure}[t]{0.8\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/casestudy_ub/cwn_degree_dist_spp.pdf}
+        \caption{}
+        \label{fig:ub_cwn_degree_dist_spp}
+    \end{subfigure}
+    \caption{
+    \label{fig:ub_cwn_degree_dist}%
+      Degree distribution for both collectors nodes $(a)$ and species nodes $(b)$ in the CWN built from records in the UB herbarium dataset. Circles represent the total number of species or collectors holding each degree value. }
+  \end{figure}
 
 % Projections
 

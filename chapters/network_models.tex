@@ -20,10 +20,14 @@ Here a distinction must be stated for the terms "species" and "specimen" I'll co
 After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a taxonomic group (a taxon), in a best-effort manner.
 
 \section{Complex Networks: A theoretical background}
+\subsection{The rise of the study of complex networks}
 %% The rise of the field of complex networks
+%% A historical background
+%% Applications (biology and other fields)
 %% What are complex networks?
 %%%% Random networks, small-world and scale-free topologies
 
+\subsection{Mathematical Representations}
 % Networks are mathematically represented as graphs
 %% Nodes and Edges
 %%% Edges are established between a pair of nodes
@@ -100,7 +104,7 @@ n = |S_{sp}|
 $$
 where $n$ is the length of the species set and each $\sigma_i^{(\mu)}$ is the total number of records of species $i$ by collector $\mu$. 
 The species bag can be directly obtained as a row-vector from the SCN biadjacency matrix.
-The sum of all elements in a collector's species bag is given by the species bag's \textit{l1 norm} $|| \sigma^{(\mu)} ||_1$, and corresponds to the node's \textit{weighted degree} $k_w$.
+The sum of all elements in a collector's species bag is given by the species bag's \textit{l1 norm} $|| \sigma^{(\mu)} ||_1$, and corresponds to the node's \textit{weighted degree} $k_w$.\todo{review weighted degree definition}
  
 \paragraph{Interest.} 
 The entire set and counts of collectors that have recorded a particular species in a dataset is defined as its \textit{interest} vector. This concept can be thought as the inverse of a species bag, being equivalent to the nodes set formed by a species' direct neighbors. The interest vector is an attribute derived exclusively for species nodes, and is formally defined as
@@ -112,7 +116,7 @@ n = |S_{col}|
 $$
 where $n$ is the length of the collectors set and each $\iota_i^{(\psi)}$ is the total number of records of species $\psi$ which was done by collector $i$. 
 A particular species' interest can also be derived as a column-vector from the biadjacency matrix. 
-The weighted degree $k_w$ of a species node can also be derived by computing the \textit{l1-norm} of its interest vector, such that $k_w^{(\psi)} \equiv || \iota^{(\psi)} ||_1 $.
+The weighted degree $k_w$ \todo{review weighted degree definition}of a species node can also be derived by computing the \textit{l1-norm} of its interest vector, such that $k_w^{(\psi)} \equiv || \iota^{(\psi)} ||_1 $.
 
 \paragraph{Taxonomic aggregation and resolution.}
 In some contexts it might be desired to simplify SCNs by grouping species nodes into higher taxonomic ranks (or levels), such as \textit{genus} or \textit{family}. This process is defined as \textit{taxonomic aggregation}, and is performed by 
