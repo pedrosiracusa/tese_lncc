@@ -172,7 +172,11 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Average collector/species & species/collector  (with percentages)
 We initially built a Species-collectors network model.
 
-The degree distribution of collectors and species are shown in Figure \ref{fig:ub_cwn_degree_dist}.
+By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_cwn_degree_dist}) one can notice that the vast majority of them hold very few ties with others, while some few very intensely connected hubs also exist. 
+This fact is reflected on heavy-tailed degree distributions\todo{can I really state it is heavy-tailed?}. 
+In fact $12081$ species, comprising almost $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors, a total of $5761$ nodes, are linked to $10$ of fewer species.
+
+
 The average number of species per collector (or collectors nodes average degree) is approximately $20.2$.
 Approximately $86.8\%$ of all species nodes have degrees below or equal the average.
 
@@ -181,22 +185,9 @@ Approximately $76.7\%$ of all collectors nodes have degrees below or equal the a
 
   \begin{figure}[h!]
   	\centering
-    \begin{subfigure}[t]{0.8\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/casestudy_ub/cwn_degree_dist_cols.pdf}
-        \caption{}
-        \label{fig:ub_cwn_degree_dist_cols}
-    \end{subfigure}
-    
-    \begin{subfigure}[t]{0.8\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/casestudy_ub/cwn_degree_dist_spp.pdf}
-        \caption{}
-        \label{fig:ub_cwn_degree_dist_spp}
-    \end{subfigure}
-    \caption{
-    \label{fig:ub_cwn_degree_dist}%
-      Degree distribution for both collectors nodes $(a)$ and species nodes $(b)$ in the CWN built from records in the UB herbarium dataset. Circles represent the total number of species or collectors holding each degree value. }
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist}
+    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the CWN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes of $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
+    \label{fig:ub_cwn_degree_dist}
   \end{figure}
 
 % Projections
