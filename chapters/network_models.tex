@@ -44,7 +44,9 @@ After properly deposited in a biological collection, each record receives a taxo
 
 %% Degree
 %%%% Degree distribution
-%%%% Higher degree nodes (richer), lower degree nodes (poorer)
+%%%% Power laws
+%%%%% Many real-world networks are approximately scale-free (give examples)
+%%%% Machanism: Preferential attachment, rich gets richer: Higher degree nodes (richer), lower degree nodes (poorer)
 
 \subsection{Bipartite Graphs}
 %% Bipartite graphs
@@ -65,7 +67,7 @@ After properly deposited in a biological collection, each record receives a taxo
 \section{Species-collectors Networks}
 
 %% Goals and Questions to investigate
-
+%% TODO: SCNs do not allow 0-degree nodes
 
 
 \subsection{General description}
@@ -124,7 +126,7 @@ In some contexts it might be desired to simplify SCNs by grouping species nodes 
 ($ii$) obtaining interest vectors for each species; 
 ($iii$) summing up interest vectors for all species in each group;
 ($iv$) building a new SCN model, aggregated on rank T. 
-The SCN's \textit{taxonomic resolution} is the taxonomic rank at which species are aggregated in the model. For the sake of model interpretability, all species nodes must necessarily be represented as taxons belonging to the same rank as the SCN's taxonomic resolution.
+The SCN's \textit{taxonomic resolution} is the taxonomic rank at which species are aggregated in the model. For the sake of model interpretability, all nodes in $S_{sp}$ must necessarily be represented as taxons belonging to the same rank as the SCN's taxonomic resolution.
 
 For a more formal description let $G_T = \{ g_1, g_2, \cdots, g_n \}$ be a taxonomic grouping at rank $T$ containing a set of taxons $g_i$, each of them mapping to a set of species nodes $S_{sp}^{(i)} \subset S_{sp}$. Then for each node $g_i \in G_T$ we obtain their interest vectors by computing $ \iota^{(g_i)} := \sum_{j=1}^{m} \iota^{(v_j)} : v_j \in S_{sp}^{(i)}, m = |g_i|$. By stacking all interests vector as row-vectors we obtain a biadjacency matrix, which is then used to build a rank-T aggregated SCN model $SCN_T = (G_T,S_{col},E)$.
 % The PICI model (Lambiotte2005)
@@ -215,6 +217,7 @@ Therefore each element in the similarity matrix holds the edge weight for a pair
 %% Temporal evolution
 %%% Who the most influential collectors change with time?
 
+% TODO: CWNs do allow nodes with 0 degree (collectors who have never collaborated)
 Collectors co-working networks models (CWNs) describe coauthoring relationships between collectors. Two collectors are considered to be co-authors in a particular record if they are both included as collectors responsible for that occurrence. In other words, these models represent collectors who have worked together in field, having recorded specimens collaboratively.
 In a dataset following \textit{Darwin Core} standards collectors names are obtained from the $recordedBy$ field.
 A CWN is constructed from an occurrences dataset by iterating over each record and forming \textit{clique} structures with the associated collectors, which are finally combined into a single undirected graph formally represented as 

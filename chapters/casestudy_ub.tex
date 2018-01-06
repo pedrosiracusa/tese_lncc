@@ -124,27 +124,29 @@ On the other hand, records with only the ZC issue are those which were misplaced
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
-Records without geospatial issues comprise approximately $52\%$ of the dataset, and their coordinates are shown in Figure \ref{fig:occurrence_map}. Notice that the figure extent is constrained around the Brazilian territory, and records outside the canvas are omitted. Although most records deposited in the UB herbarium were collected in Brazil, there is also a considerable amount of records from many other countries (Figure \ref{fig:recs_by_cntry_state}(a)), that were been obtained from herbaria exchange activities or international recording expeditions. According to the herbarium description available from the \textit{Florescer project} webpage \cite{florescer}, records from the Amazon and Atlantic forest were mostly exchanges under the curatorship of \textit{Dr. João Murça Pires} and \textit{Dr. Graziela Maciel Barroso}, respectively. A considerable part of international records were exchanges incorporated under the curatorship of \textit{Dr. George Eiten}.  
+Records without geospatial issues comprise approximately $52\%$ of the dataset, and their coordinates are shown in Figure \ref{fig:occurrence_map}. Notice that the figure extent is constrained around the Brazilian territory, and records outside the canvas are omitted. Although most records deposited in the UB herbarium were collected in Brazil, there is also a considerable amount of records from many other countries (Figure \ref{fig:recs_by_cntry_state}a), that were been obtained from herbaria exchange activities or international recording expeditions. According to the herbarium description available from the \textit{Florescer project} webpage \cite{florescer}, records from the Amazon and Atlantic forest were mostly exchanges under the curatorship of \textit{Dr. João Murça Pires} and \textit{Dr. Graziela Maciel Barroso}, respectively. A considerable part of international records were exchanges incorporated under the curatorship of \textit{Dr. George Eiten}.  
 
 
-  \begin{figure}[h!]
+  \begin{figure}[!htb]
   	\centering
     \includegraphics[width=0.7\linewidth]{figures/occurrence_map.png}
     \caption{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
     \label{fig:occurrence_map}
   \end{figure}
   
-Within the Brazilian territory, the Federal District was the most sampled federative unit despite its small area, followed by the state of Goiás (\ref{fig:recs_by_cntry_state}(b)). 
-Such a geographic bias in the occurrences distribution can be explained by the fact that UB is physically located in the University of Brasilia, making it more viable for associated collectors to record in nearby locations.
-Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas become more inclined to deposit their recordings in the institution.
-In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region. 
-
-  \begin{figure}[h!]
+  \begin{figure}[!htb]
   	\centering
     \includegraphics[width=\linewidth]{figures/recs_by_cntry_state.png}
     \caption{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
     \label{fig:recs_by_cntry_state}
   \end{figure}
+  
+Within the Brazilian territory, the Federal District was the most sampled federative unit despite its small area, followed by the state of Goiás (\ref{fig:recs_by_cntry_state}b). 
+Such a geographic bias in the occurrences distribution can be explained by the fact that UB is physically located in the University of Brasilia, making it more viable for associated collectors to record in nearby locations.
+Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas become more inclined to deposit their recordings in the institution.
+In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region. 
+
+
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Temporal characterization
@@ -170,24 +172,43 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Build SCN
 % What is the species with more collectors? What is the collector with more species?
 % Average collector/species & species/collector  (with percentages)
-We initially built a Species-collectors network model.
+For exploring the recording behavior of UB collectors in terms of their taxonomic preferences we initially built a Species-collectors network model.
 
-By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_cwn_degree_dist}) one can notice that the vast majority of them hold very few ties with others, while some few very intensely connected hubs also exist. 
-This fact is reflected on heavy-tailed degree distributions\todo{can I really state it is heavy-tailed?}. 
-In fact $12081$ species, comprising almost $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors, a total of $5761$ nodes, are linked to $10$ of fewer species.
+By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_scn_degree_dist}) one can notice that the network is majoritarily composed by nodes holding very few ties with others, while few others, called hubs, are very intensely connected. 
+In fact a total of $12081$ species, comprising almost $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors (a total of $5761$ nodes) are linked to $10$ of fewer species.
+
+For collectors nodes $\langle k_{col}\rangle \approx 20.2$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $20.2$. Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin}, with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença}, with $1884$ distinct species. Most collectors (around $86.6\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
+
+For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average.
 
 
-The average number of species per collector (or collectors nodes average degree) is approximately $20.2$.
-Approximately $86.8\%$ of all species nodes have degrees below or equal the average.
+\begin{table}[H]
+  \caption{blabla.}
+  \begin{center}
+  \begin{tabular}{l c c c c c}
+    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k/k^*$ \\
+   \hline    collectors & 6768 & 21.08 &
+   \begin{tabular}[t]{{@{}c@{}@{}}}irwin,hs\\heringer,ep\\anderson,wr\\proenca,ceb\\ratter,ja\\faria,jeq\\eiten,g\\souza,rr\\harley,rm\\santos,rrb\end{tabular} &
+   \begin{tabular}[t]{{@{}c@{}@{}}}4535\\2586\\2156\\1888\\1803\\1681\\1586\\1549\\1514\\1502\end{tabular} &
+   \begin{tabular}[t]{{@{}c@{}@{}}}0.30\\0.17\\0.14\\0.12\\0.12\\0.11\\0.10\\0.10\\0.10\\0.10\end{tabular} \\ \\
+    species & 15344 & 9.30 &
+   \begin{tabular}[t]{{@{}c@{}@{}}}\textit{Myrcia splendens}\\\textit{Myrcia guianensis}\\\textit{Eugenia punicifolia}\\\textit{Casearia sylvestris}\\\textit{Palicourea rigida}\\\textit{Myrcia tomentosa}\\\textit{Qualea parviflora}\\\textit{Solanum lycocarpum}\\\textit{Piper aduncum}\\\textit{Miconia albicans}\end{tabular} &
+   \begin{tabular}[t]{{@{}c@{}@{}}}388\\335\\266\\258\\241\\239\\232\\228\\209\\201\end{tabular} &
+   \begin{tabular}[t]{{@{}c@{}@{}}}0.06\\0.05\\0.04\\0.04\\0.04\\0.04\\0.03\\0.03\\0.03\\0.03\end{tabular} \\ 
+  \hline
+  \end{tabular}
+  \end{center}
+  \label{}
+\end{table}
 
-The average degree for species nodes (or the average number of collectors per species) is approximately $9.5$.
-Approximately $76.7\%$ of all collectors nodes have degrees below or equal the average.
+
+As opposed to random networks, in which extremely well connected or poorly connected nodes are very unlikely to occur, the connectivity pattern observed for the UB species-collectors network resembles the one from scale-free networks, whose degree distribution $p(k)$ follows a power law described by $k^{-\alpha}$.
 
   \begin{figure}[h!]
   	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist}
-    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the CWN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes of $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
-    \label{fig:ub_cwn_degree_dist}
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
+    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
+    \label{fig:ub_scn_degree_dist}
   \end{figure}
 
 % Projections
