@@ -1,3 +1,4 @@
+import os
 from collections import Counter
 import numpy as np
 import matplotlib.pyplot as plt
@@ -158,7 +159,7 @@ def plotfigures(scn,figures_basedir):
     ###################
     # Save final figure
     # -----------------
-    figPath=figures_basedir+'casestudy_ub/scn_degree_dist.pdf'
+    figPath=os.path.join(figures_basedir,'casestudy_ub/scn_degree_dist.pdf')
     print("\n  >>> Saving figure {} ...".format(figPath))
     myfig.savefig(figPath,dpi=192,format='pdf',bbox_inches='tight')
     print("  Figure saved successfully")
@@ -222,7 +223,7 @@ def createLatexTables(scn):
     table_label="table:scn_degrees"
     table_caption="This is the caption"
     table = r"""\begin{table}[H]
-  \caption{"""+table_caption+"""}
+  \caption{"""+table_caption+r"""}
   \begin{center}
   \begin{tabular}{l c c c c c}
     & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k/k^*$ \\
@@ -248,10 +249,10 @@ def createLatexTables(scn):
     table+=r"""  \hline
   \end{tabular}
   \end{center}
-  \label{"""+table_label+"""}
+  \label{"""+table_label+r"""}
 \end{table}"""
 
-    tables.append(table)
+    tables.append( (table_label.replace(':','_'), table) )
     # end of Table 1
 
     return tables

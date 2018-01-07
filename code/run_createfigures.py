@@ -21,8 +21,8 @@ plt.style.use('seaborn-paper')
 sns.set_color_codes('deep')
 
 # Configure project dirs
-figures_basedir = r'../figures/'
-tables_basedir = r'../tables/'
+figures_basedir = os.path.abspath('../figures/')
+tables_basedir = os.path.abspath('../tables/')
 
 #sys.exit()
 
@@ -131,9 +131,19 @@ print(\
 Outputting LaTeX-formatted tables
 ---------------------------------
 """)
-for i,t in enumerate(ub_casestudy.scn_degree_dist.createLatexTables(scn)):
+tables = ub_casestudy.scn_degree_dist.createLatexTables(scn)
+for i,(tname,table) in enumerate(tables):
     print(">>> Printing table {}:\n".format(i))
-    print(t+'\n')
+    print(table+'\n')
+    
+print(">>> Saving LaTeX tables...")
+for i,(tname,table) in enumerate(tables):
+    fpath = os.path.join(tables_basedir,"casestudy_ub/"+tname+".tex")
+    with open(fpath,'w+') as f:
+        f.write(table)
+        print(">>> Saved table: {}\n".format(tname))
+
+
 print("""
 Done outputting LaTeX tables
 ---------------------------------
