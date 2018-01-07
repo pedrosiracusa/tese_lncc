@@ -20,7 +20,9 @@ plt.style.use('seaborn-paper')
 
 sns.set_color_codes('deep')
 
-
+# Configure project dirs
+figures_basedir = r'../figures/'
+tables_basedir = r'../tables/'
 
 #sys.exit()
 
@@ -29,35 +31,110 @@ sns.set_color_codes('deep')
 ## -------------
 
 # Load UB dataset
-print("Loading the UB dataset")
+print(\
+"""
+======================
+Loading the UB dataset
+----------------------
+""")
 dsetPath = '/home/pedro/datasets/ub_herbarium/occurrence.txt'
+print(">>> Reading data from file {} ...".format(dsetPath))
 cols=['recordedBy','scientificName','taxonRank','kingdom','phylum','class','order','family','genus','species']
+print(">>> Removing null values...")
 ub_occs = pd.read_table(dsetPath,usecols=cols,low_memory=False)
 ub_occs = ub_occs[ub_occs['recordedBy'].notnull()]
 ub_occs = ub_occs[ub_occs['scientificName'].notnull()]
 ub_occs = ub_occs[ub_occs['species'].notnull()]
+print("""
+Done loading the ub dataset 
+----------------------
 
-# Get names map
-print("Creating names map")
-from caryocar.cleaning import read_NamesMap_fromJson
-ub_namesMap_file = '/home/pedro/caryocar/caryocar/cleaning_data/ub_namesmap.json'
-nm = read_NamesMap_fromJson(ub_namesMap_file,normalizationFunc=None)
+""")
 
-# Get names atomizer
-print("Creating names atomizer")
+
+# Create names atomizer
+print(\
+"""
+=======================
+Creating Names Atomizer
+-----------------------
+""")
 from caryocar.cleaning import NamesAtomizer,namesFromString
 na = NamesAtomizer(atomizeOp=namesFromString)
-names_replaces_file = '/home/pedro/caryocar/caryocar/cleaning_data/ub_collectors_replaces.json'
+names_replaces_file = '/home/pedro/caryocar/caryocar/cleaning/data/ub_collectors_replaces.json'
+print(">>> Using names replaces from file {} ...".format(names_replaces_file))
 na.read_replaces(names_replaces_file)
-
-# Create SCN
-print("Creating a SCN")
-from caryocar.models import SpeciesCollectorsNetwork
+print(">>> Creating an atomized collectors column...")
 ub_occs['recordedBy_atomized']=na.atomize(ub_occs['recordedBy'])
-scn = SpeciesCollectorsNetwork(species=ub_occs['species'],collectors=ub_occs['recordedBy_atomized'])
+print("""
+Done creating names atomizer 
+-----------------------
+""")
+
+
+# Get names map
+print(\
+"""
+==================
+Creating Names Map
+------------------
+""")
+from caryocar.cleaning import normalize, read_NamesMap_fromJson
+ub_namesMap_file = '/home/pedro/caryocar/caryocar/cleaning/data/ub_namesmap.json'
+print(">>> Creating names map from file {} ...".format(ub_namesMap_file))
+nm = read_NamesMap_fromJson(ub_namesMap_file,normalizationFunc=normalize)
+print(">>> Updating names map with new names...")
+nm.addNames( names=list(set(n for n,st,num in na.getCachedNames())) )
+print("""
+Done creating names map 
+------------------
+""")
+
+
 # Create SCN
+print(\
+"""
+======================================
+Creating the SCN model from UB dataset
+--------------------------------------
+""")
+from caryocar.models import SpeciesCollectorsNetwork
+print(">>> Initializing SpeciesCollectorsNetwork instance...")
+scn = SpeciesCollectorsNetwork(species=ub_occs['species'],collectors=ub_occs['recordedBy_atomized'], namesMap=nm)
+nodes_to_filter = ['','ignorado','ilegivel','incognito','etal']
+print(">>> Filtering out nodes from {}".format(nodes_to_filter))
+scn.remove_nodes_from(nodes_to_filter)
+print("""
+Done creating the SCN model
+--------------------------------------
+""")
 
+# Plot figures
+print(\
+"""
+=================================
+Plotting SCN degree distributions
+---------------------------------
+""")
+import ub_casestudy.scn_degree_dist
+print(">>> using module {}".format(ub_casestudy.scn_degree_dist.__name__))
+ub_casestudy.scn_degree_dist.plotfigures(scn,figures_basedir)
+print("""
+Done plotting SCN degree distributions
+---------------------------------
+""")
 
-import ub_casestudy.cwn_degree_dist
-print("Plotting CWN degree distributions")
-ub_casestudy.cwn_degree_dist.plotfigure(scn)
+# Latex tables
+print(\
+"""
+=================================
+Outputting LaTeX-formatted tables
+---------------------------------
+""")
+for i,t in enumerate(ub_casestudy.scn_degree_dist.createLatexTables(scn)):
+    print(">>> Printing table {}:\n".format(i))
+    print(t+'\n')
+print("""
+Done outputting LaTeX tables
+---------------------------------
+""")

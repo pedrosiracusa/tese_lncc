@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import powerlaw
 
-def plotfigure(scn):
+def plotfigures(scn,figures_basedir):
     species_k = scn.degree(scn.listSpeciesNodes())
     collectors_k = scn.degree(scn.listCollectorsNodes())
     
@@ -75,10 +75,10 @@ def plotfigure(scn):
     ax1.grid(which='both',linewidth=0.5, ls='--',color='.8')
     ax1.text(2e3,4e-1, '(a)')
     
-    print("CWN Degree Distribution Plot (a)")
-    print("--- Fit function: "+str(dist.name))
-    print("--- Fit alpha: "+str(alpha))
-    print("--- Fit lambda: "+str(lbda))
+    print("\n  >>> SCN Degree Distribution Plot (a)")
+    print("  |--- Fit function: "+str(dist.name))
+    print("  |--- Fit alpha: "+str(alpha))
+    print("  |--- Fit lambda: "+str(lbda))
     
     
     #############
@@ -127,7 +127,7 @@ def plotfigure(scn):
     data_expanded = [ k for k,cnt in zip(k,n) for i in range(cnt) ]
     fit = powerlaw.Fit(data_expanded,discrete=True,xmin=1)
     
-    dist=fit.truncated_power_law
+    dist=fit.power_law
     alpha=dist.alpha
     #lbda=dist.Lambda
     
@@ -139,7 +139,7 @@ def plotfigure(scn):
     fig,ax=plt.subplots(figsize=(6,6))
     
     ax2.plot(k, pk, 'o',markerfacecolor='none',markeredgewidth=.6,ms=7,alpha=0.8,color='b')
-    ax2.plot(k, f(np.array(k),alpha,0.4), ls='--',color='k')
+    ax2.plot(k, f(np.array(k),alpha,0.5), ls='--',color='k')
     
     ax2.set_xscale('log')
     ax2.set_yscale('log')
@@ -150,13 +150,108 @@ def plotfigure(scn):
     ax2.grid(which='both',linewidth=0.5, ls='--',color='.8')
     ax2.text(2e3,4e-1, '(b)')
     
-    print("CWN Degree Distribution Plot (b)")
-    print("--- Fit function: "+str(dist.name))
-    print("--- Fit alpha: "+str(alpha))
+    print("\n  >>> SCN Degree Distribution Plot (b)")
+    print("  |--- Fit function: "+str(dist.name))
+    print("  |--- Fit alpha: "+str(alpha))
     
     
     ###################
     # Save final figure
     # -----------------
+    figPath=figures_basedir+'casestudy_ub/scn_degree_dist.pdf'
+    print("\n  >>> Saving figure {} ...".format(figPath))
+    myfig.savefig(figPath,dpi=192,format='pdf',bbox_inches='tight')
+    print("  Figure saved successfully")
+   
     
-    myfig.savefig('./figures/cwn_degree_dist.pdf',dpi=192,format='pdf',bbox_inches='tight')
+
+def getReport(scn):
+    collectors_k = scn.degree(scn.listCollectorsNodes())
+    species_k = scn.degree(scn.listSpeciesNodes())
+    
+    colnodes_k_avg = np.average([ v for u,v in collectors_k ])
+    spnodes_k_avg = np.average([ v for u,v in species_k ])
+    num_col_nodes = len(scn.listCollectorsNodes())
+    num_spp_nodes = len(scn.listSpeciesNodes())
+    
+    
+    data = {
+            'num_col_nodes': num_col_nodes,
+            'num_sp_nodes': num_spp_nodes,
+            'top10_collectors': sorted( list(collectors_k), key=lambda x: x[1],reverse=True )[:10] ,
+            'top10_species': sorted( list(species_k), key=lambda x: x[1],reverse=True )[:10],
+            'colnodes_k_avg': colnodes_k_avg,
+            'spnodes_k_avg': spnodes_k_avg,
+            'perc_cols_k_leq_avg': sum( 1 for n,k in collectors_k if k<=colnodes_k_avg )/num_col_nodes,
+            'perc_sp_k_leq_avg':  sum( 1 for n,k in species_k if k<=spnodes_k_avg )/num_spp_nodes,
+            'num_cols_k_leq_10': sum(1 for u,v in collectors_k if v<=10),
+            'perc_cols_k_leq_10': sum( 1 for u,v in collectors_k if v<=10)/num_col_nodes,
+            'num_sp_k_leq_10': sum(1 for u,v in species_k if v<=10),
+            'perc_sp_k_leq_10': sum( 1 for u,v in species_k if v<=10)/num_spp_nodes
+     }
+    
+    return data
+
+
+
+def createLatexTables(scn):
+    report_data = getReport(scn)
+    num_col_nodes = report_data['num_col_nodes']
+    num_spp_nodes = report_data['num_sp_nodes']
+    colnodes_k_avg = report_data['colnodes_k_avg']
+    spnodes_k_avg = report_data['spnodes_k_avg']
+    collectors_top10 = report_data['top10_collectors']
+    species_top10 = report_data['top10_species']
+    
+    table_data= {
+     'collectors': (num_col_nodes,
+                    colnodes_k_avg,
+                    [ col for col,k in collectors_top10 ],
+                    [ k for col,k in collectors_top10],
+                    [ k/num_spp_nodes for col,k in collectors_top10 ]) ,
+     'species': (num_spp_nodes, 
+                 spnodes_k_avg,
+                    [ sp for sp,k in species_top10],
+                    [ k for sp,k in species_top10],
+                    [ k/num_col_nodes for sp,k in species_top10]) }
+     
+    # Create latex tables
+    tables = []
+    
+    # Table 1
+    table_label="table:scn_degrees"
+    table_caption="This is the caption"
+    table = r"""\begin{table}[H]
+  \caption{"""+table_caption+"""}
+  \begin{center}
+  \begin{tabular}{l c c c c c}
+    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k/k^*$ \\
+   \hline"""
+
+    for nset,d in table_data.items():
+        table += r"    {} & {} & {:.2f} &".format(nset, d[0], d[1])
+        table +="\n"
+        for i,col in enumerate(d[2:]):
+            table += r"   \begin{tabular}[t]{{@{}c@{}@{}}}"
+            for el in col:
+                if i==2: table +="{:.2f}\\\\".format(float(el)) # formatting percentages
+                elif nset=='species' and i==0: table +="\\textit{{{}}}\\\\".format(el) # species name to italics
+                else: table += "{}\\\\".format(el) # other columns
+            
+            table = table[:-2]
+            table += "\\end{{tabular}} &\n".format(col[-1])
+        
+        table = table[:-2]
+        table += r"\\ \\"+"\n"
+    
+    table = table[:-3]+"\n"
+    table+=r"""  \hline
+  \end{tabular}
+  \end{center}
+  \label{"""+table_label+"""}
+\end{table}"""
+
+    tables.append(table)
+    # end of Table 1
+
+    return tables
