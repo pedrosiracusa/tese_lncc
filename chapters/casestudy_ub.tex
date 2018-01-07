@@ -129,7 +129,7 @@ Records without geospatial issues comprise approximately $52\%$ of the dataset, 
 
   \begin{figure}[!htb]
   	\centering
-    \includegraphics[width=0.7\linewidth]{figures/occurrence_map.png}
+    \includegraphics[width=\linewidth]{figures/occurrence_map.png}
     \caption{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
     \label{fig:occurrence_map}
   \end{figure}
@@ -172,18 +172,34 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Build SCN
 % What is the species with more collectors? What is the collector with more species?
 % Average collector/species & species/collector  (with percentages)
-For exploring the recording behavior of UB collectors in terms of their taxonomic preferences we initially built a Species-collectors network model.
+
+\newcommand{\ubNumSpNodes}{15344}
+\newcommand{\ubNumColNodes}{6768}
+For exploring the recording behavior of UB collectors in terms of their taxonomic preferences we initially built a Species-collectors network model (SCN), linking collectors to the species they've recorded. 
+Some data preprocessing routines including names atomization and null values filtering were were executed in the tabular dataset before it could be used to build the model.
+Additionally, a previously elaborated names map for the UB dataset collectors was passed in during SCN construction, facilitating the process of remapping names variants to entities. 
+Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{``Incógnito"}, \textit{``Ignorado"}, \textit{``Ilegível"} and \textit{``?"} were excluded from the network model right after its creation.
+The resulting network had a total of $\ubNumSpNodes$ species and $\ubNumColNodes$ collectors nodes.
 
 By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_scn_degree_dist}) one can notice that the network is majoritarily composed by nodes holding very few ties with others, while few others, called hubs, are very intensely connected. 
-In fact a total of $12081$ species, comprising almost $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors (a total of $5761$ nodes) are linked to $10$ of fewer species.
+In fact a total of $12123$ species, comprising $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors (a total of $5362$ nodes) are linked to $10$ of fewer species. 
+As opposed to random networks, in which extremely well or extremely poorly connected nodes are very unlikely to occur, the connectivity pattern observed for the UB species-collectors network resembles the one from scale-free networks. While the degree distribution in random networks follow a poisson distribution, in scale-free networks it is better described by a power law $ p(k) \sim k^{-\alpha} $. For some empirical datasets, as it is the case for the $S_{sp}$ nodes set, a slight variant of the power law function $p(k) \sim e^{-\lambda k} k^{-\alpha}$ can turn out to be a better fit. The additional exponential term is the cutoff term, which is responsible for the tail cutoff that can be observed in Figure \ref{fig:ub_scn_degree_dist}a. 
 
-For collectors nodes $\langle k_{col}\rangle \approx 20.2$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $20.2$. Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin}, with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença}, with $1884$ distinct species. Most collectors (around $86.6\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
+  \begin{figure}[!h]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
+    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
+    \label{fig:ub_scn_degree_dist}
+  \end{figure}
+  
+
+As shown in Table \ref{table:ub_scn_degrees}, for collectors nodes $\langle k_{col}\rangle \approx 21.1$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $21.1$. Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. Most collectors (around $86.7\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
 
 For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average.
 
 
-\begin{table}[H]
-  \caption{blabla.}
+\begin{table}[t]
+  \caption{Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degrees $k$ are listed. We define $k^*$ as the maximum possible degree of a nodes set, a metric that represents the degree of a hypothetical node which is connected to every single node from the complementary set. Therefore $k/k^*$ is the proportion of nodes from the complementary set a given node is linked to.}
   \begin{center}
   \begin{tabular}{l c c c c c}
     & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k/k^*$ \\
@@ -198,19 +214,13 @@ For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle 
   \hline
   \end{tabular}
   \end{center}
-  \label{}
+  \label{table:ub_scn_degrees}
 \end{table}
 
 
-As opposed to random networks, in which extremely well connected or poorly connected nodes are very unlikely to occur, the connectivity pattern observed for the UB species-collectors network resembles the one from scale-free networks, whose degree distribution $p(k)$ follows a power law described by $k^{-\alpha}$.
 
-  \begin{figure}[h!]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
-    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
-    \label{fig:ub_scn_degree_dist}
-  \end{figure}
-  
+
+
 
 
 % Projections
