@@ -124,6 +124,24 @@ Done plotting SCN degree distributions
 ---------------------------------
 """)
 
+
+# Data
+print(\
+"""
+======================
+Outputting data report
+----------------------
+""")
+data = ub_casestudy.scn_degree_dist.getReport(scn)
+
+for k,v in data.items():
+    print('{}: {}'.format(k,v))
+print("""
+Done outputting data report
+----------------------
+""")
+
+
 # Latex tables
 print(\
 """
@@ -132,8 +150,8 @@ Outputting LaTeX-formatted tables
 ---------------------------------
 """)
 tables = ub_casestudy.scn_degree_dist.createLatexTables(scn)
-for i,(tname,table) in enumerate(tables):
-    print(">>> Printing table {}:\n".format(i))
+for tname,table in tables:
+    print(">>> Printing table {}:\n".format(tname))
     print(table+'\n')
     
 print(">>> Saving LaTeX tables...")
@@ -148,3 +166,5 @@ print("""
 Done outputting LaTeX tables
 ---------------------------------
 """)
+
+
