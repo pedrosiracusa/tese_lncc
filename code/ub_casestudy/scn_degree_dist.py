@@ -223,10 +223,8 @@ def createLatexTables(scn):
     table_label="table:ub_scn_degrees"
     table_caption=r"Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degrees $k$ are listed. We define $k^*$ as the maximum possible degree of a nodes set, a metric that represents the degree of a hypothetical node which is connected to every single node from the complementary set. Therefore $k/k^*$ is the proportion of nodes from the complementary set a given node is linked to."
     table = r"""
-  \caption{"""+table_caption+r"""}
-  \begin{center}
   \begin{tabular}{l c c c c c}
-    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k/k^*$ \\
+    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k^*$ \\
    \hline"""
 
     for nset,d in table_data.items():
@@ -248,8 +246,6 @@ def createLatexTables(scn):
     table = table[:-3]+"\n"
     table+=r"""  \hline
   \end{tabular}
-  \end{center}
-  \label{"""+table_label+r"""}
 """
 
     tables.append( (table_label.replace(':','_'), table) )
