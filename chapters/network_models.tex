@@ -30,10 +30,11 @@ After properly deposited in a biological collection, each record receives a taxo
 \subsection{Mathematical Representations}
 % Networks are mathematically represented as graphs
 %% Nodes and Edges
-%%% Edges are established between a pair of nodes
+%%% Edges are established between a pair of nodes , recurrent edges
 %%% Nodes and edges can have attributes (each attribute holding values)
 %%% Neighborhood, neighbors
 %%% Cliques
+%%% Paths 
 
 %% Graph density
 %%% Fully connected: n*(n-1)/2
@@ -158,21 +159,19 @@ W_{(\psi_1, \psi_2)} &= \sum_{j=1}^{m} \delta(\iota_j^{(\psi_1)}, \iota_j^{(\psi
 \mbox{ , for the projection onto }S_{sp}\mbox{, where}
 \end{split}
 \end{equation}
-$n = |S_{sp}|$, $m = |S_{col}|$ and 
-$\delta(u,v) = 
-\begin{cases}
-1 & \mbox{if both } u \mbox{ and } v \mbox{ are non-zero ,}\\
-0 & \mbox{otherwise}
-\end{cases}
-$ .
+$n = |S_{sp}|$, $m = |S_{col}|$ and $\delta(u,v)=1$ if both $u$ and $v$ are non-zero and $0$ otherwise.
+
+In order to obtain the weights for every pairs of projected nodes more efficiently we can use a vectorized implementation of this rule. First we derive a $m\times n$ logic matrix $A$ from the SCN biadjacency matrix by simply replacing its non-zero elements by ones. 
+Then the $m \times m$ matrix with edges weights for the $S_{col}$ projection is obtained by calculating the dot product $A A^T$.
+Conversely, for the $S_{sp}$ projection, the $n \times n$ weights matrix is obtained by calculating $A^T A$.
 
 The simple weighting rule has two main limitations when applied to SCNs.
 First, the weight assigned to edges linking pairs of nodes in the projection only reflects the number of distinct intermediate neighbors from the complementary set they shared in the non-projected graph. The number of times each species is recorded by each collector is therefore ignored while computing the strength of links in the projections.
 Second, such weighting rule tends to make very prolific and generalist collectors or very attractive species strongly connected to many others in a disproportional way, as an effect of their high degrees in the non-projected model. The opposite happens in the case of specialized nodes, which are those holding fewer distinct paths (or links) to neighbors but with many occurrences of each path. Besides overlooking the importance of more specialized nodes this rule also tends to make projected graphs very densely connected, which increases computational costs and obfuscates relevant relationships in the model. Analogous limitations were also reported for other bipartite social network models \cite{Lambiotte2005}.
 In order to reduce these effects we could instead use the alternative rules below.
 
-\paragraph*{Absolute weighting.}
-In order to tackle the limitation presented above we slightly modify the simple weighting rule by also considering the total number of times entities interact through each common neighbor-intermediated path in the SCN. The rule is expressed using the same equations from (\ref{eq:simple_weighting}), but changing the $\delta$ function to
+\paragraph*{Additive weighting.}
+In a first attempt to tackle the limitations presented above we slightly modify the simple weighting rule by also considering the total number of times entities interact through each common neighbor-intermediated path in the SCN. The rule is expressed using the same equations from (\ref{eq:simple_weighting}), but changing the $\delta$ function to
  
 $$\delta(u,v) = 
 \begin{cases}
@@ -180,7 +179,10 @@ $$\delta(u,v) =
 0 & \mbox{otherwise}
 \end{cases}
 $$
-In case every distinct path in the non-projected SCN only occur once then both simple and absolute weighting rules lead to the same result. This modified rule reduces the weighting asymmetry between generalist an specialized nodes,  but without a superior limit for the $\delta$ function it turns out to be hard to determine a proper threshold when filtering less-relevant edges. The next weighting rule is designed to output weights bounded to the interval from 0 to 1.
+In case every distinct path in the non-projected SCN only occur once then both simple and additive weighting rules lead to the same result\todo{test this}. 
+This modified rule potentializes the effect of recurring edges from the non-projected graph on computing edges weights in the projection, thus reducing weighting asymetries from generalist and specialized nodes.
+However, a drawback of this approach is that high-degree nodes in the non-projected graph tend to get very strongly connected with themselves in the projection, obfuscating other relevant interactions.
+Additionally, without a superior limit for the $\delta$ function it turns out to be hard to determine a proper threshold when filtering less-relevant edges. The next weighting rule is designed to output weights bounded to the interval from 0 to 1.
 
 \paragraph*{Species bag / Interest similarity.}
 This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and interest vectors  for each pair of nodes in the respective projection. 
@@ -190,10 +192,10 @@ The \textit{species bag similarity} for collectors $\mu_i$ and $\mu_j$ and the \
 \begin{split}
 sim(\sigma^{(\mu_i)},\sigma^{(\mu_j)}) &\equiv
 \cos \theta_{\mu_i,\mu_j} =
-\frac{  \sigma^{(\mu_i)} \cdot \sigma^{(\mu_j)}  }{  ||\sigma^{(\mu_i)}||_2  ||\sigma^{(\mu_j)}||_2  } \\
+\frac{  \sigma^{(\mu_i)} \sigma^{(\mu_j)}  }{  ||\sigma^{(\mu_i)}||_2  ||\sigma^{(\mu_j)}||_2  } \\
 sim(\iota^{(\psi_i)},\iota^{(\psi_j)}) &\equiv
 \cos \theta_{\psi_i,\psi_j} =
-\frac{  \iota^{(\psi_i)} \cdot \iota^{(\psi_j)}  }{  ||\iota^{(\psi_i)}||_2  ||\iota^{(\psi_j)}||_2  } 
+\frac{  \iota^{(\psi_i)} \iota^{(\psi_j)}  }{  ||\iota^{(\psi_i)}||_2  ||\iota^{(\psi_j)}||_2  } 
 \end{split}
 \end{equation}
 

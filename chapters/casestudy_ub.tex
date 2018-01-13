@@ -195,15 +195,22 @@ As opposed to random networks, in which extremely well or extremely poorly conne
 
 As shown in Table \ref{table:ub_scn_degrees}, for collectors nodes $\langle k_{col}\rangle \approx 21.1$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $21.1$. Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. Most collectors (around $86.7\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
 
-For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average.
+For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted as the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average, for example \textit{Myrcia splendens} and \textit{Eugenia punicifolia} (Table \ref{table:ub_scn_degrees}). Those top-10 species are in fact reasonably well-known, common and easily detectable species. Typical from cerrado physiognomies, \textit{Solanum lycocarpum} (\textit{lobeira}), \textit{Palicourea rigida} (\textit{chapéu-de-couro}), \textit{Qualea parviflora} (\textit{pau-terra}) are examples of species that are both very conspicuous and easy to identify.
 
 
 \begin{table}[t]
+% Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degrees $k$ are listed. We define $k^*$ as the maximum possible degree of a nodes set, a metric that represents the degree of a hypothetical node which is connected to every single node from the complementary set. Therefore $k/k^*$ is the proportion of nodes from the complementary set a given node is linked to.
+
   \input{tables/casestudy_ub/table_ub_scn_degrees}
 \end{table}
+
+% Check "Analyzing affiliation networks" from Borgatti, in Sage book of social networks analytics
  
+%%
+%% Projected graphs info
 
 
+%% Projections degree distribution
 
 
 
