@@ -91,7 +91,7 @@ Note that in this model entities from the collectors class represent actual indi
 Therefore new links between nodes are formed whenever a collector records an individual belonging to a new species. 
 For new occurrences of already existent species-collector pairs no new edges are added. Instead, the weights of those edges are increased, such that the final weight of each edge corresponds to the total number of times a given collector has recorded a given species.
 
-Nodes and edges in a SCN model can also be represented as a \textit{biadjacency matrix} with dimensions $|S_{sp}|\times|S_{col}|$, with each element representing the number of records for a particular species by some collector.
+Nodes and edges in a SCN model can also be represented as a \textit{biadjacency matrix} $A$ with dimensions $|S_{sp}|\times|S_{col}|$, wherein each element represents the number of records for a particular species by some collector.
 
 Below I introduce some basic definitions in the scope of SCN models.
 
@@ -136,7 +136,24 @@ For a more formal description let $G_T = \{ g_1, g_2, \cdots, g_n \}$ be a taxon
 
 % Temporal edges
 
-% Bipartite projection
+% Model metrics
+\subsection{Metrics and attributes}
+In this section I describe metrics and attributes of nodes and edges in the model.
+
+\paragraph*{Specificity.} 
+% This metric doesn't work well for very low degrees with very high weighted degrees (for example in aggregations into family level)
+How many of a collector's new records refer to species he/she had never recorded before?
+Is a particular species mostly collected by the same collector or are there many other collectors that are also interested in it?
+In order to tackle these questions we define a specificity metric, which can be applied to nodes in both $S_{col}$ and $S_{sp}$ sets. 
+The specificity of a node is derived from the ratio between its degree and weighted degree centralities.
+\begin{equation}
+specif(n) = 1-\frac{k^{(n)}}{k_w^{(n)}}
+\end{equation}
+This definition is not to be confused with specificity metric from the domain of model evaluation (statistics), also known as the true negatives rate.
+A collector's specificity is $0$ if all species in his/her species bag were recorded only once, and gets close to $1$
+
+
+% Bipartite projections
 \subsection{Projections}
 
 Although SCNs are originally built to model recording relationships between species and collectors, one might obtain additional insights by deriving indirect relationships from its structure. This is accomplished by projecting SCNs over each one of the nodes sets, as illustrated in Figures \ref{fig:scn_general}(b)
