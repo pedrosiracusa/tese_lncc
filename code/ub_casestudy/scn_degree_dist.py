@@ -168,7 +168,9 @@ def plotfigures(scn,figures_basedir):
 
 def getReport(scn):
     collectors_k = scn.degree(scn.listCollectorsNodes())
+    collectors_k_w = scn.degree(scn.listCollectorsNodes(), weight='count')
     species_k = scn.degree(scn.listSpeciesNodes())
+    species_k_w = scn.degree(scn.listSpeciesNodes(), weight='count')
     
     colnodes_k_avg = np.average([ v for u,v in collectors_k ])
     spnodes_k_avg = np.average([ v for u,v in species_k ])
@@ -188,7 +190,9 @@ def getReport(scn):
             'num_cols_k_leq_10': sum(1 for u,v in collectors_k if v<=10),
             'perc_cols_k_leq_10': sum( 1 for u,v in collectors_k if v<=10)/num_col_nodes,
             'num_sp_k_leq_10': sum(1 for u,v in species_k if v<=10),
-            'perc_sp_k_leq_10': sum( 1 for u,v in species_k if v<=10)/num_spp_nodes
+            'perc_sp_k_leq_10': sum( 1 for u,v in species_k if v<=10)/num_spp_nodes,
+            'top10_collectors_kw':[ collectors_k_w[c] for c,k in sorted( list(collectors_k), key=lambda x: x[1],reverse=True )[:10] ],
+            'top10_species_kw':[ species_k_w[s] for s,k in sorted( list(species_k), key=lambda x: x[1],reverse=True )[:10] ]
      }
     
     return data
@@ -203,17 +207,21 @@ def createLatexTables(scn):
     spnodes_k_avg = report_data['spnodes_k_avg']
     collectors_top10 = report_data['top10_collectors']
     species_top10 = report_data['top10_species']
+    collectors_kw = report_data['top10_collectors_kw']
+    species_kw = report_data['top10_species_kw']
     
     table_data= {
      'collectors': (num_col_nodes,
                     colnodes_k_avg,
                     [ col for col,k in collectors_top10 ],
                     [ k for col,k in collectors_top10],
+                    [ kw for kw in collectors_kw ],
                     [ k/num_spp_nodes for col,k in collectors_top10 ]) ,
      'species': (num_spp_nodes, 
                  spnodes_k_avg,
                     [ sp for sp,k in species_top10],
                     [ k for sp,k in species_top10],
+                    [ kw for kw in species_kw ],
                     [ k/num_col_nodes for sp,k in species_top10]) }
      
     # Create latex tables
@@ -221,10 +229,9 @@ def createLatexTables(scn):
     
     # Table 1
     table_label="table:ub_scn_degrees"
-    table_caption=r"Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degrees $k$ are listed. We define $k^*$ as the maximum possible degree of a nodes set, a metric that represents the degree of a hypothetical node which is connected to every single node from the complementary set. Therefore $k/k^*$ is the proportion of nodes from the complementary set a given node is linked to."
     table = r"""
-  \begin{tabular}{l c c c c c}
-    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k^*$ \\
+  \begin{tabular}{l c c c c c c}
+    & num of nodes & $\langle k \rangle$ & top-10 & $k$ & $k_w$ & $k^*$ \\
    \hline"""
 
     for nset,d in table_data.items():
@@ -233,7 +240,7 @@ def createLatexTables(scn):
         for i,col in enumerate(d[2:]):
             table += r"   \begin{tabular}[t]{{@{}c@{}@{}}}"
             for el in col:
-                if i==2: table +="{:.2f}\\\\".format(float(el)) # formatting percentages
+                if i==3: table +="{:.2f}\\\\".format(float(el)) # formatting percentages
                 elif nset=='species' and i==0: table +="\\textit{{{}}}\\\\".format(el) # species name to italics
                 else: table += "{}\\\\".format(el) # other columns
             
