@@ -91,7 +91,7 @@ Note that in this model entities from the collectors class represent actual indi
 Therefore new links between nodes are formed whenever a collector records an individual belonging to a new species. 
 For new occurrences of already existent species-collector pairs no new edges are added. Instead, the weights of those edges are increased, such that the final weight of each edge corresponds to the total number of times a given collector has recorded a given species.
 
-Nodes and edges in a SCN model can also be represented as a \textit{biadjacency matrix} $A$ with dimensions $|S_{sp}|\times|S_{col}|$, wherein each element represents the number of records for a particular species by some collector.
+Nodes and edges in a SCN model can also be represented as a rectangular \textit{biadjacency matrix} $A$ with dimensions $|S_{sp}|\times|S_{col}|$, wherein each element represents the number of records of a particular species by some collector.
 
 Below I introduce some basic definitions in the scope of SCN models.
 
@@ -202,6 +202,7 @@ However, a drawback of this approach is that high-degree nodes in the non-projec
 Additionally, without a superior limit for the $\delta$ function it turns out to be hard to determine a proper threshold when filtering less-relevant edges. The next weighting rule is designed to output weights bounded to the interval from 0 to 1.
 
 \paragraph*{Species bag / Interest similarity.}
+% This is called "Structural Equivalence": Nodes have ties to common third-parties {Borgatti2015}
 This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and interest vectors  for each pair of nodes in the respective projection. 
 The \textit{species bag similarity} for collectors $\mu_i$ and $\mu_j$ and the \textit{interest vector similarity} for species $\psi_i$ and $\psi_j$ are defined as
 
@@ -218,7 +219,7 @@ sim(\iota^{(\psi_i)},\iota^{(\psi_j)}) &\equiv
 
 Therefore each element in the similarity matrix holds the edge weight for a pair of nodes, with a value ranging within the interval $[0,1]$. Edges weights are zero-valued if no direct link exist between two nodes,  whilst nodes linked by edges with a weight of $1$ have identical species bags or interest vectors. Intermediate values reflect the correlation measure obtained for node pairs. A threshold value can be set, in order to filter out less relevant links and facilitating the process of obtaining insights from the graph structure.
 %%% check neighborhood similarity functions in literature
-
+%% Edges pruning
 
 
 \section{Collectors Co-working Networks}
