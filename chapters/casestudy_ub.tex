@@ -172,14 +172,20 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Build SCN
 % What is the species with more collectors? What is the collector with more species?
 % Average collector/species & species/collector  (with percentages)
-
 \newcommand{\ubNumSpNodes}{15344}
 \newcommand{\ubNumColNodes}{6768}
-For exploring the recording behavior of UB collectors in terms of their taxonomic preferences we initially built a Species-collectors network model (SCN), linking collectors to the species they've recorded. 
-Some data preprocessing routines including names atomization and null values filtering were were executed in the tabular dataset before it could be used to build the model.
+\newcommand{\ubSCNNumEdges}{142647}
+For exploring the recording behavior of UB collectors in terms of their taxonomic preferences and collaborations we built a Species-collectors network model (SCN), linking collectors to the species they've recorded; and a Collectors coworking network (CWN), linking collectors who collaborated during field recording.
+
+Some data preprocessing routines including names atomization and null values filtering were executed in the tabular dataset before it could be used to build the models. 
+For the SCN we filtered out records with taxonomic resolution lower than species.
+For the CWN model we only filtered out records with null entries for the collectors field.
 Additionally, a previously elaborated names map for the UB dataset collectors was passed in during SCN construction, facilitating the process of remapping names variants to entities. 
 Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{``Incógnito"}, \textit{``Ignorado"}, \textit{``Ilegível"} and \textit{``?"} were excluded from the network model right after its creation.
-The resulting network had a total of $\ubNumSpNodes$ species and $\ubNumColNodes$ collectors nodes.
+
+\subsection{The UB Species-collectors Network}
+
+The resulting network had a total of $\ubNumSpNodes$ species and $\ubNumColNodes$ collectors nodes, linked by a total of $\ubSCNNumEdges$ edges.
 
 By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_scn_degree_dist}) one can notice that the network is majoritarily composed by nodes holding very few ties with others, while few others, called hubs, are very intensely connected. 
 In fact a total of $12123$ species, comprising $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors (a total of $5362$ nodes) are linked to $10$ of fewer species. 
@@ -194,30 +200,41 @@ As opposed to random networks, in which extremely well or extremely poorly conne
   
 
 As shown in Table \ref{table:ub_scn_degrees}, for collectors nodes $\langle k_{col}\rangle \approx 21.1$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $21.1$. 
-Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. These are not only very experienced collectors but ones who also display a generalist recording behavior, meaning they're inclined towards recording the highest species diversity as possible. 
+Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. 
 Most collectors (around $86.7\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
-% Incorporate k_w
 
 For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted as the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average, for example \textit{Myrcia splendens} and \textit{Eugenia punicifolia}. Those top-10 species are in fact reasonably well-known, common and easily detectable species. Typical from cerrado physiognomies, \textit{Solanum lycocarpum} (\textit{lobeira}), \textit{Palicourea rigida} (\textit{chapéu-de-couro}), \textit{Qualea parviflora} (\textit{pau-terra}) are examples of species that are both very conspicuous and easy to identify.
 
 % Define degree centrality metric
 
 \begin{table}[t]
-\caption{ Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degrees $k$ and normalized degree centralities $k^*$ are listed.}
+\caption{ Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degree $k$, weighted degree $k_w$ and normalized degree $k^*$ centralities are listed.}
 \begin{center}
 	\input{tables/casestudy_ub/table_ub_scn_degrees}
 \end{center}
 \label{table:ub_scn_degrees}
 \end{table}
 
+The total number of records of each collector (and, conversely, the total number of collectors that have recorded each species) is given by their weigthed degree $k_w$.
+This metric is calculated for each node by assigning weights to each of their edges based on a chosen attribute, and then summing up all the weights of those edges.
+In SCNs we use edges \textit{count} attribute for weighting. 
+For a node $u$
+$ k_w^{(u)} = \sum_{v} e_{u,v}$ for $v \in$ $neighbors(u)$.
+Therefore the a node's $k_w$ metric becomes equivalent to its \textit{count} attribute.
+% Make it clearer that there is a count attribute for nodes and another one for edges
+
 Table \ref{table:ub_scn_degrees} also shows the normalized degree centralities $k^*$ for the top-10 nodes from each set. The general intuition behind this metric for bipartite models is to get the fraction of nodes of the opposite set a particular node is tied to. In other words, we compare a node's degree to the maximum degree that is possible for nodes in that set, which turns out to be the opposite nodes set's size. Therefore, $k^*_i = \frac{k_i}{|S_{sp}|}$, for each node $i \in S_{col}$ and, conversely, $k^*_j = \frac{k_j}{|S_{col}|}$ for each node $j \in S_{sp}$.  
 As stated by \cite{Borgatti2015}, the advantage of using this normalized metric over the non-normalized centrality $k$ is that it allows us to numerically compare centrality scores across nodes sets independently of their respective sizes. 
-In our case data shows that collectors hubs tend to be more central than species nodes.
-% Cite "Analyzing affiliation networks" from Borgatti, in Sage book of social networks analytics
+In our case data shows that collectors hubs tend to be more central than species nodes. The top collector \textit{irwin,hs} is linked to $30\%$ of the total diversity of the herbarium species, whilst the top species \textit{Myrcia splendens} has been recorded by $6\%$ of the herbarium collectors. 
+
+%% Number and sizes of connected components?
+
+% Network density?
  
 %%
 %% Projected graphs info
 
+%% If we used general graph algorithms for analyzing non-projected bipartite networks, a set of bipartite constraints would be ignored, such as only nodes from opposite sets being allowed to be adjacent. Depending on the algorithm this could be a problem or not {Borgatti2015}. Some algorithms are easily adapted to the bipartite case
 
 %% Projections degree distribution
 
@@ -229,7 +246,7 @@ In our case data shows that collectors hubs tend to be more central than species
 % It should be noticed, however, that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
 %% PLOT max similarity vs degree
 
-
+\subsection{The UB Collectors Coworking Network}
 %%% QUESTIONS
 
 %% 1. How common are collaborative recordings within the dataset?
@@ -244,7 +261,7 @@ In our case data shows that collectors hubs tend to be more central than species
 %%% Mix of the two models
 %%% Look for homophily in collectors communities, assortativity.
 
-%% x. Which groups of species best modularize collectors in the dataset, in terms of their collection interests? 
+%% x. Which groups of species best partitionate collectors in the dataset, in terms of their collection interests? 
 %%% Using SCNs
 %%% Are these groups necessarily taxonomic ones (such as family)? Or could functional groups be more relevant in some cases? Or is there a geographical effect?
 %%% e.g. Some group might be best classified as specialists on species inhabiting some geographical location, with some specific habit and belonging to some family rather than simply as specialists in a given family.
@@ -296,8 +313,8 @@ The degree distribution was obtained for both
 \subsection{Features Selection}
 
 %% Features engineering
-
-
+\newcommand{\G}[1]{G^{(1)}_{#1}}
+$\G1$
 
 \section{Model Evaluation}
 
