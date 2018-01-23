@@ -9,6 +9,7 @@ Created on Thu Jan  4 23:10:11 2018
 # This script creates thesis figures
 
 import paths, sys, os
+import networkx as nx
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -104,6 +105,10 @@ scn = SpeciesCollectorsNetwork(species=ub_occs['species'],collectors=ub_occs['re
 nodes_to_filter = ['','ignorado','ilegivel','incognito','etal']
 print(">>> Filtering out nodes from {}".format(nodes_to_filter))
 scn.remove_nodes_from(nodes_to_filter)
+print(">>> The SCN model was created. Here's some info:")
+print("    * Number of S_col nodes:",len(scn.listCollectorsNodes()) )
+print("    * Number of S_sp nodes:", len(scn.listSpeciesNodes()) )
+print("    * Number of edges:",len(scn.edges) )
 print("""
 Done creating the SCN model
 --------------------------------------

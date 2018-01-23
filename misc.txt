@@ -1,0 +1,5 @@
+W3Tropicos -> http://services.tropicos.org/
+    |
+	-> Info on plants distribution, nomenclatural, bibliographic, and specimen data accumulated in MBG’s electronic databases during the past 30 years.
+	|
+	-> Useful, for example, to check if species are native or exotic...
