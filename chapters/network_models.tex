@@ -245,7 +245,7 @@ $$CWN = (S,E) \mbox{ ,}$$
 where $S$ and $E$ are the graph's nodes and edges sets representing, respectively, collectors and links connecting them. This construction process is illustrated in Figure <>. % create figure %
 
 As opposed to SCNs, CWNs model collaborative relationships between entities of the same type, thus all nodes in the graph belong to the same class and are contained in the nodes set $S$. 
-Although species are not represented as entities in this model, a list with all taxons recorded collaboratively by two collectors can be included as an attribute of the edge connecting them. 
+Although species are not represented as entities in this model, a list with all taxons recorded collaboratively by two collectors can be included as an attribute of the edge connecting them.
 Edges linking each pair of collectors are unique in the graph, and the total number of times that association occurs in the dataset is included as an attribute of the edge.
 
 % Are unconnected collector represented in the model?
@@ -287,6 +287,8 @@ The \textbf{strength} of a node is the sum of the weights associated to all its 
 
 \section{Combining the network models}
 
+\subsection{The herbarium core}
+% Parameters: taxonomic_rank, min_degree
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%
