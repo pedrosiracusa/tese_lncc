@@ -16,6 +16,15 @@ def run():
     
     sns.set_color_codes('deep')
     
+    customPlotParams = {
+        'marker_emptyCircle':{
+                'markerfacecolor':'none',
+                'markeredgewidth':.6,
+                'ms':7,
+                'marker':'o'
+                }
+    }
+    
     # Configure project assets and directories paths
     rootpath=os.path.normpath(r'/home/pedro/tese_lncc')
     figures_basedir = os.path.join(rootpath,r'figures/casestudy_ub/')
@@ -31,7 +40,7 @@ def run():
     print( "############################################" )
     print( "* UB Herbarium case study")
     print( "* Author: Pedro C. de Siracusa")
-    print( "* This reported was generated on", str(datetime.datetime.now()) )
+    print( "* This report was generated on", str(datetime.datetime.now()) )
     print( "############################################\n\n" )
     
     ################
@@ -98,13 +107,32 @@ Done creating names map
     # Create SCN
     import create_scn
     scn = create_scn.run(ub_occs,nm)
+
+    # Create CWN
+    import create_cwn
+    cwn = create_cwn.run(ub_occs,nm)
     
+    ######
+    ######
+    ## SCN 
     # Subgraphs of SCN connected components
     import scn_connected_components
-    data = scn_connected_components.run(scn,ub_occs)
+    #scn_connected_components.run(scn,ub_occs)
+    # Degree dist figure and table
+    import scn_degree_dist
+    #scn_degree_dist.run(scn,figures_basedir,tables_basedir)
     
     
-    # Create CWN
+    ######
+    ######
+    ## CWN
+    # Degree dist figure
+    import cwn_degree_dist
+    cwn_degree_dist.run(cwn, figures_basedir=figures_basedir, customPlotParams=customPlotParams)
+    
+    
+    
+
 
 if __name__=='__main__':
     orig_stdout = sys.stdout
