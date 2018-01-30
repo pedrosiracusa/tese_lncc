@@ -10,7 +10,7 @@ Both CWN and SCN were built for supporting data enrichment.
 Routines were written in Python3, using the Networkx and Pandas libraries.
 
 
-Collectors had historical contributions to the herbarium \ref{table:ub_collectors_florescer}.
+Collectors had historical contributions to the herbarium Table \ref{table:ub_collectors_florescer}.
 
 \begin{table}[H]
   \caption{Historically important collectors in the UB herbarium.}
@@ -31,13 +31,14 @@ Collectors had historical contributions to the herbarium \ref{table:ub_collector
       \hline
   \end{tabular}
   \\[1.5em]
-  \hfill Source: FLORESCER Project webpage \cite{florescer}
+  \hfill Source: FLORESCER Project webpage \footnote{\url{http://florescer.unb.br/janela4.html}}
   \end{center}
   \label{table:ub_collectors_florescer}
 \end{table}
 
 \section{Dataset Characterization}
 % Check {Haripersaud2009}
+% TODO: Add collecting team size distribution
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Taxonomic characterization
@@ -125,7 +126,7 @@ On the other hand, records with only the ZC issue are those which were misplaced
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
-Records without geospatial issues comprise approximately $52\%$ of the dataset, and their coordinates are shown in Figure \ref{fig:occurrence_map}. Notice that the figure extent is constrained around the Brazilian territory, and records outside the canvas are omitted. Although most records deposited in the UB herbarium were collected in Brazil, there is also a considerable amount of records from many other countries (Figure \ref{fig:recs_by_cntry_state}a), that were been obtained from herbaria exchange activities or international recording expeditions. According to the herbarium description available from the \textit{Florescer project} webpage \cite{florescer}, records from the Amazon and Atlantic forest were mostly exchanges under the curatorship of \textit{Dr. João Murça Pires} and \textit{Dr. Graziela Maciel Barroso}, respectively. A considerable part of international records were exchanges incorporated under the curatorship of \textit{Dr. George Eiten}.  
+Records without geospatial issues comprise approximately $52\%$ of the dataset, and their coordinates are shown in Figure \ref{fig:occurrence_map}. Notice that the figure extent is constrained around the Brazilian territory, and records outside the canvas are omitted. Although most records deposited in the UB herbarium were collected in Brazil, there is also a considerable amount of records from many other countries (Figure \ref{fig:recs_by_cntry_state}a), that were been obtained from herbaria exchange activities or international recording expeditions. According to the herbarium description available from the \textit{Florescer project} webpage \footnote{ \url{http://florescer.unb.br/janela4.html}}, records from the Amazon and Atlantic forest were mostly exchanges under the curatorship of \textit{Dr. João Murça Pires} and \textit{Dr. Graziela Maciel Barroso}, respectively. A considerable part of international records were exchanges incorporated under the curatorship of \textit{Dr. George Eiten}.  
 
 
   \begin{figure}[!htb]
@@ -151,6 +152,7 @@ In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Temporal characterization
+% TODO: Include # species accumulation in the figure
 Almost $98\%$ of the records contain information about their collection dates.
 The oldest records in the herbarium dataset date from 1800.
 However, more intensive collection activity started around 1960. Around 8000 records in the herbarium date up to that time (Figure \ref{fig:ub_records_timeseries}(c)). 
@@ -185,42 +187,36 @@ Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{`
 % ==========================
 % Species-collectors Network
 % --------------------------
-% TODOS: define what is a giant component
+% TODOS: define what a giant component is, the process of formation
+% TODO: network density: show that the SCN is sparse, but the projected networks are not
 \subsection{The UB Species-collectors Network}
 
-The resulting network had a total of $6768$ collectors, $15344$ species nodes and $142647$ edges connecting species to collectors. Most nodes in the network ($93.6\%$ of the collectors and $95.0\%$ of the species) are connected to a main giant component, which we will refer to as the \textbf{herbarium core}. For a collector to be included in the herbarium core it must have collected at least one species in common with another collector who is also included in the core. The same reasoning applies to species nodes as well by observing the inverse relationship.
+The resulting network had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ edges connecting nodes from each set. 
+The maximum number of edges that could possibly exist in this network (in case every collector were connected to every species) is $|S_{col}| \times |S_{sp}| \approx 1.04 \times 10^{8}$.
+The network density is calculated as the ratio between the number of actual nodes in the network and the maximum number of nodes if it was fully connected.
+We get a network density of approximately $1.37 \times 10^{-3}$.
+
+
+\paragraph*{The herbarium core.}
+Most nodes in the network ($93.6\%$ of the collectors and $95.0\%$ of the species) are connected to a main giant component, which we will refer to as the herbarium core. 
+\todo[inline]{Maybe we should better define the herbarium core somewhere. It should be defined in respect to a taxonomic rank and degree threshold...}
+For a collector to be included in the herbarium core it must have collected at least one species in common with another collector who is also included in the core. The same reasoning applies to species nodes as well by observing the inverse relationship.
 Apart from the giant component there are other $350$ isolated components, most of which contain as few as two or three nodes. These represent collectors who have never recorded a species in common with any collector from the herbarium core; and conversely, species that have never been collected by any of those core collectors.
 One of the $350$ isolated components, however, is considerably larger than the others, with a total of $3$ collectors and $141$ species. 
 
 From all the records that form the giant component (the herbarium core), $95.2\%$ are from Brazil, from which $53\%$ were recorded either in the Federal District or in the state of Goiás. In contrast, only $21\%$ of the records which form all but the largest isolated component were recorded in Brazil, whilst the United States holds the higher percentage ($23.9\%$). The largest isolated component is an exception, given that all records were obtained in Brazil, more precisely within the Federal District. Moreover, species forming this component are all representatives of algae (phylum \textit{Charophyta}, \textit{Chlorophyta}), bacteria (phylum \textit{Cyanobacteria}) and other microscopic eukariotic organisms (\textit{Euglenozoa}, \textit{Myzozoa}), which are taxonomically distinct from the vast majority of species in the herbarium.
 
 We have hypothesized some possible explanations for the existence of so many small isolated components in the UB herbarium SCN with such characteristics. First, they could be a consequence of specimen exchange, a practice that is widely adopted among herbaria for collaboratively diversifying and distributing their collections \cite{Groom2014}. Exchange materials are typically duplicated exsiccates collected in field that a sender institution dispatches to a receiver institution. The receiver institution then incorporates those materials to its scientific collection, and ocasionally sends back to the other institution some duplicate exsiccates of its own.
-From the receiver herbarium viewpoint the inclusion of records from exchanges usually adds new species and collectors, for they are a sample reflecting the sender institution's purpose and the interests of people associated to it. If both the collectors and species from such records were previously inexistent in the receiver collection, no links to the herbarium core or to any other isolated component that already exists are formed. These records thus get included into its SCN network as nodes and edges composing new small isolated components.
+From the receiver herbarium viewpoint the inclusion of records from exchanges usually adds new species and collectors, for they are a sample reflecting the sender institution's purpose and the interests of people associated to it. If both the collectors and species from such records were previously inexistent in the receiver collection, no links to the herbarium core or to any other isolated component that already exists are formed. These records thus get included into its SCN network as nodes and edges composing new small isolated components. We should overstate, however, that including exchange records does not necessarily create new isolated components. New species or collectors could be included in the herbarium core in case either the species or at least one of the collectors associated to the exchange record are already linked to the giant component.
 
 A second situation that could potentially lead to isolated components in the network is when there are groups of very specialized collectors sampling very specific or distinct groups of organisms. Cryptic organisms such as algae, fungi and mosses are examples of groups which tend to be overlooked by botanists who are not directly interested on them. If collectors who record such groups also show a very high specificity towards them, it gets more likely that they lack links to other species which are more commonly recorded by the rest of the collectors, thus forming structures that are detached from the herbarium core. In case these collectors regularly deposit their materials in the herbarium it would be natural to observe them composing isolated components with a relatively large number of species.
 
 
 
-
-By inspecting the degree distribution of nodes from both species and collectors sets (Figure \ref{fig:ub_scn_degree_dist}) one can notice that the network is majoritarily composed by nodes holding very few ties with others, while few others, called hubs, are very intensely connected. 
-In fact a total of $12123$ species, comprising $79\%$ of all species nodes, are linked to $10$ or fewer collectors, while conversely around $79\%$ of all collectors (a total of $5362$ nodes) are linked to $10$ of fewer species. 
-As opposed to random networks, in which extremely well or extremely poorly connected nodes are very unlikely to occur, the connectivity pattern observed for the UB species-collectors network resembles the one from scale-free networks. While the degree distribution in random networks follow a poisson distribution, in scale-free networks it is better described by a power law $ p(k) \sim k^{-\alpha} $. For some empirical datasets, as it is the case for the $S_{sp}$ nodes set, a slight variant of the power law function $p(k) \sim e^{-\lambda k} k^{-\alpha}$ can turn out to be a better fit. The additional exponential term is the cutoff term, which is responsible for the tail cutoff that can be observed in Figure \ref{fig:ub_scn_degree_dist}a. 
-
-  \begin{figure}[!h]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
-    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
-    \label{fig:ub_scn_degree_dist}
-  \end{figure}
-  
-
-As shown in Table \ref{table:ub_scn_degrees}, for collectors nodes $\langle k_{col}\rangle \approx 21.1$, being $\langle k_{col}\rangle$ the average degree calculated for the $S_{col}$ nodes set. This fact can be interpreted as that the number of distinct species a collector has recorded and successfully deposited in the UB herbarium is, in average, approximately $21.1$. 
-Yet, some collectors in the herbarium have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; or \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. 
-Most collectors (around $86.7\%$), however, have degrees below or equal $floor(\langle k_{col} \rangle)$.
-
-For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted as the number of distinct collectors, in average, a species has been collected by. Similarly to nodes in $S_{col}$, most species (around $76.7\%$) have degrees below or equal $floor(\langle k_{sp}\rangle)$, albeit some species have been collected by many more collectors than the average, for example \textit{Myrcia splendens} and \textit{Eugenia punicifolia}. Those top-10 species are in fact reasonably well-known, common and easily detectable species. Typical from cerrado physiognomies, \textit{Solanum lycocarpum} (\textit{lobeira}), \textit{Palicourea rigida} (\textit{chapéu-de-couro}), \textit{Qualea parviflora} (\textit{pau-terra}) are examples of species that are both very conspicuous and easy to identify.
-
-% Define degree centrality metric
+\paragraph*{Number of species per collector.}
+Collectors contributing to the UB herbarium have, in average, recorded and successfully deposited approximately $21.1$ distinct species in that collection during their careers (Table \ref{table:ub_scn_degrees}). This value is obtained by computing the average degree $\langle k_{col} \rangle$ from all nodes in $S_{col}$ set, and would be equivalent to the expected number of species for a randomly selected collector if the SCN were a random network \cite{Albert2002}.
+However, by visually inspecting the degree distribution of collectors in Figure \ref{fig:ub_scn_degree_dist}(b and d) we realize that the vast majority of collectors have recorded very few species. In fact, around $86.7\%$ of the collectors have degrees below or equal $floor(\langle k_{col} \rangle)$, and around $79\%$ have recorded $10$ or fewer species.
+On the other hand, there are also some few collectors that have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; and \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. Nodes that are very intensely connected in the network are called hubs.
 
 \begin{table}[t]
 \caption{ Some degree metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degree $k$, weighted degree $k_w$ and normalized degree $k^*$ centralities are listed.}
@@ -230,20 +226,61 @@ For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle 
 \label{table:ub_scn_degrees}
 \end{table}
 
-The total number of records of each collector (and, conversely, the total number of collectors that have recorded each species) is given by their weigthed degree $k_w$.
-This metric is calculated for each node by assigning weights to each of their edges based on a chosen attribute, and then summing up all the weights of those edges.
-In SCNs we use edges \textit{count} attribute for weighting. 
-For a node $u$
-$ k_w^{(u)} = \sum_{v} e_{u,v}$ for $v \in$ $neighbors(u)$.
-Therefore the a node's $k_w$ metric becomes equivalent to its \textit{count} attribute.
-% Make it clearer that there is a count attribute for nodes and another one for edges
+  \begin{figure}[t]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
+    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
+    \label{fig:ub_scn_degree_dist}
+  \end{figure}
 
-Table \ref{table:ub_scn_degrees} also shows the normalized degree centralities $k^*$ for the top-10 nodes from each set. The general intuition behind this metric for bipartite models is to get the fraction of nodes of the opposite set a particular node is tied to. In other words, we compare a node's degree to the maximum degree that is possible for nodes in that set, which turns out to be the opposite nodes set's size. Therefore, $k^*_i = \frac{k_i}{|S_{sp}|}$, for each node $i \in S_{col}$ and, conversely, $k^*_j = \frac{k_j}{|S_{col}|}$ for each node $j \in S_{sp}$.  
-As stated by \cite{Borgatti2015}, the advantage of using this normalized metric over the non-normalized centrality $k$ is that it allows us to numerically compare centrality scores across nodes sets independently of their respective sizes. 
-In our case data shows that collectors hubs tend to be more central than species nodes. The top collector \textit{irwin,hs} is linked to $30\%$ of the total diversity of the herbarium species, whilst the top species \textit{Myrcia splendens} has been recorded by $6\%$ of the herbarium collectors. 
+As opposed to random networks, in which extremely well connected nodes are unlikely to coexist with a large number of extremely poorly connected ones, the degree distribution observed for collectors in the UB SCN is better described by a power law $p(k) \sim k^{-\alpha}$, which are typically observed in many large real-world networks with the scale-free property \cite{Barabasi1999a}. The dashed line in figure \ref{fig:ub_scn_degree_dist}b is a power law fit for the $S_{sp}$ data, with $\alpha=1.52$. 
 
 
-From all $|S_{col}| \times |S_{sp}| \approx 1.04 \times 10^{8}$ edges that could possibly exist in case every species were connected to every collector, only $142647$ actually exist. Therefore the network density is approximately $1.37 \times 10^{-3}$.
+  
+Other useful degree centrality metrics shown in Table \ref{table:ub_scn_degrees} are the weighted degree $k_w$ and normalized degree $k^*$. The weighted degree for each collector node is computed by summing up weights assigned to each of the node's edges. Edges can be weighted according to any chosen attribute of its own, depending on the aspect of the connection the user wants to emphasize. Here we use the \textit{count} attribute, which holds the number of times the association between a collector and a species occurs. Formally, $k_w^{(u)} = \sum_{v} count(e_{u,v})$ for $v \in$ $neighbors(u)$. Differently from the degree, which gives the number of distinct species that have been recorded by a collector, the weighted degree of a collector can be interpreted as the total number of specimens (or occurrence records) collected by him/her. It is also worth to note that a node's $k_w$ is equivalent to the node's \textit{count} attribute, which is not to be confused to edges' homonymous attribute.
+
+The intuition behind the normalized degree $k^*$ metric for a collector is to get the fraction of species from the entire $S_{sp}$ set it is connected to. More generally, we compare a node's degree to the maximum degree value that would be possible for nodes in the same set. In a bipartite model it turns out to be the node's degree divided by the size of the opposite set. Therefore, $k^{*(i)} = \frac{k^{(i)}}{|S_{sp}|}$, for each node $i \in S_{col}$. 
+As stated by Borgatti \cite{Borgatti2015}, the advantage of using this normalized metric over the non-normalized degree $k$ is that it allows us to numerically compare centrality scores across nodes sets independently of their respective sizes. 
+In our case data shows that collectors hubs tend to be more central than species hubs. The top collector \textit{irwin,hs} is linked to $30\%$ of the total diversity of the herbarium species, whilst the top species \textit{Myrcia splendens} has been recorded by $6\%$ of the herbarium collectors (Table \ref{table:ub_scn_degrees}). 
+
+
+
+\paragraph*{Number of collectors per species.}
+For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted as that species in the UB herbarium have been collected by approximately $9.5$ distinct collectors, in average. 
+The total number of times each species has been recorded and the percentage of collectors that have recorded them at least once are given by the $k_w$ and $k^*$ metrics, respectively (Table \ref{table:ub_scn_degrees}).
+
+The degree distribution for species nodes (Figure \ref{fig:ub_scn_degree_dist}(a and c)) shows a similar pattern to the distribution for collectors nodes, where a majority of very low degree nodes coexisting with a few hubs.
+Most species (around $76.7\%$) hold degree values below or equal $floor(\langle k_{sp}\rangle)$, meaning they've been recorded by $9$ distinct collectors or less.
+Yet, there are also some species that have been recorded by many more collectors than the average, as it is the case of \textit{Myrcia splendens} and \textit{Eugenia punicifolia}. Those top-10 species (Table \ref{table:ub_scn_degrees}) are in fact reasonably well-known, common and easily detectable species. Typical from cerrado physiognomies, \textit{Solanum lycocarpum} (\textit{lobeira}), \textit{Palicourea rigida} (\textit{chapéu-de-couro}), \textit{Qualea parviflora} (\textit{pau-terra}) are examples of species that are both very conspicuous and easy to identify.
+
+A particularity that can be observed in the species degree distribution is the existence of a sharp tail decrease in the probability curve towards the highest degree nodes (Figure \ref{fig:ub_scn_degree_dist}a). Such behavior typically arises when the formation of a very high number of links is constrained by some system-specific factor \cite{Newman}.
+% What is a possible explanation in this case? 
+This behavior can be better adjusted by using a slight variant of the power law function $p(k) \sim e^{-\lambda k} k^{-\alpha}$, which is obtained by simply including an exponential cutoff term. We call this variant a truncated power law function. The dashed curve in Figure \ref{fig:ub_scn_degree_dist}a represents a truncated power with parameters $\alpha=1.38$ and $\lambda =0.014$, which was fit to the species degree distribution data.
+
+% Define degree centrality metric
+
+
+
+
+% Assortativity in SCN
+% Network resilience: If the SCN is dissortative, then it is easier to break it by removing hubs (therefore forming many specialized subgroups of collectors). Otherwise, removing any of the main hubs would not have a considerable effect on fractioning the network (Specialized communities are unlikely to be formed if an important collector leaves the herbarium). 
+
+\subsection{The UB Collectors Coworking Netork}
+As the UB was built based on the same set of records as the SCN model explored in the previous section, the number of nodes is $6768$, which is equivalent to the number of collectors nodes in the SCN.
+Here all ties are established between collectors, with a total of $10391$ edges.
+There are $2673$ ($39.5\%$) singleton collectors (those having no collaborations, or $k=0$).
+
+The network is composed by a giant component, containing $3114$ nodes ($46\%$ of the nodes) and $2990$ other isolated components, holding the remaining $54\%$.
+However, almost all isolated components are in fact singleton collectors (those who have never collaborated with any other collector). All singletons are considered a distinct isolated component, and that's why there are so many of them. Only $317$ isolated components are formed by collectors with at least one collaborative tie.
+
+The overall network density is $4.5 \times 10^{-4}$.
+If we only consider the network giant component we get a density of $1.95 \times 10^{-3}$.
+If we only consider the herbarium core we get a density of $x$.
+
+\paragraph*{Who collaborates with whom?}
+
+
+
 
  
 %%
@@ -261,7 +298,7 @@ From all $|S_{col}| \times |S_{sp}| \approx 1.04 \times 10^{8}$ edges that could
 % It should be noticed, however, that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
 %% PLOT max similarity vs degree
 
-\subsection{The UB Collectors Coworking Network}
+
 %%% QUESTIONS
 
 %% 1. How common are collaborative recordings within the dataset?
@@ -287,30 +324,21 @@ From all $|S_{col}| \times |S_{sp}| \approx 1.04 \times 10^{8}$ edges that could
 \newcounter{QuestionsCounter}
 \setcounter{QuestionsCounter}{1}
 
-\subsubsection*{Question \arabic{QuestionsCounter}: How prevalent are collaborative records?}
-blablabla2
+\subsubsection*{Question \arabic{QuestionsCounter}: What team sizes do collectors usually form?}
+% Average team sizes
 
+\stepcounter{QuestionsCounter}
 \subsubsection*{Question \arabic{QuestionsCounter}: <Another question>}
 
-
+\stepcounter{QuestionsCounter}
+\subsubsection*{Question \arabic{QuestionsCounter}: Who are specialist/generalist collectors?}
 % References {Newman2004}
-% Statistical characterization of SCN structure
-%% Species per collectors (species bag), collectors have species signatures
-%% Collectors per species
-%% Simply projecting this graph originates a very densely-connected network, failing to reveal relevant connectivity patterns (Lambiotte2005)
 
-%% Define finer species taxonomic/functional division that best reflect collectors interests than division by family alone (Lambiotte2005)
-%%% Do collectors interests communities reflect taxonomic divisions such as the family level?
 
 
 % Statistical characterization of CWN structure
 %% Largest component, connected components...
 %% Assortativity: Do collectors with many collaborators (very collaborative) tend to associate with others that are also very collaborative?
-
-% Network Evolution
-%% Is network evolution ruled by preferential attachment?
-%% How likely is it that two co-authors of a record will also be co-authors of another one?
-%% Do attach influential collectors (high betweeness) attach preferentially to other influential ones? (Goh2003, Newman2004)
 
 
 \subsection{Degree distribution?}

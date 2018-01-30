@@ -97,7 +97,7 @@ Below I introduce some basic definitions in the scope of SCN models.
 
 %% SCN definitions
 \paragraph{Species bag.} 
-The entire set and counts of species a collector has recorded in a dataset, which is equivalent to the set formed by the node's direct neighbors, composes his/her \textit{species bag}.
+The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}.
 Species bag is an attribute which is exclusively derived for collectors nodes, formally defined as a vector
 $$
 \sigma^{(\mu)} =  \begin{bmatrix}
@@ -203,6 +203,7 @@ Additionally, without a superior limit for the $\delta$ function it turns out to
 
 \paragraph*{Species bag / Interest similarity.}
 % This is called "Structural Equivalence": Nodes have ties to common third-parties {Borgatti2015}
+% One characteristic is that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
 This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and interest vectors  for each pair of nodes in the respective projection. 
 The \textit{species bag similarity} for collectors $\mu_i$ and $\mu_j$ and the \textit{interest vector similarity} for species $\psi_i$ and $\psi_j$ are defined as
 
@@ -225,19 +226,7 @@ Therefore each element in the similarity matrix holds the edge weight for a pair
 \section{Collectors Co-working Networks}
 % References: (Ramasco2004)
 
-%% Goals
-%%% 1. I want to assign entities to profiles using attributes such as: Their betweeness, degree, tot_records. One problem is that entities forming communities in this model do not share such attributes: A community is formed by students, professors, great collectors...
-
-%% Questions to investigate
-%%% 1. Is there modularity for any attributes? (check Mislove, A.,et al 2010. You are who you know... sec 3) -> Instead of users modularity defined by them sharing attributes we could have them sharing species
-%%% 2. Preferential attachment: Do new nodes tend to attach to higher-degree ones? This could be representing for example students beginning to collect with advisors/specialists.
-%%% 3. Influence analysis: Who are the most influential nodes in the network? Do other entities tend to replicate the influencers' collecting behavior (at least on the beginning of their careers)? What is the global influence of the most influential collectors' bias in the herbarium?
-%%% 4. Which features best reflect collectors expertise?
-
-%% Temporal evolution
-%%% Who the most influential collectors change with time?
-
-% TODO: CWNs do allow nodes with 0 degree (collectors who have never collaborated)
+% TODO: update: CWNs do allow nodes with 0 degree (collectors who have never collaborated)
 Collectors co-working networks models (CWNs) describe coauthoring relationships between collectors. Two collectors are considered to be co-authors in a particular record if they are both included as collectors responsible for that occurrence. In other words, these models represent collectors who have worked together in field, having recorded specimens collaboratively.
 In a dataset following \textit{Darwin Core} standards collectors names are obtained from the $recordedBy$ field.
 A CWN is constructed from an occurrences dataset by iterating over each record and forming \textit{clique} structures with the associated collectors, which are finally combined into a single undirected graph formally represented as 
@@ -245,7 +234,7 @@ $$CWN = (S,E) \mbox{ ,}$$
 where $S$ and $E$ are the graph's nodes and edges sets representing, respectively, collectors and links connecting them. This construction process is illustrated in Figure <>. % create figure %
 
 As opposed to SCNs, CWNs model collaborative relationships between entities of the same type, thus all nodes in the graph belong to the same class and are contained in the nodes set $S$. 
-Although species are not represented as entities in this model, a list with all taxons recorded collaboratively by two collectors can be included as an attribute of the edge connecting them. 
+Although species are not represented as entities in this model, a list with all taxons recorded collaboratively by two collectors can be included as an attribute of the edge connecting them.
 Edges linking each pair of collectors are unique in the graph, and the total number of times that association occurs in the dataset is included as an attribute of the edge.
 
 % Are unconnected collector represented in the model?
@@ -287,6 +276,8 @@ The \textbf{strength} of a node is the sum of the weights associated to all its 
 
 \section{Combining the network models}
 
+\subsection{The herbarium core}
+% Parameters: taxonomic_rank, min_degree
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%
