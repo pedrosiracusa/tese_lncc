@@ -81,17 +81,21 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 %% Goals and Questions to investigate
 %% TODO: SCNs do not allow 0-degree nodes
 
+Species-collectors networks (SCN) describe relationships of the type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Every time a collector records an individual from a given species, a link between the collector and the species is either created or strengthened.
+An important semantic aspect of this model worth emphasizing is that while collectors are represented at the individual level, species are, by definition, aggregations of specimens sharing some degree of taxonomic similarity.
 
-\subsection{General description}
-
-Species-collectors networks (SCN) describe relationships of the type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. 
-As such relationships can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct classes. Additionally, we add the constraint that all relationships in the network necessarily involve entities from distinct classes.
+As relationships here modeled can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct classes. Additionally, we add the constraint that all relationships in the network must necessarily involve entities from distinct classes.
 The network is thus mathematically described as a bipartite graph
-$$ SCN = (S_{sp},S_{col},E) \mbox{ ,}$$
-where $S_{col} = \{\mu_1, \mu_2, ..., \mu_n \}$ is the nodes set representing the collectors group; $S_{sp}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
-The graph can be represented as a rectangular biadjacency matrix $A$ with dimensions $|S_{col}| \times |S_{sp}|$, wherein each $a_{ij}=0$ if $e_{ij} \notin E$.
+$$ SCN = (S_{col},S_{sp},E) \mbox{ ,}$$
+where $S_{col} = \{u_1, u_2, ..., u_n \}$ is the nodes set representing the collectors group; $S_{sp}=\{v_1,v_2, ..., v_m\}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
+The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below.
 
-Both nodes and edges are allowed to hold attributes.
+The network is constructed from a species occurrence dataset in an iterative process, where links are added connecting the species to each of its collectors for each new record. 
+For each new species and collector included in the network, a node is created with a \textit{count} attribute initially set to $1$. In subsequent iterations, the value assigned to this attribute is increased by one for every new occurrence of that particular node. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
+Similarly, the number of times a particular species-collector association occurs in the dataset is stored in the edge's \textit{count} attribute.
+For a previously inexistent species-collector association a new edge with $count=1$ is created, and the attribute is increased for every new occurrence of the same association.
+Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs.
+
 
   \begin{figure}[h!]
   	\centering
@@ -100,27 +104,28 @@ Both nodes and edges are allowed to hold attributes.
     \label{fig:scn_general}
   \end{figure}
 
-Note that in this model entities from the collectors class represent actual individuals (people), whereas each entity from the species class refer instead to a species, which by definition comprises a group of individuals. 
-Therefore new links between nodes are formed whenever a collector records an individual belonging to a new species. 
-For new occurrences of already existent species-collector pairs no new edges are added. Instead, the weights of those edges are increased, such that the final weight of each edge corresponds to the total number of times a given collector has recorded a given species.
+Figure \ref{fig:scn_general}a is an example of a SCN network, for which the adjacency matrix is
+$$
+\begin{bmatrix}
 
-Nodes and edges in a SCN model can also be represented as a rectangular \textit{biadjacency matrix} $A$ with dimensions $|S_{sp}|\times|S_{col}|$, wherein each element represents the number of records of a particular species by some collector.
+\end{bmatrix}
+$$
 
+\subsection{Definitions}
 Below I introduce some basic definitions in the scope of SCN models.
 
 %% SCN definitions
 \paragraph{Species bag.} 
 The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}.
-Species bag is an attribute which is exclusively derived for collectors nodes, formally defined as a vector
+The species bag $\sigma$ for collector $u_i$ is directly obtained as the $i^{th}$ row-vector of the biadjacency matrix, such that
+
 $$
-\sigma^{(\mu)} =  \begin{bmatrix}
-\sigma_1^{(\mu)}, \sigma_2^{(\mu)}, \cdots, \sigma_n^{(\mu)}
-\end{bmatrix}  \quad : \quad 
-n = |S_{sp}|
+\sigma_{u_i} =  \begin{bmatrix}
+a_{i 1}, a_{i 2}, ..., a_{i m}
+\end{bmatrix}  \quad ,
 $$
-where $n$ is the length of the species set and each $\sigma_i^{(\mu)}$ is the total number of records of species $i$ by collector $\mu$. 
-The species bag can be directly obtained as a row-vector from the SCN biadjacency matrix.
-The sum of all elements in a collector's species bag is given by the species bag's \textit{l1 norm} $|| \sigma^{(\mu)} ||_1$, and corresponds to the node's \textit{weighted degree} $k_w$.\todo{review weighted degree definition}
+where $m$ is the length of the species set and each $a_{i j}$ is the total number of records of species $v_j$ by collector $u_i$. The sum of all elements in a collector's species bag, which is equivalent to the vector's \textit{l1 norm} $||\sigma_{u_i}||_1$, corresponds to the total number of records for that collector.
+
  
 \paragraph{Interest.} 
 The entire set and counts of collectors that have recorded a particular species in a dataset is defined as its \textit{interest} vector. This concept can be thought as the inverse of a species bag, being equivalent to the nodes set formed by a species' direct neighbors. The interest vector is an attribute derived exclusively for species nodes, and is formally defined as
@@ -149,21 +154,8 @@ For a more formal description let $G_T = \{ g_1, g_2, \cdots, g_n \}$ be a taxon
 
 % Temporal edges
 
-% Model metrics
-\subsection{Metrics and attributes}
-In this section I describe metrics and attributes of nodes and edges in the model.
 
-\paragraph*{Specificity.} 
-% This metric doesn't work well for very low degrees with very high weighted degrees (for example in aggregations into family level)
-How many of a collector's new records refer to species he/she had never recorded before?
-Is a particular species mostly collected by the same collector or are there many other collectors that are also interested in it?
-In order to tackle these questions we define a specificity metric, which can be applied to nodes in both $S_{col}$ and $S_{sp}$ sets. 
-The specificity of a node is derived from the ratio between its degree and weighted degree centralities.
-\begin{equation}
-specif(n) = 1-\frac{k^{(n)}}{k_w^{(n)}}
-\end{equation}
-This definition is not to be confused with specificity metric from the domain of model evaluation (statistics), also known as the true negatives rate.
-A collector's specificity is $0$ if all species in his/her species bag were recorded only once, and gets close to $1$
+\subsection{Construction process}
 
 
 % Bipartite projections
