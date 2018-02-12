@@ -99,16 +99,22 @@ Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus 
 
   \begin{figure}[h!]
   	\centering
-    \includegraphics[width=\linewidth]{figures/scn_generalaspect.png}
-    \caption{(a) General aspect of a species-collectors network model (SCN), where collectors are linked to the species they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. Here for simplicity all collectors have recorded each species once. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. Link strength in each network is graphically represented by edges thickness.}
+    \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
+    \caption{(a) General aspect of a species-collectors network model (SCN), where collectors are linked to the species they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. Link strength in each network is graphically represented by edges thickness.}
     \label{fig:scn_general}
   \end{figure}
 
 Figure \ref{fig:scn_general}a is an example of a SCN network, for which the adjacency matrix is
 $$
-\begin{bmatrix}
-
-\end{bmatrix}
+A =
+\kbordermatrix{
+& sp1 & sp2 & sp3 & sp4 & sp5 & sp6 & sp7 & sp8 & sp9 & sp10 \\
+col1 & 1 & 1 & 1 & 2 & 1 & 0 & 0 & 0 & 0 & 0 \\
+col2 & 1 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+col3 & 1 & 2 & 1 & 0 & 1 & 1 & 0 & 0 & 3 & 0 \\
+col4 & 0 & 0 & 0 & 1 & 0 & 0 & 4 & 1 & 0 & 0 \\
+col5 & 0 & 0 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 1 \\
+}
 $$
 
 \subsection{Definitions}
