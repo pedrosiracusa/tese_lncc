@@ -5,19 +5,19 @@
 %%%% Profiling collectors in terms of their activities and interests can be a way of further detecting anomalies (activity monitoring, Fawcett and Provost 1999).
 
 
-\begin{figure}[h!]
-  	\centering
-    \includegraphics[width=0.8\linewidth]{figures/er_occurrence.png}
-    \caption{Entity-relationship diagram for occurrences.}
-    \label{fig:er_occurrences}
-\end{figure}
 
-This chapter contains the core models I've developed during this study.
+
+
+In this chapter we present and formally describe two classes of network models that were developed during this study.
+\textbf{Species-collectors networks} (SCNs) are built based on associations between collectors and the species they've recorded during their careers, whereas \textbf{collectors coworking networks} (CWNs) describe direct collaborative associations between collectors when recording specimens in field.
+
+Although structurally distinct, models here presented provide complementary perspectives on the recording behavior of collectors from a given species occurrence dataset. 
+From SCNs we retrieve information on which collectors have recorded which species and, conversely, which species were recorded by which collectors. 
+CWNs, on the other hand, allow us to investigate which collectors team up with whom during fieldwork, although here species are not represented as entities.
+
+As both models were elaborated based on a social networks analytics framework, we start by reviewing some general concepts from the network science domain.
+
 % What am I modeling with these models?
-
-Here a distinction must be stated for the terms "species" and "specimen" I'll constantly refer to along this text. The former refers to a taxonomic rank, a group of individuals forming a biological classification unit as determined by a professional taxonomist. The latter refers to an individual, which can be identified as being a representative of one species. These relationships are illustrated in Figure \ref{fig:er_occurrences}.
-
-After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a taxonomic group (a taxon), in a best-effort manner.
 
 \section{Complex Networks: A theoretical background}
 \subsection{The rise of the study of complex networks}
@@ -25,7 +25,7 @@ After properly deposited in a biological collection, each record receives a taxo
 %% A historical background
 %% Applications (biology and other fields)
 %% What are complex networks?
-%%%% Random networks, small-world and scale-free topologies
+%%%% Random networks, small-world and scale-free topologies 
 
 \subsection{Mathematical Representations}
 % Networks are mathematically represented as graphs
@@ -50,6 +50,9 @@ For undirected graphs, connected components are defined as subgraphs in which th
 
 %% Matrix Representation
 %%% Adjacency matrix, sparsity
+For some applications it turns to be convenient to use a matrix representation of graphs. A matrix where ... is known as the graph's \textbf{adjacency matrix}. % where are zeros and ones?
+In case the graph is unimodal the adjacency matrix is a squared symmetrical matrix.
+For bipartite graphs, however, this is not necessarily true. It depends on the size of each nodes set. We refer to it as the \textbf{biadjacency matrix}.
 
 %% Degree
 %%%% Degree distribution
@@ -82,12 +85,14 @@ For undirected graphs, connected components are defined as subgraphs in which th
 \subsection{General description}
 
 Species-collectors networks (SCN) describe relationships of the type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. 
-As such relationships can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct entity classes. Additionally, we add a constraint only allowing links to be established between collectors and species.
-As all relationships in the network necessarily involve one entity belonging to each class it is best described by a bipartite graph model
+As such relationships can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct classes. Additionally, we add the constraint that all relationships in the network necessarily involve entities from distinct classes.
+The network is thus mathematically described as a bipartite graph
 $$ SCN = (S_{sp},S_{col},E) \mbox{ ,}$$
-where $S_{col}$ is the nodes set representing the collectors group; $S_{sp}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
+where $S_{col} = \{\mu_1, \mu_2, ..., \mu_n \}$ is the nodes set representing the collectors group; $S_{sp}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
+The graph can be represented as a rectangular biadjacency matrix $A$ with dimensions $|S_{col}| \times |S_{sp}|$, wherein each $a_{ij}=0$ if $e_{ij} \notin E$.
 
-% https://www.latex-tutorial.com/tutorials/figures/
+Both nodes and edges are allowed to hold attributes.
+
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/scn_generalaspect.png}
@@ -231,11 +236,11 @@ Therefore each element in the similarity matrix holds the edge weight for a pair
 %% Edges pruning
 
 
-\section{Collectors Co-working Networks}
+\section{Collectors Coworking Networks}
 % References: (Ramasco2004)
 
 % TODO: update: CWNs do allow nodes with 0 degree (collectors who have never collaborated)
-Collectors co-working networks models (CWNs) describe coauthoring relationships between collectors. Two collectors are considered to be co-authors in a particular record if they are both included as collectors responsible for that occurrence. In other words, these models represent collectors who have worked together in field, having recorded specimens collaboratively.
+Collectors coworking networks (CWNs) describe coauthoring relationships between collectors. Two collectors are considered to be co-authors in a particular record if they are both included as collectors responsible for that occurrence. In other words, these models represent collectors who have worked together in field, having recorded specimens collaboratively.
 In a dataset following \textit{Darwin Core} standards collectors names are obtained from the $recordedBy$ field.
 A CWN is constructed from an occurrences dataset by iterating over each record and forming \textit{clique} structures with the associated collectors, which are finally combined into a single undirected graph formally represented as 
 $$CWN = (S,E) \mbox{ ,}$$
@@ -279,14 +284,3 @@ The \textbf{strength} of a node is the sum of the weights associated to all its 
 
 %% Weighting
 %%% Check the weighting rule from Newman2001a -> Hyperbolic weighting
-
-
-
-\section{Combining the network models}
-
-\subsection{The herbarium core}
-% Parameters: taxonomic_rank, min_degree
-
-%%%%%%%%%%%%%
-%%%%%%%%%%%%%
-%% Case Study
