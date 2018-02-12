@@ -1,4 +1,4 @@
-\chapter{Understanding Biodiversity Occurrence Data}\label{biodiversity_data}
+\chapter{Understanding Biological Collections Data}\label{biodiversity_data}
 
 % ==============
 % Herbarium data
@@ -51,6 +51,40 @@
 %% Museum-based informatics{Graham2004}
 
 
+\begin{figure}[h!]
+  	\centering
+    \includegraphics[width=0.8\linewidth]{figures/er_occurrence.png}
+    \caption{Entity-relationship diagram for occurrences.}
+    \label{fig:er_occurrences}
+\end{figure}
+
+Taxonomy classifies organisms in a hierarchical system.
+
+Before delving into the characterization of biodiversity data we review the definitions of some domain-specific terms that will be used throughout this text. 
+We specifically use definitions from the \textit{International Code of Nomenclature for algae, fungi and plants} (ICN) \cite{McNeill2012}. This document outlines a set of rules and guidelines for scientifically naming and grouping plants, fungi and algae, consisting of a universally adopted reference by the botanical scientific community. Nomenclature best-practices for other groups of organisms are governed by other (though similar) documents.
+
+\paragraph*{Taxonomy}
+Within the domain of biology taxonomy is, in a general sense, the science of classification of organisms. 
+Organisms are classified in a hierarchical system, where more specific groupings of organisms are nested within broader ones. 
+For an analogy with sets theory, a taxonomic classification system can be thought as being similar to a hereditary (or pure) set, in that all members in a set are, recursively, also required to be sets. In our case, however, we allow the existence of non-set objects only in the lowest-level set, which is the most specific grouping of organisms a taxonomist can come up with.
+
+\paragraph*{Taxonomic Rank.}
+The taxonomic rank of a grouping of organisms is the level of the taxonomic hierarchy at which it is defined. The most relevant ranks adopted in botany (in descending hierarchical order) are \textit{Kingdom}, \textit{Phylum} (or \textit{Division}), \textit{Class}, \textit{Order}, \textit{Family}, \textit{Genus}, \textit{Species}, as stated in \textit{Art. $3.1$} of ICN.
+
+\paragraph*{Species.}
+Species is one of the taxonomic ranks organisms can be determined by professional taxonomists as belonging to. It is regarded to be a basic unit of taxonomic classification, although organisms can be further classified in lower-hierarchy taxonomic ranks (infraspecific ranks).
+Differently from other ranks, the name of a species is composed using a binomial nomenclature system, in which the name of the genus it belongs to is appended to a \textit{specific epithet}.
+Examples of species names are \textit{Caryocar brasiliense}, \textit{Myrcia guianensis}, \textit{Solanum lycocarpum}.
+
+\paragraph*{Specimen.}
+When botanists sample organisms in field they either collect part of the organism (\textit{e.g.} a branch of a tree), the entire organism (\textit{e.g.} the entire body of a weed) or multiple individuals of the same type (\textit{e.g.} a bunch of identical, very small-sized mosses). 
+Any of these collected biological materials is an evidence of the existence of a particular organism at some place and time, and must be properly deposited in a biological collection. A specimen is defined as one of such evidences, and refers to a punctual observation of a single type of organism. For the formal definition refer to \textit{Art. $8.2$} of ICN. 
+Although a specimen could be classified by a taxonomist as being a representative of a given species, this is not a requirement for them to be included in scientific collections. Although taxonomists classify specimens in a best effort manner (the most taxonomically precise as possible), sometimes only higher ranks can be determined. The highest taxonomic rank at which the specimen could be identified is known as its \textbf{taxonomic resolution}.
+After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a taxonomic group (a taxon), in a best-effort manner.
+
+\paragraph*{Taxon.}
+
+A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{Art.1.1}). Notice that the plural is \textbf{taxa}.
 
 
 
