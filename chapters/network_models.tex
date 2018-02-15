@@ -65,6 +65,7 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 %%%% The bipartite constraint: formalization: Nodes sets are DISJOINT (no intersection) ; and INDEPENDENT (no adjacent nodes within any set); 
 %%%% Biadjacency matrix
 %%%% Bipartite projection
+%%%%%% bipartite tradeoff : summarization vs information loss
 %%%%%% bipartite projections edges set is usually very dense -> The importance of adding weights to edges in bipartite projections
 %%%%%% weaker connections are then filtered out
 
@@ -76,35 +77,49 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
   \end{figure}
 
 
-\section{Species-collectors Networks}
 
-%% Goals and Questions to investigate
+
+
+
+% ===========================
+% ===========================
+% Species-collectors Networks
+% ---------------------------
 %% TODO: SCNs do not allow 0-degree nodes
 
-Species-collectors networks (SCN) describe relationships of the type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Every time a collector records an individual from a given species, a link between the collector and the species is either created or strengthened.
+\section{Species-collectors Networks}
+
+In this section we describe Species-collectors Networks (SCNs) as a relational model for structuring associations between collectors and species.
+We first give an overview on the semantics of the relationships we propose to model and how they can be derived from a species occurrence dataset.
+Next we define attributes and operations for SCNs that facilitate obtaining domain-specific insights from it.
+Finally we compare our proposed model to other analogous though different systems in literature.
+
+
+\subsection{General Description}
+
+Species-collectors networks describe relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Whenever a collector records an individual from a given species, a link between the collector and the species is either created or strengthened.
 An important semantic aspect of this model worth emphasizing is that while collectors are represented at the individual level, species are, by definition, aggregations of specimens sharing some degree of taxonomic similarity.
 
 As relationships here modeled can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct classes. Additionally, we add the constraint that all relationships in the network must necessarily involve entities from distinct classes.
 The network is thus mathematically described as a bipartite graph
 $$ SCN = (S_{col},S_{sp},E) \mbox{ ,}$$
 where $S_{col} = \{u_1, u_2, ..., u_n \}$ is the nodes set representing the collectors group; $S_{sp}=\{v_1,v_2, ..., v_m\}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
-The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below.
 
-The network is constructed from a species occurrence dataset in an iterative process, where links are added connecting the species to each of its collectors for each new record. 
-For each new species and collector included in the network, a node is created with a \textit{count} attribute initially set to $1$. In subsequent iterations, the value assigned to this attribute is increased by one for every new occurrence of that particular node. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
-Similarly, the number of times a particular species-collector association occurs in the dataset is stored in the edge's \textit{count} attribute.
-For a previously inexistent species-collector association a new edge with $count=1$ is created, and the attribute is increased for every new occurrence of the same association.
-Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs.
-
+The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below. For large and sparse SCNs, storage and operations on the graph object can be optimized by using sparse matrix designs for $A$.
 
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
-    \caption{(a) General aspect of a species-collectors network model (SCN), where collectors are linked to the species they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. Link strength in each network is graphically represented by edges thickness.}
+    \caption{(a) General aspect of a species-collectors network model (SCN), where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
+    Link strength for both projections were obtained using the \textit{simple weighting} rule, and are graphically displayed as edges thickness.}
     \label{fig:scn_general}
   \end{figure}
-
-Figure \ref{fig:scn_general}a is an example of a SCN network, for which the adjacency matrix is
+  
+The network is constructed from a species occurrence dataset in an iterative process, where links are added connecting the species to each of its collectors for each new record. 
+For each new species and collector included in the network, a node is created with a \textit{count} attribute initially set to $1$. In subsequent iterations, the value assigned to this attribute is increased by one for every new occurrence of that particular node. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
+Similarly, the number of times a particular species-collector association occurs in the dataset is stored in the edge's \textit{count} attribute.
+For a previously inexistent species-collector association a new edge with $count=1$ is created, and the attribute is increased for every new occurrence of the same association.
+Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs. An example of a SCN network is given in Figure \ref{fig:scn_general}, for which the adjacency matrix is
 $$
 A =
 \kbordermatrix{
@@ -114,16 +129,22 @@ col2 & 1 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
 col3 & 1 & 2 & 1 & 0 & 1 & 1 & 0 & 0 & 3 & 0 \\
 col4 & 0 & 0 & 0 & 1 & 0 & 0 & 4 & 1 & 0 & 0 \\
 col5 & 0 & 0 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 1 \\
-}
+}.
 $$
 
-\subsection{Definitions}
-Below I introduce some basic definitions in the scope of SCN models.
+% ===============
+% SCN Definitions
 
-%% SCN definitions
+\subsection{Definitions}
+Attributes and operations for retrieving information about species and collectors.
+Operation for summarizing the model.
+In this section I define some attributes of the SCN model 
+
 \paragraph{Species bag.} 
-The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}.
-The species bag $\sigma$ for collector $u_i$ is directly obtained as the $i^{th}$ row-vector of the biadjacency matrix, such that
+The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}. This attribute is therefore exclusively derivable for collectors nodes.
+As species bags are directly obtained as row-vectors of the graph's biadjacency matrix, they are a convenient structure for comparing collectors in terms of the composition of their records.
+For that task a high variety of well-known distance algorithms for vectors in literature can be readily applied.
+The species bag $\sigma$ for collector $u_i$ is defined as
 
 $$
 \sigma_{u_i} =  \begin{bmatrix}
@@ -133,27 +154,33 @@ $$
 where $m$ is the length of the species set and each $a_{i j}$ is the total number of records of species $v_j$ by collector $u_i$. The sum of all elements in a collector's species bag, which is equivalent to the vector's \textit{l1 norm} $||\sigma_{u_i}||_1$, corresponds to the total number of records for that collector.
 
  
-\paragraph{Interest.} 
-The entire set and counts of collectors that have recorded a particular species in a dataset is defined as its \textit{interest} vector. This concept can be thought as the inverse of a species bag, being equivalent to the nodes set formed by a species' direct neighbors. The interest vector is an attribute derived exclusively for species nodes, and is formally defined as
-$$ 
-\iota^{(\psi)} =  \begin{bmatrix}
-\iota^{(\psi)}_1, \iota_2^{(\psi)}, \cdots, \iota_n^{(\psi)}
-\end{bmatrix}  \quad : \quad 
-n = |S_{col}|
+\paragraph{Quorum.} 
+The entire set and counts of collectors who have recorded a particular species in a dataset comprise its \textit{quorum}, an exclusive attribute of species nodes. 
+This concept can be thought as the inverse of a species bag, being the collectors signature of a species. 
+The quorum vector $\iota$ of a species $v_j$ is directly obtained from the graph's biadjacency matrix as the $j^{th}$ column-vector 
+
 $$
-where $n$ is the length of the collectors set and each $\iota_i^{(\psi)}$ is the total number of records of species $\psi$ which was done by collector $i$. 
-A particular species' interest can also be derived as a column-vector from the biadjacency matrix. 
-The weighted degree $k_w$ \todo{review weighted degree definition}of a species node can also be derived by computing the \textit{l1-norm} of its interest vector, such that $k_w^{(\psi)} \equiv || \iota^{(\psi)} ||_1 $.
+\iota_{v_j} = \begin{bmatrix}
+a_{1 j}, a_{2 j}, ..., a_{n j}
+\end{bmatrix} \quad ,
+$$
+where $n$ is the length of the collectors set and each $a_{i j}$ is the total number of times collector $u_i$ has recorded species $v_j$. 
+The total number of occurrences of species $v_j$ in the entire dataset can be obtained as the sum of all elements in its quorum vector $ || \iota_{v_j} ||_1$.
+
 
 \paragraph{Taxonomic aggregation and resolution.}
 In some contexts it might be desired to simplify SCNs by grouping species nodes into higher taxonomic ranks (or levels), such as \textit{genus} or \textit{family}. This process is defined as \textit{taxonomic aggregation}, and is performed by 
 ($i$) obtaining a grouping of species using some taxonomic rank; 
-($ii$) obtaining interest vectors for each species; 
-($iii$) summing up interest vectors for all species in each group;
+($ii$) obtaining quorum vectors for each species; 
+($iii$) summing up quorum vectors for all species in each group;
 ($iv$) building a new SCN model, aggregated on rank T. 
 The SCN's \textit{taxonomic resolution} is the taxonomic rank at which species are aggregated in the model. For the sake of model interpretability, all nodes in $S_{sp}$ must necessarily be represented as taxons belonging to the same rank as the SCN's taxonomic resolution.
 
-For a more formal description let $G_T = \{ g_1, g_2, \cdots, g_n \}$ be a taxonomic grouping at rank $T$ containing a set of taxons $g_i$, each of them mapping to a set of species nodes $S_{sp}^{(i)} \subset S_{sp}$. Then for each node $g_i \in G_T$ we obtain their interest vectors by computing $ \iota^{(g_i)} := \sum_{j=1}^{m} \iota^{(v_j)} : v_j \in S_{sp}^{(i)}, m = |g_i|$. By stacking all interests vector as row-vectors we obtain a biadjacency matrix, which is then used to build a rank-T aggregated SCN model $SCN_T = (G_T,S_{col},E)$.
+For a more formal description let $G_T = \{g_1,g_2,..., g_n\}$ denote a taxonomic grouping at rank $T$, containing a set of $n$ rank-$T$ taxa.  In addition, let each taxon $g_i \in G_T$ itself be a set of nodes $S_{sp}^{(i)} \subseteq S_{sp}$, with the conditions that there are no empty $S_{sp}^{(i)}$ and that every node $v \in S_{sp}$ is a member of exactly one set  from $ \{ S_{sp}^{(1)}, S_{sp}^{(2)}, ..., S_{sp}^{(n)} \}$.
+Such a grouping rule makes $G_T$ a partition of $S_{sp}$, and thus the entire set $S_{sp}$ can be recreated by simply computing the union of elements in $G_T$. This guarantees that no entities are duplicated or eliminated on aggregations using it.
+
+We then use grouping $G_T$ for obtaining quorum vectors for each of its taxa $g_i \in G_T$, which will be represented as nodes in the new aggregated graph. Quorum vectors are computed as $ \iota_{g_i} := \sum_j \iota_{v_j}  $ for $v_j \in S_{sp}^{(i)}$. Finally, the rank-$T$ aggregated  graph $SCN_T=(G_T,S_{col},E)$ is created from a biadjacency matrix, which is constructed by stacking quorum vectors for each taxon $g_i$ as row-vectors. The set of collectors nodes remain the same in the aggregated graph.
+
 % The PICI model (Lambiotte2005)
 %% Collective effects acting on individuals with similar interests
 %% Individual mechanisms, pushing collectors towards their particular interests, establishing their collecting niche
@@ -161,45 +188,51 @@ For a more formal description let $G_T = \{ g_1, g_2, \cdots, g_n \}$ be a taxon
 % Temporal edges
 
 
-\subsection{Construction process}
-
-
-% Bipartite projections
+% ===============
+% SCN projections
 \subsection{Projections}
 
-Although SCNs are originally built to model recording relationships between species and collectors, one might obtain additional insights by deriving indirect relationships from its structure. This is accomplished by projecting SCNs over each one of the nodes sets, as illustrated in Figures \ref{fig:scn_general}(b)
-and~\ref{fig:scn_general}(c). Each projection gives us complementary perspectives on how strongly entities of the same type relate with each other in terms of their linkage patterns with intermediates.
+Bipartite projections on each one of the SCN's nodes sets allows one to investigate indirect associations two entities from the same class might have with each another, as intermediated by a third entity from the opposite class. 
+Figure \ref{fig:scn_general} illustrates projections of a SCN onto the species set (b) and the collectors set (c).
+In overall, each projection gives us complementary perspectives of transitive relationships in the SCN, either from the collectors or species point of view.
 
+From a species-centric perspective (Figure \ref{fig:scn_general}b), connections are formed between species having been recorded by at least one collector in common, with link strength proportional to the number of different collectors they share. 
+Although collectors are used during projection for determining the existence of links between species they are not represented as nodes in this projection.
+In general strongly connected species can be interpreted as being both included in the species bags of many collectors, whereas weakly connected or isolated species are seldom or never recorded by the same collectors.
+% Modules in species projections reveal species that are more intensely associated with each other than with others from outside the module
+The second perspective (Figure \ref{fig:scn_general}c) is collectors-centric, in that only collectors are represented as nodes whilst species are omitted. 
+Analogously to the species-centric perspective, here collectors are linked together if they have recorded at least on species in common, with link strength depending on the number of shared species between them. 
+From this perspective we could identify collectors having similar recording profiles.
 
-The first perspective (Figure \ref{fig:scn_general}(b)) is obtained by projecting the graph onto the $S_{col}$ set, and allows us to investigate which collectors share interest in common sets of species. Collectors with at least one species in common in their species bags get directly connected, whereas species nodes are omitted. This perspective allows us to investigate, for example, which species are most frequently associated to each other in species bags.% analogous to the shopping basket problem
-
-The second perspective (Figure \ref{fig:scn_general}(c)) represents species that are recorded by a common set of collectors or, in other words, share interest. Similarly to the other projection, projecting the SCN onto the $S_{sp}$ set directly links species with at least one collector in their interest vector while omitting collectors nodes. From this perspective we could identify collectors having similar recording profiles, having recorded a similar set of species. 
-
-In both projections link strength is given by some weighting rule, which can be applied depending on the question one wants to investigate. Below I first describe the simplest weighting rule with its limitations and, in sequence, some alternatives rules for overcoming them.
+As previously discussed in this text, projections are a mechanism for summarizing bipartite into more convenient one-mode graphs, where only one class of entity is represented. % TODO: Remember to add this in the projection section
+Projections, however, come with the cost of information loss, as any relationships or attributes of nodes from the omitted set are not represented in the projection \cite{Borgatti1997}. % TODO: Add reference
+Moreover, relevant associations between entities eventually become obfuscated by others of lower relevance, as projections tend to generate graphs that are much denser than the original bipartite model \cite{Lambiotte2005}.
+Choosing an appropriate weighting rule for the aspects one wants to investigate is thus detrimental for separating relevant from less-relevant associations, so that the latter ones can be subsequently removed by applying weighting filters.
+Below I first describe the simplest weighting rule with its limitations and, in sequence, some alternatives rules for overcoming them.
 % https://doi.org/10.1016/j.physa.2006.12.021 <- The effect of weight on community structure of networks
 
 \paragraph*{Simple weighting.}
-This rule assigns weights to links between pairs of collectors ($\mu_1$ and $\mu_2$) or species ($\psi_1$ and $\psi_2$) by simply counting the total number of species collectors share on their species bags or the total number of collectors species share in their interest vector. The rule is mathematically expressed as:
+This rule assigns weights to links between pairs of collectors ($u_s$ and $u_t$) or species ($v_s$ and $v_t$) by simply counting the total number of species collectors share on their species bags or the total number of collectors species share in their quorum vector. The rule is mathematically expressed as:
 \begin{equation} \label{eq:simple_weighting}
 \begin{split}
-W_{(\mu_1, \mu_2)} &= \sum_{i=1}^{n} \delta(\sigma_i^{(\mu_1)}, \sigma_i^{(\mu_2)})\mbox{ , for the projection onto }S_{col}\mbox{ ;}\\
-W_{(\psi_1, \psi_2)} &= \sum_{j=1}^{m} \delta(\iota_j^{(\psi_1)}, \iota_j^{(\psi_2)})
+w_{(u_s, u_t)} &= \sum_{j=1}^{m} \delta(\sigma^{(j)}_{u_s}, \sigma^{(j)}_{u_t})\mbox{ , for the projection onto }S_{col}\mbox{ ;}\\
+w_{(v_s, v_t)} &= \sum_{i=1}^{n} \delta(\iota^{(i)}_{v_s}, \iota^{(i)}_{v_t})
 \mbox{ , for the projection onto }S_{sp}\mbox{, where}
 \end{split}
 \end{equation}
-$n = |S_{sp}|$, $m = |S_{col}|$ and $\delta(u,v)=1$ if both $u$ and $v$ are non-zero and $0$ otherwise.
+$n = |S_{col}|$, $m = |S_{sp}|$, $\sigma^{(i)}$ and $\iota^{(i)}$ are the $i^{th}$ element of a species bag and a quorum vector, respectively; and $\delta(u,v)=1$ if both $u$ and $v$ are non-zero and $0$ otherwise.
 
-In order to obtain the weights for every pairs of projected nodes more efficiently we can use a vectorized implementation of this rule. First we derive a $m\times n$ logic matrix $A$ from the SCN biadjacency matrix by simply replacing its non-zero elements by ones. 
-Then the $m \times m$ matrix with edges weights for the $S_{col}$ projection is obtained by calculating the dot product $A A^T$.
-Conversely, for the $S_{sp}$ projection, the $n \times n$ weights matrix is obtained by calculating $A^T A$.
+In order to obtain the weights for every pairs of projected nodes more efficiently we can use a vectorized implementation of this rule. First we derive a $n\times m$ logic matrix $A_{bool}$ from the SCN biadjacency matrix $A$ by simply replacing its non-zero elements by ones. 
+Then a $n \times n$ adjacency matrix with edges weights for the $S_{col}$ projection is obtained by calculating the dot product $A_{bool} A_{bool}^T$.
+Conversely, for the $S_{sp}$ projection, the $m \times m$ weights matrix is obtained by calculating $A_{bool}^T A_{bool}$.
 
-The simple weighting rule has two main limitations when applied to SCNs.
-First, the weight assigned to edges linking pairs of nodes in the projection only reflects the number of distinct intermediate neighbors from the complementary set they shared in the non-projected graph. The number of times each species is recorded by each collector is therefore ignored while computing the strength of links in the projections.
-Second, such weighting rule tends to make very prolific and generalist collectors or very attractive species strongly connected to many others in a disproportional way, as an effect of their high degrees in the non-projected model. The opposite happens in the case of specialized nodes, which are those holding fewer distinct paths (or links) to neighbors but with many occurrences of each path. Besides overlooking the importance of more specialized nodes this rule also tends to make projected graphs very densely connected, which increases computational costs and obfuscates relevant relationships in the model. Analogous limitations were also reported for other bipartite social network models \cite{Lambiotte2005}.
-In order to reduce these effects we could instead use the alternative rules below.
+The simple weighting rule has an important limitation when applied to SCNs.
+It arises from the fact that the weight assigned to edges linking pairs of nodes in the projection only reflects the number of distinct intermediate neighbors from the complementary set they shared in the non-projected graph. The number of times each species is recorded by each collector is therefore ignored while computing the strength of links in the projections, underestimating the importance of recurrent relationships.
+Consequently this weighting rule tends to make very prolific and generalist collectors or very attractive species strongly connected to many others in a disproportional way, as an effect of their high degrees in the non-projected model. The opposite happens in the case of specialized nodes, which typically hold fewer --- although recurrent --- distinct links to their neighbors. 
+In order to reduce these effects two alternative rules are proposed below.
 
 \paragraph*{Additive weighting.}
-In a first attempt to tackle the limitations presented above we slightly modify the simple weighting rule by also considering the total number of times entities interact through each common neighbor-intermediated path in the SCN. The rule is expressed using the same equations from (\ref{eq:simple_weighting}), but changing the $\delta$ function to
+This rule is a slight modification of the simple weighting rule, in that it also considers the total number of times entities interact through each neighbor-intermediated path in the non-projected network. The rule is expressed using the same equations from (\ref{eq:simple_weighting}), but changing the $\delta$ function to
  
 $$\delta(u,v) = 
 \begin{cases}
@@ -207,32 +240,52 @@ $$\delta(u,v) =
 0 & \mbox{otherwise}
 \end{cases}
 $$
-In case every distinct path in the non-projected SCN only occur once then both simple and additive weighting rules lead to the same result\todo{test this}. 
+In case every distinct path in the non-projected SCN only occur once then both simple and additive weighting rules lead to the same result. % TODO: Test this assumption 
 This modified rule potentializes the effect of recurring edges from the non-projected graph on computing edges weights in the projection, thus reducing weighting asymetries from generalist and specialized nodes.
-However, a drawback of this approach is that high-degree nodes in the non-projected graph tend to get very strongly connected with themselves in the projection, obfuscating other relevant interactions.
-Additionally, without a superior limit for the $\delta$ function it turns out to be hard to determine a proper threshold when filtering less-relevant edges. The next weighting rule is designed to output weights bounded to the interval from 0 to 1.
 
-\paragraph*{Species bag / Interest similarity.}
+However, this approach still has a drawback in that nodes which have high degrees in the non-projected graph tend to become much more strongly connected with themselves in the projection than average-degree ones, simply by the fact that they have many more connections than average.
+Additionally, without a superior limit for the $\delta$ function it turns out to be hard to determine a proper threshold when filtering relevant from non-relevant edges. The next weighting rule is designed to reduce the effects of nodes degrees on their edges' weights, outputting values which are bounded to the $[0,1]$ interval.
+
+\paragraph*{Species bag / Quorum similarity.}
 % This is called "Structural Equivalence": Nodes have ties to common third-parties {Borgatti2015}
 % One characteristic is that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
-This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and interest vectors  for each pair of nodes in the respective projection. 
-The \textit{species bag similarity} for collectors $\mu_i$ and $\mu_j$ and the \textit{interest vector similarity} for species $\psi_i$ and $\psi_j$ are defined as
+This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and quorum vectors  for each pair of nodes in the respective projection. 
+The \textit{species bag similarity} for collectors $u_s$ and $u_t$ and the \textit{quorum vector similarity} for species $v_s$ and $v_t$ are defined as
 
 \begin{equation}
 \begin{split}
-sim(\sigma^{(\mu_i)},\sigma^{(\mu_j)}) &\equiv
-\cos \theta_{\mu_i,\mu_j} =
-\frac{  \sigma^{(\mu_i)} \sigma^{(\mu_j)}  }{  ||\sigma^{(\mu_i)}||_2  ||\sigma^{(\mu_j)}||_2  } \\
-sim(\iota^{(\psi_i)},\iota^{(\psi_j)}) &\equiv
-\cos \theta_{\psi_i,\psi_j} =
-\frac{  \iota^{(\psi_i)} \iota^{(\psi_j)}  }{  ||\iota^{(\psi_i)}||_2  ||\iota^{(\psi_j)}||_2  } 
+sim(\sigma_{u_s},\sigma_{u_t}) &\equiv
+\cos \theta_{u_s,u_t} =
+\frac{  \sigma_{u_s} \cdot \sigma_{u_t}  }{  ||\sigma_{u_s}||_2  ||\sigma_{u_t}||_2  } \\
+sim(\iota_{v_s},\iota_{v_t}) &\equiv
+\cos \theta_{v_s,v_t} =
+\frac{  \iota_{v_s} \cdot \iota_{v_t}  }{  ||\iota_{v_s}||_2  ||\iota_{v_t}||_2  } 
 \end{split}
 \end{equation}
 
-Therefore each element in the similarity matrix holds the edge weight for a pair of nodes, with a value ranging within the interval $[0,1]$. Edges weights are zero-valued if no direct link exist between two nodes,  whilst nodes linked by edges with a weight of $1$ have identical species bags or interest vectors. Intermediate values reflect the correlation measure obtained for node pairs. A threshold value can be set, in order to filter out less relevant links and facilitating the process of obtaining insights from the graph structure.
+Therefore each element in the similarity matrix holds the edge weight for a pair of nodes, with a value ranging within the interval $[0,1]$. Edges weights are zero-valued if no direct link exist between two nodes,  whilst nodes linked by edges with a weight of $1$ have identical species bags or quorum vectors. Intermediate values reflect the correlation measure obtained for node pairs.
+As this rule outputs weight values that are bound to a known interval, filtering less relevant links become much more straightforward. Depending on the aspects regarding the species-collectors system an investigator might be interested in, a filtering threshold $\phi$ can be set based on the minimum correlation value she considers acceptable, such that only the most relevant relationships for that particular analysis are kept.
 %%% check neighborhood similarity functions in literature
 %% Edges pruning
 
+
+\subsection{Conclusion}
+Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
+The model presented in the next section covers this.
+
+
+
+
+
+
+
+
+
+
+% =============================
+% =============================
+% Collectors Coworking Networks
+% -----------------------------
 
 \section{Collectors Coworking Networks}
 % References: (Ramasco2004)
@@ -245,7 +298,7 @@ $$CWN = (S,E) \mbox{ ,}$$
 where $S$ and $E$ are the graph's nodes and edges sets representing, respectively, collectors and links connecting them. This construction process is illustrated in Figure <>. % create figure %
 
 As opposed to SCNs, CWNs model collaborative relationships between entities of the same type, thus all nodes in the graph belong to the same class and are contained in the nodes set $S$. 
-Although species are not represented as entities in this model, a list with all taxons recorded collaboratively by two collectors can be included as an attribute of the edge connecting them.
+Although species are not represented as entities in this model, a vector with all taxa recorded collaboratively by two collectors is included as an attribute of the edge connecting them, in addition to its \textit{count} attribute.
 Edges linking each pair of collectors are unique in the graph, and the total number of times that association occurs in the dataset is included as an attribute of the edge.
 
 % Are unconnected collector represented in the model?
@@ -260,7 +313,7 @@ If we use the hyperbolic weighting rule instead not every new occurrence of the 
 The contribution of each new link depends on the number of the collectors $n^{(k)}$ included in record $k$ or, in other words, its clique size. 
 This rule follows a hyperbolic growth function 
 \begin{equation}
-W_{(i,j)} = \sum\limits_k \frac{\delta_i^{(k)} \delta_j^{(k)}}{(n^{(k)}-1)} \mbox{ , }
+w_{(i,j)} = \sum\limits_k \frac{\delta_i^{(k)} \delta_j^{(k)}}{(n^{(k)}-1)} \mbox{ , }
 \end{equation}
 where $\delta^{(k)}_u = 1$ if collector $u$ is in record $k$ and $0$ otherwise.
 As the hyperbolic function above has singularity at $1$, it gets ill-defined for records with only one collector. 
