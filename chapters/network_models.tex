@@ -97,24 +97,38 @@ Finally we compare our proposed model to other analogous though different system
 
 \subsection{General Description}
 
-Species-collectors networks describe relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Whenever a collector records an individual from a given species, a link between the collector and the species is either created or strengthened.
-An important semantic aspect of this model worth emphasizing is that while collectors are represented at the individual level, species are, by definition, aggregations of specimens sharing some degree of taxonomic similarity.
+%% Model semantics
+Species-collectors networks describe relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Such relationships, which necessarily involve both a collector and a species, are structured as links in the network.
+The network is thus composed by collectors holding links to every single species she has ever recorded or alternatively, species holding links to every collector who have ever recorded them.
+An important semantic aspect of this model worth emphasizing is that here we model collectors recording species rather than specimens. As exposed elsewhere in this text, the term ``species'' refers to aggregations of taxonomically similar \textit{specimens}, which are the actual individuals that are collected. Thus, while collectors are represented at the individual level (each collector is a person), species are instead entities composed of groups of individuals, and must be uniquely included in the network as such.
+This means no particular collector or species should be represented more than once in the model, even though they might have been observed in multiple records in dataset.
 
-As relationships here modeled can only possibly exist between collectors and species we explicitly represent collectors and species as entities belonging to distinct classes. Additionally, we add the constraint that all relationships in the network must necessarily involve entities from distinct classes.
-The network is thus mathematically described as a bipartite graph
+%% Model specification
+As networks are formally described as graph structures, we represent both collectors and species entities as nodes, though belonging to distinct classes.
+Links are represented as edges.
+Moreover, as relationships here modeled can only possibly exist between collectors and species we also impose a constraint that all edges in the work must necessarily connect nodes from distinct classes. In other words, nodes can be divided into two disjoint sets, with the condition that no edges in the same set are adjacent.
+This best matches the description of a bipartite network
 $$ SCN = (S_{col},S_{sp},E) \mbox{ ,}$$
 where $S_{col} = \{u_1, u_2, ..., u_n \}$ is the nodes set representing the collectors group; $S_{sp}=\{v_1,v_2, ..., v_m\}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
 
-The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below. For large and sparse SCNs, storage and operations on the graph object can be optimized by using sparse matrix designs for $A$.
+The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below. 
+For large and sparse SCNs, storage and operations on the graph object can be optimized by using sparse matrix designs for $A$.
 
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
-    \caption{(a) General aspect of a species-collectors network model (SCN), where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
+    \caption{Multiple perspectives of a species-collectors network model (SCN).
+    (a) Unprojected network, where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
     Link strength for both projections were obtained using the \textit{simple weighting} rule, and are graphically displayed as edges thickness.}
     \label{fig:scn_general}
   \end{figure}
   
+%% Network construction
+% the construction process, using paired collectors-species lists guarantees that no disconnected node can possibly exist
+We build a SCN model from a species occurrence dataset by using basically two fields. First, we need a collectors field, containing the names of all collectors that were responsible for the record are is stored; and the species field, storing the name of the species if determined.
+Following Darwin Core standards, we should expect to find collectors names in the \textit{recordedBy} field; and the species name in a field named \textit{species}. As not every biological collection dataset uses Darwin Core vocabulary though, these fields might be occasionally found under different names.
+
+Whenever a collector records an individual from a given species, a link between the collector and the species is either created or strengthened. % move to creation process
 The network is constructed from a species occurrence dataset in an iterative process, where links are added connecting the species to each of its collectors for each new record. 
 For each new species and collector included in the network, a node is created with a \textit{count} attribute initially set to $1$. In subsequent iterations, the value assigned to this attribute is increased by one for every new occurrence of that particular node. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
 Similarly, the number of times a particular species-collector association occurs in the dataset is stored in the edge's \textit{count} attribute.
