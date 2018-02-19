@@ -124,15 +124,18 @@ For large and sparse SCNs, storage and operations on the graph object can be opt
   \end{figure}
   
 %% Network construction
+\subsection{Model construction from data}
 % the construction process, using paired collectors-species lists guarantees that no disconnected node can possibly exist
-We build a SCN model from a species occurrence dataset by using basically two fields. First, we need a collectors field, containing the names of all collectors that were responsible for the record are is stored; and the species field, storing the name of the species if determined.
-Following Darwin Core standards, we should expect to find collectors names in the \textit{recordedBy} field; and the species name in a field named \textit{species}. As not every biological collection dataset uses Darwin Core vocabulary though, these fields might be occasionally found under different names.
+We use basically two fields to build a SCN model from a species occurrence dataset. First, we need a collectors field, containing the names of all collectors that were responsible for the record; and the species field, storing the name of the species if determined up to that taxonomic resolution.
+Following Darwin Core terms standard\footnote{\url{http://rs.tdwg.org/dwc/terms/}}, we should expect to find collectors names in the \textit{recordedBy} field; and the species name in a field named \textit{species}. As not every biological collection dataset uses Darwin Core standards though, these fields might be occasionally found under different names.
 
-Whenever a collector records an individual from a given species, a link between the collector and the species is either created or strengthened. % move to creation process
-The network is constructed from a species occurrence dataset in an iterative process, where links are added connecting the species to each of its collectors for each new record. 
-For each new species and collector included in the network, a node is created with a \textit{count} attribute initially set to $1$. In subsequent iterations, the value assigned to this attribute is increased by one for every new occurrence of that particular node. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
-Similarly, the number of times a particular species-collector association occurs in the dataset is stored in the edge's \textit{count} attribute.
-For a previously inexistent species-collector association a new edge with $count=1$ is created, and the attribute is increased for every new occurrence of the same association.
+The network is built up from the dataset in an iterative process. For each row in the dataset each individual collector included in the record establishes an additional link to the collected species.
+In this process nodes and edges are either created in case they did not previously exist in the graph; or have their occurrence counts increased in case they did.
+We keep the record of the number of times each link occurs in the network by setting a \textit{count} attribute to them, which is initially set to $1$ and is increased by one every time a new occurrence of the link is observed. Link strength is proportional to this attribute, and is graphically represented by edges thickness (Figure \ref{fig:scn_general}).
+The more often a particular collector records a particular species, the stronger gets the link between them.
+An homonymous attribute is also set to graph nodes, which is increased whenever a new link involving the node is either added or strengthened. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
+The reader should note, however, that \textit{count} attributes for nodes and edges are conceptually distinct and are not to be confused.
+
 Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs. An example of a SCN network is given in Figure \ref{fig:scn_general}, for which the adjacency matrix is
 $$
 A =
