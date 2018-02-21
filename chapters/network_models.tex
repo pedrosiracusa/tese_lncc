@@ -150,9 +150,9 @@ $$
 % SCN Definitions
 
 \subsection{Definitions}
-Attributes and operations for retrieving information about species and collectors.
-Operation for summarizing the model.
-In this section I define some attributes of the SCN model 
+Given an overall description on the structure and semantics of the SCN model, we now define a set of attributes and operations that provide higher-level abstractions for dealing with the system here modeled. By using such field-domain abstractions we potentialize the data exploration process, eventually making it more insightful.
+We introduce both the \textit{species bag} and the \textit{quorum vector} as specific attributes of collectors and species.
+Moreover, we define the process of taxonomy aggregation as a model summarization routine for grouping together species nodes into higher-rank taxons.
 
 \paragraph{Species bag.} 
 The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}. This attribute is therefore exclusively derivable for collectors nodes.
