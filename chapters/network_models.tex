@@ -85,7 +85,6 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 % ===========================
 % Species-collectors Networks
 % ---------------------------
-%% TODO: SCNs do not allow 0-degree nodes
 
 \section{Species-collectors Networks}
 
@@ -125,18 +124,18 @@ For large and sparse SCNs, storage and operations on the graph object can be opt
   
 %% Network construction
 \subsection{Model construction from data}
-% the construction process, using paired collectors-species lists guarantees that no disconnected node can possibly exist
-We use basically two fields to build a SCN model from a species occurrence dataset. First, we need a collectors field, containing the names of all collectors that were responsible for the record; and the species field, storing the name of the species if determined up to that taxonomic resolution.
+We use basically two fields to build a SCN model from a species occurrence dataset. First, we need a collectors field, containing the names of all collectors that were responsible for the record; and the species field, storing the species identity assigned to the specimen in the record.
 Following Darwin Core terms standard\footnote{\url{http://rs.tdwg.org/dwc/terms/}}, we should expect to find collectors names in the \textit{recordedBy} field; and the species name in a field named \textit{species}. As not every biological collection dataset uses Darwin Core standards though, these fields might be occasionally found under different names.
 
-The network is built up from the dataset in an iterative process. For each row in the dataset each individual collector included in the record establishes an additional link to the collected species.
+The network is built up from the dataset in an iterative process.
+For each row in the dataset each individual collector included in the record establishes an additional link to the collected species.
+As at least one additional link is necessarily created for each new row, the construction process guarantees that no disconnected species or collector nodes can possibly exist in the network model.
 In this process nodes and edges are either created in case they did not previously exist in the graph; or have their occurrence counts increased in case they did.
+
 We keep the record of the number of times each link occurs in the network by setting a \textit{count} attribute to them, which is initially set to $1$ and is increased by one every time a new occurrence of the link is observed. Link strength is proportional to this attribute, and is graphically represented by edges thickness (Figure \ref{fig:scn_general}).
 The more often a particular collector records a particular species, the stronger gets the link between them.
-An homonymous attribute is also set to graph nodes, which is increased whenever a new link involving the node is either added or strengthened. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
-The reader should note, however, that \textit{count} attributes for nodes and edges are conceptually distinct and are not to be confused.
-
-Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs. An example of a SCN network is given in Figure \ref{fig:scn_general}, for which the adjacency matrix is
+Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs. 
+The adjacency matrix for the example SCN network in Figure \ref{fig:scn_general} is thus
 $$
 A =
 \kbordermatrix{
@@ -148,14 +147,17 @@ col4 & 0 & 0 & 0 & 1 & 0 & 0 & 4 & 1 & 0 & 0 \\
 col5 & 0 & 0 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 1 \\
 }.
 $$
+An homonymous attribute is also set to graph nodes, which is increased whenever a new link involving the node is either added or strengthened. As a result the node's \textit{count} attribute keeps a record of how many times a given species or collector occurs in the dataset.
+The reader should note, however, that \textit{count} attributes for nodes and edges are conceptually distinct and are not to be confused.
+
 
 % ===============
 % SCN Definitions
 
 \subsection{Definitions}
-Given an overall description on the structure and semantics of the SCN model, we now define a set of attributes and operations that provide higher-level abstractions for dealing with the system here modeled. By using such field-domain abstractions we potentialize the data exploration process, eventually making it more insightful.
+Given an overall description on the structure and semantics of the SCN model, we now define a set of attributes and operations that provide higher-level abstractions for dealing with the system here modeled. By using such field-domain abstractions we potentialize the data exploration process, eventually making it more insightful for the analyst.
 We introduce both the \textit{species bag} and the \textit{quorum vector} as specific attributes of collectors and species.
-Moreover, we define the process of taxonomy aggregation as a model summarization routine for grouping together species nodes into higher-rank taxons.
+Moreover, we define the process of taxonomy aggregation as a model summarization routine for grouping together species nodes into higher-rank taxa.
 
 \paragraph{Species bag.} 
 The entire set and counts of species a collector has recorded in a dataset, which can be thought as a collector's species signature, composes his/her \textit{species bag}. This attribute is therefore exclusively derivable for collectors nodes.
