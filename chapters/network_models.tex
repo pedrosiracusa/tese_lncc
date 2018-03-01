@@ -15,19 +15,45 @@ Although structurally distinct, models here presented provide complementary pers
 From SCNs we retrieve information on which collectors have recorded which species and, conversely, which species were recorded by which collectors. 
 CWNs, on the other hand, allow us to investigate which collectors team up with whom during fieldwork, although here species are not represented as entities.
 
-As both models were elaborated based on a social networks analytics framework, we start by reviewing some general concepts from the network science domain.
+As both models were elaborated based on a social networks analytics framework, we start by reviewing some general concepts from the network science and graph theory domains.
 
-% What am I modeling with these models?
 
-\section{Complex Networks: A theoretical background}
-\subsection{The rise of the study of complex networks}
-%% The rise of the field of complex networks
-%% A historical background
-%% Applications (biology and other fields)
-%% What are complex networks?
-%%%% Random networks, small-world and scale-free topologies 
+\section{Network Science: A theoretical background}
 
-\subsection{Mathematical Representations}
+Network Science refers to a relatively new domain of scientific investigation, aiming to describe emergent properties and patterns from complex systems of interacting entities.
+Such relational systems are naturally represented as networks, where interactions are represented as pairwise connections between entities and assume particular semantics depending on the nature of the modeled phenomenon.
+The rise of this field is strongly associated to recent advances in information technology, which provided scientists with novel tools for collecting, storing and processing data from many knowledge domains more efficiently and in larger scales.
+Although a variety of networked systems in many disciplines had been studied long before that, technological advances allowed us to model real-world systems in much more details, from large volumes data that are often public or easily accessible for the investigator.
+
+In a classic $1999$ paper which has inspired many researchers to engage into the field of network science, \textit{Albert-László Barabási}, \textit{Hawoong Jeong} and \textit{Réka Albert} built a model of the World-Wide Web from data collected by a web crawler \cite{Albert1999}. 
+Their model represented the web as a set of interconnected documents, where a connection between document $a$ and document $b$ existed if either $a$ contained hyperlinks pointing to $b$ (outgoing links of $a$) or if $a$ was referred by $b$ through hyperlinks (incoming links of $a$).
+By exploring some of the model topological features, they estimated that although the web is composed by a huge number of documents (by that time there were around $8 \times 10^8$ documents online), two randomly chosen documents are, in average, separated by as few as 19 links. 
+
+Although surprising, this finding was in fact consistent with a generative model proposed by \textit{Watts} and \textit{Strogatz} in $1998$ \cite{Watts1998}.
+In that paper authors argued that real-world networked systems are neither completely randomly nor completely regularly connected, and demonstrated that more realistic topologies could be derived by combining features from both extremes.
+Following this approach they were able to generate models in which entities were separated from others by very few connections, even for very large networks.
+This phenomenon is known as the \textit{small-world}, and became popular after the experimental work of \textit{Stanley Milgram} \cite{Milgram1969} as the ``six degrees of separation''.
+The concept referred to the finding that two arbitrary individuals in the world are separated by at most 6 connections, following an acquaintances chain.
+ 
+Besides small-world networks, other generative models have been proposed in literature to explain mechanisms by which real world networks grow and acquire their particular topologies.
+A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new entities to those in the network which already have many connections. 
+The preferential attachment mechanism makes a few hubs and many nodes with very few connections, 
+In random networks, in contrast, new nodes are expected to connect to existing ones by chance, independently of the number of connections nodes already have.
+<Hubs and low-degree nodes > a topology that would be extremely unlikely if the network was randomly assembled.
+Networks with such characteristics are known as \textit{scale-free} networks.
+
+
+
+We refer to networks with non-trivial topological features as \textit{complex networks}.
+%% Examples of networks in biology, computer science...
+
+Network models are suitable for structuring relational data, where entities are expected to interact with each other through connections (or links). 
+Networked systems as relational models, where entities interconnect by links.
+Networks are mathematically represented as \textit{graphs}.
+ 
+ 
+
+\subsection{Concepts on Graph theory}
 % Networks are mathematically represented as graphs
 %% Nodes and Edges
 %%% Edges are established between a pair of nodes , recurrent edges
@@ -36,10 +62,21 @@ As both models were elaborated based on a social networks analytics framework, w
 %%% Cliques
 %%% Paths 
 
-Networks are mathematically represented as graphs.
+For a general intuition, \textbf{graphs} are mathematical structures composed by discrete objects holding pairwise connections to each other.
+The most intuitive representation is the one in which objects are represented as vertices (or nodes), and links between them are edges.
+Graphs are formally defined as a pair $G=(S,E)$, where $s$ is the set of nodes that compose the graph; and $E$ is the set of all edges.
+Attributes can be associated to nodes and edges.
 
-\paragraph*{Graphs}
-Graphs are formally defined as a 2-tuple $G=(S,E)$ containing a set of nodes $S$ and a set of edges $E$.
+Graphs are a natural approach for representing networked systems:
+1. Discrete entities can naturally be represented as vertices, and their interactions as edges.
+2. There are a whole set of metrics and algorithms in literature for dealing with graphs and exploring their topologies.
+3. There are a bunch of available tools for graph visualization, which potentializes drawing insights from their structures.
+
+Besides the nodes-and-edges representations, graphs can also be represented in alternative data structures, which can be more appropriate depending on the application.
+Adjacency matrix.
+
+
+We review some important definitions from graph theory.
 
 \paragraph*{Connected components}
 For undirected graphs, connected components are defined as subgraphs in which there is at least one path linking each pair of nodes.
@@ -50,7 +87,7 @@ For undirected graphs, connected components are defined as subgraphs in which th
 
 %% Matrix Representation
 %%% Adjacency matrix, sparsity
-For some applications it turns to be convenient to use a matrix representation of graphs. A matrix where ... is known as the graph's \textbf{adjacency matrix}. % where are zeros and ones?
+For some applications it turns \luiz{out?} to be convenient to use a matrix representation of graphs. A matrix where ... is known as the graph's \textbf{adjacency matrix}. % where are zeros and ones?
 In case the graph is unimodal the adjacency matrix is a squared symmetrical matrix.
 For bipartite graphs, however, this is not necessarily true. It depends on the size of each nodes set. We refer to it as the \textbf{biadjacency matrix}.
 
@@ -78,8 +115,9 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 
 
 
-
-
+\subsection{The Social Networks framework}
+% Mark Granovetter paper (1973)
+Social structures in social systems are studied using network science theory. 
 
 % ===========================
 % ===========================
@@ -88,24 +126,32 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 
 \section{Species-collectors Networks}
 
-In this section we describe Species-collectors Networks (SCNs) as a relational model for structuring associations between collectors and species.
+In this section we describe Species-collectors Networks (SCNs) as relational models for structuring associations between collectors and species.
 We first give an overview on the semantics of the relationships we propose to model and how they can be derived from a species occurrence dataset.
 Next we define attributes and operations for SCNs that facilitate obtaining domain-specific insights from it.
 Finally we compare our proposed model to other analogous though different systems in literature.
-
+% Illustrate the concept; 
 
 \subsection{General Description}
-
 %% Model semantics
-Species-collectors networks describe relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}''. Such relationships, which necessarily involve both a collector and a species, are structured as links in the network.
-The network is thus composed by collectors holding links to every single species she has ever recorded or alternatively, species holding links to every collector who have ever recorded them.
-An important semantic aspect of this model worth emphasizing is that here we model collectors recording species rather than specimens. As exposed elsewhere in this text, the term ``species'' refers to aggregations of taxonomically similar \textit{specimens}, which are the actual individuals that are collected. Thus, while collectors are represented at the individual level (each collector is a person), species are instead entities composed of groups of individuals, and must be uniquely included in the network as such.
+Species-collectors networks describe relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}'' (Figure \ref{fig:scn_general}). Such relationships, which necessarily involve both a collector and a species, are structured as links in the network.
+The network is thus composed by collectors holding links to every single species they have ever recorded or alternatively, species holding links to every collector who have ever recorded them.
+An important semantic aspect of this model worth emphasizing is that here we model collectors recording species rather than specimens. As exposed elsewhere in this text, the term \textit{species} refers to aggregations of taxonomically similar \textit{specimens}, which are the actual individuals that are collected. Thus, while collectors are represented at the individual level (each collector is a person), species are instead entities composed of groups of individuals, and must be uniquely included in the network as such.
 This means no particular collector or species should be represented more than once in the model, even though they might have been observed in multiple records in dataset.
 
+  \begin{figure}[h!]
+  	\centering
+    \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
+    \caption{Multiple perspectives of a Species-collectors Network model (SCN).
+    (a) Unprojected network, where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
+    Link strength for both projections were obtained using the \textit{simple weighting} rule (eq. \ref{eq:simple_weighting}), and are graphically displayed as edges thickness. Nodes sizes reflect collectors' and species' degrees in each perspective.}
+    \label{fig:scn_general}
+  \end{figure}
+  
 %% Model specification
 As networks are formally described as graph structures, we represent both collectors and species entities as nodes, though belonging to distinct classes.
 Links are represented as edges.
-Moreover, as relationships here modeled can only possibly exist between collectors and species we also impose a constraint that all edges in the work must necessarily connect nodes from distinct classes. In other words, nodes can be divided into two disjoint sets, with the condition that no edges in the same set are adjacent.
+Moreover, as relationships here modeled can only possibly exist between collectors and species we also impose a constraint that all edges in the network must necessarily connect nodes from distinct classes. In other words, nodes can be divided into two disjoint sets, with the condition that no edges in the same set are adjacent.
 This best matches the description of a bipartite network
 $$ SCN = (S_{col},S_{sp},E) \mbox{ ,}$$
 where $S_{col} = \{u_1, u_2, ..., u_n \}$ is the nodes set representing the collectors group; $S_{sp}=\{v_1,v_2, ..., v_m\}$ is the nodes set representing the species group; and $E$ is the set of undirected edges between members of $S_{col}$ and $S_{sp}$.
@@ -113,14 +159,7 @@ where $S_{col} = \{u_1, u_2, ..., u_n \}$ is the nodes set representing the coll
 The graph can also be represented as a rectangular biadjacency matrix $A^{n\times m}$ for which $a_{ij}\neq 0$ \textit{iff} $(u_i,v_j) \in E$. Values of non-zero $a_{ij}$ elements are set to the number of times edges $(u_i,v_j)$ occur in the network, as described below. 
 For large and sparse SCNs, storage and operations on the graph object can be optimized by using sparse matrix designs for $A$.
 
-  \begin{figure}[h!]
-  	\centering
-    \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
-    \caption{Multiple perspectives of a species-collectors network model (SCN).
-    (a) Unprojected network, where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
-    Link strength for both projections were obtained using the \textit{simple weighting} rule, and are graphically displayed as edges thickness.}
-    \label{fig:scn_general}
-  \end{figure}
+
   
 %% Network construction
 \subsection{Model construction from data}
@@ -129,10 +168,13 @@ Following Darwin Core terms standard\footnote{\url{http://rs.tdwg.org/dwc/terms/
 
 The network is built up from the dataset in an iterative process.
 For each row in the dataset each individual collector included in the record establishes an additional link to the collected species.
-As at least one additional link is necessarily created for each new row, the construction process guarantees that no disconnected species or collector nodes can possibly exist in the network model.
+As at least one additional link is necessarily either created or reinforced for each new row, the construction process guarantees that no disconnected species or collector nodes can possibly exist in the network model.
 In this process nodes and edges are either created in case they did not previously exist in the graph; or have their occurrence counts increased in case they did.
 
-We keep the record of the number of times each link occurs in the network by setting a \textit{count} attribute to them, which is initially set to $1$ and is increased by one every time a new occurrence of the link is observed. Link strength is proportional to this attribute, and is graphically represented by edges thickness (Figure \ref{fig:scn_general}).
+
+%% < add an illustration >
+
+We keep the record of the number of times each link occurs in the network by setting a \textit{count} attribute to them, which is initially set to $1$ and is increased by one every time a new occurrence of the link is observed. Link strength is proportional to this attribute, and is graphically represented by edges thickness in Figure \ref{fig:scn_general}.
 The more often a particular collector records a particular species, the stronger gets the link between them.
 Edges' \textit{count} values are stored in the biadjacency matrix $A$, and thus the value of element $a_{ij}$ is the number of times the edge $(u_i, v_j)$ occurs. 
 The adjacency matrix for the example SCN network in Figure \ref{fig:scn_general} is thus
@@ -151,7 +193,6 @@ An homonymous attribute is also set to graph nodes, which is increased whenever 
 The reader should note, however, that \textit{count} attributes for nodes and edges are conceptually distinct and are not to be confused.
 
 
-% ===============
 % SCN Definitions
 
 \subsection{Definitions}
@@ -207,7 +248,6 @@ We then use grouping $G_T$ for obtaining quorum vectors for each of its taxa $g_
 % Temporal edges
 
 
-% ===============
 % SCN projections
 \subsection{Projections}
 
@@ -269,7 +309,7 @@ Additionally, without a superior limit for the $\delta$ function it turns out to
 % This is called "Structural Equivalence": Nodes have ties to common third-parties {Borgatti2015}
 % One characteristic is that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
 This weighting rule uses a similarity (or correlation) matrix that is computed for each projection of the SCN. Edges' weights are given by the similarity between their nodes. The similarity matrix for the collectors and species projections are constructed by computing the  \textit{cosine similarity} of species bags and quorum vectors  for each pair of nodes in the respective projection. 
-The \textit{species bag similarity} for collectors $u_s$ and $u_t$ and the \textit{quorum vector similarity} for species $v_s$ and $v_t$ are defined as
+The \textit{species bag similarity} for collectors $u_s$ and $u_t$; and the \textit{quorum vector similarity} for species $v_s$ and $v_t$ are defined as
 
 \begin{equation}
 \begin{split}
@@ -283,12 +323,32 @@ sim(\iota_{v_s},\iota_{v_t}) &\equiv
 \end{equation}
 
 Therefore each element in the similarity matrix holds the edge weight for a pair of nodes, with a value ranging within the interval $[0,1]$. Edges weights are zero-valued if no direct link exist between two nodes,  whilst nodes linked by edges with a weight of $1$ have identical species bags or quorum vectors. Intermediate values reflect the correlation measure obtained for node pairs.
-As this rule outputs weight values that are bound to a known interval, filtering less relevant links become much more straightforward. Depending on the aspects regarding the species-collectors system an investigator might be interested in, a filtering threshold $\phi$ can be set based on the minimum correlation value she considers acceptable, such that only the most relevant relationships for that particular analysis are kept.
+As this rule outputs weight values that are bound to a known interval, filtering less relevant links becomes much more straightforward. Depending on the aspects regarding the species-collectors system an investigator might be interested in, a filtering threshold $\phi$ can be set based on the minimum correlation value she considers acceptable, such that only the most relevant relationships for that particular analysis are kept.
 %%% check neighborhood similarity functions in literature
 %% Edges pruning
 
 
-\subsection{Conclusion}
+\subsection{Similar networked systems}
+A variety of network models structurally similar to species-collectors networks have been proposed in social networks literature for modeling networked systems within many unrelated application domains. We describe some of them for improving the reader's intuition.
+
+\textit{Affiliation networks} are a particular type of social networks in which actors are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. Social ties between individuals are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
+A classic example of this kind of network is the movie actors network, which was used as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
+This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), linking actors to movies they have starred in.
+
+% exemplify models
+
+Although the semantics of relationships modeled in each of these networks (with different analytic purposes), the structures used to represent them are shared. A common feature shared by those models is their bipartite structure, allowing  
+
+The bipartite structure of SCNs make them structurally similar to affiliation networks, with some examples in the social networks literature.
+
+One classic affiliation network model is the films and actors network.
+
+Lambiotte models listeners and music
+
+Another analogous example are the scientific papers coauthorship networks in which authors are linked to papers they have authored \cite{Newman2004}
+
+
+
 Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
 The model presented in the next section covers this.
 
@@ -308,28 +368,42 @@ The model presented in the next section covers this.
 
 \section{Collectors Coworking Networks}
 % References: (Ramasco2004)
+% TODO: Talk about singleton collectors
+In this section we describe Collectors Coworking Networks (CWNs) as relational models for representing direct collaborative associations between collectors.
 
-% TODO: update: CWNs do allow nodes with 0 degree (collectors who have never collaborated)
-Collectors coworking networks (CWNs) describe coauthoring relationships between collectors. Two collectors are considered to be co-authors in a particular record if they are both included as collectors responsible for that occurrence. In other words, these models represent collectors who have worked together in field, having recorded specimens collaboratively.
-In a dataset following \textit{Darwin Core} standards collectors names are obtained from the $recordedBy$ field.
-A CWN is constructed from an occurrences dataset by iterating over each record and forming \textit{clique} structures with the associated collectors, which are finally combined into a single undirected graph formally represented as 
+\subsection{General Description}
+Collectors Coworking Networks are a particular instance of \textit{collaboration networks} \cite{Ramasco2004} describing coauthoring relationships between collectors from species occurrence records (Figure \ref{fig:cwn_general}).
+We consider two collectors to be coauthors in a given record if they are both included in the collectors field for that record. The collectors field holds a list collectors names who have authored each record in the dataset, and is equivalent to the \textit{recordedBy} field in a dataset following \textit{Darwin Core} terms standards (check an example in Table \ref{table:cwn_example_dataset}). We refer to each distinct list of collectors in this context as a \textit{team}.
+
+As opposed to SCNs, which describe collectors interests towards species, relationships in CWNs are directly formed between collectors who have effectively worked collaboratively in field, and are semantically described as ``\textbf{collector} records specimen with \textbf{collector}''.
+Each individual species occurrence record with at least two collectors (team size greater than $1$) is thus considered a distinct collaboration act, originating new pairwise connections between all collectors involved.
+For records with team size equal to $1$, which we refer to as non-collaborative records, no connections are created.
+
+  \begin{figure}[h!]
+  	\centering
+    \includegraphics[width=.4\linewidth]{figures/network_models/cwn_generalaspect.pdf}
+    \caption{General aspect of a Collectors Coworking Network (CWN). Coauthoring relationships between collectors (green nodes) are structured as edges in the graph, and are graphically represented as gray links.
+    Here collectors nodes are sized according to the total number of records they've authored; and edges are weighted according to the number of collaborative records coauthored by both nodes.}
+    \label{fig:cwn_general}
+  \end{figure}
+
+Differently from SCNs, where two entities classes are represented in the graph as disjoint nodes sets with the bipartite constraint, CWNs exclusively model direct relationships between entities from a single class (collectors), with the only connectivity restriction that a collector should not hold collaborative ties to itself.
+The model is thus formally described as an unipartite (or one-mode) undirected graph
 $$CWN = (S,E) \mbox{ ,}$$
-where $S$ and $E$ are the graph's nodes and edges sets representing, respectively, collectors and links connecting them. This construction process is illustrated in Figure <>. % create figure %
+where $S=\{u_1,u_2,...u_n\}$ is the graph's nodes set and $E$ is the set of undirected edges linking members of $S$.
 
-As opposed to SCNs, CWNs model collaborative relationships between entities of the same type, thus all nodes in the graph belong to the same class and are contained in the nodes set $S$. 
-Although species are not represented as entities in this model, a vector with all taxa recorded collaboratively by two collectors is included as an attribute of the edge connecting them, in addition to its \textit{count} attribute.
-Edges linking each pair of collectors are unique in the graph, and the total number of times that association occurs in the dataset is included as an attribute of the edge.
+Analogously to SCNs, both nodes and edges hold homonymous but conceptually distinct \textit{count} attributes.
+Nodes count attribute stores the total number of records --- including non-collaborative ones --- a collector has authored, whereas
+edges count attribute stores the total number of times an association between two collectors was observed in the dataset. Thus, although each node and edge respectively are uniquely included in $S$ and $E$, their recurrence patterns are registered in the model as attributes.
+Another important edge attribute is the \textit{species list}. Although species associated to each occurrence record are not represented as entities in this model, edges can optionally keep a list of species that are shared by two collectors through that link, which is stored in this attribute.
 
-% Are unconnected collector represented in the model?
+Weights are assigned to edges in the CWN as a measure of their overall relevance in the network structure. Edges with higher weight values represent stronger collaborative ties between collectors, pointing out the main groups of collectors who are most willing to collaborate. 
+The simplest rule is to set the edge weight as the total total number of occurrences of the tie it represents in the dataset. However, as pointed out by other authors studying social networks \cite{Newman2001a}, in reality not all collaboration acts should contribute the same way for a collector's network. 
+Collectors tend to hold weaker collaborative ties with each other when they collaborate in larger teams than when they collaborate in smaller ones. 
 
-Weights can be assigned to edges in the CWN as a measure of their overall relevance in the network structure. Edges with higher weight values represent stronger collaborative ties between collectors, pointing out the main groups of collectors who are most willing to collaborate. 
-The simplest rule is to set the edge weight as its total total number of occurrences. However, as pointed out by other authors studying social networks \cite{Newman2001a}, in reality not all collaborations contribute the same way for a collector's network. 
-Collectors tend to hold weaker collaborative ties with each other when they collaborate in larger teams than when they collaborate in smaller ones. The hyperbolic weighting rule, described below, accounts for this fact, while also considering the total number of collaborations between two collectors as a factor contributing the strength of their link.
-
-\paragraph*{Hyperbolic weighting.}
-If we wanted to set edges weights to the same value as the total counts of their occurrences, we would simply increase the weight value by one for each new occurrence of a given link, during the construction of the network model. 
-If we use the hyperbolic weighting rule instead not every new occurrence of the link increases the edge weight by one. 
-The contribution of each new link depends on the number of the collectors $n^{(k)}$ included in record $k$ or, in other words, its clique size. 
+The \textbf{hyperbolic weighting} rule accounts for this fact, while also considering the total number of collaborations between two collectors as a factor contributing the strength of their link.
+According to this rule, not every new occurrence of the link increases the edge weight equally. 
+The contribution of each new link depends on the number of the collectors $n^{(k)}$ included in record $k$ or, in other words, the team size. 
 This rule follows a hyperbolic growth function 
 \begin{equation}
 w_{(i,j)} = \sum\limits_k \frac{\delta_i^{(k)} \delta_j^{(k)}}{(n^{(k)}-1)} \mbox{ , }
@@ -339,16 +413,77 @@ As the hyperbolic function above has singularity at $1$, it gets ill-defined for
 Therefore only records with two or more collectors are used to compute edges weights. 
 The maximum weight contribution of 1 is assigned to records with two collectors, whilst records with larger cliques yield smaller contributions.\\
 
+Relationships in the CWN graph can be represented in a symmetric adjacency matrix $A^{n\times n}$ for which $a_{ij} \neq 0 \textit{ iff } (u_i,u_j) \in E$. 
+Values of non-zero elements depend on the weighting method adopted for representing links strength, being the absolute counts of edges' recurrence (edges' \textit{count} attribute) the simplest one.
+Additionally, the model's connectivity constraint states that all diagonal elements in $A$ are necessarily equal to $0$, thus ensuring that no self loops are formed.
+To give a concrete example, the adjacency matrix for the graph in Figure \ref{fig:cwn_general} is 
+$$
+A =
+\kbordermatrix{
+& col1 & col2 & col3 & col4 & col5 & col6 & col7 & col8 & col9 & col10 \\
+col1 & 0 & 2 & 2 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+col2 & 2 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+col3 & 2 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+col4 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 2 & 2 & 0\\
+col5 & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 0\\
+col6 & 0 & 0 & 0 & 0 & 1 & 0 & 2 & 0 & 0 & 0\\
+col7 & 0 & 0 & 0 & 0 & 1 & 2 & 0 & 0 & 0 & 0\\
+col8 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 0 & 2 & 0\\
+col9 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 2 & 0 & 0\\
+col10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+},
+$$
+where each element is the count of the total number of recurrences of collectors associations, represented in the graph as edges weights.
 
-% Weighting rules
 
 
 
-% Basic node attributes
-The degree ($k$) for a node depends on the total number of edges it holds. 
-This metric informs us how many different other collectors a collector has ever collaborated with.
-In case we also want to consider the effect of the weights associated to each edge in the degree metric we must compute the weighted degree ($k_w$).
-The \textbf{strength} of a node is the sum of the weights associated to all its edges. It describes the total number of collaborative records for a collector.
+% Network construction
+%% Singleton collectors are those holding no collaborative recording with any other collector in the dataset ($k=0$), and are also included in the model as isolated nodes.
+\subsection{Model construction from data}
+
+We build CWNs from species occurrence data in an iterative process that is similar to the one described for SCNs.
+In this case, however, the only field that is strictly required for structuring relationships is the one containing collectors names, which in a database following \textit{Darwin core} terms standards should be named ``\textit{recordedBy}''.
+The field containing species identities, although not required, can be optionally used during model construction in case the user decides to set the edges' \textit{species list} attribute.
+Table \ref{table:cwn_example_dataset} shows the species occurrence dataset which was used to build the graph in Figure \ref{fig:cwn_general}.
+
+\begin{table}[!ht]
+  \caption{Species occurrence dataset from which the CWN model in Figure \ref{fig:cwn_general} was built. The \textit{species} field is not strictly required for building CWN models.}
+  \begin{center}
+  \begin{tabular}{r l c}
+      id & recordedBy & species \\
+      \hline
+        0 & col1; col2; col3 & sp1\\ 
+        1 & col3; col1; col2 & sp2\\ 
+        2 & col1; col3 & sp3\\ 
+        3 & col5; col4 & sp3\\ 
+        4 & col5; col2 & sp3\\ 
+        5 & col5; col6 & sp5\\ 
+        6 & col5; col7 & sp4\\ 
+        7 & col6; col7 & sp6\\ 
+        8 & col6; col7 & sp7\\ 
+        9 & col4; col8; col9 & sp4\\ 
+        10 & col4; col9; col8 & sp5\\ 
+        11 & col10 & sp6\\ 
+        12 & col10 & sp6\\
+       \hline
+  \end{tabular}
+  \end{center}
+  \label{table:cwn_example_dataset}
+\end{table}
+
+For each row in the dataset, a \textit{clique} structure is formed by creating edges between all collectors included in the record's team, in a pairwise fashion. 
+Each clique thus represents one collaborative act, where every collector gets and additional collaborative tie with every other collector included in that collaborative record. 
+The clique size, which is the number of nodes included in the clique structure, is equivalent to the team size. For non-collaborative records the clique is composed by the collector node itself, and therefore no edges are formed.
+As the user might want to distinguish the relevance of links originated from distinct team sizes, the hyperbolic weighting rule described in the previous section can be used for weighting links in each clique. 
+In case the species field is included in the building routine, each clique also gets associated to the name of the species to which the recorded specimen belongs to.
+
+The CWN model is finally composed by combining all cliques together into a single undirected graph. In this process edges that occur in multiple cliques have their weights summed. In case the species list attribute is set, combining edges also merges their respective species lists.
+
+
+
+
+% Are unconnected collector represented in the model?
 %% Average number of collaborators?
 
 
