@@ -36,7 +36,8 @@ This phenomenon is known as the \textit{small-world}, and became popular after t
 The concept referred to the finding that two arbitrary individuals in the world are separated by at most 6 connections, following an acquaintances chain.
  
 Besides small-world networks, other generative models have been proposed in literature to explain mechanisms by which real world networks grow and acquire their particular topologies.
-A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new entities to those in the network which already have many connections. 
+A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new entities to those in the network which already have many connections \cite{Albert2002}. 
+``The rich gets richer'' effect.
 The preferential attachment mechanism makes a few hubs and many nodes with very few connections, 
 In random networks, in contrast, new nodes are expected to connect to existing ones by chance, independently of the number of connections nodes already have.
 <Hubs and low-degree nodes > a topology that would be extremely unlikely if the network was randomly assembled.
@@ -52,6 +53,7 @@ Networked systems as relational models, where entities interconnect by links.
 Networks are mathematically represented as \textit{graphs}.
  
  
+Next we review some important definitions from graph theory.
 
 \subsection{Concepts on Graph theory}
 % Networks are mathematically represented as graphs
@@ -62,21 +64,35 @@ Networks are mathematically represented as \textit{graphs}.
 %%% Cliques
 %%% Paths 
 
-For a general intuition, \textbf{graphs} are mathematical structures composed by discrete objects holding pairwise connections to each other.
-The most intuitive representation is the one in which objects are represented as vertices (or nodes), and links between them are edges.
-Graphs are formally defined as a pair $G=(S,E)$, where $s$ is the set of nodes that compose the graph; and $E$ is the set of all edges.
+Intuitively, \textbf{graphs} are mathematical structures composed by discrete objects holding pairwise connections to each other. 
+Objects are referred to as \textit{vertices} and the connections between them as \textit{edges}.
+Graph structures provide a natural representation for networked systems for a couple of reasons.
+First, they allow representing entities and their interactions in a structured way, a ``map of connections'' through which information flows.
+Connections necessarily involve two entities and can be either symmetric, in which case information is allowed to flow in both directions; or asymmetric, if it necessarily flows from a source to a target entity.
+Second, graph theory provides a bunch of of metrics and algorithms in literature for dealing with graphs and exploring their topologies.
+Finally, the availability of a considerable amount of graph visualization tools and techniques potentializes obaining insights from its structure.
+
+ 
+Graphs are formally defined as a pair $G=(S,E)$, where $s$ is the set of vertices that compose the graph; and $E$ is the set of all edges.
+A pair of vertices directly connected by an edge are said to be \textit{adjacent}.
+The set of all nodes that are adjacent to a particular node compose its \textit{neighborhood}.
 Attributes can be associated to nodes and edges.
-
-Graphs are a natural approach for representing networked systems:
-1. Discrete entities can naturally be represented as vertices, and their interactions as edges.
-2. There are a whole set of metrics and algorithms in literature for dealing with graphs and exploring their topologies.
-3. There are a bunch of available tools for graph visualization, which potentializes drawing insights from their structures.
-
-Besides the nodes-and-edges representations, graphs can also be represented in alternative data structures, which can be more appropriate depending on the application.
-Adjacency matrix.
+A graph may be weighted by an edge attribute. 
+Edge weight represents the strenghtness of an edge.
+If connections are symmetric the graph is \textit{undirected}; otherwise, \textit{directed}.
+% <include figure>
 
 
-We review some important definitions from graph theory.
+Besides the nodes-and-edges representations, graphs can also be represented as alternative data structures, which can be more appropriate depending on the application.
+Adjacency matrices are appropriate in some contexts for mathematical operations.
+Undirected graphs have symmetric adjacency matrices.
+If the graph is unweighted the matrix stores values $1$ in case an edge between two vertices exists and $0$ otherwise. 
+As many real-world of networks are very sparse, adopting sparse matrices representations such as compressed row storage (CRS) might be useful.
+
+
+
+
+\paragraph*{Path}
 
 \paragraph*{Connected components}
 For undirected graphs, connected components are defined as subgraphs in which there is at least one path linking each pair of nodes.
@@ -97,6 +113,8 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 %%%%% Many real-world networks are approximately scale-free (give examples)
 %%%% Machanism: Preferential attachment, rich gets richer: Higher degree nodes (richer), lower degree nodes (poorer)
 
+
+
 \subsection{Bipartite Graphs}
 %% Bipartite graphs
 %%%% The bipartite constraint: formalization: Nodes sets are DISJOINT (no intersection) ; and INDEPENDENT (no adjacent nodes within any set); 
@@ -105,6 +123,20 @@ For bipartite graphs, however, this is not necessarily true. It depends on the s
 %%%%%% bipartite tradeoff : summarization vs information loss
 %%%%%% bipartite projections edges set is usually very dense -> The importance of adding weights to edges in bipartite projections
 %%%%%% weaker connections are then filtered out
+Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
+We define bipartite graphs as 
+$$
+B = (U, V, E) \mbox{, }
+$$
+where $E$ is the set of edges between nodes from $U$ and $V$.
+In sets theory terms, $U$ and $V$ are both \textit{disjoint} and \textit{independent} sets.
+This means vertices must be assigned to exactly one vertices set and, moreover, all edges in $E$ necessarily connect vertices from opposite sets. 
+Such features make bipartite graphs particularly useful for representing interactions that only make sense to exist between entities of different classes. 
+
+
+As most graph algorithms and metrics in literature are primarily designed for one-mode graphs, bipartite graphs ...
+One way to summarize bipartite 
+
 
   \begin{figure}[h!]
   	\centering
