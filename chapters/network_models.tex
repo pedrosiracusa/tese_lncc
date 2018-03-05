@@ -68,8 +68,7 @@ Networks are mathematically represented as \textit{graphs}.
  
 Next we briefly review some fundamental definitions from graph theory.
 For the purpose of this work this is not intended to be a thorough review on the field, but rather a quick overview for readers that are not familiarized with the field. 
-For a slightly more comprehensive introduction we recommend the reader to refer to \textit{Barabási}'s and \textit{Newman}'s books on network science \cite{Barabasia, Newman2010b}.
-
+For a slightly more comprehensive introduction we recommend the reader to refer to \textit{Barabási}'s and \textit{Newman}'s books on network science, \cite{Barabasibook,Newman2010b}.
 
 % ============
 % Graph Theory
@@ -119,7 +118,7 @@ Given the equivalence between edges $(i,j)$ and $(j,i)$ in undirected graphs, ad
 Besides, the size of an adjacency matrix grows quadratically with the number of vertices in the graph, which would make loading and processing large graphs in computer memory problematic.
 However, real-world networks have been observed to be naturally sparse, meaning that only a very small percentage of all possible edges do in fact exist.
 Adjacency matrices could thus be optimized for storage and performance by adopting standard sparse matrix representations such as compressed row storage (CRS) \ref{Saad2003}.
-An alternative way to represent sparse networks is to use the \texti{adjacency list} representation, which in short consists of storing a list of neighbors for every single vertex in the network. 
+An alternative way to represent sparse networks is to use the \textit{adjacency list} representation, which in short consists of storing a list of neighbors for every single vertex in the network. 
 % TODO:<include figure: graph where nodes have attributes and edges are weighted; simple graph with its adj. matrix>
 
 
@@ -160,7 +159,7 @@ $
 k_i = \sum_j^{n} A_{i,j}
 $,
 where $A_{i,j}$ are the elements in the graph's adjacency matrix containing edges weights $(i,j)$.
-The \textit{average degree} ($\lange k \rangle$) is a global property of the network, computed by averaging the degree values for each individual vertex $i$.
+The \textit{average degree} ($\langle k \rangle$) is a global property of the network, computed by averaging the degree values for each individual vertex $i$.
 $
 \langle k \rangle = \frac{1}{N} \sum_{i=1}^N k_i
 $
