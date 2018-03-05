@@ -1,13 +1,6 @@
 \chapter{Network Models}\label{network_models}
 
 
-%% Collectors Profiling and activities history
-%%%% Profiling collectors in terms of their activities and interests can be a way of further detecting anomalies (activity monitoring, Fawcett and Provost 1999).
-
-
-
-
-
 In this chapter we present and formally describe two classes of network models that were developed during this study.
 \textbf{Species-collectors networks} (SCNs) are built based on associations between collectors and the species they've recorded during their careers, whereas \textbf{collectors coworking networks} (CWNs) describe direct collaborative associations between collectors when recording specimens in field.
 
@@ -18,10 +11,16 @@ CWNs, on the other hand, allow us to investigate which collectors team up with w
 As both models were elaborated based on a social networks analytics framework, we start by reviewing some general concepts from the network science and graph theory domains.
 
 
+
+% ======================
+% ======================
+% Network Science Theory
+% ----------------------
+
 \section{Network Science: A theoretical background}
 
 Network Science refers to a relatively new domain of scientific investigation, aiming to describe emergent properties and patterns from complex systems of interacting entities.
-Such relational systems are naturally represented as networks, where interactions are represented as pairwise connections between entities and assume particular semantics depending on the nature of the modeled phenomenon.
+Such relational systems are naturally represented as networks, where interactions are represented as pairwise connections (\textit{links}) between entities (\textit{nodes}) and assume particular semantics depending on the nature of the modeled phenomenon.
 The rise of this field is strongly associated to recent advances in information technology, which provided scientists with novel tools for collecting, storing and processing data from many knowledge domains more efficiently and in larger scales.
 Although a variety of networked systems in many disciplines had been studied long before that, technological advances allowed us to model real-world systems in much more details, from large volumes data that are often public or easily accessible for the investigator.
 
@@ -31,12 +30,12 @@ By exploring some of the model topological features, they estimated that althoug
 
 Although surprising, this finding was in fact consistent with a generative model proposed by \textit{Watts} and \textit{Strogatz} in $1998$ \cite{Watts1998}.
 In that paper authors argued that real-world networked systems are neither completely randomly nor completely regularly connected, and demonstrated that more realistic topologies could be derived by combining features from both extremes.
-Following this approach they were able to generate models in which entities were separated from others by very few connections, even for very large networks.
+Following this approach they were able to generate network models in which nodes were separated from others by very few connections, even for very large systems.
 This phenomenon is known as the \textit{small-world}, and became popular after the experimental work of \textit{Stanley Milgram} \cite{Milgram1969} as the ``six degrees of separation''.
 The concept referred to the finding that two arbitrary individuals in the world are separated by at most 6 connections, following an acquaintances chain.
  
 Besides small-world networks, other generative models have been proposed in literature to explain mechanisms by which real world networks grow and acquire their particular topologies.
-A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new entities to those in the network which already have many connections \cite{Albert2002}. 
+A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new nodes to those in the network which already have many connections \cite{Albert2002}. 
 ``The rich gets richer'' effect.
 The preferential attachment mechanism makes a few hubs and many nodes with very few connections, 
 In random networks, in contrast, new nodes are expected to connect to existing ones by chance, independently of the number of connections nodes already have.
@@ -48,91 +47,142 @@ Networks with such characteristics are known as \textit{scale-free} networks.
 We refer to networks with non-trivial topological features as \textit{complex networks}.
 %% Examples of networks in biology, computer science...
 
-Network models are suitable for structuring relational data, where entities are expected to interact with each other through connections (or links). 
+
+% Present some network models already developed applied to the biodiversity domain
+%% Ecological interactions networks
+
+%%% Co-occurrence networks
+%%% Metagenomics
+%%% Climatic changes
+%%% Challenge: Reliable data is hard to be obtained
+
+%% The herbarium exchangers network
+%%% A prosopological approach, where social interactions between collectors is modeled
+
+
+% Network models represented as graphs
+Network models are suitable for structuring relational data, where nodes are expected to interact with each other through connections (or links). 
 Networked systems as relational models, where entities interconnect by links.
 Networks are mathematically represented as \textit{graphs}.
  
  
-Next we review some important definitions from graph theory.
+Next we briefly review some fundamental definitions from graph theory.
+For the purpose of this work this is not intended to be a thorough review on the field, but rather a quick overview for readers that are not familiarized with the field. 
+For a slightly more comprehensive introduction we recommend the reader to refer to \textit{Newman}'s book on network science \cite{Newman2010b}.
 
-\subsection{Concepts on Graph theory}
-% Networks are mathematically represented as graphs
-%% Nodes and Edges
-%%% Edges are established between a pair of nodes , recurrent edges
-%%% Nodes and edges can have attributes (each attribute holding values)
-%%% Neighborhood, neighbors
-%%% Cliques
-%%% Paths 
+
+% ============
+% Graph Theory
+% ------------
+\subsection{General concepts on Graph theory}
 
 Intuitively, \textbf{graphs} are mathematical structures composed by discrete objects holding pairwise connections to each other. 
-Objects are referred to as \textit{vertices} and the connections between them as \textit{edges}.
-Graph structures provide a natural representation for networked systems for a couple of reasons.
-First, they allow representing entities and their interactions in a structured way, a ``map of connections'' through which information flows.
-Connections necessarily involve two entities and can be either symmetric, in which case information is allowed to flow in both directions; or asymmetric, if it necessarily flows from a source to a target entity.
-Second, graph theory provides a bunch of of metrics and algorithms in literature for dealing with graphs and exploring their topologies.
-Finally, the availability of a considerable amount of graph visualization tools and techniques potentializes obaining insights from its structure.
+In graph theory terminology, objects are referred to as \textit{vertices} and the connections between them as \textit{edges}.
+Graph structure provides a natural representation for networked systems for a couple of reasons.
+First, graphs allow representing entities and their interactions in a structured way, as a ``map of connections'' through which information flows.
+Second, graph theory provides a bunch of well established data structures, metrics and algorithms for systematically representing, characterizing and exploring graph topologies.
+Finally, the availability of a considerable amount of graph visualization tools and techniques helps analysts to obtain insights from network structure, by allowing them to focus on different aspects of the system depending on their interest.
 
- 
-Graphs are formally defined as a pair $G=(S,E)$, where $s$ is the set of vertices that compose the graph; and $E$ is the set of all edges.
-A pair of vertices directly connected by an edge are said to be \textit{adjacent}.
-The set of all nodes that are adjacent to a particular node compose its \textit{neighborhood}.
-Attributes can be associated to nodes and edges.
-A graph may be weighted by an edge attribute. 
-Edge weight represents the strenghtness of an edge.
-If connections are symmetric the graph is \textit{undirected}; otherwise, \textit{directed}.
-% <include figure>
+% Graph formal definition, undirected/weighted graphs
+Graphs are formally defined as a pair $G=(S,E)$, where $S$ is the set of vertices that compose the graph; and $E$ is the graph's edges set.
+%
+Edges necessarily involve pairs of vertices, and can be either \textit{undirected} or \textit{directed}.
+Undirected edges model symmetric connections, in which case information is allowed to flow equally in both directions.
+There are situations, however, in which information necessarily flows from a source to a target vertex, thus making connections asymmetric.
+Those are represented in the graph as directed edges.
+Graphs composed by directed edges are known as \textit{digraphs} (or \textit{directed graphs}), whilst \textit{undirected graphs} only have undirected edges.
+%
+Additionally, connections in a networked system can be modeled as either being all identical or distinct in terms of their strengthness or relevance, which is incorporated in the graph as edges \textit{weight}.
+Graphs are also classified as either weighted on unweighted, based on the nature of their edges.
+%
+Given the nature of the networks modeled in the context of this project, we will specifically focus on properties of undirected weighted graphs for the rest of this section.
 
-
-Besides the nodes-and-edges representations, graphs can also be represented as alternative data structures, which can be more appropriate depending on the application.
-Adjacency matrices are appropriate in some contexts for mathematical operations.
-Undirected graphs have symmetric adjacency matrices.
-If the graph is unweighted the matrix stores values $1$ in case an edge between two vertices exists and $0$ otherwise. 
+% Graph representations
+Graphs can be computationally represented using a variety of data structures, the most appropriate one heavily depending on the set of algorithms one expects to run against the graph.
+Here we review some of the most common of them.
+%
+\textit{Edges lists} are perhaps the simplest and most intuitive graph representation, and consists of a list storing all edges as ordered pairs $(u,v)$, for $u,v \in S$.
+Given its simplicity, this representation is more appropriate for situations in which the user directly interacts with the data, such as when manually creating or editing graphs without the aid of specialized software. 
+This representation is also compact enough to be adopted for graph storage in some situations.
+%
+Most algorithms, however, perform better by using alternative designs such as \textit{adjacency lists} or \textit{adjacency matrices}. 
+\textbf{Adjacency matrices} are usually denoted $A$ and represent graph edges $(u,v)$ as elements $A_{u,v}$.
+The adjacency matrix of undirected weighted graphs is always symmetric, as each edge $(u,v)$ is equivalent to $(v,u)$. 
+Element $A_{u,v}>0 $\textit{iff}$(u,v)\in E$.
+Non-zero elements store edges weight values.
+%Besides the vertices-and-edges representations, graphs can also be represented as alternative data structures, which can be more appropriate depending on the application.
+%Adjacency lists in computers
+%Although graphs can be trivially represented as ... in computers, Adjacency matrices are appropriate in some contexts for mathematical operations.
+%Undirected graphs have symmetric adjacency matrices, while not necessarily for directed graphs.
+%If the graph is unweighted the matrix stores values $1$ in case an edge between two vertices exists and $0$ otherwise. 
 As many real-world of networks are very sparse, adopting sparse matrices representations such as compressed row storage (CRS) might be useful.
+% TODO:<include figure: graph where nodes have attributes and edges are weighted; simple graph with its adj. matrix>
 
 
+% Vertices basic metrics
+A pair of vertices which are directly connected by an edge are said to be \textit{adjacent}.
+The set of all vertices that are adjacent to a particular vertex compose its \textit{neighborhood}.
+The number of edges connected to a vertex or, in other words, the size of its neighbors, is given by its \textit{degree}.
+Denoted by $k$, 
+$
+k_i = \sum_j^{n} A_{i,j}
+$
+We can also obtain a global metric for the entire graph, the \textit{average degree} 
+$
+\langle k \rangle = k_i
+$
+The \textit{degree distribution}
 
 
-\paragraph*{Path}
+% Nodes and edges attributes
+Attributes can be associated to vertices and edges.
+A graph may be weighted by an edge attribute. 
 
-\paragraph*{Connected components}
-For undirected graphs, connected components are defined as subgraphs in which there is at least one path linking each pair of nodes.
+% Paths in directed/undirected graphs
+For undirected graphs we say there exists a \textit{path} of length $n$ between a pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
+Pairs of vertices are said to be \textit{connected} if at least one path involving them exists.
+
+% Connected components
+\textit{Connected components} are defined as subgraphs in which there is at least one path linking each pair of vertices.
+
+% Cliques
+\textit{Cliques}
+
 
 %% Graph density
+%%% Matrix sparsity
 %%% Fully connected: n*(n-1)/2
 
 
-%% Matrix Representation
-%%% Adjacency matrix, sparsity
-For some applications it turns \luiz{out?} to be convenient to use a matrix representation of graphs. A matrix where ... is known as the graph's \textbf{adjacency matrix}. % where are zeros and ones?
-In case the graph is unimodal the adjacency matrix is a squared symmetrical matrix.
-For bipartite graphs, however, this is not necessarily true. It depends on the size of each nodes set. We refer to it as the \textbf{biadjacency matrix}.
 
 %% Degree
 %%%% Degree distribution
 %%%% Power laws
 %%%%% Many real-world networks are approximately scale-free (give examples)
-%%%% Machanism: Preferential attachment, rich gets richer: Higher degree nodes (richer), lower degree nodes (poorer)
+%%%% Machanism: Preferential attachment, rich gets richer: Higher degree vertices (richer), lower degree vertices (poorer)
 
 
 
-\subsection{Bipartite Graphs}
 %% Bipartite graphs
-%%%% The bipartite constraint: formalization: Nodes sets are DISJOINT (no intersection) ; and INDEPENDENT (no adjacent nodes within any set); 
+%%%% The bipartite constraint: formalization: Nodes sets are DISJOINT (no intersection) ; and INDEPENDENT (no adjacent vertices within any set); 
 %%%% Biadjacency matrix
 %%%% Bipartite projection
 %%%%%% bipartite tradeoff : summarization vs information loss
 %%%%%% bipartite projections edges set is usually very dense -> The importance of adding weights to edges in bipartite projections
 %%%%%% weaker connections are then filtered out
-Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
-We define bipartite graphs as 
-$$
+\textbf{Bipartite graphs}, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
+We define bipartite graphs as triples 
+$
 B = (U, V, E) \mbox{, }
-$$
-where $E$ is the set of edges between nodes from $U$ and $V$.
+$
+where $E$ is the set of edges between vertices from $U$ and $V$.
 In sets theory terms, $U$ and $V$ are both \textit{disjoint} and \textit{independent} sets.
 This means vertices must be assigned to exactly one vertices set and, moreover, all edges in $E$ necessarily connect vertices from opposite sets. 
 Such features make bipartite graphs particularly useful for representing interactions that only make sense to exist between entities of different classes. 
 
+For bipartite graphs the adjacency matrix is known as \textit{biadjacency matrix}
+In case the graph is unimodal the adjacency matrix is a squared symmetrical matrix.
+For bipartite graphs, however, this is not necessarily true. It depends on the size of each vertices set. We refer to it as the \textbf{biadjacency matrix}.
 
 As most graph algorithms and metrics in literature are primarily designed for one-mode graphs, bipartite graphs ...
 One way to summarize bipartite 
@@ -141,7 +191,7 @@ One way to summarize bipartite
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.5\linewidth]{figures/bipartite_general.png}
-    \caption{(a) General aspect of a bipartite graph. All nodes in the graph belong to exactly one of $U$ and $V$ nodes sets. In addition edges are only established between nodes from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together nodes that are at a length-2 distance in the bipartite graph, while omitting nodes from the other set.}
+    \caption{(a) General aspect of a bipartite graph. All vertices in the graph belong to exactly one of $U$ and $V$ vertices sets. In addition edges are only established between vertices from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together vertices that are at a length-2 distance in the bipartite graph, while omitting vertices from the other set.}
     \label{fig:bipartite_general}
   \end{figure}
 
@@ -150,6 +200,10 @@ One way to summarize bipartite
 \subsection{The Social Networks framework}
 % Mark Granovetter paper (1973)
 Social structures in social systems are studied using network science theory. 
+
+
+
+
 
 % ===========================
 % ===========================
