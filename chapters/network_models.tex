@@ -68,7 +68,7 @@ Networks are mathematically represented as \textit{graphs}.
  
 Next we briefly review some fundamental definitions from graph theory.
 For the purpose of this work this is not intended to be a thorough review on the field, but rather a quick overview for readers that are not familiarized with the field. 
-For a slightly more comprehensive introduction we recommend the reader to refer to \textit{Newman}'s book on network science \cite{Newman2010b}.
+For a slightly more comprehensive introduction we recommend the reader to refer to \textit{Barabási}'s and \textit{Newman}'s books on network science \cite{Barabasia, Newman2010b}.
 
 
 % ============
@@ -84,18 +84,23 @@ Second, graph theory provides a bunch of well established data structures, metri
 Finally, the availability of a considerable amount of graph visualization tools and techniques helps analysts to obtain insights from network structure, by allowing them to focus on different aspects of the system depending on their interest.
 
 % Graph formal definition, undirected/weighted graphs
-Graphs are formally defined as a pair $G=(S,E)$, where $S$ is the set of vertices that compose the graph; and $E$ is the graph's edges set.
+Graphs are formally defined as a pair $G=(S,E)$, where $S$ is the set of vertices that compose the graph; and $E$ is the graph's edges set. 
 %
-Edges necessarily involve pairs of vertices, and can be either \textit{undirected} or \textit{directed}.
+Edges necessarily involve pairs of vertices, and are thus represented as $(u,v)$, for $u,v \in S$.
+Pairs of vertices that are directly connected by an edge are said to be \textit{adjacent}, and the set of all vertices that are adjacent to a given vertex composes its \textit{neighborhood}.
+%
+Depending on the nature of the modeled connections, edges can be either classified as \textit{undirected} or \textit{directed}.
 Undirected edges model symmetric connections, in which case information is allowed to flow equally in both directions.
 There are situations, however, in which information necessarily flows from a source to a target vertex, thus making connections asymmetric.
 Those are represented in the graph as directed edges.
 Graphs composed by directed edges are known as \textit{digraphs} (or \textit{directed graphs}), whilst \textit{undirected graphs} only have undirected edges.
+In undirected graphs we should note that edges $(u,v)$ and $(v,u)$ are equivalent.
 %
 Additionally, connections in a networked system can be modeled as either being all identical or distinct in terms of their strengthness or relevance, which is incorporated in the graph as edges \textit{weight}.
 Graphs are also classified as either weighted on unweighted, based on the nature of their edges.
 %
 Given the nature of the networks modeled in the context of this project, we will specifically focus on properties of undirected weighted graphs for the rest of this section.
+
 
 % Graph representations
 Graphs can be computationally represented using a variety of data structures, the most appropriate one heavily depending on the set of algorithms one expects to run against the graph.
@@ -103,59 +108,64 @@ Here we review some of the most common of them.
 %
 \textit{Edges lists} are perhaps the simplest and most intuitive graph representation, and consists of a list storing all edges as ordered pairs $(u,v)$, for $u,v \in S$.
 Given its simplicity, this representation is more appropriate for situations in which the user directly interacts with the data, such as when manually creating or editing graphs without the aid of specialized software. 
-This representation is also compact enough to be adopted for graph storage in some situations.
+This representation is also compact enough to be adopted for graph storage and data exchange in some situations.
 %
 Most algorithms, however, perform better by using alternative designs such as \textit{adjacency lists} or \textit{adjacency matrices}. 
-\textbf{Adjacency matrices} are usually denoted $A$ and represent graph edges $(u,v)$ as elements $A_{u,v}$.
-The adjacency matrix of undirected weighted graphs is always symmetric, as each edge $(u,v)$ is equivalent to $(v,u)$. 
-Element $A_{u,v}>0 $\textit{iff}$(u,v)\in E$.
-Non-zero elements store edges weight values.
-%Besides the vertices-and-edges representations, graphs can also be represented as alternative data structures, which can be more appropriate depending on the application.
-%Adjacency lists in computers
-%Although graphs can be trivially represented as ... in computers, Adjacency matrices are appropriate in some contexts for mathematical operations.
-%Undirected graphs have symmetric adjacency matrices, while not necessarily for directed graphs.
-%If the graph is unweighted the matrix stores values $1$ in case an edge between two vertices exists and $0$ otherwise. 
-As many real-world of networks are very sparse, adopting sparse matrices representations such as compressed row storage (CRS) might be useful.
+%
+\textbf{Adjacency matrices} are a way to represent graphs in matrix form, in which elements store adjacencies between pairs of vertices.
+An adjacency matrix $A$ is defined as having non-zero entries $A_{i,j}$\textit{ iff } $(i,j)\in E$ which, in weighted graphs, correspond to the weight assigned to edge $(i,j)$.
+Given the equivalence between edges $(i,j)$ and $(j,i)$ in undirected graphs, adjacency matrices in this case are always symmetric, meaning information is stored redundantly in its structure.
+%
+Besides, the size of an adjacency matrix grows quadratically with the number of vertices in the graph, which would make loading and processing large graphs in computer memory problematic.
+However, real-world networks have been observed to be naturally sparse, meaning that only a very small percentage of all possible edges do in fact exist.
+Adjacency matrices could thus be optimized for storage and performance by adopting standard sparse matrix representations such as compressed row storage (CRS) \ref{Saad2003}.
+An alternative way to represent sparse networks is to use the \texti{adjacency list} representation, which in short consists of storing a list of neighbors for every single vertex in the network. 
 % TODO:<include figure: graph where nodes have attributes and edges are weighted; simple graph with its adj. matrix>
 
 
-% Vertices basic metrics
-A pair of vertices which are directly connected by an edge are said to be \textit{adjacent}.
-The set of all vertices that are adjacent to a particular vertex compose its \textit{neighborhood}.
-The number of edges connected to a vertex or, in other words, the size of its neighbors, is given by its \textit{degree}.
-Denoted by $k$, 
+% Definitions and metrics
+As previously mentioned, one of the main benefits of adopting graph models for representing networks is the availability of a whole set of well-established metrics and definitions that allow analysts to characterize the topology of their systems. 
+Below we review some of the most basic ones.
+
+\paragraph*{Path}
+A path can be thought of as a chain of adjacent vertices composing a route through which information flows in a graph.
+For undirected graphs we say there exists a \textit{path} of length $n$ between a pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
+Pairs of vertices are said to be \textit{connected} if at least one path exists between them.
+A pair of vertices can be connected through more than one path, each having distinct lengths.
+The \textit{distance} between two nodes is the length of the shortest path connecting them.
+We can calculate the average path length for a network as the average path length between all pairs of connected nodes in the network.
+% Diameter of the network
+
+\paragraph*{Connected component}
+A connected component is a subset of vertices in the graph in which all included vertices are \textit{connected} to every other one by at least one path.
+Moreover, this subset is required to be maximal, meaning that all vertices in the network for which the inclusion property holds should also be included in the component. 
+A network graph can be composed by many distinct connected components which are completely disconnected from each other, the largest of which is called the \textbf{giant component}.
+
+\paragraph*{Clique}
+A clique is a structure composed by a subset of vertices in which all included vertices are \textit{adjacent} to each other.
+The set of edges that compose a clique are obtained by computing the pairwise combination of all its $n$ vertices, being the total number of edges equivalent to the binomial coefficient $\binom{n}{2}$.
+
+
+\paragraph*{Attributes}
+Attributes allow representing non-topological features that are relevant in the context of the modeled system, and can be optionally assigned to both edges and vertices in a graph.
+For example, we might want to model a social network in which individuals name, age and gender information are relevant for our analyses.
+Those features, which assume distinct values for each individual in the network, is typically stored as vertices attributes.
+Similarly, edges attributes store particularities regarding each individual connection
+In thesis, any numerical attribute could be used for weighting the edges.
+
+\paragraph*{Degree}
+The degree of a vertex in a undirected graph is given by the total number of vertices that are adjacent to it or, in other words, the length of its neighborhood.
+We compute the degree of a particular vertex $i$ as 
 $
 k_i = \sum_j^{n} A_{i,j}
+$,
+where $A_{i,j}$ are the elements in the graph's adjacency matrix containing edges weights $(i,j)$.
+The \textit{average degree} ($\lange k \rangle$) is a global property of the network, computed by averaging the degree values for each individual vertex $i$.
 $
-We can also obtain a global metric for the entire graph, the \textit{average degree} 
+\langle k \rangle = \frac{1}{N} \sum_{i=1}^N k_i
 $
-\langle k \rangle = k_i
-$
-The \textit{degree distribution}
 
-
-% Nodes and edges attributes
-Attributes can be associated to vertices and edges.
-A graph may be weighted by an edge attribute. 
-
-% Paths in directed/undirected graphs
-For undirected graphs we say there exists a \textit{path} of length $n$ between a pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
-Pairs of vertices are said to be \textit{connected} if at least one path involving them exists.
-
-% Connected components
-\textit{Connected components} are defined as subgraphs in which there is at least one path linking each pair of vertices.
-
-% Cliques
-\textit{Cliques}
-
-
-%% Graph density
-%%% Matrix sparsity
-%%% Fully connected: n*(n-1)/2
-
-
-
-%% Degree
+\paragraph*{Degree distribution}
 %%%% Degree distribution
 %%%% Power laws
 %%%%% Many real-world networks are approximately scale-free (give examples)
@@ -170,7 +180,8 @@ Pairs of vertices are said to be \textit{connected} if at least one path involvi
 %%%%%% bipartite tradeoff : summarization vs information loss
 %%%%%% bipartite projections edges set is usually very dense -> The importance of adding weights to edges in bipartite projections
 %%%%%% weaker connections are then filtered out
-\textbf{Bipartite graphs}, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
+\paragraph*{Bipartite graphs}
+Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
 We define bipartite graphs as triples 
 $
 B = (U, V, E) \mbox{, }
@@ -202,6 +213,29 @@ One way to summarize bipartite
 Social structures in social systems are studied using network science theory. 
 
 
+
+A variety of network models structurally similar to species-collectors networks have been proposed in social networks literature for modeling networked systems within many unrelated application domains. We describe some of them for improving the reader's intuition.
+
+\textit{Affiliation networks} are a particular type of social networks in which actors are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. Social ties between individuals are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
+A classic example of this kind of network is the movie actors network, which was used as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
+This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), linking actors to movies they have starred in.
+
+% exemplify models
+
+Although the semantics of relationships modeled in each of these networks (with different analytic purposes), the structures used to represent them are shared. A common feature shared by those models is their bipartite structure, allowing  
+
+The bipartite structure of SCNs make them structurally similar to affiliation networks, with some examples in the social networks literature.
+
+One classic affiliation network model is the films and actors network.
+
+Lambiotte models listeners and music
+
+Another analogous example are the scientific papers coauthorship networks in which authors are linked to papers they have authored \cite{Newman2004}
+
+
+
+Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
+The model presented in the next section covers this.
 
 
 
