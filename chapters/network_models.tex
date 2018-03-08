@@ -164,7 +164,7 @@ In most real-world networks, however, a majority of low-degree nodes coexist wit
 Such a scenario better described by a\textit{power law}, where $p(k) \sim k^{-\alpha}$.
 
 \paragraph*{Assortative mixing}
-%TODO
+
 
 % Bipartite graphs
 \paragraph*{Bipartite graphs}
@@ -200,8 +200,10 @@ Therefore, bipartite projections into each vertices set provide complementary pe
 % ===============
 % Social Networks
 % ---------------
-\subsection{The Social Networks framework}
 % Mark Granovetter paper (1973)
+%% Which types of analyses are most common in social networks?
+
+\subsection{The Social Networks framework}
 In the context of this work we refer to the \textit{social networks framework} as a set of concepts, methods and algorithms which can be directly applied or slightly adapted for modeling and analyzing social networks in diverse and independent contexts and knowledge domains.
 %
 In our definition, we refer to \textit{social networks} as systems in which entities (mostly people) interact with each other through some type of \textit{social tie}.
@@ -218,34 +220,35 @@ Here we describe some of them for giving the reader a more solid intuition on ho
 
 
 % Affiliation networks
-\textit{Affiliation networks} are a particular type of social networks in which individuals are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. 
-Social ties are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
-A classic example of this kind of network is the movie actors network, which was used as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
-This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), linking actors to movies they have starred in.
+\textit{Affiliation networks} are a particular type of social networks in which individuals are associated to events, groups or institutions (we'll refer to all those as organizations) by being members or participating in them \cite{Borgatti2015}. 
+%
+Such networks are considered relevant in the context of social networks analytics due to the fact that individuals belonging to the same groups or attending the same events are more likely to become acquainted and develop social ties than those who are not affiliated to common organizations.
+%
+The most conservative way to structure affiliation networks, so that we keep the complete information on who have affiliated to which organizations, is achieved by representing both individuals and organizations as distinct types of entities in a bipartite model.
+ 
+A classic example of affiliation networks is the movie actors network, introduced as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
+This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), by linking actors to movies they have starred in.
+Actors and movies are thus modeled as distinct entities in the network, such that an actor gets connected to all movies he/she has participated in whereas, conversely, a movie gets connected to all actors who have composed its cast.  
+From complementary perspectives, one could distinguish for instance movies that are most similar in terms of their cast composition and, on the other hand, actors that are most related by having starred in the same sets of movies.
+%
+Similarly, \textit{Davis}, \textit{Garder} and \textit{Gardner} have studied women social circles from data on their attendance to public social events, and related how their attendance behavior could be influenced by their own social casts. 
+%
+Another well-known application of affiliation networks are scientific papers authorship networks, in which authors get connected to papers they've authored.
+In this case, however, the focus has been mostly on deriving co-authorship relationships between paper authors, and in many cases the individual papers which originated the co-authorships are not very relevant \cite{Newman2004, Borett2014}.
+A simplified one-mode network, in which only authors are represented as nodes and get directly linked by co-authorship relations, can be derived from the bipartite model by computing its projection onto the authors nodes set.
+In the resulting network, authors get directly connected and authors connect to others as co-authors.
+Networks where edges assume this semantic are also known as \textit{collaboration networks} (or, alternatively, \textit{coworking networks}). 
+They can either be directly constructed from data or be derived by projecting affiliation networks.
 
-% Collaboration networks
+Apart from affiliation networks, the bipartite structure is also suitable for modeling other types of social networks.
+One of those, which we here refer to as the \textit{interest networks}, model relations of interest from entities towards objects.
+Besides their structural similarity to affiliation networks, relationships modeled in interest networks are conceptually distinct from the former, as the fact of two individuals sharing interests does not necessarily provide them differentiated opportunities for developing social ties.
+Instead, interest networks tie together individuals with objects they're interested in, independently of the social groups or communities they are members of. 
+Thus, instead of social communites, interest networks are more appropriate for revealing communities of interests.
+%
+Interest networks have been used for instance to characterize collective music listening habitats among users of media streaming platforms \cite{Lambiotte}.
+From a network of listeners interests towards music groups, \textit{Lambiotte} found evidence that the traditional music genres classification by the music industry is not the best way to split listeners' communities of interests.
 
-
-% exemplify models
-
-Although the semantics of relationships modeled in each of these networks (with different analytic purposes), the structures used to represent them are shared. A common feature shared by those models is their bipartite structure, allowing  
-
-The bipartite structure of SCNs make them structurally similar to affiliation networks, with some examples in the social networks literature.
-
-One classic affiliation network model is the films and actors network.
-
-Lambiotte models listeners and music
-
-Another analogous example are the scientific papers coauthorship networks in which authors are linked to papers they have authored \cite{Newman2004}
-
-
-
-Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
-The model presented in the next section covers this.
-
-% Some commonly explored approaches:
-%% Look for influencers
-%% Modularity and Community detection
 
 
 % ========================
@@ -261,37 +264,22 @@ As ecological interactions are regarded as key processes modeling ecosystems fun
 Interaction networks can be broadly classified as \textit{food webs}, \textit{host-parasitoid webs} or \textit{mutualistic webs} \cite{Ings2009}, being food webs the first ones described in literature, in two classical papers by \textit{Lindeman} and \textit{Odum} \cite{lindeman1942trophic, odum1956primary}. 
 %
 
-Besides ecological interactions, other natural systems have also been modeled under the perspectives of network thinking. 
-- Interactions of animals within their populations;
+Besides ecological interactions, network thinking has also been applied for modeling other aspects of natural systems.
+%
+%Animal movements
+Patterns of animal movement can be investigated in a structured way, for instance, through \textit{movement networks} \cite{Jacoby2016a}.
+These networks represent geographical space as a set of discrete and interconnected locations, forming a mesh of possible routes through which animals (or groups of animals) transitate. 
+Links between each pair of locations are weighted according to their geographical connectivity.
+Animal movement is thus regarded as dynamic processes composed by sequences of discrete movement steps running through the network structure.
+As the spatial feature is key in this type of network, they are also referred to as \textit{spatial networks} \cite{Bascompte2007}.
+%
 
-Modeling ecological interactions is very common.
-
-
-
-
-%% Animal movement networks
-%%% How tracking data is gathered?
-Movement networks allow understanding how individuals or groups of individuals use geographical space in a structured way.
-Spatial connectivity is modeled as networks of discrete locations, which are
-Animal movement networks are structured by connecting discrete locations which are sequentially visited.    
-Processes are composed of discrete movement steps in the network structure
-
-
-\cite{Jacoby2016a}
-
-Animal movement networks represent movement steps as discrete movement steps an animal can transition.
-Animal movement is represented as a network of discrete movement steps, where locations are represented as nodes linked by transitions. 
-Animal movement networks for structuring animal routes.
-Edges represent transitions between locations
-
-
-%%% Co-occurrence networks
+%%% Co-occurrence networks TODO
+Others have applied network science to investigate patterns of species co-occurrence. 
+So called \textit{co-occurrence networks} 
 Network models have also been used to model biogeographical patterns.
-
-
 From the study of co-occurrence networks, one can select subsets of species to be used as surrogates for the existence of many others within an ecological community \cite{Tulloch2016}.
-%%% Metagenomics
-%%% Climatic changes
+One data-related challenge in co-occurrence networks is that more local patterns of co-occurrence are hard to be assessed, as usually co-occurrence data in local scales is hard to be obtained.
 \cite{Araujo2011}
 
 %%% Challenge: Reliable data is hard to be obtained
@@ -303,13 +291,13 @@ Identifying overlapping species ranges
 modularity in bats species distributions  
 \cite{Thebault2013}
 
-
 % Social Networks and Biodiversity
-% Animal social networks
-
+The social network analytics framework has also been applied in some biodiversity studies, most expressively for modeling animal social behavior.
+% Animal social networks TODO
 
 % Social networks composed by people / institutions
-Few initiatives have applied social network analysis in the context of networks of people and institutions working with biodiversity.
+Fewer initiatives have appliedd social network analytics for studying networks of people and institutions working with biodiversity data. 
+
 
 %% Collaborative research in network ecology field (3.4)
 Authors form collaborative clusters around subareas.
