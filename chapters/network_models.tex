@@ -133,6 +133,8 @@ A network graph can be composed by many distinct connected components which are 
 A clique is a structure composed by a subset of vertices in which all included vertices are \textit{adjacent} to each other.
 The set of edges that compose a clique are obtained by computing the pairwise combination of all its $n$ vertices, being the total number of edges equivalent to the binomial coefficient $\binom{n}{2}$.
 
+\paragraph*{Clustering}
+%TODO
 
 \paragraph*{Attributes}
 Attributes allow representing non-topological features that are relevant in the context of the modeled system, and can be optionally assigned to both edges and vertices in a graph.
@@ -161,7 +163,8 @@ Thus vertices with degree equal $\langle k \rangle$ are most likely to occur, wh
 In most real-world networks, however, a majority of low-degree nodes coexist with few hubs.
 Such a scenario better described by a\textit{power law}, where $p(k) \sim k^{-\alpha}$.
 
-
+\paragraph*{Assortative mixing}
+%TODO
 
 % Bipartite graphs
 \paragraph*{Bipartite graphs}
@@ -180,16 +183,11 @@ The \textit{biadjacency matrix} (or \textit{incidence matrix}) is the matrix rep
 Differently from one-mode graphs for which the adjacency matrix is necessarily square, biadjacency matrices are usually rectangular, unless both vertices sets have the same size.
 
 %% Bipartite projection
-%%%%%% bipartite tradeoff : summarization vs information loss
-%%%%%% bipartite projections edges set is usually very dense -> The importance of adding weights to edges in bipartite projections
-%%%%%% weaker connections are then filtered out
-As most algorithms and metrics in literature are primarily designed for one-mode graphs, it is often convenient to summarize a bipartite graph by deriving direct relationships between vertices from the same set.
+As most algorithms and metrics in literature are primarily designed for one-mode graphs, it is often convenient to summarize a bipartite graph by directly linking vertices that belong to the same set based on indirect associations they might have. 
 This operation, in which vertices from one set get directly linked if they are intermediated by at least one vertex from the opposite set, is called a \textit{bipartite projection} (Figure \ref{fig:bipartite_general}b).
-
-Projections, however, come with a tradeoff.
-\textit{Projections} are one way to summarize bipartite graphs, by compressing  
-% Bipartite projection
-
+Projections thus compress a bipartite graph into a one-mode graph by only representing vertices from the projected set, while those from the opposite set are omitted.
+Therefore, bipartite projections into each vertices set provide complementary perspectives on the relationships modeled.
+%
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.5\linewidth]{figures/bipartite_general.png}
@@ -197,20 +195,6 @@ Projections, however, come with a tradeoff.
     \label{fig:bipartite_general}
   \end{figure}
 
-% ========================
-% Networks in Biodiversity
-% ------------------------
-\subsection{Networks in Biodiversity}
-% Present some network models already developed applied to the biodiversity domain
-%% Ecological interactions networks
-
-%%% Co-occurrence networks
-%%% Metagenomics
-%%% Climatic changes
-%%% Challenge: Reliable data is hard to be obtained
-
-%% The herbarium exchangers network
-%%% A prosopological approach, where social interactions between collectors is modeled
 
 
 % ===============
@@ -218,15 +202,29 @@ Projections, however, come with a tradeoff.
 % ---------------
 \subsection{The Social Networks framework}
 % Mark Granovetter paper (1973)
-In the context of this work we refer to \textit{social networks} as systems in which people interact with each other through some type of social tie. 
-Under the framework of network science, those systems are modeled as networks in which people are represented as nodes and social ties as links. 
-In fact, a variety of social network models within many distinct application domains have been proposed in literature. 
-We describe some of them for making the reader a more solid intuition before we present our models developed throughout our work.
+In the context of this work we refer to the \textit{social networks framework} as a set of concepts, methods and algorithms which can be directly applied or slightly adapted for modeling and analyzing social networks in diverse and independent contexts and knowledge domains.
+%
+In our definition, we refer to \textit{social networks} as systems in which entities (mostly people) interact with each other through some type of \textit{social tie}.
+
+As social networks are themselves a particular class of networks, most of the theoretical foundation used to study them is directly inherited from network science.
+%
+Social networks, however, display two important particularities if compared to other types of networked systems \cite{Newman2003d}.
+First, entities tend to organize themselves in groups within social systems, such that those who are members of the same group tend to interact more intensely with themselves than with non-members.
+This contributes to the formation of communitites structures, making social networks \textit{highly clustered}.
+Second, as entities belonging to larger groups tend to interact with many peers --- and, conversely, entities belonging to smaller groups tend to interact with fewer peers ---, social networks tend to be assortatively mixed, in contrast with non-social networks which are typically disassortative.  
+
+A variety of social network models within many distinct areas have been proposed in literature. 
+Here we describe some of them for giving the reader a more solid intuition on how they're structured before we introduce our own models.
 
 
-\textit{Affiliation networks} are a particular type of social networks in which actors are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. Social ties between individuals are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
+% Affiliation networks
+\textit{Affiliation networks} are a particular type of social networks in which individuals are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. 
+Social ties are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
 A classic example of this kind of network is the movie actors network, which was used as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
 This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), linking actors to movies they have starred in.
+
+% Collaboration networks
+
 
 % exemplify models
 
@@ -244,6 +242,92 @@ Another analogous example are the scientific papers coauthorship networks in whi
 
 Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
 The model presented in the next section covers this.
+
+% Some commonly explored approaches:
+%% Look for influencers
+%% Modularity and Community detection
+
+
+% ========================
+% Networks in Biodiversity
+% ------------------------
+\subsection{Networks in Biodiversity}
+Network modeling has been widely adopted in the context of biodiversity research, especially for investigating ecological and evolutionary aspects of ecosystems and natural communities. 
+Efforts towards this goal have led to the creation of the field of \textit{network ecology}, which has undergone a noticeable growth over last few years \cite{Borrett2014}.
+%
+Network ecology has traditionally focused on describing general aspects of the entangled networks by which organisms interact.
+As ecological interactions are regarded as key processes modeling ecosystems functioning and structure, unraveling their architecture and dynamics is detrimental for understanding a variety of ecosystem features, such as stability and energy flow.
+%
+Interaction networks can be broadly classified as \textit{food webs}, \textit{host-parasitoid webs} or \textit{mutualistic webs} \cite{Ings2009}, being food webs the first ones described in literature, in two classical papers by \textit{Lindeman} and \textit{Odum} \cite{lindeman1942trophic, odum1956primary}. 
+%
+
+Besides ecological interactions, other natural systems have also been modeled under the perspectives of network thinking. 
+- Interactions of animals within their populations;
+
+Modeling ecological interactions is very common.
+
+
+
+
+%% Animal movement networks
+%%% How tracking data is gathered?
+Movement networks allow understanding how individuals or groups of individuals use geographical space in a structured way.
+Spatial connectivity is modeled as networks of discrete locations, which are
+Animal movement networks are structured by connecting discrete locations which are sequentially visited.    
+Processes are composed of discrete movement steps in the network structure
+
+
+\cite{Jacoby2016a}
+
+Animal movement networks represent movement steps as discrete movement steps an animal can transition.
+Animal movement is represented as a network of discrete movement steps, where locations are represented as nodes linked by transitions. 
+Animal movement networks for structuring animal routes.
+Edges represent transitions between locations
+
+
+%%% Co-occurrence networks
+Network models have also been used to model biogeographical patterns.
+
+
+From the study of co-occurrence networks, one can select subsets of species to be used as surrogates for the existence of many others within an ecological community \cite{Tulloch2016}.
+%%% Metagenomics
+%%% Climatic changes
+\cite{Araujo2011}
+
+%%% Challenge: Reliable data is hard to be obtained
+
+
+
+Animal-location associations modeled as bipartite networks.
+Identifying overlapping species ranges
+modularity in bats species distributions  
+\cite{Thebault2013}
+
+
+% Social Networks and Biodiversity
+% Animal social networks
+
+
+% Social networks composed by people / institutions
+Few initiatives have applied social network analysis in the context of networks of people and institutions working with biodiversity.
+
+%% Collaborative research in network ecology field (3.4)
+Authors form collaborative clusters around subareas.
+\cite{Borrett2014}
+
+%% Network analysis in the biodiversity informatics landscape
+Characterized the community of biodiversity informatics initiatives. 
+Institutions can use this map to better prioritize and synchronize collaborative actions, in order to potentialize the use of biodiversity data towards more effective biodiversity-related policies.
+\cite{Bingham2017}
+
+%% The herbarium exchangers network
+Modeled a correspondence network of botanists <from the ... century>, which corresponded to each other by means of specimens exchange.
+Those practices led to the formation of exchange clubs.
+From the network we can grasp insights on how botanists work and identify roles they assumed. 
+\cite{Groom2014}
+To the best of our knowledge this is currently the most similar work to the one we propose.
+
+
 
 
 
@@ -391,7 +475,7 @@ The second perspective (Figure \ref{fig:scn_general}c) is collectors-centric, in
 Analogously to the species-centric perspective, here collectors are linked together if they have recorded at least on species in common, with link strength depending on the number of shared species between them. 
 From this perspective we could identify collectors having similar recording profiles.
 
-As previously discussed in this text, projections are a mechanism for summarizing bipartite into more convenient one-mode graphs, where only one class of entity is represented. % TODO: Remember to add this in the projection section
+As previously discussed in this text, projections are a mechanism for summarizing bipartite into more convenient one-mode graphs, where only one class of entity is represented. 
 Projections, however, come with the cost of information loss, as any relationships or attributes of nodes from the omitted set are not represented in the projection \cite{Borgatti1997}. % TODO: Add reference
 Moreover, relevant associations between entities eventually become obfuscated by others of lower relevance, as projections tend to generate graphs that are much denser than the original bipartite model \cite{Lambiotte2005}.
 Choosing an appropriate weighting rule for the aspects one wants to investigate is thus detrimental for separating relevant from less-relevant associations, so that the latter ones can be subsequently removed by applying weighting filters.
