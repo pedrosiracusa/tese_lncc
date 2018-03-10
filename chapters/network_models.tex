@@ -138,7 +138,7 @@ The set of edges that compose a clique are obtained by computing the pairwise co
 \paragraph*{Density}
 Density is one of the simplest metrics for assessing graph connectivity, and indicates the proportion of pairs of vertices that are connected by edges.
 For a graph with $n$ vertices density is given by $\frac{2E}{n(n-1)}$, where $E$ is the number of edges in the graph.
-Possible values for density are thus bound from $0$ to $1$, where $1$ is obtained for a \texti{complete graph} (or a \textit{clique}) and $0$ would be obtained for a graph with no edges.
+Possible values for density are thus bound from $0$ to $1$, where $1$ is obtained for a \textit{complete graph} (or a \textit{clique}) and $0$ would be obtained for a graph with no edges.
 This concept is inverse to graph \textit{sparsity}. 
 
 \paragraph*{Clustering}
@@ -150,7 +150,9 @@ Clustering analysis is particularly useful in the context of social networks ana
 The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed by itself and all its $k$ neighbors (which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L$ is the number of edges connected to $i$ and $k_i$ is the degree of $i$.
 To illustrate with an inutitive example within the context of social networks, clustering coefficient is an answer to the question ``How many of my friends are also friends themselves?''.
 %
-The global clustering metric $c_{\delta}$, on the other hand, computes the fraction of triples in the graph that compose cliques (or triangles).In short, \equation[eq:globalclustering]{c_{\delta} = \frac{3 \times numOfTriangles}{numOfTriples}}
+The global clustering metric $c_{\delta}$, on the other hand, computes the fraction of triples in the graph that compose cliques (or triangles).In short, \begin{equation}\label{eq:globalclustering}
+c_{\delta} = \frac{3 \times numOfTriangles}{numOfTriples}
+\end{equation}
 
 \paragraph*{Attributes}
 Attributes allow representing non-topological features that are relevant in the context of the modeled system, and can be optionally assigned to both edges and vertices in a graph.
@@ -246,7 +248,7 @@ Other classes centrality metrics emphasize the importance of other topological a
 \textit{Betweeness centrality} identifies nodes which are important strategical intermediators, if they are included in the path between many pairs of nodes in the network.  
 
 %% Transitivity
-The transitivity relation between a triple of nodes ${$a$,$b$,$c$}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ also makes $a$ very likely to be connected to $c$. 
+The transitivity relation between a triple of nodes ${a,b,c}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ also makes $a$ very likely to be connected to $c$. 
 In other words, transitivity is the ``A friend of my friend is also my friend'' effect.
 In order to quantify the transitivity of a network we can use the global clustering coefficient from equation \ref{eq:globalclustering}.
 
