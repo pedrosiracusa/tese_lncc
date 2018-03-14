@@ -236,7 +236,7 @@ This contributes to the formation of communitites structures, making social netw
 Second, as entities belonging to larger groups tend to interact with many peers --- and, conversely, entities belonging to smaller groups tend to interact with fewer peers ---, social networks tend to be assortatively mixed, in contrast with non-social networks which are typically disassortative.  
 
 %Properties 
-Many studies on social networks have primaly focused on obtaining domain-specific insights from statistical and topological features of network models \cite{Newman2003b}.
+Many studies on social networks have primaly focused on obtaining domain-specific insights from statistical and topological properties of network models \cite{Newman2003b}.
 %% Centrality
 \textbf{Centrality analysis} concerns the identification of influential entities in the network, who might assume important roles in the system under different perspectives.
 \textit{Degree centrality} is perhaps the simplest centrality measure, and assumes that the relevance of a node only depends on its own degree. Nodes with many connections are thus more influential than those with fewer connections.
@@ -248,11 +248,13 @@ Other classes centrality metrics emphasize the importance of other topological a
 \textit{Betweeness centrality} identifies nodes which are important strategical intermediators, if they are included in the path between many pairs of nodes in the network.  
 
 %% Transitivity
+\texti{Transitivity} is another important property of networks. 
 The transitivity relation between a triple of nodes ${a,b,c}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ also makes $a$ very likely to be connected to $c$. 
 In other words, transitivity is the ``A friend of my friend is also my friend'' effect.
 In order to quantify the transitivity of a network we can use the global clustering coefficient from equation \ref{eq:globalclustering}.
 
 %% Community analysis TODO
+
 
 %% Mixing patterns
 \textbf{Mixing patterns} describe the effects of nodes characteristics on influencing links formation.
@@ -302,65 +304,49 @@ From a network of listeners interests towards music groups, \textit{Lambiotte} f
 % ------------------------
 \subsection{Networks in Biodiversity}
 Network modeling has been widely adopted in the context of biodiversity research, especially for investigating ecological and evolutionary aspects of ecosystems and natural communities. 
-Efforts towards this goal have led to the creation of the field of \textit{network ecology}, which has undergone a noticeable growth over last few years \cite{Borrett2014}.
-%
+Efforts towards this goal have led to the creation of the field of \textit{network ecology}, which has undergone a noticeable growth over the last few years \cite{Borrett2014}.
+% Interaction networks
 Network ecology has traditionally focused on describing general aspects of the entangled networks by which organisms interact.
 As ecological interactions are regarded as key processes modeling ecosystems functioning and structure, unraveling their architecture and dynamics is detrimental for understanding a variety of ecosystem features, such as stability and energy flow.
 %
 Interaction networks can be broadly classified as \textit{food webs}, \textit{host-parasitoid webs} or \textit{mutualistic webs} \cite{Ings2009}, being food webs the first ones described in literature, in two classical papers by \textit{Lindeman} and \textit{Odum} \cite{lindeman1942trophic, odum1956primary}. 
 %
 
-Besides ecological interactions, network thinking has also been applied for modeling other aspects of natural systems.
-%
 %Animal movements
-Patterns of animal movement can be investigated in a structured way, for instance, through \textit{movement networks} \cite{Jacoby2016a}.
+Besides ecological interactions, network thinking has also been applied for modeling other aspects of natural systems.
+Patterns of animal movement can be investigated in a structured way, for instance, by means of \textit{movement networks} \cite{Jacoby2016a}.
 These networks represent geographical space as a set of discrete and interconnected locations, forming a mesh of possible routes through which animals (or groups of animals) transitate. 
 Links between each pair of locations are weighted according to their geographical connectivity.
 Animal movement is thus regarded as dynamic processes composed by sequences of discrete movement steps running through the network structure.
 As the spatial feature is key in this type of network, they are also referred to as \textit{spatial networks} \cite{Bascompte2007}.
 %
 
-%%% Co-occurrence networks TODO
-Others have applied network science to investigate patterns of species co-occurrence. 
-So called \textit{co-occurrence networks} are structures by linking together species 
-Network models have also been used to model biogeographical patterns.
-From the study of co-occurrence networks, one can select subsets of species to be used as surrogates for the existence of many others within an ecological community \cite{Tulloch2016}.
-One data-related challenge in co-occurrence networks is that more local patterns of co-occurrence are hard to be assessed, as usually co-occurrence data in local scales is hard to be obtained.
-\cite{Araujo2011}
-
+%%% Co-occurrence networks 
+Others have applied network science to investigate biogeographical patterns, such as species co-occurrence. 
+So called \textit{co-occurrence networks} model species associations in terms of their geographical distributions, such that species which are often observed occurring together in the same set of localities are considered to be strongly associated.
+Similarly to other networked systems, co-occurrence networks are composed by a majority of the species holding co-occurrence links to very few others, whilst only few species are connected to many others \cite{Araujo2011a}.
+Co-occurrence network analysis has been used for many applications, including for selecting subsets of species to be used as surrogates for the characterization of biological communities \cite{Tulloch2016};
+for assessing the resilience of biotic communities towards climate change \cite{Araujo2011a};
+and for identifying modularity (clusters of overlapping species ranges) in biological communities from animal-location bipartite networks \cite{Thebault2003}.
 %%% Challenge: Reliable data is hard to be obtained
 
 
-
-Animal-location associations modeled as bipartite networks.
-Identifying overlapping species ranges
-modularity in bats species distributions  
-\cite{Thebault2013}
-
 % Social Networks and Biodiversity
-The social network analytics framework has also been applied in some biodiversity studies, most expressively for modeling animal social behavior.
-% Animal social networks TODO
+The social network analytics framework has also been applied in some biodiversity studies, in most cases for modeling animal social behavior \cite{faust2011animal}.
+An alternative perspective is to look at communities of biodiversity data producers and consumers, in order to better understand the myriad of contexts in which data is collected, shared and used.
+%
+Mapping data flow within the community of biodiversity informatics initiatives, for instance, could help prioritizing and improving the coordination of collaborative actions, leading to more effective biodiversity data-based policies \cite{Bingham2017}.
+%
+Also, important scientific communities and gaps could be identified and characterized by exploring collaborative paper authoring networks and scientific topics networks \cite{Borrett2014}. 
+%
+Another interesting example of a collaboration network in biodiversity is given in \textit{Groom`s} work, where a correspondence network of $19th$-$20th$ century botanists was structured from digitized data from the British Herbaria \cite{Groom2014}.
+Botanists composing this network corresponded to each other by exchanging specimens, a practice that has led to the formation of exchange clubs.
+Many aspects regarding the particular ways botanists used to work as well as the roles they assumed could be investigated with exchange networks 
 
-% Social networks composed by people / institutions
-Fewer initiatives have appliedd social network analytics for studying networks of people and institutions working with biodiversity data. 
-
-
-%% Collaborative research in network ecology field (3.4)
-Authors form collaborative clusters around subareas.
-\cite{Borrett2014}
-
-%% Network analysis in the biodiversity informatics landscape
-Characterized the community of biodiversity informatics initiatives. 
-Institutions can use this map to better prioritize and synchronize collaborative actions, in order to potentialize the use of biodiversity data towards more effective biodiversity-related policies.
-\cite{Bingham2017}
-
-%% The herbarium exchangers network
-Modeled a correspondence network of botanists <from the ... century>, which corresponded to each other by means of specimens exchange.
-Those practices led to the formation of exchange clubs.
-From the network we can grasp insights on how botanists work and identify roles they assumed. 
-\cite{Groom2014}
-To the best of our knowledge this is currently the most similar work to the one we propose.
-
+Finally, in the context of species occurrence data, a better understanding of the contexts in which occurrences are gathered would be invaluable for improving data usability, especially for species distribution modeling \cite{Daru2017}. 
+Characterizing collectors not only in terms of their preferred taxonomic groups, but also regarding their collaborative behavior during collections could help, for instance, inferring how likely they are of having participated in a record of a given specimen, in a given date and location.   
+The models we propose in the following sections are a contribution in this scope.
+  
 
 
 
@@ -375,7 +361,6 @@ To the best of our knowledge this is currently the most similar work to the one 
 In this section we describe Species-collectors Networks (SCNs) as relational models for structuring associations between collectors and species.
 We first give an overview on the semantics of the relationships we propose to model and how they can be derived from a species occurrence dataset.
 Next we define attributes and operations for SCNs that facilitate obtaining domain-specific insights from it.
-Finally we compare our proposed model to other analogous though different systems in literature.
 % Illustrate the concept; 
 
 \subsection{General Description}
@@ -574,29 +559,6 @@ As this rule outputs weight values that are bound to a known interval, filtering
 %% Edges pruning
 
 
-\subsection{Similar networked systems}
-A variety of network models structurally similar to species-collectors networks have been proposed in social networks literature for modeling networked systems within many unrelated application domains. We describe some of them for improving the reader's intuition.
-
-\textit{Affiliation networks} are a particular type of social networks in which actors are associated to events, groups or institutions by being members or participating in them \cite{Borgatti2015}. Social ties between individuals are usually derived from such models by considering that individuals belonging to the same groups or attending the same events are more likely to become acquainted than those who are not co-affiliated to any of those. 
-A classic example of this kind of network is the movie actors network, which was used as an empirical example in \textit{Watts} and \textit{Strogratz}'s work \cite{Watts1998} while describing the small-world property in real-world networks.
-This network was built from the Internet Movie Database (IMDB \footnote{\url{http://www.imdb.com/}}), linking actors to movies they have starred in.
-
-% exemplify models
-
-Although the semantics of relationships modeled in each of these networks (with different analytic purposes), the structures used to represent them are shared. A common feature shared by those models is their bipartite structure, allowing  
-
-The bipartite structure of SCNs make them structurally similar to affiliation networks, with some examples in the social networks literature.
-
-One classic affiliation network model is the films and actors network.
-
-Lambiotte models listeners and music
-
-Another analogous example are the scientific papers coauthorship networks in which authors are linked to papers they have authored \cite{Newman2004}
-
-
-
-Whereas SCNs represent ..., other structures might arise when analyzing which collectors record together. 
-The model presented in the next section covers this.
 
 
 
