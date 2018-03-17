@@ -1,10 +1,19 @@
 \chapter{Understanding Biological Collections Data}\label{biodiversity_data}
 
-% ==============
-% Herbarium data
-% --------------
+% ===========================
+% Biological Collections data
+% ---------------------------
 
-%% Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. Not all questions might be properly answered with such data, as there might be taxonomic, spatial,... biases.
+% Biological collections such as herbaria and museums are a valuable source of biodiversity data.
+% Many new species are discovered from collections samples \cite{Kemp2015}.
+
+% However, we still face the challenge of digitizing biodiversity data \cite{Hardisty2013}.
+
+% Describing and publishing digitized datasets
+% Data description (metadata).
+% Data publication (Darwin Core).
+
+%%%% Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. Not all questions might be properly answered with such data, as there might be taxonomic, spatial,... biases.
 
 %% As it is common practice for botanists to record each species once during field work, some important ecological attributes such as the species abundance are not to be directly inferred from such data. {check van Gemerden 2005, from Haripersaud2009}
 
@@ -45,6 +54,36 @@
 %%   - {Graham2004 box3}
 
 
+% ============
+% Data quality
+% ------------
+% [Soberon2004]
+
+% Data quality among collection records is uneven -> worse for large datasets and for datasets composed by multiple sources
+% Procedures are needed for correcting problems
+
+% Quality issues: 
+%% Determination issues: many specimens are incorrectly identified;
+%% outdated taxonomy;
+%% georreferencing errors.
+
+% Data fit for use
+
+In order to make data fit for its intended use the analyst must perform data cleaning.
+
+% =============
+% Data cleaning
+% -------------
+%[Chapman2005a]
+
+% Why do we need data cleaning? -> We must make data fit for its indended use
+
+% Goal: improving data quality, removing or treating entries that are 
+
+% Adopting standardized collectors names
+% Checking collectors itineraries -> look for the spatial pattern of records by the collector
+
+
 % ================
 % References
 % ----------------
@@ -58,8 +97,10 @@
     \label{fig:er_occurrences}
 \end{figure}
 
-Taxonomy classifies organisms in a hierarchical system.
 
+% =====================
+% Terms and Definitions
+% ---------------------
 Before delving into the characterization of biodiversity data we review the definitions of some domain-specific terms that will be used throughout this text. 
 We specifically use definitions from the \textit{International Code of Nomenclature for algae, fungi and plants} (ICN) \cite{McNeill2012}. This document outlines a set of rules and guidelines for scientifically naming and grouping plants, fungi and algae, consisting of a universally adopted reference by the botanical scientific community. Nomenclature best-practices for other groups of organisms are governed by other (though similar) documents.
 
@@ -89,9 +130,9 @@ A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{
 
 
 
-\section{Data Quality}
+% Data Quality
 
-\section{Preparing data}
-\subsection{Data Selection}
-\subsection{Data Cleaning}
-\subsection{The Entity Resolution problem}
+% Preparing data 
+% Data Selection
+% Data Cleaning
+% The Entity Resolution problem

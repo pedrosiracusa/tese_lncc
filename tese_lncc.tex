@@ -89,6 +89,7 @@
 \usepackage{tablefootnote}
 \usepackage{dirtytalk}
 \usepackage{otherpackages/kbordermatrix}
+\usepackage{adjustbox}
 
 % ---
 % CONFIGURAÇÕES DE PACOTES
@@ -461,10 +462,9 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % inserir lista de abreviaturas e siglas
 % ---
 \begin{siglas}
-  \item[ABNT] Associação Brasileira de Normas Técnicas
-  \item[abnTeX] ABsurdas Normas para TeX
   \item[SCN] Species-collectors Network
   \item[CWN] Collectors Coworking Network
+  \item[SDM] Species Distribution Model
   
 \end{siglas}
 % ---
@@ -500,11 +500,11 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 %\counterwithin{figure}{section}
 %\counterwithin{table}{section}
 
-%\include{chapters/introduction}
+\include{chapters/introduction}
 \include{chapters/biodiversity_data}
 \include{chapters/network_models}
 \include{chapters/casestudy_ub}
-%\include{chapters/conclusion_perspectives}
+\include{chapters/conclusion_perspectives}
 
 % ---
 
