@@ -2,30 +2,25 @@
 % herbarium page: http://florescer.unb.br/bol/
 % Add herbarium historical
 
-In this section I describe the application of the network models for deriving enriched information from the University of Brasilia Herbarium (UB) dataset.
-The UB Herbarium is physically based at the University of Brasília Biology Department (UnB-IB) since its foundation in 1963.
-\textit{Florescer project} webpage \footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
-The dataset is made publicly available for download through the Global Biodiversity Information Facility (GBIF) portal.
-Here I assume the dataset has already been passed through a data cleaning process, and the entity resolution problem resolved.
-Both CWN and SCN were built for supporting data enrichment.
-Routines were written in Python3, using the Networkx and Pandas libraries.
-
-
-Collectors had historical contributions to the herbarium Table \ref{table:ub_collectors_florescer}.
-
+In this case study we explore and characterize the topologies of our two network models (presented in chapter \ref{chapter:network_models}) constructed from an empirical biological collection dataset.
+%
+The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
+%
+The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
+Table \ref{table:ub_collectors_florescer} lists some of the most historically relevant collectors who have intensively contributed to the herbarium. 
 
 \begin{table}[H]
-  \caption{Historically important collectors in the UB herbarium.}
+  \caption{Historically important collectors who have contributed to the UB herbarium.}
   \begin{center}
-  \begin{tabular}{l c c}
+  \begin{tabular}{l l l}
       & activity years & contribution\\
       \hline
       William R. Anderson & 1962-1976 & Central Brazil Expedition (NY Botanical Garden)\\
       Howard S. Irwin & 1962-1976 & Central Brazil Expedition (NY Botanical Garden)\\
-      George Eiten & - & Cerrado biome, mainly in MA state \\
+      George Eiten &  & Cerrado biome, mainly in MA state \\
       James Alexander Ratter & 
-      	\begin{tabular}[t]{{@{}c@{}}}1968-1976 \\ 1996-2006\end{tabular} &
-        \begin{tabular}[t]{{@{}c@{}}}Xavantina-Cachimbo expedition \\ Cerrado biome\end{tabular} \\
+      	\begin{tabular}[t]{{@{}l@{}}}1968-1976 \\ 1996-2006\end{tabular} &
+        \begin{tabular}[t]{{@{}l@{}}}Xavantina-Cachimbo expedition \\ Cerrado biome\end{tabular} \\
       Joseph Harold Kirkbride Junior & 1976-1983 & Flora of DF \\
       Ana Lúcia Tostes Leite & 1982-1984 & Continental algae of DF \\
       Carolyn Elinores Barnes Proença & 1981-current & Cerrado biome \\
@@ -33,19 +28,40 @@ Collectors had historical contributions to the herbarium Table \ref{table:ub_col
       \hline
   \end{tabular}
   \\[1.5em]
-  \hfill Source: Florescer Project webpage \footnotemark[\getrefnumber{footnote:florescer}]
+  \hfill Source: Florescer Project webpage \footnotemark
+  %[\getrefnumber{footnote:florescer}]
   \end{center}
   \label{table:ub_collectors_florescer}
 \end{table}
+\footnotetext{\url{http://florescer.unb.br/janela4.html}}
+%\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
 
-\section{Dataset Characterization}
+We have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}.
+%
+Before actually building the network models we first executed some data cleaning routines against the dataset, which basically consisted of filtering out unwanted records and resolving some inconsistencies in collectors names.
+%
+Next we briefly explored and characterized the dataset in terms of its taxonomic composition, the main issues associated to the published data and the geographic and temporal distribution of the occurrence records.
+%
+The process is described in more details in section \ref{section:ub_characterization} below.
+%
+All cleaning routines, data analysis and models construction were performed using \textit{Python3} language. 
+
+
+
+
+
+
+
+
+
+\section{Dataset Characterization}\label{section:ub_characterization}
 % Check {Haripersaud2009}
 % TODO: Add collecting team size distribution, avg. team size
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Taxonomic characterization
 
-After loading the dataset with specified columns into memory I've filtered out records with missing values for fields \textit{recordedBy} or \textit{scientificName}, as these are critical for building the network models.
+Our first step after loading the dataset into memory was to filter out records with missing values in fields \textit{recordedBy} or \textit{scientificName}, as they are critical for building the network models.
 At the time of this study the resulting dataset had a total of 185301 records. However not all records have been identified up to the taxonomic resolution of \textit{species}, as shown in Table \ref{table:dset_taxonomicres_counts}. 
 As taxons hold a tree-like hierarchical relationship, those at more inclusive (broader) ranks can be successfully derived from more restrictive ones, but not the inverse. Each child taxon have exactly one parent, but a parent taxon can have one or more children.
 To give an example, the table shows that approximately $76\%$ of the records are at the resolution of species. However the species identity of records at higher resolutions, in this case form or variety, are automatically determined by following parental paths. This makes species identity derivable for approximately $82\%$ of the records, as shown in the cumulative percentage for the species rank.
@@ -112,7 +128,7 @@ For CWNs, on the other hand, the taxonomic resolution of each record is not rele
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Geographic characterization
 
-From the set of $185301$ records approximately $48\%$ (a total of $89216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform \cite{GBIF.ORG}.
+From the set of $185301$ records approximately $48\%$ (a total of $89216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform \cite{gbif_dataprocessing}.
 During geospatial validation the routines check for each record ($i$) if geographical coordinates are erroneously assigned to zero latitude and longitude; ($ii$) if geographic coordinates are in fact placed within the boundaries of the country if indicated; and ($iii$) if lat/long values are likely to having been swapped or negated during recording.
 If inconsistencies are detected during the execution of such routines, issues are registered for each record, priorly to making the dataset available for download or query via API. 
 % http://www-old.gbif.org/infrastructure/processing

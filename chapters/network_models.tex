@@ -1,4 +1,4 @@
-\chapter{Network Models}\label{network_models}
+\chapter{Network Models}\label{chapter:network_models}
 
 
 In this chapter we present and formally describe two classes of network models that were developed during this study.
@@ -371,10 +371,10 @@ The network models we propose in the following section help characterizing colle
 
 \section{Species-collectors Networks}
 
-In this section we describe Species-collectors Networks (SCNs) as relational models for structuring associations between collectors and species.
-We first give an overview on the semantics of the relationships we propose to model and how they can be derived from a species occurrence dataset.
-We then define attributes and operations for SCNs that facilitate obtaining domain-specific insights from it.
-% Illustrate the concept; 
+In this section we introduce species-collectors networks (SCNs) as modeling associations between collectors and species they record. 
+We first give an overview on the semantics of the modeled relationships and provide a formal definition of SCNs using graph theory.
+Then, we describe how such networks can be built from species occurrence datasets.
+Finally, we define attributes and operations for SCNs that facilitate obtaining domain-specific insights from network structure.
 
 \subsection{General Description}
 %% Model semantics
@@ -620,10 +620,8 @@ As this rule outputs weight values that are bound to a known interval, filtering
 % -----------------------------
 
 \section{Collectors Coworking Networks}
-% References: (Ramasco2004)
-% TODO: Talk about singleton collectors
-In this section we describe Collectors Coworking Networks (CWNs) as relational models for representing direct collaborative associations between collectors.
-We first provide a general description of the relations modeled by CWNs, and then we describe how such models can be structured from species occurrence datasets.
+In this section we describe collectors coworking networks (CWNs) as modeling collaborative associations between collectors.
+We first define CWNs using graph theory and then we describe how such models can be structured from species occurrence datasets.
 
 \subsection{General Description}
 \textbf{Collectors coworking networks} are a particular instance of \textit{collaboration networks} describing coauthoring relationships between collectors from species occurrence records (Figure \ref{fig:cwn_general}).
