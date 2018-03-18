@@ -1,63 +1,88 @@
 \chapter{Introduction}\label{introduction}
 
-% ----------------------
-% E-science and Big Data
-% ======================
-
-%% We frequently lack a thorough scientific understanding of natural processes although we still need to take scientifically-informed decisions ('Science for Environmental Applications', 4th paradigm chapt.2)
-
-
-
-
-% ------------------------------
-% Citizen Science & Open Science
-% ==============================
-
-%% Ecology is becoming a data-intensive science, requiring the use of data-driven approaches \cite{Kelling2009}	
-
-%%% Data life cycle for transforming biodiversity data into knowledge \cite{Michener2012}
+% Threats to biodiversity and public policies
+% We are currently losing biodiversity in high rates as an effect of human activities.
+% However, we still know very little about the diversity of organisms and their distribution on earth.
+% We often lack a thorough scientific understanding of natural processes that lead to patterns of species distributions.
+% Nevertheless, we still need to take scientific-informed decisions for mitigating the impact of human activities in the environment \cite{Dozzier_4paradigm_2009}.
+% We need to use available biodiversity data the best as we can, taking as much information as possible.
 
 
+% SDM for conservation
+% Species Distribution modeling (SDM) is one important application of biodiversity data.
+% Models predict the geographic distribution of species based on environmental features
+% Data used to build SDMs is species occurrence.
+% We need to understand which are the most relevant factors driving species' distribution
+% Species distribution in geographic space is inferred from relevant relationships discovered in environmental space
+% Thus we can prioritize areas for allocating resources for conservation.
+% Current challenges os Species Distribution Modeling.
 
 
-% ---
-% SDM
-% ===
-
-%% Ecological Niche Modeling
-%%% Models predict species occurrence based on environmental features
-%%% We need to understand which are the most relevant factors driving species' distribution
-%%% Species distribution in geographic space is inferred from relevant relationships discovered in environmental space
-%%% Explain the term and equivalence to Species Distribution modeling
-%%% Do SDMs model potential or realized niche?
-%%% Why bother modeling instead of creating maps based on point interpolation?
-
-%%% Maxent must be corrected for sampling bias: check {Kramer‐Schadt, Stephanie, et al. "The importance of correcting for sampling bias in MaxEnt species distribution models." Diversity and Distributions 19.11 (2013): 1366-1379.}\cite{Kramer-Schadt2013}
-
-% Current challenges on Species Distribution Modeling
+% Big data in Biodiversity
+% Currently, in the era of Big Data, there's a massive amount of biodiversity data available. 
+% Biodiversity data comes from diverse sources, each of them with their own particularities.
+% A variety of low-cost sensors facilitate data collection.
+% Currently researchers and institutions are becoming more willing to share their datasets.
+% Initiatives like GBIF \cite{gbif} and DataOne are aggregators, and help institutions publishing their datasets using best practices and standards.
 
 
-% --------------------
-% Motivation and goals
+% Citizen science in Biodiversity
+% A large amount of biodiversity data has also been collected by citizen scientists. 
+% We refer the practice of collecting large ammounts of data with the help of groups of people (paid or unpaid) as crowdsourcing.
+% Citizen science allow sampling much more extense are without spending resources.
+% Another benefit is that citizens gets involve in scientific endeavor.
+
+
+% Knowledge from data
+% However, simply gathering and publishing large amounts of data per se is not sufficient.
+% One of the main challenges is how we transform a massive amount of messy data into valuable knowledge.
+% Data is useless unless it can be used for some purpose.
+% For instance, in order to be useful data needs to be properly organized and validated before being published.
+% Data life cycle is used for transforming biodiversity data into knowledge \cite{Michener2012}
+% Data life cycle includes (i) data management planning; (ii) data collection; (iii) data quality assurance and control (using standards and validation methods); (iv) data description, with metadata; (v) data preservation; (vi) data discovering; (vii) data integration; (viii) data analysis. 
+
+
+% Data bias
+% Another issue is data bias, which arises when records are not obtained from random sampling \cite{Daru2017}
+% Using biased data can impact the quality of models built on it.
+% Data from biological collections (or museum data) is often biased \cite{Daru2017}.
+% (?) Many algorithms for building SDMs assume data is randomly collected.
+% Maxent must be corrected for sampling bias: check {Kramer‐Schadt, Stephanie, et al. "The importance of correcting for sampling bias in MaxEnt species distribution models." Diversity and Distributions 19.11 (2013): 1366-1379.}\cite{Kramer-Schadt2013}
+% Bias needs to be characterized, and accounted for.
+
+
+
+
+
+
+
+% Moreover, ecology is becoming a data-intensive science, and thus requires the adoption of data-driven approaches \cite{Kelling2009}.
+% More traditionally, ecology is more hypothesis-driven, as an investigator states hypotheses a priori from her own knowledge, and expects certain patterns to be observed in data she collects.
+% A data-driven approach, on the other hand, seeks to unravel relevant patterns from data, which can then be used for generating domain-specific hypotheses.
+
+
+% Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. 
+
+
 % ====================
+% Motivation and goals
+% --------------------
 
-In this work we propose two network models for representing biological collections in terms of their
+% Obtaining contextual information from biological collections datasets.
 
-We base our argument for investigating the  a social network-based understanding of biological collections on the fact that natural history museums do not represent biodiversity within its scope
-
-
-[...] 
-However, biological collections do not necessarily equally represent biodiversity within its actuation scope.
-Instead, in its best efforts, it reflects the perception and interests of people who have most contributed to it in terms of specimen records.
-An observer's perception itself is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
-Moreover, an observer's perception is also influenced by the perception of others in their own communities, with whom the observer interact.
-The composition of perceptions of all observers that contribute to a biological collection, summed up with data limitations and quality issues is what best characterizes the collection.
-
-%In this work we...
-
-%% Premiss: Argue that a natural history museum dataset does not represent the biodiversity in its actuation area. Instead, in its best efforts it reflects the perception of people interested in studying it. An observer's perception itself is dynamic, being influenced by factors such as his/her own interests, motivations, age in career, available resources and residence. In other words, the perception varies temporally. Moreover, an observer's perception is also influenced by the perception of others in their own communities. The ensemble of perceptions of all observers that are part of a NHM, summed up with data limitations and quality issues is what best characterizes the collections.
+% Premiss:
+% Argue that a biological collections do not represent well the entire composition of biodiversity in its actuation area. 
+% Instead, in its best efforts it reflects the perception and interests of people who have most contributed to it in terms of specimens records.
+% An observer's perception itself is biased towards more attractive organisms.  
+% For instance, botanists tend to focus on flowering materials \cite{VanGemerden2005}.
+% Also, observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
+% Moreover, an observer's perception is also influenced by the perception of others in their own communities, with whom the observer interacts. 
+% The composition of perceptions of all observers that contribute to a biological collection, summed up with data limitations and quality issues is what best characterizes the collections.
 %% This premiss holds similar for crowdsourcing data (citizen science)
 
+
+% In this work we propose two network models for representing biological collections
+% We pursue a social network-based understanding of biological collections
 
 %% One goal is to use occurrence data with collectors' ... Close to a map of distribution an expert would draw.
 
