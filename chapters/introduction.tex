@@ -3,9 +3,18 @@
 % Threats to biodiversity and public policies
 % We are currently losing biodiversity in high rates as an effect of human activities.
 % However, we still know very little about the diversity of organisms and their distribution on earth.
-% We often lack a thorough scientific understanding of natural processes that lead to patterns of species distributions.
-% Nevertheless, we still need to take scientific-informed decisions for mitigating the impact of human activities in the environment \cite{Dozzier_4paradigm_2009}.
-% We need to use available biodiversity data the best as we can, taking as much information as possible.
+% Climate change, land use (habitat loss) are examples of threats.
+% We often lack a thorough scientific understanding of natural processes that lead to patterns of species geographical distribution.
+% Biodiversity data is often incomplete, unreliable or missing.
+% Nevertheless, we still need to take scientific-informed decisions for mitigating the impact of human activities in the environment \cite{Dozzier_4paradigm_2009, Funk1999}.
+% We need to use available biodiversity data the best as we can, taking as much information as possible from the datasets we already have.
+
+
+% Ecology becoming data-intensive
+% Moreover, ecology is becoming a data-intensive science, and thus requires the adoption of data-driven approaches \cite{Kelling2009}.
+% More traditionally, ecology is more hypothesis-driven, as an investigator states hypotheses a priori from her own knowledge, and expects certain patterns to be observed in data she collects.
+% A data-driven approach, on the other hand, seeks to unravel relevant patterns from data, which can then be used for generating domain-specific hypotheses.
+% Data-intensive science gives us the opportunity of studying natural systems, which are inherently complex, more thoroughly.
 
 
 % SDM for conservation
@@ -14,13 +23,14 @@
 % Data used to build SDMs is species occurrence.
 % We need to understand which are the most relevant factors driving species' distribution
 % Species distribution in geographic space is inferred from relevant relationships discovered in environmental space
-% Thus we can prioritize areas for allocating resources for conservation.
+% Thus we can prioritize areas for allocating resources for conservation (priority areas selection).
 % Current challenges os Species Distribution Modeling.
 
 
 % Big data in Biodiversity
 % Currently, in the era of Big Data, there's a massive amount of biodiversity data available. 
 % Biodiversity data comes from diverse sources, each of them with their own particularities.
+% Opportunistic data collection or using experimental designs (such as grids).
 % A variety of low-cost sensors facilitate data collection.
 % Currently researchers and institutions are becoming more willing to share their datasets.
 % Initiatives like GBIF \cite{gbif} and DataOne are aggregators, and help institutions publishing their datasets using best practices and standards.
@@ -46,35 +56,44 @@
 % Another issue is data bias, which arises when records are not obtained from random sampling \cite{Daru2017}
 % Using biased data can impact the quality of models built on it.
 % Data from biological collections (or museum data) is often biased \cite{Daru2017}.
+% Biological collection data is typically collected in clustered areas with very high collecting effort, and clusters are scattered \cite{VanGemerden2005}.
 % (?) Many algorithms for building SDMs assume data is randomly collected.
 % Maxent must be corrected for sampling bias: check {Kramer‐Schadt, Stephanie, et al. "The importance of correcting for sampling bias in MaxEnt species distribution models." Diversity and Distributions 19.11 (2013): 1366-1379.}\cite{Kramer-Schadt2013}
 % Bias needs to be characterized, and accounted for.
 
 
+% Biological collections representativeness
+% A biological collection does not necessarily represent well the biodiversity within its actuation regions \cite{Funk1999}.
+% Instead, in its best efforts it reflects the perception and interests of people who have most contributed to it in terms of specimens records.
+% An observer's perception itself is biased towards more attractive organisms. 
+% For instance, botanists tend to focus on flowering materials \cite{VanGemerden2005}.
+% Moreover, more experienced collectors tend to record species that are rare than common species, and thus common species are usually undersampled \cite{Nelson1990}.
+% Also, observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
+% Moreover, an observer's perception is also influenced by the perception of others in their own communities, with whom the observer interacts. 
+% The composition of perceptions of all observers that contribute to a biological collection, summed up with data limitations and quality issues is what best characterizes the collections.
+% This premiss holds similar for crowdsourcing data (citizen science)
+ 
 
-
-
-
-
-% Moreover, ecology is becoming a data-intensive science, and thus requires the adoption of data-driven approaches \cite{Kelling2009}.
-% More traditionally, ecology is more hypothesis-driven, as an investigator states hypotheses a priori from her own knowledge, and expects certain patterns to be observed in data she collects.
-% A data-driven approach, on the other hand, seeks to unravel relevant patterns from data, which can then be used for generating domain-specific hypotheses.
-
-
+% Inferring datasets contextual information
+% Obtaining contextual information from biological collections datasets.
 % Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. 
+
+
+% Motivation/goals
+% We present two network models for modeling collectors interests and collaborative interactions in a biological collection.
 
 
 % ====================
 % Motivation and goals
 % --------------------
 
-% Obtaining contextual information from biological collections datasets.
 
 % Premiss:
 % Argue that a biological collections do not represent well the entire composition of biodiversity in its actuation area. 
 % Instead, in its best efforts it reflects the perception and interests of people who have most contributed to it in terms of specimens records.
-% An observer's perception itself is biased towards more attractive organisms.  
+% An observer's perception itself is biased towards more attractive organisms. 
 % For instance, botanists tend to focus on flowering materials \cite{VanGemerden2005}.
+% Moreover, more experienced collectors tend to record species that are rare than common species, and thus common species are usually undersampled \cite{Nelson1990}.
 % Also, observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
 % Moreover, an observer's perception is also influenced by the perception of others in their own communities, with whom the observer interacts. 
 % The composition of perceptions of all observers that contribute to a biological collection, summed up with data limitations and quality issues is what best characterizes the collections.
