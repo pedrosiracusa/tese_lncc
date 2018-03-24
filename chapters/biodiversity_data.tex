@@ -1,16 +1,19 @@
 \chapter{Understanding Biological Collections Data}\label{biodiversity_data}
 
-% ===========================
-% Biological Collections data
-% ---------------------------
 
 % Biological collections
+% Also known as natural museum or Natural History Collections (NHC).
 % Biological collections such as herbaria and museums are a valuable source of biodiversity data.
 % Many new species are discovered from collections samples \cite{Kemp2015}.
-% Data collection is opportunistic.
+% Data collection is typically opportunistic.
+% In scientific biological collections specimens are vouchered \cite{}.
+% However, we still face the challenge of digitizing specimens in biological collections \cite{Hardisty2013}.
 
 
-% However, we still face the challenge of digitizing biodiversity data \cite{Hardisty2013}.
+% Citizen Science projects
+% Data from citizen science projects are structured similarly, with a few differences: (i) absence of vouchered specimens; (ii) taxonomic determinations result from a collaborative community, not necessarily composed of specialists. 
+
+
 
 
 % Biological collections data coverage and completeness \cite{Funk1999}.
@@ -24,13 +27,30 @@
 % Data publication (Darwin Core).
 
 % Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. 
-% Not all questions can be properly answered with such data, as there might be taxonomic, spatial,... biases.
+% Not all questions can be readily answered with such data, as there might be taxonomic, spatial,... biases.
 
 %% As it is common practice for botanists to record each species once during field work, some important ecological attributes such as the species abundance are not to be directly inferred from such data. {check van Gemerden 2005, from Haripersaud2009}
 
 
 % Biological collections are composed of aggregates of multiple biodiversity surveys, each recorded with particular methodologies
 % Records sampled using distinct methodologies can be combined for optimizing data use \cite{VanGemerden2005}.
+
+
+% Limitations in NHM data \cite{Graham2004 box3}
+% Errors
+% Biases
+% Presence vc presence-absence data
+
+
+% Sources of bias \cite{Daru2017, Haripersaud2009}
+% Collector bias
+% Trait bias
+% Taxonomic bias
+% Historical bias
+% Seasonal bias
+% Geographical bias
+
+
 
 
 % ==========================
@@ -47,6 +67,7 @@
 
 % Characteristics of occurrence data?
 %  Punctual data, often obtained in an opportunistic fashion
+%  May include collectors field notes.
 %  Main assets of a occurrence record: taxon, location, datetime {Graham2004} -> for us, also collectors
 
 %% What are applications of occurrence data?
@@ -61,6 +82,11 @@
 %%   - Biases: collector bias, taxonomic bias, geographic bias...
 %%   - {Graham2004 box3}
 %%%% Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models
+
+
+% Collecting bias
+% A mechanism for spatially characterizing collecting bias using Thiessen polygons \cite{Schulman2007}
+
 
 %% Presence/absence data
 %%   - {Graham2004 box3}
@@ -147,4 +173,7 @@ A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{
 % Preparing data 
 % Data Selection
 % Data Cleaning
+
+
 % The Entity Resolution problem
+\cite{Bhattacharya2007}

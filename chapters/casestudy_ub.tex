@@ -44,7 +44,7 @@ Next we briefly explored and characterized the dataset in terms of its taxonomic
 %
 The process is described in more details in section \ref{section:ub_characterization} below.
 %
-All cleaning routines, data analysis and models construction were performed using \textit{Python3} language. 
+All cleaning routines, data analysis and models construction were performed using \textit{Python3} language and packages listed in table <>. % TODO Add table with python packages: Networkx, Pandas, Scipy, Numpy 
 
 
 
@@ -184,10 +184,10 @@ From 1950 to present, there are two apparent peaks in collection activity around
   \end{figure}
 
 
-\section{Network models construction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Network models construction
+\section{Network models construction}
 
 
 % Build SCN
@@ -205,7 +205,6 @@ Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{`
 % ==========================
 % Species-collectors Network
 % --------------------------
-% TODOS: define what a giant component is, the process of formation
 % TODO: network density: show that the SCN is sparse, but the projected networks are not
 \subsection{The UB Species-collectors Network}
 
@@ -222,7 +221,7 @@ From all the records that form the giant component, $95.2\%$ are from Brazil, fr
 We have hypothesized some possible explanations for the existence of so many small connected components in the UB herbarium SCN with such characteristics. First, they could be a consequence of specimen exchange, a practice that is widely adopted among herbaria for collaboratively diversifying and distributing their collections \cite{Groom2014}. Exchange materials are typically duplicated exsiccates collected in field that a sender institution dispatches to a receiver institution. The receiver institution then incorporates those materials to its scientific collection, and ocasionally sends back to the other institution some duplicate exsiccates of its own.
 From the receiver herbarium viewpoint the inclusion of records from exchanges usually adds new species and collectors, for they are a sample reflecting the sender institution's purpose and the interests of people associated to it. If both the collectors and species from such records were previously inexistent in the receiver collection, no links to $c_1$ or to any other connected component that already exists are formed. These records thus get included into its SCN network as nodes and edges composing new small connected components. We should overstate, however, that including exchange records does not necessarily create new connected components. New species or collectors could be included in $c_1$ in case either the species or at least one of the collectors associated to the exchange record are already linked to it.
 
-A second situation that could potentially lead to isolated components in the network is when there are groups of very specialized collectors sampling very specific or distinct groups of organisms. Cryptic organisms such as algae, fungi and mosses are examples of groups which tend to be overlooked by botanists who are not directly interested on them. If collectors who record such groups also show a very high specificity towards them, it gets more likely that they lack links to other species which are more commonly recorded by the rest of the collectors, thus forming structures that are detached from the giant component. In case these collectors regularly deposit their materials in the herbarium it would be natural to observe them composing connected components with a relatively large number of species.
+A second situation that could potentially lead to isolated components in the network is when there are groups of very specialized collectors sampling very specific or distinct groups of organisms. Cryptic organisms such as algae, fungi and mosses are examples of groups which tend to be overlooked by botanists who are not directly interested on them. If collectors who record such groups also show a very high specificity towards them, it gets more likely that they lack links to other species which are more commonly recorded by the rest of the collectors, thus forming structures that are detached from the giant component. In case these collectors regularly deposit their materials in the herbarium it would be natural to observe them composing connected components with a relatively large number of species, as seen in $c_2$.
 
 
 
@@ -294,6 +293,7 @@ In order to retain only the most relevant ties between families and collectors w
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_tax_agg_curves.pdf}
     \caption{ Number of taxa ($S_{sp}$ nodes), edges and network density for UB SCN aggregations onto successive taxonomic ranks. }
     \label{fig:ub_scn_tax_agg_curves}
+% TODOS: define what a giant component is, the process of formation
   \end{figure}
 
 Three communities are visually distinguishable from the central region of the network, which we'll refer to as the network core (Figure \ref{fig:ub_scn_agg_family_general}).
@@ -314,7 +314,10 @@ Nevertheless, collectors from the network core still vary considerably regarding
 \textit{Howard S. Irwin} (\textit{irwin,hs}) is the collector with most records in the network, having intensively sampled organisms from many distinct families, especially from the most central ones (illustrated in Figure \ref{fig:ub_scn_agg_family_general} as the biggest pink nodes).
 The majority of his records are, in descending order, from families \textit{Fabaceae}, \textit{Rubiaceae}, \textit{Asteraceae}, \textit{Poaceae} and \textit{Cyperaceae}. He is also the collector holding the highest number of records for those families.
 An interesting fact is that although \textit{Myrtaceae} is the second most recorded family in the UB dataset (with a total of $10951$ records), it was relatively overlooked by \textit{irwin,hs}, having himself contributed with only $399$ \textit{Myrtaceae} records. 
-Instead, the main \textit{Myrtaceae} collector in the herbarium is \textit{Jair E. Faria} (\textit{faria,jeq}), who apparently has a preference towards this family ($\approx 31.0\%$ of all his records). \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}) is another key collector of this family, although she is also interested, to the same extent, in families \textit{Fabaceae} and \textit{Asteraceae}. Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
+Instead, the main \textit{Myrtaceae} collector in the herbarium is \textit{Jair E. Faria} (\textit{faria,jeq}), who apparently has a preference towards this family ($\approx 31.0\%$ of all his records). 
+It could be insightful to investigate why a generalist collectors such as \textit{Irwin}, who mostly contributed to the herbarium in the context of the Central Brazil expedition (see Table \ref{table:ub_collectors_florescer}), was not very interested in such a predominant family from the Cerrado biome as \textit{Myrtaceae} (Figure \ref{fig:ub_scn_agg_family_general} ).
+\textit{Carolyn E. B. Proença} (\textit{proenca,ceb}) is another key collector of this family, although she is also interested, to the same extent, in families \textit{Fabaceae} and \textit{Asteraceae}. 
+Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
 
 
 
