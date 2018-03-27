@@ -1,36 +1,63 @@
 \chapter{Conclusion and Future perspectives}\label{conclusion_perspectives}
 
 
-%% CONCUSIONS
-% Argue that a natural history museum dataset does not represent the biodiversity in its actuation area. Instead, in its best efforts it reflects the perception of people interested in studying it. An observer's perception itself is dynamic, being influenced by factors such as his/her own interests, motivations, age in career, available resources and residence. In other words, the perception varies temporally. Moreover, an observer's perception is also influenced by the perception of others in their own communities. The ensemble of perceptions of all observers that are part of a NHM, summed up with data limitations and quality issues is what best characterizes the collections.
+% ===========
+% Conclusions
+% -----------
 
 
 
 We show that modeling biological collections formation by focusing on the interests and relationships between collectors can be insightful for uncovering hidden mechanisms leading to the current composition of the herbarium. 
-It could be insightful to investigate why a generalist collectors such as \textit{Irwin}, who mostly contributed to the herbarium in the context of the Central Brazil expedition (see Table \ref{table:ub_collectors_florescer}), was not very interested in such a predominant family from the Cerrado biome as \textit{Myrtaceae} (Figure \ref{fig:ub_scn_agg_family_general} ).
 
 
 We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
 
-
-
-
-
-
-
-
-
+% ============
 % Perspectives
+% ------------
+
+% Including the temporal dimension
+% Social network are by nature dynamic, as they evolve over time. New interactions between entities form continuously whereas other ties break.
+% Observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
+% In our study, however, we haven't yet included the temporal dimension. 
+
+
+% Including the spatial dimension
+% The study of collectors carreer trajectories cite{Borgatti2015, conclusion} depends on incorporating temporal and geographic dimensions.
+
+
+% Adopting an unifying structure
+% SCNs and CWNs should be stored in an unified structure, for example using the structure of multiaspect graphs (MAGs).
+% MAGs allow representing edges composed of multiple features by using general graph theory, instead of tensor algebra.
+% Important dimensions can be included as aspects, such as temporal and spatial, and different types of edges. 
+
+
+
+
+
+% ============
+% Applications
+% ------------
+
+
+% Collectors Profiling and activities history
+% -------------------------------------------
+% Profiling collectors in terms of their activities and interests can be a way of further detecting anomalies (activity monitoring, Fawcett and Provost 1999).
+
 
 % Building Recommender Systems
-%% Collaborative filtering: The system gather information about the interest of the collectors and then proposes collectors to record new species based on the interests of others.
-
-% ============================
-% Sampling Site Recommendation
 % ----------------------------
-% Objectivelly priorizing regions and taxa for surveys {Graham2004}, site selection{Funk2002}
-%% Sampling site priorization may be done based on niche models {Raxworthy}
-%% GDMs {Ferrier: Mapping Spatial Pattern in Biodiversity for Regional Conservation Planning: Where to from Here?}
+% Collaborative filtering: The system gather information about the interest of the collectors and then proposes collectors to record new species based on the interests of others.
 
-% Recommender System - Use Cases:
-%% "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
+
+% Link prediction: Trying to predict which ties are most likely to form between entities in the network in the near future.
+
+% Use Case: "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
+% < add illustration >
+
+% Sampling Site Recommendation
+% Objectivelly priorizing regions and taxa for surveys cite{Graham2004}, site selection cite{Funk2002}
+% Sampling site priorization may be done based on niche models {Raxworthy}
+% GDMs {Ferrier: Mapping Spatial Pattern in Biodiversity for Regional Conservation Planning: Where to from Here?}
+
+

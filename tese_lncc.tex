@@ -56,6 +56,11 @@
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
 \usepackage{abntex2lncc}		% Formatacao especifica do modelo do LNCC
+% Para comentários
+\newcommand{\artur}[1]{\textcolor{blue}{[Artur]: #1}}
+\newcommand{\luiz}[1]{\textcolor{red}{[Luiz]: #1}}
+
+
 % ---
 		
 % ---
@@ -84,6 +89,7 @@
 \usepackage{tablefootnote}
 \usepackage{dirtytalk}
 \usepackage{otherpackages/kbordermatrix}
+\usepackage{adjustbox}
 
 % ---
 % CONFIGURAÇÕES DE PACOTES
@@ -282,9 +288,9 @@
 	\imprimirdata.}\\
 	
 	\hspace{0.5cm}
-		1. Data Science.
+		1. Biodiversity Informatics.
 		2. Networks.
-		3. Biodiversity.
+		3. Data Science.
 		I. \imprimirUltimoSobrenomeOrientador,{ }\imprimirNomeOrientador.
 		II. LNCC/MCTIC.
 		III. \labelTitulo
@@ -374,8 +380,8 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 \begin{epigrafe}
     \vspace*{\fill}
 	\begin{flushright}
-		\textit{``Título ou frase que serve de tema ao assunto ou para resumir\\ o sentido ou situar a motivação da obra.''\\
-		(Referência para a epígrafe)}
+		\textit{``Ahhrrrr urrrrghh uhrrrr aaaarrrghh''\\
+		(Chewbacca)}
 	\end{flushright}
 \end{epigrafe}
 % ---
@@ -456,10 +462,11 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % inserir lista de abreviaturas e siglas
 % ---
 \begin{siglas}
-  \item[ABNT] Associação Brasileira de Normas Técnicas
-  \item[abnTeX] ABsurdas Normas para TeX
   \item[SCN] Species-collectors Network
   \item[CWN] Collectors Coworking Network
+  \item[SDM] Species Distribution Model
+  \item[GBIF] Global Biodiversity Information Facility
+  \item[NHC] Natural History Collection
   
 \end{siglas}
 % ---
@@ -495,11 +502,11 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 %\counterwithin{figure}{section}
 %\counterwithin{table}{section}
 
-%\include{chapters/introduction}
+\include{chapters/introduction}
 \include{chapters/biodiversity_data}
 \include{chapters/network_models}
 \include{chapters/casestudy_ub}
-%\include{chapters/conclusion_perspectives}
+\include{chapters/conclusion_perspectives}
 
 % ---
 
