@@ -228,12 +228,12 @@ Considering the records from within Brazil, only $7.8\%$ of them were collected 
 We have hypothesized some possible explanations for the existence of so many small connected components in the UB herbarium SCN with such characteristics. First, they could be a consequence of specimen exchange, a practice that is widely adopted among herbaria for collaboratively diversifying and distributing their collections \cite{Groom2014}. Exchange materials are typically duplicated exsiccates collected in field that a sender institution dispatches to a receiver institution. The receiver institution then incorporates those materials to its scientific collection, and ocasionally sends back to the other institution some duplicate exsiccates of its own.
 From the receiver herbarium viewpoint the inclusion of records from exchanges usually adds new species and collectors, for they are a sample reflecting the sender institution's purpose and the interests of people associated to it. If both the collectors and species from such records were previously inexistent in the receiver collection, no links to $c_1$ or to any other connected component that already exists are formed. These records thus get included into its SCN network as nodes and edges composing new small connected components. We should overstate, however, that including exchange records does not necessarily create new connected components. New species or collectors could be included in $c_1$ in case either the species or at least one of the collectors associated to the exchange record are already linked to it.
 
-A second situation that could potentially lead to isolated components in the network is when there are groups of very specialized collectors sampling very specific or distinct groups of organisms. 
+A second situation that could potentially lead to isolated components in the network is when there are groups of very specialized collectors sampling very specific and distinct groups of organisms. 
 Cryptic organisms such as algae, fungi and mosses are examples of groups which tend to be overlooked by botanists who are not directly interested on them. 
 If collectors who record such groups also show a very high specificity towards them, it gets more likely that they lack links to other species which are more commonly recorded by the rest of the collectors, thus forming structures that are detached from the giant component. 
 In case these collectors regularly deposit their materials in the herbarium it would be natural to observe them composing connected components with a relatively large number of species.
 The connected component $c_2$, for instance, includes \textit{Ana Lúcia Tostes Leite} (\textit{leite,alta}), one of the herbarium's most relevant continental algae collector as shown in Table \ref{table:ub_collectors_florescer}.
-She holds a total of $2757$ records, from $87$ distinct species.
+She holds a total of $2757$ records, from $87$ distinct species, all of them being charophytes, a division of green algae (Figure \ref{fig:ub_scn_agg_family_general}, community $ii$).
 
 
 
@@ -292,23 +292,30 @@ In most social networks, however, not all regions are equally dense, as entities
 
 
 \paragraph*{Communities of common interests.}
-Communities in a species-collectors network are composed by groups of collectors who are specifically interested in a particular subset of organisms which are, in turn, not usually recorded by the rest of the herbarium collectors. As the number of edges linking members within a community is far greater than those connecting members to non-members, communities can be visually detected as clusters of nodes which are relatively well separated from the rest of the network when using force-directed algorithms \cite{Jacomy2014} for graph layout.
+Communities in a species-collectors network are composed by groups of collectors who are specifically interested in a particular subset of organisms which are, in turn, not usually recorded by the rest of the herbarium collectors. 
+As the number of edges linking members within a community is far greater than those connecting members to non-members, communities can be visually detected as clusters of nodes which are relatively well separated from the rest of the network when using force-directed algorithms \cite{Jacomy2014} for graph layout.
 
-For a visual inspection of the community structure in the UB SCN we first aggregated the network onto the \textit{family} rank, as it would be impractical to draw relevant conclusions if every single species were plotted in the figure. By summarizing the network in such way we reduced the number of $S_{sp}$ nodes (taxa) from $15344$ to $474$, although the number of edges (from $142647$ to $43803$) did not decrease in the same proportion (Figure \ref{fig:ub_scn_tax_agg_curves}).
+
+For a visual inspection of the community structure in the UB SCN we first aggregated the network onto the \textit{family} rank, as it would be impractical to draw relevant conclusions if every single species were plotted in the figure. 
+By summarizing the network in such way we reduced the number of $S_{sp}$ nodes (taxa) from $15344$ to $474$, although the number of edges (from $142647$ to $43803$) did not decrease in the same proportion (Figure \ref{fig:ub_scn_tax_agg_curves}).
 This incurred in a $10 \times$ increase in network density, from $1.37\times 10^{-3}$ to $1.36\times 10^{-2}$.
-In order to retain only the most relevant ties between families and collectors we then filtered out edges for which the \textit{count} attribute was lower than 20. In other words this step removed collectors-families associations that occurred less than 20 times throughout the dataset. As this edges filtering routine resulted in many isolated collectors (mostly novice collectors, with low recording counts), these were also omitted from the figure for clarity.
+In order to retain only the most relevant ties between families and collectors we then filtered out edges for which the \textit{count} attribute was lower than 20. 
+In other words this step removed collectors-families associations that occurred less than 20 times throughout the dataset. 
+As this edges filtering routine resulted in many isolated collectors (mostly novice collectors, with low recording counts), these were also omitted from the figure for clarity.
+
 
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_tax_agg_curves.pdf}
     \caption{ Number of taxa ($S_{sp}$ nodes), edges and network density for UB SCN aggregations onto successive taxonomic ranks. }
     \label{fig:ub_scn_tax_agg_curves}
-% TODOS: define what a giant component is, the process of formation
   \end{figure}
 
 Three communities are visually distinguishable from the central region of the network, which we'll refer to as the network core (Figure \ref{fig:ub_scn_agg_family_general}).
 Although the network core could be considered a community \textit{per se}, we prefer to think of it as a region of the network that best reflects the overall interests of the majority of the most productive collectors composing the herbarium.
-Nevertheless, collectors from the network core still vary considerably regarding their recording interests, as can be verified by inspecting the sets of taxa they're linked to as well as the strength of each connection. Those who have sampled organisms from many distinct families (and are thus considered to display a generalist collecting behavior) are placed more centrally in the network core by the layout algorithm. Specialist collectors are consequently pushed towards the borders of the network core, as nearer as possible to their most recorded taxa.
+Nevertheless, collectors from the network core still vary considerably regarding their recording interests, as can be verified by inspecting the sets of taxa they're linked to as well as the strength of each connection. 
+Those who have sampled organisms from many distinct families (and are thus considered to display a generalist collecting behavior) are placed more centrally in the network core by the layout algorithm. 
+Specialist collectors are consequently pushed towards the borders of the network core, as nearer as possible to their most recorded taxa.
 
 \afterpage{
   \begin{figure}[!ht]
@@ -330,34 +337,42 @@ It could be insightful to investigate why a generalist collectors such as \texti
 Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
 
 
-
-
-Although family \textit{Myrtaceae} is also a very relevant family in this dataset, the relatively weak tie connecting it to \textit{irwin,hs} 
-it was placed in a more marginalized position.is placed in a more marginalized position
-
-For family \textit{Myrtaceae}, which is also a very prevalent family in the dataset, the situation is slightly different in the case of family \textit{Myrtaceae}. Although \textit{Irwin} has also sampled it considerably well, \textit{Jair E. Q. Faria} (\textit{faria,jeq}) is the collector holding the highest number of \textit{Myrtaceae} records.
-
-The core could certainly be further partitioned into communities by some algorithms, although we will not perform it here.
-The largest one
+We could use a whole set of modularity detection algorithms in order to further split the network core and identify some visually less obvious communities. 
+A common practice among the statistical physics community for detecting communities in bipartite networks has been to first obtain bipartite projections and then running unipartite community detection algorithms for each of them, separately.
+In order to minmize information loss, obtaining weighted bipartite projections is preferred over unweighted, as the latter have shown to produce poor results \cite{Guimera2007}.
 
 
 
 
-For a quick look at the main communities in the UB SCN we first aggregated the network onto the \textit{family} rank.
-Although taxonomic aggregation is a summarization routine (and thus reduces the absolute number of nodes and edges in the network),  an aggregated SCN network is denser than the original one.
+
+% ======================
+% The Col set projection
 
 
-We can visually differentiate three communities apart from the core of the network.
-Groups $(i)$ and $(iii)$ are connected to the giant component, whereas group $(ii)$ is not.
+% We have projected the SCN network into the collectors set, using the species bag similarity < make figure >
+% The resulting network is very dense < calculate density >
+% As bipartite projections are unipartite networks we must use a slightly different function for density calculation. In this case we make $d=\frac{2m}{n(n-1)}$, where $n$ is the total number of nodes in the projection and $m$ is the number of existing edges.
+% Networks that are very dense make relationships less meaningful and increases computational costs for analyzing them.
+% We must specify some filtering threshold for ignoring less relevant ties.
+% But what is a good threshold? < plot threshold vs density>
 
 
-This example shows how SCN visualization could be insightful for uncovering hidden mechanisms leading to the current composition of the herbarium. 
+% Quickly describe the community detection algorithm used.
+% Discuss some of the communities found
 
-% =========Projections
-%We can further use the density metric to verify that both projections of this network are much denser, which makes relationships less meaningful and increases computational costs for analyzing them. As the projections are unipartite networks we must use a slightly different function for density calculation. In this case we make $d=\frac{2m}{n(n-1)}$, where $n$ is the total number of nodes in the projection and $m$ is the number of existing edges. 
-%As a result, the species projection ($d=1.65\times 10^{-1}$) was denser than the collectors projection ($d=3.64 \times 10^{-2}$).
-% ===================
 
+% =====================
+% The Sp set projection
+
+% The resulting network is also very dense.
+% The Sp projection is about 10 times denser than the collectors.
+% Simlarly, we must define a filtering threshold
+
+
+
+
+
+% ====================
 % Assortativity in SCN
 % Network resilience: If the SCN is dissortative, then it is easier to break it by removing hubs (therefore forming many specialized subgroups of collectors). Otherwise, removing any of the main hubs would not have a considerable effect on fractioning the network (Specialized communities are unlikely to be formed if an important collector leaves the herbarium). 
 
