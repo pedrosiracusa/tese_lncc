@@ -337,18 +337,24 @@ It could be insightful to investigate why a generalist collectors such as \texti
 Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
 
 
-We could use a whole set of modularity detection algorithms in order to further split the network core and identify some visually less obvious communities. 
+We could use a whole set of modularity detection algorithms in order to further split the network core and identify communities which are visually less conspicuous. 
 A common practice among the statistical physics community for detecting communities in bipartite networks has been to first obtain bipartite projections and then running unipartite community detection algorithms for each of them, separately.
 In order to minmize information loss, obtaining weighted bipartite projections is preferred over unweighted, as the latter have shown to produce poor results \cite{Guimera2007}.
 
-\afterpage{
+
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
     \caption{ Communities in the collectors-projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
     \label{fig:ub_scn_family_projCol_communities}
-  \end{figure}
-}
+\end{figure}
+
+\begin{figure}[!ht]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
+    \caption{ Communities in the collectors-projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
+    \label{fig:ub_scn_family_projSp_communities}
+\end{figure}
 
 % ======================
 % The Col set projection
@@ -360,6 +366,9 @@ In order to minmize information loss, obtaining weighted bipartite projections i
 % Networks that are very dense make relationships less meaningful and increases computational costs for analyzing them.
 % We must specify some filtering threshold for ignoring less relevant ties.
 % But what is a good threshold? < plot threshold vs density>
+
+In order to investigate more thoroughly communities of common interests we have projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
+We used the species bag / quorum similarity rule (expression \ref{equation:cosine_similarity}) for weighting the edges in the resulting unipartite networks.
 
 
 % Quickly describe the community detection algorithm used.

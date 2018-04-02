@@ -525,7 +525,7 @@ We then use grouping $G_T$ for obtaining quorum vectors for each of its taxa $g_
 
 
 % SCN projections
-\subsection{Projections}
+\subsection{Projections} \label{section:scn_projection}
 
 Bipartite projections on each one of the SCN's nodes sets allows one to investigate indirect associations two entities from the same class might have with each another, as intermediated by a third entity from the opposite class. 
 Figure \ref{fig:scn_general} illustrates projections of a SCN onto the species set (b) and the collectors set (c).
@@ -588,6 +588,7 @@ This weighting rule uses a similarity (or correlation) matrix that is computed f
 The \textit{species bag similarity} for collectors $u_s$ and $u_t$; and the \textit{quorum vector similarity} for species $v_s$ and $v_t$ are defined as
 
 \begin{equation}
+\label{equation:cosine_similarity}
 \begin{split}
 sim(\sigma_{u_s},\sigma_{u_t}) &\equiv
 \cos \theta_{u_s,u_t} =
