@@ -202,6 +202,9 @@ For the CWN model we only filtered out records with null entries for the collect
 Additionally, a previously elaborated names map for the UB dataset collectors was passed in during SCN construction, facilitating the process of remapping names variants to entities. 
 Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{``Incógnito"}, \textit{``Ignorado"}, \textit{``Ilegível"} and \textit{``?"} were excluded from the network model right after its creation.
 
+
+
+
 % ==========================
 % Species-collectors Network
 % --------------------------
@@ -258,8 +261,6 @@ On the other hand, there are also some few collectors that have recorded much mo
   \end{figure}
 
 As opposed to random networks, in which extremely well connected nodes are unlikely to coexist with a large number of extremely poorly connected ones, the degree distribution observed for collectors in the UB SCN is better approximated by a power law $p(k) \sim k^{-\alpha}$, typically observed in many large real-world networks with the scale-free property \cite{Barabasi1999a}. The dashed line in figure \ref{fig:ub_scn_degree_dist}b is a power law fit for the $S_{sp}$ data, with $\alpha=1.52$. 
-
-
   
 Other useful degree centrality metrics shown in Table \ref{table:ub_scn_degrees} are the weighted degree $k_w$ and normalized degree $k^*$. The weighted degree for each collector node is computed by summing up weights assigned to each of the node's edges. Edges can be weighted according to any chosen attribute of its own, depending on the aspect of the connection the user wants to emphasize. Here we use the \textit{count} attribute, which holds the number of times the association between a collector and a species occurs. Formally, $k_w^{(u)} = \sum_{v} count(e_{u,v})$ for $v \in$ $neighbors(u)$. Differently from the degree, which gives the number of distinct species that have been recorded by a collector, the weighted degree of a collector can be interpreted as the total number of specimens (or occurrence records) collected by him/her. It is also worth to note that a node's $k_w$ is equivalent to the node's \textit{count} attribute, which is not to be confused to edges' homonymous attribute.
 
@@ -295,14 +296,12 @@ In most social networks, however, not all regions are equally dense, as entities
 Communities in a species-collectors network are composed by groups of collectors who are specifically interested in a particular subset of organisms which are, in turn, not usually recorded by the rest of the herbarium collectors. 
 As the number of edges linking members within a community is far greater than those connecting members to non-members, communities can be visually detected as clusters of nodes which are relatively well separated from the rest of the network when using force-directed algorithms \cite{Jacomy2014} for graph layout.
 
-
-For a visual inspection of the community structure in the UB SCN we first aggregated the network onto the \textit{family} rank, as it would be impractical to draw relevant conclusions if every single species were plotted in the figure. 
-By summarizing the network in such way we reduced the number of $S_{sp}$ nodes (taxa) from $15344$ to $474$, although the number of edges (from $142647$ to $43803$) did not decrease in the same proportion (Figure \ref{fig:ub_scn_tax_agg_curves}).
+For a visual inspection of the community structure in the UB SCN we summarized it in basically two steps.
+First we aggregated the SCN onto the \textit{family} rank following the routine described in section \ref{section:taxonomic_aggregation}, as it would be impractical to draw relevant conclusions from the network if every single species were plotted in the figure.
+By performing the taxonomic aggregation, we reduced the number of $S_{sp}$ nodes (taxa) from $15344$ to $474$, although the number of edges (from $142647$ to $43803$) did not decrease in the same proportion (Figure \ref{fig:ub_scn_tax_agg_curves}).
 This incurred in a $10 \times$ increase in network density, from $1.37\times 10^{-3}$ to $1.36\times 10^{-2}$.
-In order to retain only the most relevant ties between families and collectors we then filtered out edges for which the \textit{count} attribute was lower than 20. 
-In other words this step removed collectors-families associations that occurred less than 20 times throughout the dataset. 
-As this edges filtering routine resulted in many isolated collectors (mostly novice collectors, with low recording counts), these were also omitted from the figure for clarity.
-
+In the second step of the summarization routine we removed collectors-families ties which occurred less than $20$ times throughout the entire dataset by filtering edges based on their \textit{count} attribute.
+As this edges filtering routine resulted in many isolated collectors, most of which novice collectors with low absolute recording counts, we also omitted them for improving figure readability.
 
 \begin{figure}[!ht]
   	\centering
@@ -310,12 +309,6 @@ As this edges filtering routine resulted in many isolated collectors (mostly nov
     \caption{ Number of taxa ($S_{sp}$ nodes), edges and network density for UB SCN aggregations onto successive taxonomic ranks. }
     \label{fig:ub_scn_tax_agg_curves}
   \end{figure}
-
-Three communities are visually distinguishable from the central region of the network, which we'll refer to as the network core (Figure \ref{fig:ub_scn_agg_family_general}).
-Although the network core could be considered a community \textit{per se}, we prefer to think of it as a region of the network that best reflects the overall interests of the majority of the most productive collectors composing the herbarium.
-Nevertheless, collectors from the network core still vary considerably regarding their recording interests, as can be verified by inspecting the sets of taxa they're linked to as well as the strength of each connection. 
-Those who have sampled organisms from many distinct families (and are thus considered to display a generalist collecting behavior) are placed more centrally in the network core by the layout algorithm. 
-Specialist collectors are consequently pushed towards the borders of the network core, as nearer as possible to their most recorded taxa.
 
 \afterpage{
   \begin{figure}[!ht]
@@ -327,20 +320,52 @@ Specialist collectors are consequently pushed towards the borders of the network
   \footnotetext{ \url{https://pedrosiracusa.github.io/networks/ub_scn_agg_family} }
 }
 
+Three communities are visually distinguishable from the central region of the network, which we'll refer to as the network core (Figure \ref{fig:ub_scn_agg_family_general}).
+Although the network core could be considered a community \textit{per se}, we prefer to think of it as a region of the network that best reflects the overall interests of the majority of the most productive collectors composing the herbarium.
+Nevertheless, collectors from the network core still vary considerably regarding their recording interests, as can be verified by inspecting the sets of taxa they're linked to as well as the strength of each connection. 
+Those who have sampled organisms from many distinct families (and are thus considered to display a generalist collecting behavior) are placed more centrally in the network core by the layout algorithm, whereas specialists are consequently pushed towards the borders of the network core, as nearer as possible to their most recorded taxa.
 
 \textit{Howard S. Irwin} (\textit{irwin,hs}) is the collector with most records in the network, having intensively sampled organisms from many distinct families, especially from the most central ones (illustrated in Figure \ref{fig:ub_scn_agg_family_general} as the biggest pink nodes).
-The majority of his records are, in descending order, from families \textit{Fabaceae}, \textit{Rubiaceae}, \textit{Asteraceae}, \textit{Poaceae} and \textit{Cyperaceae}. He is also the collector holding the highest number of records for those families.
+The majority of his records are, in descending order, from families \textit{Fabaceae}, \textit{Rubiaceae}, \textit{Asteraceae}, \textit{Poaceae} and \textit{Cyperaceae}. 
+He is also the collector holding the highest number of records for those families.
 An interesting fact is that although \textit{Myrtaceae} is the second most recorded family in the UB dataset (with a total of $10951$ records), it was relatively overlooked by \textit{irwin,hs}, having himself contributed with only $399$ \textit{Myrtaceae} records. 
-Instead, the main \textit{Myrtaceae} collector in the herbarium is \textit{Jair E. Faria} (\textit{faria,jeq}), who apparently has a preference towards this family ($\approx 31.0\%$ of all his records). 
+Instead, the main \textit{Myrtaceae} collector in the herbarium is \textit{Jair E. Faria} (\textit{faria,jeq}), who apparently has a preference towards this family, as it composes approximately $31.0\%$ of his entire records set. 
 It could be insightful to investigate why a generalist collectors such as \textit{Irwin}, who mostly contributed to the herbarium in the context of the Central Brazil expedition (see Table \ref{table:ub_collectors_florescer}), was not very interested in such a predominant family from the Cerrado biome as \textit{Myrtaceae} (Figure \ref{fig:ub_scn_agg_family_general} ).
 \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}) is another key collector of this family, although she is also interested, to the same extent, in families \textit{Fabaceae} and \textit{Asteraceae}. 
 Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
 
+%  TODO Communities i, ii, iii
+Community $i$ represents a large part of the \textit{Cryptogams Lab} \footnote{\url{http://labcriptounb.blogspot.com.br/}} collectors team, together with the taxa they're most interested in. 
+The lab is part of the University of Brasília department of botany, having \textit{Paulo Eduardo A. S. Câmara} (\textit{camara,peas}), \textit{Micheline C. Silva} (\textit{cavalhosilva,m}) and \textit{Maria das Graças M. de Souza} (\textit{souza,mgm}) as the principal investigators. 
+%
+The first two researchers, which have been included in community $i$, are mostly interested in bryophytes (mosses and liverworts), mainly those from families \textit{Sematophyllaceae}, \textit{Hypnaceae} and \textit{Dicranaceae}.
+\textit{Micheline C. Silva}, however, also shows interest towards \textit{Piperaceae}, a family of flowering plants that has also been considerably recorded by collectors from the network core. 
+Therefore, \textit{Piperaceae} is an important node connecting community $i$ to the network core, as it intermediates many paths between collectors from both network regions.
+%
+Some PhD and MSc students from the cryptogams lab including \textit{Abel Eustáquio R. Soares} (\textit{soares,aer}), \textit{Allan Laid Alkimim Faria} (\textit{faria,ala}), \textit{Ronaldo Viveiros de Sousa} (\textit{souza,rv}), \textit{Tamara Silva Dantas} (\textit{dantas,ts}), \textit{Renato Gama} (\textit{gama,r}), \textit{Eliana Marília Lima Pinheiro} (\textit{pinheiro,eml}) have also been placed in community $i$, and their closeness to their academic supervisor \textit{camara,peas} reflect their common taxonomic interests in bryophytes.
+
+Although she is one of the principal investigators of the \textit{Cryptogams Lab}, \textit{souza,mgm} was placed in community $iii$ instead of $i$ due to her taxonomic interest towards algae, a taxonomic group which is overlooked by the vast majority of collectors in the herbarium, including bryophytes collectors. 
+She is mostly interested in families \textit{Eunotiaceae}, \textit{Naviculaceae}, \textit{Pinnulariaceae}, which compose a group of algae known as diatoms.
+There are two more collectors in community $iii$.
+Together with \textit{souza,mgm}, \textit{Roni Ivan Rocha de Oliveira} (\textit{oliveira,rir}) was a member of a survey on the diatoms acquatic biota of the Paranã River, during years 2002 and 2003.
+\textit{Drielle dos Santos Martins} (\textit{martins,ds}) was an undergraduate student and a lichen collector, having been supervised by \textit{souza,mgm}.
+
+Another community of algae collectors is the one formed by \textit{Ana Lúcia Tostes de Aquino Leite} (\textit{leite,alta}), \textit{João Vademar Grando} \textit{grando,jv} and \textit{Christina Wyss Castelo Branco} (\textit{castelobranco,cw}) (community $ii$), which also happens to be the connected component $c_2$ itself.
+\textit{Ana Lúcia Leite} has intensely collected continental green algae from family \textit{Desmidiaceae} in the Federal District while pursuing her MSc degree at the University of Brasília.
+During that period she has also collected some specimens from another green algae family, \textit{Closteriaceae}, which has not been recorded by anyone else from the UB herbarium.
+She is regarded as one of the UB historically relevant collectors (Table \ref{table:ub_collectors_florescer}).
+%
+\textit{João Grando} and \textit{Christina Castelo Branco} were also MSc students in the University of Brasília, both working under the academic supervision of Dr. \textit{Antônio José de Andrade Rocha} (not included in the UB dataset).
+Besides green algae (families \textit{Desmidiaceae}, \textit{Scenedesmaceae}, \textit{Chlorellaceae} \textit{Selenastraceae} \textit{Hydrodictyaceae}), they have also collected other types of microscopic organisms, such as euglenophytes (family \textit{Euglenaceae}) and cyanobacteria (families \textit{Nostocaceae}, \textit{Oscillatoriaceae}, \textit{Chroococcaceae} and \textit{Pseudanabaenaceae}). 
+All those organisms are typical of limnic systems.
+ 
 
 We could use a whole set of modularity detection algorithms in order to further split the network core and identify communities which are visually less conspicuous. 
 A common practice among the statistical physics community for detecting communities in bipartite networks has been to first obtain bipartite projections and then running unipartite community detection algorithms for each of them, separately.
 In order to minmize information loss, obtaining weighted bipartite projections is preferred over unweighted, as the latter have shown to produce poor results \cite{Guimera2007}.
 
+
+% TODO Communities in projections
 
 \begin{figure}[!ht]
   	\centering
@@ -391,6 +416,11 @@ We used the species bag / quorum similarity rule (expression \ref{equation:cosin
 % Network resilience: If the SCN is dissortative, then it is easier to break it by removing hubs (therefore forming many specialized subgroups of collectors). Otherwise, removing any of the main hubs would not have a considerable effect on fractioning the network (Specialized communities are unlikely to be formed if an important collector leaves the herbarium). 
 
 
+
+
+% ===============================
+% UB Collectors Coworking Network
+% -------------------------------
 
 \subsection{The UB Collectors Coworking Network}
 % TODO: Add average path size connecting collectors
