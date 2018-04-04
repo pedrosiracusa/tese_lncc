@@ -392,12 +392,33 @@ In order to minmize information loss, obtaining weighted bipartite projections i
 % We must specify some filtering threshold for ignoring less relevant ties.
 % But what is a good threshold? < plot threshold vs density>
 
-In order to investigate more thoroughly communities of common interests we have projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
+In order to investigate more thoroughly communities of common interests under complementary perspectives we projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
 We used the species bag / quorum similarity rule (expression \ref{equation:cosine_similarity}) for weighting the edges in the resulting unipartite networks.
 
 \paragraph*{Communities in the collectors projection.}
+The collectors projection of the family-aggregated UB SCN network has a total of $6768$ nodes and $5,431,799$ edges, with average node degree $\langle k \rangle = 1605$.
+Although the taxonomic aggregation process does not change the number of nodes at all in a collectors projection of a SCN, the number of edges connecting collectors together increases signifficantly from lower-rank towards higher-rank aggregations, which means they also become denser.
+In fact, the density of our family-aggregated SCN collectors projection is $2.37 \times 10^{-1}$, while the same projection at the species resolution is almost $10$ times sparser, with a density of $3.64 \times 10^{-2}$. 
+This happens because higher-level taxa represent broader ranges of organisms, and thus assume ties from all lower-rank taxa they are composed of.
+In other words the lowest the taxonomic resolution of the network model is, the most inclusive are taxa modeled as nodes, making it more likely that collectors record at least one specimen belonging to it. 
+
+Given the very high density of our resulting network, we performed an additional filtering step before drawing the graph and identifying communities.
+We use an edge filter $\phi$.
+Figure \ref{fig:ub_scn_filter_threshold_projCol} shows the effect of increasing $\phi$ values on network density.
+We then set $\phi = 0.8$.
+This means only edges with similarity values higher than $0.8$ are kept, while weaker edges are discarded.
+We also define a score metric for each connected component, by simply adding up values of the \textit{count} attributes for each member node.
+For this visualization we have removed connected components with score lower than $500$.
+
+
+The collectors projection has $20$ communities, $7$ of which composing a giant component \ref{fig:ub_scn_family_projSp}.
+
 
 \paragraph*{Communities in the species projection.}
+The species projection of the family-aggregated UB SCN network has a total of $15,344$ nodes and $19,482,923$ edges, with average node degree of $2539$.
+The collectors projection has $15$ communities.
+
+
 % Quickly describe the community detection algorithm used.
 % Discuss some of the communities found
 
