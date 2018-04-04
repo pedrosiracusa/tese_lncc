@@ -366,28 +366,21 @@ In order to minmize information loss, obtaining weighted bipartite projections i
 
 
 % TODO Communities in projections
-
-\begin{figure}[!ht]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
-    \caption{ Communities in the collectors-projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
-    \label{fig:ub_scn_family_projCol_communities}
-\end{figure}
-
-\begin{figure}[!ht]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
-    \caption{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
-    \label{fig:ub_scn_family_projSp_communities}
-\end{figure}
-
 In order to investigate more thoroughly communities of common interests under complementary perspectives we projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
 We used the species bag / quorum similarity rule (expression \ref{equation:cosine_similarity}) for weighting the edges in the resulting unipartite networks.
 
 
 % ======================
 % The Col set projection
+
+
 \paragraph*{Communities in the collectors projection.}
+\begin{figure}[!ht]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
+    \caption{ Communities in the collectors-projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
+    \label{fig:ub_scn_family_projCol_communities}
+\end{figure}
 The collectors projection of the family-aggregated UB SCN network has a total of $6768$ nodes and $5,431,799$ edges, with average node degree $\langle k \rangle = 1605$.
 Although the taxonomic aggregation process does not change the number of nodes at all in a collectors projection of a SCN, the number of edges connecting collectors together increases signifficantly from lower-rank towards higher-rank aggregations, which means they also become denser.
 In fact, the density of our family-aggregated SCN collectors projection is $2.37 \times 10^{-1}$, while the same projection at the species resolution is almost $10$ times sparser, with a density of $3.64 \times 10^{-2}$. 
@@ -402,8 +395,8 @@ Figure \ref{fig:ub_scn_projCol_filter_thresh} illustrates the effect of increasi
 
 \begin{figure}[!ht]
   	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_projCol_filter_thresh.pdf}
-    \caption{ This is the caption }
+    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/scn_projCol_filter_thresh.pdf}
+    \caption{ Drop on density of a collectors-projected SCN with increasing filtering thresholds $\phi$. SCNs with lower taxonomic resolutions show a more pronounced drop, especially for threshold values between $0$ and $0.6$. }
     \label{fig:ub_scn_projCol_filter_thresh}
 \end{figure}
 
@@ -425,7 +418,16 @@ The collectors projection has $20$ communities, $7$ of which composing a giant c
 % The resulting network is also very dense.
 % The Sp projection is about 10 times denser than the collectors.
 % Simlarly, we must define a filtering threshold
+
+
+
 \paragraph*{Communities in the species projection.}
+\begin{figure}[!ht]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
+    \caption{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
+    \label{fig:ub_scn_family_projSp_communities}
+\end{figure}
 The species projection of the family-aggregated UB SCN network has a total of $15,344$ nodes and $19,482,923$ edges, with average node degree of $2539$.
 The collectors projection has $15$ communities.
 
