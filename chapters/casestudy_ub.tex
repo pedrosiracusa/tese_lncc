@@ -331,10 +331,9 @@ He is also the collector holding the highest number of records for those familie
 An interesting fact is that although \textit{Myrtaceae} is the second most recorded family in the UB dataset (with a total of $10951$ records), it was relatively overlooked by \textit{irwin,hs}, having himself contributed with only $399$ \textit{Myrtaceae} records. 
 Instead, the main \textit{Myrtaceae} collector in the herbarium is \textit{Jair E. Faria} (\textit{faria,jeq}), who apparently has a preference towards this family, as it composes approximately $31.0\%$ of his entire records set. 
 It could be insightful to investigate why a generalist collectors such as \textit{Irwin}, who mostly contributed to the herbarium in the context of the Central Brazil expedition (see Table \ref{table:ub_collectors_florescer}), was not very interested in such a predominant family from the Cerrado biome as \textit{Myrtaceae} (Figure \ref{fig:ub_scn_agg_family_general} ).
-\textit{Carolyn E. B. Proença} (\textit{proenca,ceb}) is another key collector of this family, although she is also interested, to the same extent, in families \textit{Fabaceae} and \textit{Asteraceae}. 
+\textit{Carolyn E. B. Proença} (\textit{proenca,ceb}) is another key collector of this family, although she also seems interested, to the same extent, in families \textit{Fabaceae} and \textit{Asteraceae}. 
 Moreover, the figure also makes it easy to detect collectors who exclusively (or almost exclusivelly) collect each family, as it is the case of \textit{Vanessa G. Staggmeier} (\textit{staggmeier,vg}) for \textit{Myrtaceae} and \textit{Regina C. Oliveira} (\textit{oliveira,rc}) for \textit{Poaceae}.
 
-%  TODO Communities i, ii, iii
 Community $i$ represents a large part of the \textit{Cryptogams Lab}\footnote{\url{http://labcriptounb.blogspot.com.br/}} collectors team, together with the taxa they're most interested in. 
 The lab is part of the University of Brasília department of botany, having \textit{Paulo Eduardo A. S. Câmara} (\textit{camara,peas}), \textit{Micheline Carvalho Silva} (\textit{carvalhosilva,m}) and \textit{Maria das Graças M. de Souza} (\textit{souza,mgm}) as the principal investigators. 
 %
@@ -365,15 +364,13 @@ A common practice among the statistical physics community for detecting communit
 In order to minmize information loss, obtaining weighted bipartite projections is preferred over unweighted, as the latter have shown to produce poor results \cite{Guimera2007}.
 
 
-% TODO Communities in projections
 In order to investigate more thoroughly communities of common interests under complementary perspectives we projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
 We used the species bag / quorum similarity rule (expression \ref{equation:cosine_similarity}) for weighting the edges in the resulting unipartite networks.
 
 
 % ======================
 % The Col set projection
-
-
+% TODO
 \paragraph*{Communities in the collectors projection.}
 \begin{figure}[!ht]
   	\centering
@@ -389,7 +386,7 @@ In other words the lowest the taxonomic resolution of the network model is, the 
 
 % edges filtering
 We could reduce the density of the projected network by ignoring weaker ties, which form between collectors who are less similar in their species bags.
-For that we define a filtering routine, which consists of iterating entries of the network's biadjacency matrix $A$ and setting elements to $0$ in case their respective values fall below a user-defined filter threshold $\phi$.
+For that we define a filtering routine, which consists of iterating through all entries $A_{i,j}$ of the network's biadjacency matrix and setting them to $0$ in case their respective values fall below a user-defined filter threshold $\phi$.
 Acceptable values for the filtering coefficient $\phi$ range within the interval $[0,1[$, and represents the minimum similarity score that should be observed for a pair of collectors for their tie to be considered relevant.
 Figure \ref{fig:ub_scn_projCol_filter_thresh} illustrates the effect of increasing $\phi$ on the density of the UB SCN, under three distinct taxonomic resolutions. 
 
@@ -400,21 +397,42 @@ Figure \ref{fig:ub_scn_projCol_filter_thresh} illustrates the effect of increasi
     \label{fig:ub_scn_projCol_filter_thresh}
 \end{figure}
 
-% We must specify some filtering threshold for ignoring less relevant ties.
-% But what is a good threshold? < plot threshold vs density>
-We then set $\phi = 0.8$.
-This means only edges with similarity values higher than $0.8$ are kept, while weaker edges are discarded.
-We also define a score metric for each connected component, by simply adding up values of the \textit{count} attributes for each member node.
-For this visualization we have removed connected components with score lower than $500$.
+For investigating the formation of communities in the collectors projection, we first filter collectors ties by setting $phi = 0.8$.
+This means only edges holding similarity scores equal or higher than $0.8$ are kept, while weaker ones are discarded.
+This process leads to the formation of many small connected components or \textit{islands}, many of which are composed by a single collector.
+An additional step in the filtering process is thus required for removing less relevant connected components in the network.
+For calculating the relevance of a connected component we define a simple score which adds up the the values associated to the \textit{count} attribute of each node composing it.
+We then remove all components with score lower than $500$.
 
-% quickly describe the community detection algorithm used.
+% Communities
+We applied the \textit{Louvain} heuristic method for community detection \ref{Blondel2008}, which maximizes modularity scores in the network in successive steps.   
+The result is an optimized division of the network into modules within which nodes are more densely connected with each other than with external ones.
+%
+The collectors projection has a total of $20$ communities, $7$ of which are included in the giant component \ref{fig:ub_scn_family_projSp_communities}.
+We also computed the overall taxa composition for each group by summing up the species bags of each of their collectors.
+%
+The most central one is community $6$ (`grp $6$' in figure), which includes some of the most important UB collectors, among which \textit{`irwin,hs'}, \textit{`heringer,ep'}, \textit{`anderson,wr'}, \textit{`ratter,ja'} and \textit{`proenca,ceb'}.
+These are generalist collectors, having recorded $104$ from a total of $161$ distinct families. 
+The most recorded families by the community are \textit{Fabaceae} ($18.8\%$), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$). 
+%
 
-% Discuss some of the communities found
-The collectors projection has $20$ communities, $7$ of which composing a giant component \ref{fig:ub_scn_family_projSp}.
+\begin{table}[H]
+  \caption{}
+  \begin{center}
+  \begin{tabular}{l l l}
+      community & # taxa & top-5 taxa\\
+      \hline
+      6 & 104 & \textit{Fabaceae}, \textit{Rubiaceae}, \textit{Myrtaceae}, \textit{Asteraceae}, \textit{Melastomataceae} \\
+      \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+
 
 
 % ======================
 % The Sp set projection
+% TODO
 % The resulting network is also very dense.
 % The Sp projection is about 10 times denser than the collectors.
 % Simlarly, we must define a filtering threshold
@@ -584,5 +602,4 @@ This is not the case for the CWN network. If we consider the network as whole, i
 %% Features engineering
 
 %\section{Model Evaluation}
-
 
