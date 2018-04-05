@@ -408,26 +408,45 @@ We then remove all components with score lower than $500$.
 We applied the \textit{Louvain} heuristic method for community detection \ref{Blondel2008}, which maximizes modularity scores in the network in successive steps.   
 The result is an optimized division of the network into modules within which nodes are more densely connected with each other than with external ones.
 %
-The collectors projection has a total of $20$ communities, $7$ of which are included in the giant component \ref{fig:ub_scn_family_projSp_communities}.
+The collectors projection has a total of $20$ communities, $7$ of which are included in the giant component (Figure \ref{fig:ub_scn_family_projSp_communities}).
 We also computed the overall taxa composition for each group by summing up the species bags of each of their collectors.
 %
 The most central one is community $6$ (`grp $6$' in figure), which includes some of the most important UB collectors, among which \textit{`irwin,hs'}, \textit{`heringer,ep'}, \textit{`anderson,wr'}, \textit{`ratter,ja'} and \textit{`proenca,ceb'}.
-These are generalist collectors, having recorded $104$ from a total of $161$ distinct families. 
-The most recorded families by the community are \textit{Fabaceae} ($18.8\%$), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$). 
+These are generalist collectors, having recorded $104$ from a total of $161$ distinct families, being families \textit{Fabaceae} ($18.8\%$), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$) the most prevalent ones. 
 %
 
+\begin{sidewaystable}
 \begin{table}[H]
-  \caption{}
+  \caption{Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}. The total number of distinct taxa, together with the percentages of the top-3 most prevalent ones in each community are given.}
   \begin{center}
-  \begin{tabular}{l l l}
-      community & # taxa & top-5 taxa\\
+  \begin{tabular}{r r l l l l}
+      community & num of taxa & top taxon & 2nd taxon & 3rd taxon \\
       \hline
-      6 & 104 & \textit{Fabaceae}, \textit{Rubiaceae}, \textit{Myrtaceae}, \textit{Asteraceae}, \textit{Melastomataceae} \\
+0 & 15 & Asteraceae (72.7\%) & Fabaceae (9.1\%) & Melastomataceae (5.2\%) \\
+1 & 24 & Cyperaceae (50.4\%) & Fabaceae (9.9\%) & Oxalidaceae (7.2\%) \\
+2 & 28 & Fabaceae (58.8\%) & Myrtaceae (8.6\%) & Rubiaceae (6.0\%) \\
+3 & 27 & Poaceae (40.4\%) & Cyperaceae (12.5\%) & Asteraceae (7.5\%) \\
+4 & 37 & Myrtaceae (62.0\%) & Fabaceae (7.7\%) & Asteraceae (4.3\%) \\
+5 & 11 & Rubiaceae (82.7\%) & Myrtaceae (4.6\%) & Fabaceae (3.0\%) \\
+6 & 104 & Fabaceae (18.8\%) & Rubiaceae (10.1\%) & Myrtaceae (8.4\%) \\
+7 & 27 & Sematophyllaceae (26.8\%) & Hypnaceae (16.0\%) & Dicranaceae (13.8\%) \\
+8 & 14 & Desmidiaceae (31.4\%) & Scenedesmaceae (18.9\%) & Chlorellaceae (9.7\%) \\
+9 & 23 & Eunotiaceae (35.4\%) & Naviculaceae (15.2\%) & Pinnulariaceae (11.2\%) \\
+10 & 2 & Desmidiaceae (97.5\%) & Closteriaceae (2.5\%) \\
+11 & 18 & Poaceae (14.3\%) & Fabaceae (13.2\%) & Santalaceae (11.1\%) \\
+12 & 4 & Amblystegiaceae (63.6\%) & Polytrichaceae (22.6\%) & Dicranaceae (10.4\%) \\
+13 & 5 & Orchidaceae (73.6\%) & Myrtaceae (9.8\%) & Araceae (7.2\%) \\
+14 & 9 & Santalaceae (34.5\%) & Loranthaceae (17.4\%) & Myrtaceae (13.4\%) \\
+15 & 1 & Melastomataceae (100.0\%) \\
+16 & 6 & Fissidentaceae (53.2\%) & Calymperaceae (17.3\%) & Pottiaceae (16.8\%) \\
+17 & 7 & Rubiaceae (20.5\%) & Fabaceae (18.8\%) & Dicranaceae (16.2\%) \\
+18 & 6 & Arecaceae (36.1\%) & Myrtaceae (25.4\%) & Fabaceae (15.4\%) \\
+19 & 4 & Calophyllaceae (38.1\%) & Fabaceae (28.1\%) & Asteraceae (23.8\%) \\
       \hline
   \end{tabular}
   \end{center}
 \end{table}
-
+\end{sidewaystable}
 
 
 % ======================
