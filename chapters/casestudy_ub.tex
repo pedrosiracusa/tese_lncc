@@ -407,13 +407,8 @@ We then remove all components with score lower than $500$.
 % Communities
 We applied the \textit{Louvain} heuristic method for community detection \ref{Blondel2008}, which maximizes modularity scores in the network in successive steps.   
 The result is an optimized division of the network into modules within which nodes are more densely connected with each other than with external ones.
-%
-The collectors projection has a total of $20$ communities, $7$ of which are included in the giant component (Figure \ref{fig:ub_scn_family_projSp_communities}).
-We also computed the overall taxa composition for each group by summing up the species bags of each of their collectors.
-%
-The most central one is community $6$ (`grp $6$' in figure), which includes some of the most important UB collectors, among which \textit{`irwin,hs'}, \textit{`heringer,ep'}, \textit{`anderson,wr'}, \textit{`ratter,ja'} and \textit{`proenca,ceb'}.
-These are generalist collectors, having recorded $104$ from a total of $161$ distinct families, being families \textit{Fabaceae} ($18.8\%$), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$) the most prevalent ones. 
-%
+We also computed the overall taxa composition for each group by summing up the species bags of each of their collectors, which we show as percentages in Table \ref{table:ub_scn_family_projCol_composition}.
+
 
 \begin{sidewaystable}
 \begin{table}[H]
@@ -444,11 +439,35 @@ These are generalist collectors, having recorded $104$ from a total of $161$ dis
 19 & 4 & Calophyllaceae (38.1\%) & Fabaceae (28.1\%) & Asteraceae (23.8\%) \\
       \hline
   \end{tabular}
+  \label{table:ub_scn_family_projCol_composition}
   \end{center}
 \end{table}
 \end{sidewaystable}
 
 
+The collectors projection has a total of $20$ communities, $7$ of which are included in a giant component (Figure \ref{fig:ub_scn_family_projSp_communities}).
+The biggest community in the giant component \textit{grp $6$}, which includes some of the most important UB collectors, among which \textit{`irwin,hs'}, \textit{`heringer,ep'}, \textit{`anderson,wr'}, \textit{`ratter,ja'} and \textit{`proenca,ceb'}.
+These are generalist collectors, having recorded $104$ from a total of $161$ distinct families, being families \textit{Fabaceae} ($18.8\%$ of the group interest), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$) the most prevalent ones. 
+%
+The giant component also includes more specialized communities, such as
+\textit{grp $4$}, composed by collectors showing interests towards family \textit{Myrtaceae} ($62.0\%$); 
+\textit{grp $2$} towards family \textit{Fabaceae} ($58.8\%$);
+\textit{grp $3$} including herbaceous plants collectors, mainly from families \textit{Poaceae} ($40.4\%$), \textit{Cyperaceae} ($12.5\%$) and \textit{Asteraceae} ($7.5\%$); 
+\textit{grp $0$} including majoritarily \textit{Asteraceae} ($72.7\%$) collectors;
+\textit{grp $1$} mostly composed by collectors interested in families \textit{Cyperaceae} ($50.4\%$), \textit{Fabaceae} ($9.9\%$) and \textit{Oxalidaceae} ($7.2\%$) and
+\textit{grp $5$} composed by \textit{Rubiaceae} ($82.7\%$) collectors. 
+
+Apart from the giant component there are $7$ other connected components and $6$ isolated nodes, each of them making a distinct community.
+The second biggest connected component (\grp{$7$}) includes a more generalist part of the bryophytes collectors within polygon $(i)$ in Figure \ref{fig:ub_scn_agg_family_general}, where the most prevalent family is \textit{Sematophyllaceae} ($26.8\%$), followed by \textit{Hypnaceae} ($16.0\%$) and \textit{Dicranaceae} ($13.8\%$). 
+Another part of the bryophytes collectors was split into a distinct community (\textit{grp $12$}), more specialized in family \textit{Amblystegiaceae} ($63.6\%$).
+%
+Algae collectors from polygon $(ii)$ (Figure \ref{fig:ub_scn_agg_family_general}) are also split in two distinct communities.
+\textit{João Vademar Grando} and \textit{Christina Wyss Castelo Branco} are placed in \textit{grp 8} and \textit{Ana Lúcia Tostes Leite} is represented as an isolated node (\textit{grp $10$}).
+Besides \textit{Ana Lúcia Tostes Leite}, \textit{Maria das Graças M. de Souza} (within polygon $(iii)$ in Figure \ref{fig:ub_scn_agg_family_general}) is also represented as an isolated node, composing a community of a single entity.
+This happens because these collectors are signifficantly distinct from the rest of the herbarium in their recording behavior, such that no strong similarities are observed with any other collector.
+
+
+%
 % ======================
 % The Sp set projection
 % TODO
