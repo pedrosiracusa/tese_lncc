@@ -208,7 +208,6 @@ Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{`
 % ==========================
 % Species-collectors Network
 % --------------------------
-% TODO: network density: show that the SCN is sparse, but the projected networks are not
 \subsection{The UB Species-collectors Network}
 
 The resulting network had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ undirected edges connecting nodes from opposite sets. 
@@ -370,6 +369,8 @@ We used the species bag / quorum similarity rule (expression \ref{equation:cosin
 
 % ======================
 % The Col set projection
+% TODO
+%   - explain that nodes sizing in the figure represent the number of records for each collector in the herbarium dataset
 \paragraph*{Communities in the collectors projection.}
 \begin{figure}[!ht]
   	\centering
@@ -412,7 +413,7 @@ We also computed the overall taxa composition for each group by summing up the s
 
 \begin{sidewaystable}
 \begin{table}[H]
-  \caption{Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}. The total number of distinct taxa, together with the percentages of the top-3 most prevalent ones in each community are given.}
+  \caption{Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}. The total number of distinct taxa, together with the percentages of the top-3 most recorded ones in each community are given.}
   \begin{center}
   \begin{tabular}{r r l l l l}
       community & num of taxa & top taxon & 2nd taxon & 3rd taxon \\
@@ -447,18 +448,12 @@ We also computed the overall taxa composition for each group by summing up the s
 
 The collectors projection has a total of $20$ communities, $7$ of which are included in a giant component (Figure \ref{fig:ub_scn_family_projSp_communities}), which does not overlap with the giant component in Figure \ref{fig:ub_scn_family_projCol_communities}.
 The biggest community in the giant component is \textit{grp $6$}, including some of the most important UB collectors among which \textit{`irwin,hs'}, \textit{`heringer,ep'}, \textit{`anderson,wr'}, \textit{`ratter,ja'} and \textit{`proenca,ceb'}.
-These are generalist collectors, having recorded $104$ from a total of $161$ distinct families, being families \textit{Fabaceae} ($18.8\%$ of the group interest), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$) the most prevalent ones. 
+These are generalist collectors, having recorded $104$ from a total of $161$ distinct families, being families \textit{Fabaceae} ($18.8\%$ of the group interest), \textit{Rubiaceae} ($10.1\%$) and \textit{Myrtaceae} ($8.4\%$) the most recorded ones. 
 %
-The giant component also includes other smaller communities which are more specialized, such as
-\textit{grp $4$}, composed by collectors showing interests towards family \textit{Myrtaceae} ($62.0\%$); 
-\textit{grp $2$} towards family \textit{Fabaceae} ($58.8\%$);
-\textit{grp $3$} including herbaceous plants collectors, mainly from families \textit{Poaceae} ($40.4\%$), \textit{Cyperaceae} ($12.5\%$) and \textit{Asteraceae} ($7.5\%$); 
-\textit{grp $0$} including majoritarily \textit{Asteraceae} ($72.7\%$) collectors;
-\textit{grp $1$} mostly composed by collectors interested in families \textit{Cyperaceae} ($50.4\%$), \textit{Fabaceae} ($9.9\%$) and \textit{Oxalidaceae} ($7.2\%$) and
-\textit{grp $5$} composed by \textit{Rubiaceae} ($82.7\%$) collectors. 
+The giant component also includes other smaller communities showing predominant interests towards families \textit{Myrtaceae} (\textit{grp} $4$), \textit{Fabaceae} (\textit{grp} $2$), \textit{Poaceae} (\textit{grp} $3$), \textit{Asteraceae} (\textit{grp} $0$), \textit{Cyperaceae} (\textit{grp} $1$) and \textit{Rubiaceae} (\textit{grp} $5$)
 
 Apart from the giant component there are $7$ other connected components and $6$ isolated nodes, each of them making a distinct community.
-The second biggest connected component (\textit{grp{$7$}}) includes a more generalist part of the bryophytes collectors within polygon $(i)$ in Figure \ref{fig:ub_scn_agg_family_general}, where the most prevalent family is \textit{Sematophyllaceae} ($26.8\%$), followed by \textit{Hypnaceae} ($16.0\%$) and \textit{Dicranaceae} ($13.8\%$). 
+The second biggest connected component (\textit{grp{$7$}}) includes a more generalist part of the bryophytes collectors within polygon $(i)$ in Figure \ref{fig:ub_scn_agg_family_general}, where the most recorded family is \textit{Sematophyllaceae} ($26.8\%$), followed by \textit{Hypnaceae} ($16.0\%$) and \textit{Dicranaceae} ($13.8\%$). 
 Another part of the bryophytes collectors was split into a distinct community (\textit{grp $12$}), more specialized in family \textit{Amblystegiaceae} ($63.6\%$).
 
 Algae collectors from polygon $(ii)$ (Figure \ref{fig:ub_scn_agg_family_general}) are also split in two distinct communities.
@@ -466,25 +461,23 @@ Algae collectors from polygon $(ii)$ (Figure \ref{fig:ub_scn_agg_family_general}
 \textit{Maria das Graças M. de Souza} (within polygon $(iii)$ in Figure \ref{fig:ub_scn_agg_family_general}) is also represented as an isolated node, composing a community of a single collector.
 This happens because these collectors are signifficantly distinct from the rest of the herbarium in their recording behavior, such that no strong similarities are observed with any other collector.
 
-% TODO [connection] Now what if we want to have a better notion of taxonomic groups that best split collectors interests ? 
 Although Table \ref{table:ub_scn_family_projCol_composition} gives some intuition on the main taxonomic groups that compose the interests of each community, it is not very informative on how community-specific each of those families are.
-Family \textit{Fabaceae}, for instance, is relatively more prevalent in community $2$ (with $58.8\%$ of the records in that community), although it is also included as a top-3 taxon in communities $0$, $1$, $4$, $5$, $6$, $11$, $17$, $18$ and $19$.
+Family \textit{Fabaceae}, for instance, has been relatively more recorded by collectors from community $2$ (with $58.8\%$ of the records in that community), although it is also included as a top-3 taxon in communities $0$, $1$, $4$, $5$, $6$, $11$, $17$, $18$ and $19$.
 This makes it non-specific, in that collectors in many communities have demonstrated interests towards recording it.
 In contrast, family \textit{Desmidiaceae} is more community-specific, as it is only recorded by algae collectors composing communities $8$ and $10$ (both comprising together only $3$ collectors).
 Moreover, it is also relevant to identify groups of families that best split collectors interests in the network by observing which taxa are frequently recorded by a common set of collectors.
-A better approach for retrieving such information is described below, and consists of changing the projection perspective, focusing on the species set.
+A better approach for identifying such groups of interests is described below, and consists of changing the projection perspective, focusing on the species set.
 
 % ======================
 % The Sp set projection
-% TODO
 \paragraph*{Communities in the species projection.}
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
-    \caption{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $600$ were also omitted from the figure. Colors are used to distinguish communities.}
+    \caption{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $600$ were also omitted from the figure. Colors are used to distinguish communities and nodes sizes reflect families prevalence in the dataset.}
     \label{fig:ub_scn_family_projSp_communities}
 \end{figure}
-% The number of nodes and edges of the family-aggregated network is lower than the collectors projection
+
 The species projection of the family-aggregated UB SCN network is a one-mode network exclusively representing taxa at the family resolution, with a total of $474$ nodes, $43756$ edges and average node degree of $184$.
 Edges between pairs of taxa are weighted according to their quorum vector similarities, such that strongly connected taxa are those which have been recorded by similar sets of collectors, in similar proportions.
 %
@@ -496,8 +489,10 @@ It is also important to observe that although the absolute number of nodes and e
 % Filtering
 In order to reduce network density and better visualize the formation of communities we performing a filtering routine to remove less relevant families associations, analogously to what we've done for the collectors projection.
 As network density decreases with increasing values for $\phi$ (Figure \ref{fig:ub_scn_projSp_filter_thresh}), we again set the threshold value to $0.8$, omitting ties that are weaker than the threshold value. 
-As the process produces many islands, we use the same relevance score from the collectors projection for filtering out non-relevant components, though now using a threshold value of $500$.
+As the process produces many islands, we use the same relevance score from the collectors projection for filtering out non-relevant components, though now using a threshold value of $600$.
 The resulting network is shown in Figure \ref{fig:ub_scn_family_projSp_communities}.
+Nodes were sized based on the \textit{count} attribute, which indicates how common each family is in the herbarium dataset or, in other words, their \textit{prevalence}. 
+Nodes colors reflect the communities they've been assigned to, using the same approach as we did for the collectors projection.
 
 \begin{figure}[!ht]
   	\centering
@@ -507,13 +502,30 @@ The resulting network is shown in Figure \ref{fig:ub_scn_family_projSp_communiti
 \end{figure}
 
 % Communities description
-The species projection has a total of $15$ communities, three of which belong to the giant component. Every other component in the graph 
+% TODO rephrase
+The species projection has a total of $15$ communities, three of which belong to the giant component. 
+The biggest community is \textit{grp $0$}, containing families that are, in general, more widely recorded by herbarium collectors, as it is the case of \textit{Fabaceae}, \textit{Euphorbiaceae} and \textit{Rubiaceae}.
+Most of them form a densely-connected structure, containing central families that are all recorded by a very similar set of collectors.
+However, there are some families included in the same community which are more loosely connected, and would quickly become isolated nodes if we continued to increase $\phi$. 
+This is the case for families \textit{Asteraceae}, \textit{Cyperaceae} and \textit{Orchidaceae}, which indicates that they are recorded by more specialized collectors.
+These families are also prevalent in the herbarium dataset.
+
+Community $2$ is composed by fern families (gymnosperms), thus also reflecting a taxonomic group of interest.
+Some of the included families are more recorded by fern specialist collectors, as it is the case of \textit{Gleicheniaceae}, \textit{Dryopteridaceae} and \textit{Hymenophyllaceae}.
+Others as \textit{Pterydaceae}, \textit{Anemiaceae} and \textit{Polypodiacea} are recorded by collectors who also record flowering plants such as families \textit{Rubiaceae} and \textit{Iridaceae}.
 
 
+The remaining $12$ communities are all equivalent to islands, $6$ of which formed by isolated nodes.
 
-% Small nodes are strongly correlated -> The same groups of collectors recording distinct families
+Community $4$ contains bryophyte families, mostly recorded by collectors within polygon $(i)$ in Figure \ref{fig:ub_scn_agg_family_general}.
 
-% Some very prevalent families are connected to many less prevalent ones
+Community $6$ contains algae families, mostly diatoms (polygon $(iii)$ in Figure \ref{fig:ub_scn_agg_family_general}).
+
+Communities $9$ and $7$ are composed by green algae families recorded by collectors within polygon $(ii)$ in Figure \ref{fig:ub_scn_agg_family_general}.
+As `\textit{leite,alta}' is substantially distinct from `\textit{grando,cw}' and `\textit{castelo-branco,}' regarding their recording interests, families \textit{Desmidiaceae} and \textit{Closteriaceae} are included in a distinct island.
+
+Families \textit{Myrtaceae} (\textit{grp $3$}) and \textit{Poaceae} (\textit{grp $5$}) are both very prevalent in the herbarium and are isolated.
+This indicates that they are recorded by more specialized collectors.
 
 
 
@@ -522,12 +534,12 @@ The species projection has a total of $15$ communities, three of which belong to
 % Assortativity in SCN
 % Network resilience: If the SCN is dissortative, then it is easier to break it by removing hubs (therefore forming many specialized subgroups of collectors). Otherwise, removing any of the main hubs would not have a considerable effect on fractioning the network (Specialized communities are unlikely to be formed if an important collector leaves the herbarium). 
 
-
-
 Communities discussed above are composed by collectors that share interests in common taxa and, conversely, taxa that has been sampled by a common set of collectors.
 These are interest networks.
 They do not represent collaborative ties between collectors in field.
 This can be investigated with CWN models, as described below.
+
+
 
 % ===============================
 % UB Collectors Coworking Network
