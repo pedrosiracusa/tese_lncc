@@ -1,0 +1,5 @@
+This file contains some of the main points that should be overstated throughout the dissertation text.
+
+Projections
+  Sp projection
+    - Finding groups of interests
