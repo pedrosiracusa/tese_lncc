@@ -9,30 +9,31 @@ From SCNs, we retrieve information on which collectors have recorded which speci
 On the other hand, CWNs allow us to investigate which collectors team up with whom during fieldwork, although here species are not represented as entities.
 As both network models were elaborated based on a framework for social network analytics, we first review some general concepts from the network science and graph theory domains that are used in this study.
 
-\art{Parei minha revisao aqui}
-
 % ======================
 % ======================
 % Network Science Theory
 % ----------------------
 
-\section{Network Science: A theoretical background}
+\section{Network science: A theoretical background}
 
-Network Science refers to a relatively new domain of scientific investigation, aiming to describe emergent properties and patterns from complex systems of interacting entities.
+Network science refers to a relatively new domain of scientific investigation, which aims at describing emergent properties and patterns from complex systems of interacting entities.
 Such relational systems are naturally represented as networks, in which interactions are represented as pairwise connections (\textit{links}) between entities (\textit{nodes}) and assume particular semantics depending on the nature of the modeled phenomenon.
-The rise of this field is strongly associated to recent advances of information technology, which provided scientists with novel tools for collecting, storing and processing data from many knowledge domains more efficiently and in larger scales.
-Although a variety of networked systems in many disciplines had been studied long before that, technological advances allowed us to model real-world systems in much more details, from large volumes data that are often public or easily accessible for the investigator.
+The rise of this field is strongly associated with recent advances of information technology, which provided scientists with novel tools for collecting, storing, and processing data from many knowledge domains in a more efficient way and at larger scales.
+Although a variety of networked systems in many disciplines have been studied long before that, technological advances allowed the modeling of real-world systems in much more details, from large volumes data that are often public or easily accessible for the investigators.
 
-In a classic $1999$ paper which has inspired many researchers to engage into the field of network science, \textit{Albert-László Barabási}, \textit{Hawoong Jeong} and \textit{Réka Albert} built a model of the World-Wide Web from data collected by a web crawler \cite{Albert1999}. 
+In a seminal $1999$ paper that has inspired many researchers to engage into the field of network science, \textit{Albert-László Barabási}, \textit{Hawoong Jeong}, and \textit{Réka Albert} built a model of the World-Wide Web from data collected by a web crawler~\cite{Albert1999}. 
 Their model represented the web as a set of interconnected documents, where a connection between document $a$ and document $b$ existed if either $a$ contained hyperlinks pointing to $b$ (outgoing links of $a$) or if $a$ was referred by $b$ through hyperlinks (incoming links of $a$).
-By exploring some of the model topological features, they estimated that although the web is composed by a huge number of documents (by that time there were around $8 \times 10^8$ documents online), two randomly chosen documents are, in average, separated by as few as 19 links. 
+By exploring some of the model topological features, they estimated that although the web is composed of a huge number of documents (by that time there were around $8 \times 10^8$ documents online), two randomly chosen documents are, in average, separated by a relatively small number of links (19~in their study). 
 
 Although surprising, this finding was in fact consistent with a generative model proposed by \textit{Watts} and \textit{Strogatz} in $1998$ \cite{Watts1998}.
-In that paper authors argued that real-world networked systems are neither completely randomly nor completely regularly connected, and demonstrated that more realistic topologies could be derived by combining features from both extremes.
-Following this approach they were able to generate network models which became known as the \textbf{small-world networks}, in which nodes are separated from others by very few connections, even for very large systems.
-The name of the networks refers to a phenomenon known as the \textit{small-world}, which became popular after the experimental work of \textit{Stanley Milgram} \cite{Milgram1969} as the ``six degrees of separation''.
-The concept referred to the finding that two arbitrary individuals in the world are separated by at most 6 connections, following an acquaintances chain.
- 
+In that paper, authors argued that real-world networked systems are neither completely randomly nor completely regularly connected, and demonstrated that more realistic topologies could be derived by combining features from both extremes.
+Following this approach, they were able to generate network models which became known as the \textbf{small-world networks}, in which nodes are separated from others by very few connections, even for very large systems, while still keeping a relatively high clustering structure.
+\art{Lembre-se que redes small-world combinam simultaneamente a diametro pequeno E clustering alto.}
+This kind of networks was named after a phenomenon known as \textit{small-world}, which became popular after the experimental work of \textit{Stanley Milgram} \cite{Milgram1969} that also led to the expression ``six degrees of separation''.
+The concept referred to the experimental finding that two arbitrary individuals in a large population are separated by at most 6 connections, following an acquaintances chain~(i.e. a relatively low number of connections compared to the population size).
+
+\art{Parei minha revisao aqui}
+
 Besides small-world networks, other models have been proposed in literature to explain mechanisms by which real world networks grow and acquire their particular topologies.
 A \textit{preferential attachment mechanism} was proposed by \textit{Barabási} as ruling network growth by preferentially connecting new nodes to those in the network which already have many connections \cite{Albert2002}. 
 This phenomenon is also referred to as ``the rich gets richer'' effect, and allows the appearance of few heavily connected nodes in the network, called \textit{hubs}. 
