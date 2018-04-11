@@ -59,8 +59,9 @@
 % Types of biodiversity data
 % --------------------------
 
+% Give an overview of commonly used types of biodiversity data
 % Survey data (species checklists) -> examples: Catalogue of life
-% Species occurrence data
+% Here we're interested in Species occurrence data
 
 % ===============
 % Occurrence data
@@ -105,6 +106,20 @@
 %% Determination issues: many specimens are incorrectly identified;
 %% outdated taxonomy;
 %% georreferencing errors.
+
+% Data atomicity issues:
+% Some fields are not atomic: more than one entity is represented as a single data element. 
+% In the recordedBy field, Darwin Core standards state that distinct names should be separated by | (delimiter).
+% This varies depending on the standard a collection uses. For example, the BRAHMS system recommends using a ';' as the delimiter.
+% BRAHMS docs: https://herbaria.plants.ox.ac.uk/bol/brahms/support/documentation
+
+% Identity issues:
+% Entities are not guaranteed to have the same ids through distinct datasets.
+% Even in the same datasets there may be variations in their names
+% this is specially problematic for fields like the collectors field, which is overlooked for most applications of such data. 
+% Some standards provide guidelines for including collectors names: last name + first initials...
+% However different standards give distinct guidelines and thus name variants are common.
+% How to map all name variants to the same entity? -> This leads to the Entity-resolution problem
 
 % Data fit for use
 

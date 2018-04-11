@@ -1,5 +1,8 @@
 This file contains some of the main points that should be overstated throughout the dissertation text.
 
+SCNs
+  They can be thought of as roadmaps of collectors and taxa they record.
+
 Projections
   Sp projection
     - Finding groups of interests

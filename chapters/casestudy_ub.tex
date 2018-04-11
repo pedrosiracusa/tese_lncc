@@ -37,6 +37,8 @@ Table \ref{table:ub_collectors_florescer} lists some of the most historically re
 %\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
 
 We have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}.
+This dataset is also available through the CRIA portal % TODO
+The UB herbarium uses the BRAHMS data management system % TODO
 %
 Before actually building the network models we first executed some data cleaning routines against the dataset, which basically consisted of filtering out unwanted records and resolving some inconsistencies in collectors names.
 %
@@ -46,6 +48,7 @@ The process is described in more details in section \ref{section:ub_characteriza
 %
 All cleaning routines, data analysis and models construction were performed using \textit{Python3} language and packages listed in table <>. % TODO Add table with python packages: Networkx, Pandas, Scipy, Numpy 
 
+\ped{Devo construir esta tabela? Com bibliotecas usadas e uma breve descrição}
 
 
 
@@ -211,12 +214,13 @@ Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{`
 \subsection{The UB Species-collectors Network}
 
 The resulting network had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ undirected edges connecting nodes from opposite sets. 
+Average degree for the collectors and species set are respectively $21.08$ and $9.30$.
 
 \paragraph*{Connected components.}
 The UB SCN network is composed by a total of $351$ connected components, the largest of which (the giant component, or $c_1$) contains most nodes in the network ($93.6\%$ of the collectors and $95.0\%$ of the species). 
 From a collector's perspective, the requirement for it to belong to the giant component is that it must have collected at least one species in common with another collector who is already included in the giant component. The same reasoning applies to species nodes as well by observing the inverse relationship.
 Apart from the giant component, most other connected components contain as few as two or three nodes. These represent collectors who have never recorded a species in common with any collector from $c_1$; and conversely, species that have never been collected by any of those $c_1$ collectors.
-One of those $350$ remaining connected components, however, is considerably larger than the others, with a total of $3$ collectors and $141$ species. For convenience we'll refer to it as the second largest component ($c_2$) throughout this section.
+One of those $350$ remaining connected components, however, is considerably larger than the others, with a total of $3$ collectors and $141$ species. We refer to it as the second largest component ($c_2$) throughout this section.
 
 From all the records that form the giant component, $95.2\%$ are from Brazil, from which $53\%$ were recorded either in the Federal District or in the state of Goiás. 
 Also, $c_1$ is mostly composed of species within phylum \textit{Tracheophyta} ($88\%$ of all records), followed by phylum \textit{Bryophyta} (mosses), comprising $8\%$ of the records. 
@@ -226,7 +230,6 @@ The remaining components ($c_3,c_4,..., c_{351}$) include a total of $431$ disti
 The most representative country is the United States, holding $23.9\%$ of the records, followed by Brazil with $21\%$. 
 Considering the records from within Brazil, only $7.8\%$ of them were collected in the Federal District. Most of them ($59.2\%$) are from the southeast region, among which the state of São Paulo comprises $52.5\%$.
 
-
 We have hypothesized some possible explanations for the existence of so many small connected components in the UB herbarium SCN with such characteristics. First, they could be a consequence of specimen exchange, a practice that is widely adopted among herbaria for collaboratively diversifying and distributing their collections \cite{Groom2014}. Exchange materials are typically duplicated exsiccates collected in field that a sender institution dispatches to a receiver institution. The receiver institution then incorporates those materials to its scientific collection, and ocasionally sends back to the other institution some duplicate exsiccates of its own.
 From the receiver herbarium viewpoint the inclusion of records from exchanges usually adds new species and collectors, for they are a sample reflecting the sender institution's purpose and the interests of people associated to it. If both the collectors and species from such records were previously inexistent in the receiver collection, no links to $c_1$ or to any other connected component that already exists are formed. These records thus get included into its SCN network as nodes and edges composing new small connected components. We should overstate, however, that including exchange records does not necessarily create new connected components. New species or collectors could be included in $c_1$ in case either the species or at least one of the collectors associated to the exchange record are already linked to it.
 
@@ -235,7 +238,7 @@ Cryptic organisms such as algae, fungi and mosses are examples of groups which t
 If collectors who record such groups also show a very high specificity towards them, it gets more likely that they lack links to other species which are more commonly recorded by the rest of the collectors, thus forming structures that are detached from the giant component. 
 In case these collectors regularly deposit their materials in the herbarium it would be natural to observe them composing connected components with a relatively large number of species.
 The connected component $c_2$, for instance, includes \textit{Ana Lúcia Tostes Leite} (\textit{leite,alta}), one of the herbarium's most relevant continental algae collector as shown in Table \ref{table:ub_collectors_florescer}.
-She holds a total of $2757$ records, from $87$ distinct species, all of them being charophytes, a division of green algae (Figure \ref{fig:ub_scn_agg_family_general}, community $ii$).
+She holds a total of $2757$ records, from $87$ distinct species, all of them being charophytes, a division of green algae (Figure \ref{fig:ub_scn_agg_family_general}, within polygon $ii$).
 
 
 
@@ -359,9 +362,9 @@ All those organisms are typical of limnic systems.
  
 
 We could use a whole set of modularity detection algorithms in order to further split the network core and identify communities which are visually less conspicuous. 
+However, if we used general modularity algorithms --- appropriate for one-mode graphs --- for analyzing non-projected bipartite networks, a set of bipartite constraints and assumptions would be systematically ignored \cite{Borgatti2015}.
 A common practice among the statistical physics community for detecting communities in bipartite networks has been to first obtain bipartite projections and then running unipartite community detection algorithms for each of them, separately.
 In order to minmize information loss, obtaining weighted bipartite projections is preferred over unweighted, as the latter have shown to produce poor results \cite{Guimera2007}.
-
 
 In order to investigate more thoroughly communities of common interests under complementary perspectives we projected the family-aggregated SCN network shown in Figure \ref{fig:ub_scn_agg_family_general} into both the collectors (Figure \ref{fig:ub_scn_family_projCol_communities}) and the species sets (Figure \ref{fig:ub_scn_family_projSp_communities}), using the approach described in section \ref{section:scn_projection}.
 We used the species bag / quorum similarity rule (expression \ref{equation:cosine_similarity}) for weighting the edges in the resulting unipartite networks.
@@ -384,7 +387,14 @@ In fact, the density of our family-aggregated SCN collectors projection is $2.37
 This happens because higher-level taxa represent broader ranges of organisms, and thus assume ties from all lower-rank taxa they are composed of.
 In other words the lowest the taxonomic resolution of the network model is, the most inclusive are taxa modeled as nodes, making it more likely that collectors record at least one specimen belonging to it. 
 
-We could reduce the density of the projected network by ignoring weaker ties, which form between collectors who are less similar in their species bags.
+% Similarity between collectors TODO
+Another issue is that collectors with very few records in the dataset are more likely to have recorded identical sets of taxa by chance, leading to identical species bags.
+As a consequence they are tied by edges with similarity very close to $1$.
+This explains the formation of many fully connected regions containing low-degree nodes, which contribute to increasing network density.
+More experienced collectors can be observed to have high similarity with others, but it is unlikely to be very close to $1$.
+%% PLOT max similarity vs degree
+
+We could reduce the density of the projected network by both ignoring nodes with very low degrees and ignoring weaker ties, which form between collectors who are less similar in their species bags.
 For that we define a filtering routine, which consists of iterating through all entries $A_{i,j}$ of the network's biadjacency matrix and setting them to $0$ in case their respective values fall below a user-defined filter threshold $\phi$.
 Acceptable values for the filtering coefficient $\phi$ range within the interval $[0,1[$, and represents the minimum similarity score that should be observed for a pair of collectors for their tie to be considered relevant.
 Figure \ref{fig:ub_scn_projCol_filter_thresh} illustrates the effect of increasing $\phi$ on the density of the UB SCN collectors projection, under three distinct taxonomic resolutions.
@@ -404,6 +414,8 @@ This process led to the formation of many small connected components (or \textit
 An additional step in the filtering process was thus required for removing less relevant connected components from the network.
 In order to calculate the relevance of a component we defined a simple relevance score which adds up the the values associated to the \textit{count} attribute of each node composing it.
 We then removed all islands with score lower than $500$.
+
+
 
 % Communities
 We applied the \textit{Louvain} heuristic method for community detection \cite{Blondel2008}, which maximizes modularity scores in the network in successive steps.   
@@ -532,8 +544,13 @@ This indicates that they are recorded by more specialized collectors.
 
 % ====================
 % Assortativity in SCN
+% TODO
+% Do collectors who have recorded many taxa (generalists) tend to record taxa recorded by many collectors (generalists)? The inverse also holding.
+
 % Network resilience: If the SCN is dissortative, then it is easier to break it by removing hubs (therefore forming many specialized subgroups of collectors). Otherwise, removing any of the main hubs would not have a considerable effect on fractioning the network (Specialized communities are unlikely to be formed if an important collector leaves the herbarium). 
 
+
+% Conclusion
 Communities discussed above are composed by collectors that share interests in common taxa and, conversely, taxa that has been sampled by a common set of collectors.
 These are interest networks.
 They do not represent collaborative ties between collectors in field.
@@ -544,33 +561,68 @@ This can be investigated with CWN models, as described below.
 % ===============================
 % UB Collectors Coworking Network
 % -------------------------------
+% TODO Figure degree dist.
+% TODO Figure communities (edges weighted with hyperbolic weighting)
+% TODO Figure team sizes frequency
+% TODO Table degree (sorted by Kw) --> ColName | k | kw (considering team size (hyperbolic weighting) | num_recs 
 
 \subsection{The UB Collectors Coworking Network}
 % TODO: Add average path size connecting collectors
 % From table \ref{table:ub_collectors_florescer}, \textit{Irwin} mostly contributed to the UB herbarium from year $1962$ to $1976$, in the context of the Central Brazil Expedition carried out by the New York Botanical Garden \footnote{\url{http://sciweb.nybg.org/science2/hcol/planalto/index.asp}}. Together with \textit{William R. Anderson} (\textit{anderson,wr}), \textit{Irwin} was a key member of the expedition staff. 
 
-As the UB was built based on the same set of records as the SCN model explored in the previous section, the number of nodes is $6768$, which is equivalent to the number of collectors nodes in the SCN.
-Here all ties are established between collectors, with a total of $10391$ edges.
-There are $2673$ ($39.5\%$) singleton collectors (those having no collaborations, or $k=0$).
-
-The network is composed by a giant component, containing $3114$ nodes ($46\%$ of the nodes) and $2990$ other isolated components, holding the remaining $54\%$.
-However, almost all isolated components are in fact singleton collectors (those who have never collaborated with any other collector). All singletons are considered a distinct isolated component, and that's why there are so many of them. Only $317$ isolated components are formed by collectors with at least one collaborative tie.
-The percentage of nodes in the giant component is small if compared to other social networks (most are between $80\% - 90\%$) \cite{Newman}. This observed low size of the giant component might be due to records from foreign teams, which have never collected with anyone from the giant component. These records give a poor coverage of the real activities of these collectors, which could be possibly obtained from other herbaria.
-
+As the UB was built based on the same set of records as the SCN model explored in the previous section, the number of nodes is $6768$, equivalent to the number of collectors nodes in the SCN model.
+A total of $10391$ edges represent collaborative ties between collectors.
+The average degree is $3.07$.
 The overall network density is $4.5 \times 10^{-4}$.
-If we only consider the network giant component we get a density of $1.95 \times 10^{-3}$.
-If we only consider the herbarium core we get a density of $x$.
 
-\paragraph*{Distinct collaborators per collector.}
-Collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers.
-However, similarly to the SCN network, degree distribution for the CWN network does not fit a poisson distribution well (which is characteristic of random networks). It fits better a power law with parameter $\alpha=2.2$.
+\paragraph*{Connected components.}
+The UB CWN network is composed by a a total of $2991$ connected components, from which the largest one --- the giant component ($c_1$) ---  contains $46\%$ of all nodes in the network.
+The average degree of nodes within the giant component $c_1$ is $6.08$.
+%
+Moreover, only $318$ of the connected components ($c_1, c_2, ..., c_{318}$) are composed by collectors with at least one collaborative tie.
+The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all composed by single disconnected nodes (all have $k=0$), which we refer to as \textit{singleton} collectors.
+Singleton collectors are those who have never recorded specimens collaboratively --- or at least they do not include their collaborators' names as authors of the records ---, and thus are considered as having no structural role in the collaboration network.
+They comprise $39.5\%$ of all nodes in the network.
+%
+One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative.  % of records from all singleton collectors
+This comprises $18.14\%$ of all records by singleton collectors.
+All other $2672$ singleton collectors have fewer than $400$ records.
+Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been obtained in Brazil.
+%
+The percentage of nodes in the giant component is small if compared to other social networks (most are between $80\% - 90\%$) \cite{Newman}. 
+This observed low size of the giant component might be due to records from foreign teams, which have never collected with anyone from the giant component. 
+These records give a poor coverage of the real activities of these collectors, which could be possibly obtained from other herbaria.
+%
+The low density observed for the whole network is due to the high percentage of isolated nodes, and can be increased by almost $10$ times if we only consider the giant component. 
+The density of the giant component $c_1$ is $1.95 \times 10^{-3}$.
+% What is the degree of these nodes? Where are these collectors from? It is unlikely that novice collectors would record alone, without a supervisor. If these are low-degree nodes they are probably experienced foreign collectors, who have low degrees because they've only contributed to the herbarium with few records (as exchanges).
 
-Although team sizes are typically not very large (not exceeding 9 collaborators in the UB herbarium), some collectors have gathered a large number of collaborators throughout their carreers, much more than the average. %% TODO: Add figure with team sizes
+\paragraph*{Sizes of collectors teams.}
+% TODO FIGURE: team size frequency
+% Only one record with team size of $9$.
+% Strings are truncated for collectors field with $8$ collectors or more.
+% There is apparently a constraint preventing teams with more than $9$ collectors. Maybe this is due to restrictions on the system used for entering data, which does not accept more than $9$ collectors for a record.
+
+\paragraph*{How collaborative are collectors?}
+% We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
+If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers.
+However, this value reflects the high number of singleton collectors, for which $k=0$.
+If we only consider the giant component, $\langle k\rangle = 6.08$.
+If we exclude the giant component, $\langle k\rangle = 0.51$. 
+The average degree lower than $1$ is explained by the existance of so many singleton collectors.
+%
+Similarly to the SCN network, degree distribution for the CWN network does not fit a poisson distribution well (which is characteristic of random networks). 
+It fits better a power law with parameter $\alpha=2.2$.
+
+
+Although team sizes are typically not very large (not exceeding 9 collaborators in the UB herbarium), some collectors have gathered a large number of collaborators throughout their carreers, much more than the average. 
 In contrast, there are also many collectors who have never recorded collaboratively with any other collector.
 
 Depending on the degree centrality metric we use, we get a different ranking of most influential collectors.
 The non-weighted degree $k$ ranks collectors based on the total number of collaborations they've established to distinct collectors, irrespective of the number of times each association was observed.
-If we use the weighted degree $k_w$ metric instead, we must specify which weighting rule to use. If we use the edge \textit{count} attribute, which is simply the number of times a given association between two collectors occur, the weighted degree for each collector is equivalent to his/her total number of collaborative records. which also considers the number of recurrent collaborations with each collaborator, we consider in the ranking rule the number of collaborative ties a collector has established to others, irrespectively of the number of distinct collectors.
+We might want to consider the number of recurrent collaborations with each collaborator, by using the weighted degree metric.
+If we use the weighted degree $k_w$ metric, we must specify which weighting rule to use. 
+If we use the edge \textit{count} attribute, which is simply the number of times a given association between two collectors occur, the weighted degree for each collector is equivalent to his/her total number of collaborative records. 
 
 We could use another weighting rule for calculating the $k_w$ centrality, for example the hyperbolic weighting.
 
@@ -578,12 +630,13 @@ We could use another weighting rule for calculating the $k_w$ centrality, for ex
 %% FIGURE HERE %%
 
 For a concrete example, \textit{Howard S. Irwin} (\textit{irwin,hs}) is the top collector in terms of absolute number of collaborative ties. He has collected a total of $14803$ specimens in field with others. However, the network indicates that he usually works with a more restricted team of partners. He holds only $39$ links to distinct collectors, which puts him in the $43th$ position of the rank. 
-On the other hand, \textit{James A. Ratter} (\textit{ratter,ja}), who is the third with most connections to distinct collectors, is on the $20th$ position in the $k_w$ rank, with a total of $2962$ collaborative collectors.
+On the other hand, \textit{James A. Ratter} (\textit{ratter,ja}), who is the third with most connections to distinct collectors, is at the $20th$ position in the $k_w$ rank, with a total of $2962$ collaborative collectors.
 There are only $3$ collectors in common between the top-10 collectors in the $k_w$ and the $k$ ranks.
 % TODO: Include hyperbolic weighting (and compare with degree k)
 
 As in this model it is possible for even for collaborative collectors to record some records alone, the weighted degree is not necessarily equivalent to his/her total number of records. Instead, it is equivalent to his/her total number of collaborative records.
 
+% Assortativity
 \paragraph*{Do collaborative collectors prefer to work with other collaborative ones?}
 One relevant question we might ask is whether collectors tend to form collaborative ties preferentially with others holding a similar number of collaborative ties.
 Here we refer to collaborative collectors as those holding collaborative ties with many distinct collectors, irrespective of the number of times each individual link occurs. Those collectors which hold strong collaborative ties with few collaborators are thus less collaborative than the former case. In this sense, $proenca,ceb$ is considered more collaborative than $irwin,hs$, for instance.
@@ -610,20 +663,7 @@ This is not the case for the CWN network. If we consider the network as whole, i
 % TODO: Betweeness: Which collectors facilitate collaborative behavior?
  
  
-%%
-%% Projected graphs info
 
-%% If we used general graph algorithms for analyzing non-projected bipartite networks, a set of bipartite constraints would be ignored, such as only nodes from opposite sets being allowed to be adjacent. Depending on the algorithm this could be a problem or not {Borgatti2015}. Some algorithms are easily adapted to the bipartite case
-
-%% Projections degree distribution
-
-
-
-% Projections
-
-% Similarity between collectors
-% It should be noticed, however, that in practice collectors holding similarity values very close to one tend to be those with very few records in the dataset. More experienced collectors can have higher similarities with some collectors, but it is usually not very high.
-%% PLOT max similarity vs degree
 
 
 %%% QUESTIONS
