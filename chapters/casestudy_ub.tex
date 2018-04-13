@@ -613,6 +613,8 @@ The average degree lower than $1$ is explained by the existance of so many singl
 Similarly to the SCN network, degree distribution for the CWN network does not fit a poisson distribution well (which is characteristic of random networks). 
 It fits better a power law with parameter $\alpha=2.2$.
 
+%% degree dist. FIGURE %%
+
 
 Although team sizes are typically not very large (not exceeding 9 collaborators in the UB herbarium), some collectors have gathered a large number of collaborators throughout their carreers, much more than the average. 
 In contrast, there are also many collectors who have never recorded collaboratively with any other collector.
@@ -625,9 +627,40 @@ If we use the edge \textit{count} attribute, which is simply the number of times
 
 We could use another weighting rule for calculating the $k_w$ centrality, for example the hyperbolic weighting.
 
-%% TABLE HERE %%
+\begin{table}[H]
+  \caption{}
+  \begin{center}
+  \begin{tabular}{l r r r r}
+      collector & num of records & $k$ & num of collaborative records & $k_w^{hyperb}$ \\
+      \hline
+        proenca,ceb & 4803 & 0.88 & 218 & 4203.67 \\
+        faria,jeq & 4687 & 0.83 & 117 & 3881.00 \\
+        ratter,ja & 4728 & 0.26 & 111 & 1084.92 \\
+        munhoz,cbr & 3191 & 0.83 & 109 & 2493.17 \\
+        silva,ma & 823 & 0.57 & 93 & 403.60 \\
+        oliveira,rc & 723 & 0.89 & 92 & 595.25 \\
+        harley,rm & 2564 & 0.66 & 90 & 1455.83 \\
+        mendes,vc & 1696 & 1.00 & 89 & 1695.00 \\
+        souza,vc & 505 & 0.56 & 89 & 237.62 \\
+        carvalho,avm & 884 & 0.75 & 88 & 651.50 \\
+        walter,bmt & 709 & 0.51 & 80 & 296.08 \\
+        mendonca,rc & 1162 & 0.54 & 76 & 603.75 \\
+        franca,f & 538 & 0.74 & 72 & 389.67 \\
+        melo,e & 682 & 0.60 & 65 & 378.67 \\
+        martins,rc & 715 & 0.93 & 63 & 664.00 \\
+        silva,gp & 266 & 0.40 & 61 & 71.80 \\
+        giulietti,aml & 134 & 0.69 & 60 & 70.08 \\
+        cardoso,es & 385 & 1.00 & 59 & 382.75 \\
+        carvalhosilva,m & 1635 & 0.98 & 58 & 1436.00 \\
+        santana,sc & 88 & 0.89 & 57 & 77.00 \\
+      \hline
+  \end{tabular}
+  \label{table:ub_cwn_}
+  \end{center}
+\end{table}
 %% FIGURE HERE %%
 
+% TODO: REWRITE!! Remember that k_w using count attribute does not give the absolute number of collaborative records!
 For a concrete example, \textit{Howard S. Irwin} (\textit{irwin,hs}) is the top collector in terms of absolute number of collaborative ties. He has collected a total of $14803$ specimens in field with others. However, the network indicates that he usually works with a more restricted team of partners. He holds only $39$ links to distinct collectors, which puts him in the $43th$ position of the rank. 
 On the other hand, \textit{James A. Ratter} (\textit{ratter,ja}), who is the third with most connections to distinct collectors, is at the $20th$ position in the $k_w$ rank, with a total of $2962$ collaborative collectors.
 There are only $3$ collectors in common between the top-10 collectors in the $k_w$ and the $k$ ranks.
