@@ -515,7 +515,8 @@ Nodes colors reflect the communities they've been assigned to, using the same ap
 % Communities description
 % TODO rephrase
 The species projection has a total of $15$ communities, three of which belong to the giant component. 
-The biggest community is \textit{grp $0$}, containing families that are, in general, more widely recorded by herbarium collectors, as it is the case of \textit{Fabaceae}, \textit{Euphorbiaceae} and \textit{Rubiaceae}.
+%
+The largest community is \textit{grp $0$}, containing families that are, in general, more widely recorded by herbarium collectors, as it is the case of \textit{Fabaceae}, \textit{Euphorbiaceae} and \textit{Rubiaceae}.
 Most of them form a densely-connected structure, containing central families that are all recorded by a very similar set of collectors.
 However, there are some families included in the same community which are more loosely connected, and would quickly become isolated nodes if we continued to increase $\phi$. 
 This is the case for families \textit{Asteraceae}, \textit{Cyperaceae} and \textit{Orchidaceae}, which indicates that they are recorded by more specialized collectors.
@@ -562,8 +563,7 @@ This can be investigated with CWN models, as described below.
 % -------------------------------
 % TODO Figure degree dist.
 % TODO Figure communities (edges weighted with hyperbolic weighting)
-% TODO Figure team sizes frequency
-% TODO Table degree (sorted by Kw) --> ColName | k | kw (considering team size (hyperbolic weighting) | num_recs 
+
 
 \subsection{The UB Collectors Coworking Network}
 % TODO: Add average path size connecting collectors
@@ -579,15 +579,15 @@ The UB CWN network is composed by a a total of $2991$ connected components, from
 The average degree of nodes within the giant component $c_1$ is $6.08$.
 %
 Moreover, only $318$ of the connected components ($c_1, c_2, ..., c_{318}$) are composed by collectors with at least one collaborative tie.
-The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all composed by single disconnected nodes (all have $k=0$), which we refer to as \textit{singleton} collectors.
+The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all disconnected nodes (nodes with $k=0$), which we refer to as \textit{singleton} collectors.
 Singleton collectors are those who have never recorded specimens collaboratively --- or at least they do not include their collaborators' names as authors of the records ---, and thus are considered as having no structural role in the collaboration network.
 They comprise $39.5\%$ of all nodes in the network.
 %
 One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative.  % of records from all singleton collectors
 This comprises $18.14\%$ of all records by singleton collectors.
-All other $2672$ singleton collectors have fewer than $400$ records.
+All other $2672$ singleton collectors have fewer than $400$ records each.
 Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been obtained in Brazil.
-%
+
 The percentage of nodes in the giant component is small if compared to other social networks (most are between $80\% - 90\%$) \cite{Newman}. 
 This observed low size of the giant component might be due to records from foreign teams, which have never collected with anyone from the giant component. 
 These records give a poor coverage of the real activities of these collectors, which could be possibly obtained from other herbaria.
@@ -597,19 +597,32 @@ The density of the giant component $c_1$ is $1.95 \times 10^{-3}$.
 % What is the degree of these nodes? Where are these collectors from? It is unlikely that novice collectors would record alone, without a supervisor. If these are low-degree nodes they are probably experienced foreign collectors, who have low degrees because they've only contributed to the herbarium with few records (as exchanges).
 
 \paragraph*{Sizes of collectors teams.}
-% TODO FIGURE: team size frequency
 % Only one record with team size of $9$.
 % Strings are truncated for collectors field with $8$ collectors or more.
 % There is apparently a constraint preventing teams with more than $9$ collectors. Maybe this is due to restrictions on the system used for entering data, which does not accept more than $9$ collectors for a record.
+Average team size is $ 1.73$, maximum size is $9$.
+However, there is a single record with team size of $9$.
+The percentage of teams with increasing sizes decreases exponentially.
+Figure \ref{fig:ub_team_sizes_pcts}.
+%
+An important aspect is that $63\%$ of all records are non-collaborative, having been recorded by a single collector.
+
+\begin{figure}[!h]
+  	\centering
+    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes_pcts.pdf}
+    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. }
+    \label{fig:ub_team_sizes_pcts}
+\end{figure}
 
 \paragraph*{How collaborative are collectors?}
 % We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
-If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers.
-However, this value reflects the high number of singleton collectors, for which $k=0$.
+Collectors in the UB CWN vary substantially regarding their collaborativity during fieldwork.
+As we've previously mentioned, a considerable fraction of collectors included in the network have never 
+If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers, which is lowered by the existence of many singleton collectors in the dataset, with $k=0$.
 If we only consider the giant component, $\langle k\rangle = 6.08$.
 If we exclude the giant component, $\langle k\rangle = 0.51$. 
-The average degree lower than $1$ is explained by the existance of so many singleton collectors.
-%
+The average degree lower than $1$ is explained by the existence of so many singleton collectors.
+
 Similarly to the SCN network, degree distribution for the CWN network does not fit a poisson distribution well (which is characteristic of random networks). 
 It fits better a power law with parameter $\alpha=2.2$.
 
@@ -631,28 +644,28 @@ We could use another weighting rule for calculating the $k_w$ centrality, for ex
   \caption{}
   \begin{center}
   \begin{tabular}{l r r r r}
-      collector & num of records & $k$ & num of collaborative records & $k_w^{hyperb}$ \\
+      collector & num of records & \% collaborative & $k$ & $k_w$ \\
       \hline
-        proenca,ceb & 4803 & 0.88 & 218 & 4203.67 \\
-        faria,jeq & 4687 & 0.83 & 117 & 3881.00 \\
-        ratter,ja & 4728 & 0.26 & 111 & 1084.92 \\
-        munhoz,cbr & 3191 & 0.83 & 109 & 2493.17 \\
-        silva,ma & 823 & 0.57 & 93 & 403.60 \\
-        oliveira,rc & 723 & 0.89 & 92 & 595.25 \\
-        harley,rm & 2564 & 0.66 & 90 & 1455.83 \\
-        mendes,vc & 1696 & 1.00 & 89 & 1695.00 \\
-        souza,vc & 505 & 0.56 & 89 & 237.62 \\
-        carvalho,avm & 884 & 0.75 & 88 & 651.50 \\
-        walter,bmt & 709 & 0.51 & 80 & 296.08 \\
-        mendonca,rc & 1162 & 0.54 & 76 & 603.75 \\
-        franca,f & 538 & 0.74 & 72 & 389.67 \\
-        melo,e & 682 & 0.60 & 65 & 378.67 \\
-        martins,rc & 715 & 0.93 & 63 & 664.00 \\
-        silva,gp & 266 & 0.40 & 61 & 71.80 \\
-        giulietti,aml & 134 & 0.69 & 60 & 70.08 \\
-        cardoso,es & 385 & 1.00 & 59 & 382.75 \\
-        carvalhosilva,m & 1635 & 0.98 & 58 & 1436.00 \\
-        santana,sc & 88 & 0.89 & 57 & 77.00 \\
+      irwin,hs & 18065 & 34.1 & 39 & 5696.0 \\
+      proenca,ceb & 4803 & 88.3 & 218 & 4203.7 \\
+      faria,jeq & 4687 & 82.9 & 117 & 3881.0 \\
+      souza,rr & 3885 & 99.3 & 37 & 3835.5 \\
+      santos,rrb & 3587 & 94.5 & 41 & 3382.3 \\
+      munhoz,cbr & 3191 & 82.8 & 109 & 2493.2 \\
+      zanatta,mrv & 2364 & 95.8 & 50 & 2264.0 \\
+      castelobranco,cw & 2256 & 100.0 & 1 & 2256.0 \\
+      grando,jv & 2256 & 100.0 & 1 & 2256.0 \\
+      eiten,g & 3046 & 61.4 & 33 & 1865.5 \\
+      amaral,ag & 1825 & 99.5 & 37 & 1815.0 \\
+      projetobiodiversidadebp & 1780 & 100.0 & 19 & 1780.0 \\
+      mendes,vc & 1696 & 99.9 & 89 & 1695.0 \\
+      fonseca,sf & 1610 & 99.9 & 18 & 1607.0 \\
+      camara,peas & 2076 & 79.8 & 47 & 1486.0 \\
+      harley,rm & 2564 & 66.0 & 90 & 1455.8 \\
+      carvalhosilva,m & 1635 & 98.5 & 58 & 1436.0 \\
+      eiten,lt & 1262 & 99.6 & 14 & 1256.5 \\
+      mello,trb & 1247 & 100.0 & 21 & 1247.0 \\
+      soares,aer & 1557 & 73.0 & 29 & 1135.0 \\
       \hline
   \end{tabular}
   \label{table:ub_cwn_}
@@ -660,16 +673,22 @@ We could use another weighting rule for calculating the $k_w$ centrality, for ex
 \end{table}
 %% FIGURE HERE %%
 
-% TODO: REWRITE!! Remember that k_w using count attribute does not give the absolute number of collaborative records!
+% TODO: WRONG!! Remember that k_w using count attribute does not give the absolute number of collaborative records!
 For a concrete example, \textit{Howard S. Irwin} (\textit{irwin,hs}) is the top collector in terms of absolute number of collaborative ties. He has collected a total of $14803$ specimens in field with others. However, the network indicates that he usually works with a more restricted team of partners. He holds only $39$ links to distinct collectors, which puts him in the $43th$ position of the rank. 
 On the other hand, \textit{James A. Ratter} (\textit{ratter,ja}), who is the third with most connections to distinct collectors, is at the $20th$ position in the $k_w$ rank, with a total of $2962$ collaborative collectors.
 There are only $3$ collectors in common between the top-10 collectors in the $k_w$ and the $k$ ranks.
 % TODO: Include hyperbolic weighting (and compare with degree k)
 
-As in this model it is possible for even for collaborative collectors to record some records alone, the weighted degree is not necessarily equivalent to his/her total number of records. Instead, it is equivalent to his/her total number of collaborative records.
+\paragraph*{Coworking groups.}
+\begin{figure}[!ht]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_communities.pdf}
+    \caption{ Coworking groups.}
+    \label{fig:ub_cwn_communities}
+\end{figure}
 
 % Assortativity
-\paragraph*{Do collaborative collectors prefer to work with other collaborative ones?}
+\paragraph*{Do collaborative collectors prefer to work with others who are also collaborative?}
 One relevant question we might ask is whether collectors tend to form collaborative ties preferentially with others holding a similar number of collaborative ties.
 Here we refer to collaborative collectors as those holding collaborative ties with many distinct collectors, irrespective of the number of times each individual link occurs. Those collectors which hold strong collaborative ties with few collaborators are thus less collaborative than the former case. In this sense, $proenca,ceb$ is considered more collaborative than $irwin,hs$, for instance.
 
