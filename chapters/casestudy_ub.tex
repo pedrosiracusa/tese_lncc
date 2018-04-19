@@ -48,7 +48,7 @@ The process is described in more details in section \ref{section:ub_characteriza
 %
 All cleaning routines, data analysis and models construction were performed using \textit{Python3} language and packages listed in table <>. % TODO Add table with python packages: Networkx, Pandas, Scipy, Numpy 
 
-\ped{Devo construir esta tabela? Com bibliotecas usadas e uma breve descrição}
+\ped{Devo construir esta tabela? Com bibliotecas usadas e uma breve descrição -> Incluir footnote p/ repositório no Github}
 
 
 
@@ -571,25 +571,24 @@ This can be investigated with CWN models, as described below.
 
 As the UB was built based on the same set of records as the SCN model explored in the previous section, the number of nodes is $6768$, equivalent to the number of collectors nodes in the SCN model.
 A total of $10391$ edges represent collaborative ties between collectors.
-The average degree is $3.07$.
-The overall network density is $4.5 \times 10^{-4}$.
+The average degree and density for the overall network are, respectively, $3.07$ and $4.5 \times 10^{-4}$.
 
 \paragraph*{Connected components.}
 The UB CWN network is composed by a a total of $2991$ connected components, from which the largest one --- the giant component ($c_1$) ---  contains $46\%$ of all nodes in the network.
 Such a low percentage of nodes in the giant component contrasts to most empirical scientific paper-publishing collaboration networks studied by Newman in one of his $2001$ papers \cite{Newman2001d}, for which the giant components contain as much as $80\% - 90\%$ of all nodes.
-
 Moreover, only $318$ of the connected components ($c_1, c_2, ..., c_{318}$) are composed by collectors with at least one collaborative tie.
 The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all disconnected nodes (nodes with $k=0$), which we refer to as \textit{singleton} collectors.
-Singleton collectors are those who have never recorded specimens collaboratively --- or at least they do not include their collaborators' names as authors of the records ---, and thus are considered as having no structural role in the collaboration network.
+
+Singleton collectors are those who have never recorded specimens collaboratively --- or at least they do not include their collaborators' names as authors of the records ---, and thus are considered to have no structural role in the collaboration network.
 They comprise $39.5\%$ of all nodes in the network.
 % How many records do singleton usually have?
 %
-One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative.  % of records from all singleton collectors
+One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative (Figure \ref{fig:ub_team_sizes}).  % of records from all singleton collectors
 This comprises $18.14\%$ of all records by singleton collectors.
 All other $2672$ singleton collectors have fewer than $400$ records each.
 Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been obtained in Brazil.
 
-
+% Remove?
 This observed low size of the giant component might be due to records from foreign teams, which have never collected with anyone from the giant component. 
 These records give a poor coverage of the real activities of these collectors, which could be possibly obtained from other herbaria.
 %
@@ -604,21 +603,34 @@ The density of the giant component $c_1$ is $1.95 \times 10^{-3}$.
 Average team size is $ 1.73$, maximum size is $9$.
 However, there is a single record with team size of $9$.
 The percentage of teams with increasing sizes decreases exponentially.
-Figure \ref{fig:ub_team_sizes_pcts}.
+Figure \ref{fig:ub_team_sizes}.
 %
 An important aspect is that $63\%$ of all records are non-collaborative, having been recorded by a single collector.
 
 \begin{figure}[!h]
   	\centering
-    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes_pcts.pdf}
-    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. }
-    \label{fig:ub_team_sizes_pcts}
+    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes.pdf}
+    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records singleton collectors typically hold, with records numbers logarithmically binned using base $2$. }
+    \label{fig:ub_team_sizes}
 \end{figure}
 
 \paragraph*{How collaborative are collectors?}
 % We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
 Collectors in the UB CWN vary substantially regarding their collaborativeness during fieldwork.
-Whereas some collectors have gathered a large number of collaborator throughout their carreers (much more than the average), most of them have never co-authored a record.
+Whereas some few collectors have gathered a large number of collaborator throughout their careers (much more than the average $3.07$), most of them have never co-authored a single record.
+%
+The average team size for records in the UB dataset is $1.73$, with as much as $63\%$ of all records being non-collaborative, recorded by a single collector (Figure \ref{fig:ub_team_sizes}).
+The records distribution by team size seems to follow a logarithmic function for team sizes from $1$ to $8$.
+For some reason which is not clear for us, records above $8$ are apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artefact).
+One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record (or string size).
+
+
+o teams being larger than $9$.
+
+Figure \ref{fig:ub_team_sizes} shows that the distribution of records by team size in the UB dataset is approximated by a logarithmic function.
+The maximum team size is $9$.
+
+team size distribution in the UB herbarium dataset.
 As we've previously mentioned, a considerable fraction of collectors included in the network have never co-authored a record.
 If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers, which is lowered by the existence of many singleton collectors in the dataset, with $k=0$.
 If we only consider the giant component, $\langle k\rangle = 6.08$.
