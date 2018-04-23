@@ -399,15 +399,15 @@ More experienced collectors can be observed to have high similarity with others,
 We could reduce the density of the projected network by both ignoring nodes with very low degrees and ignoring weaker ties, which form between collectors who are less similar in their species bags.
 For that we define a filtering routine, which consists of iterating through all entries $A_{i,j}$ of the network's biadjacency matrix and setting them to $0$ in case their respective values fall below a user-defined filter threshold $\phi$.
 Acceptable values for the filtering coefficient $\phi$ range within the interval $[0,1[$, and represents the minimum similarity score that should be observed for a pair of collectors for their tie to be considered relevant.
-Figure \ref{fig:ub_scn_projCol_filter_thresh} illustrates the effect of increasing $\phi$ on the density of the UB SCN collectors projection, under three distinct taxonomic resolutions.
+Figure \ref{fig:ub_scn_filter_thresh}(a) illustrates the effect of increasing $\phi$ on the density of the UB SCN collectors projection, under three distinct taxonomic resolutions.
 Although the three curves show a similar behavior, aggregations at lower taxonomic ranks show more pronounced drops, especially in the region where $\phi$ ranges from $0$ to $0.6$.
 In addition, we verify that higher-rank aggregations lead to denser networks for all possible values of $\phi$.
 
 \begin{figure}[!ht]
   	\centering
-    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/scn_projCol_filter_thresh.pdf}
-    \caption{ Drop on density of the collectors-projected UB SCN with increasing filtering thresholds $\phi$. }
-    \label{fig:ub_scn_projCol_filter_thresh}
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_filter_thresh.pdf}
+    \caption{ Reduction in the density of SCN collectors (a) and species (b) projections as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange) and at the original taxonomic resolution of species (green). }
+    \label{fig:ub_scn_filter_thresh}
 \end{figure}
 
 In order to investigate the formation of communities in the collectors projection we first filtered collectors ties by setting $\phi = 0.8$.
@@ -502,18 +502,11 @@ It is also important to observe that although the absolute number of nodes and e
 
 % Filtering
 In order to reduce network density and better visualize the formation of communities we performing a filtering routine to remove less relevant families associations, analogously to what we've done for the collectors projection.
-As network density decreases with increasing values for $\phi$ (Figure \ref{fig:ub_scn_projSp_filter_thresh}), we again set the threshold value to $0.8$, omitting ties that are weaker than the threshold value. 
+As network density decreases with increasing values for $\phi$ (Figure \ref{fig:ub_scn_filter_thresh}(b)), we again set the threshold value to $0.8$, omitting ties that are weaker than the threshold value. 
 As the process produces many islands, we use the same relevance score from the collectors projection for filtering out non-relevant components, though now using a threshold value of $600$.
 The resulting network is shown in Figure \ref{fig:ub_scn_family_projSp_communities}.
 Nodes were sized based on the \textit{count} attribute, which indicates how common each family is in the herbarium dataset or, in other words, their \textit{prevalence}. 
 Nodes colors reflect the communities they've been assigned to, using the same approach as we did for the collectors projection.
-
-\begin{figure}[!ht]
-  	\centering
-    \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/scn_projSp_filter_thresh.pdf}
-    \caption{ Drop on density of the species-projected UB SCN with increasing filtering thresholds $\phi$. }
-    \label{fig:ub_scn_projSp_filter_thresh}
-\end{figure}
 
 % Communities description
 % TODO rephrase
@@ -586,7 +579,7 @@ Singleton collectors are those who have never recorded specimens collaboratively
 They comprise $39.5\%$ of all nodes in the network.
 % How many records do singleton usually have?
 %
-One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative (Figure \ref{fig:ub_team_sizes}).  % of records from all singleton collectors
+One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative (inset in Figure~\ref{fig:ub_team_sizes}).  % of records from all singleton collectors
 This comprises $18.14\%$ of all records by singleton collectors.
 All other $2672$ singleton collectors have fewer than $400$ records each.
 Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been obtained in Brazil.
@@ -599,42 +592,30 @@ The low density observed for the whole network is due to the high percentage of 
 The density of the giant component $c_1$ is $1.95 \times 10^{-3}$.
 % What is the degree of these nodes? Where are these collectors from? It is unlikely that novice collectors would record alone, without a supervisor. If these are low-degree nodes they are probably experienced foreign collectors, who have low degrees because they've only contributed to the herbarium with few records (as exchanges).
 
-\paragraph*{Sizes of collectors teams.}
-% Only one record with team size of $9$.
-% Strings are truncated for collectors field with $8$ collectors or more.
-% There is apparently a constraint preventing teams with more than $9$ collectors. Maybe this is due to restrictions on the system used for entering data, which does not accept more than $9$ collectors for a record.
-Average team size is $ 1.73$, maximum size is $9$.
-However, there is a single record with team size of $9$.
-The percentage of teams with increasing sizes decreases exponentially.
-Figure \ref{fig:ub_team_sizes}.
+
+
+\paragraph*{How collaborative are collectors?}
+% We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
+
+% Team sizes
+By inspecting team sizes of all records in the dataset, we find that the average team size for records in the UB dataset is $1.73$, as a consequence of the fact that $63\%$ of all records are non-collaborative, \textit{i.e.} recorded by a single collector (Figure \ref{fig:ub_team_sizes}).
 %
-An important aspect is that $63\%$ of all records are non-collaborative, having been recorded by a single collector.
+Records distribution seems to decay logarithmically with team size, at least for teams with sizes varying from $1$ to $8$.
+For some reason which is not clear for us, records above $8$ are apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artifact).
+One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record.
+In some records the string containing the collectors names are truncated, which also could also indicate a system-specific constrain towards the maximum string length.
 
 \begin{figure}[!h]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes.pdf}
-    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records singleton collectors typically hold, with records numbers logarithmically binned using base $2$. }
+    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data (using team sizes from $1$ to $8$) using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records singleton collectors typically hold, with records numbers logarithmically binned using base $2$. }
     \label{fig:ub_team_sizes}
 \end{figure}
 
-\paragraph*{How collaborative are collectors?}
-% We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
 Collectors in the UB CWN vary substantially regarding their collaborativeness during fieldwork.
-Whereas some few collectors have gathered a large number of collaborator throughout their careers (much more than the average $3.07$), most of them have never co-authored a single record.
-%
-The average team size for records in the UB dataset is $1.73$, with as much as $63\%$ of all records being non-collaborative, recorded by a single collector (Figure \ref{fig:ub_team_sizes}).
-The records distribution by team size seems to follow a logarithmic function for team sizes from $1$ to $8$.
-For some reason which is not clear for us, records above $8$ are apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artefact).
-One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record (or string size).
+Whereas few ones have collaborated with a large number of collectors throughout their careers (much more than the average $3.07$), almost $40\%$ of them have never co-authored a single record.
+The existence of so many singleton collectors in the dataset (with $k=0$ explains the relatively low average degree score if we consider the entire network. 
 
-
-o teams being larger than $9$.
-
-Figure \ref{fig:ub_team_sizes} shows that the distribution of records by team size in the UB dataset is approximated by a logarithmic function.
-The maximum team size is $9$.
-
-team size distribution in the UB herbarium dataset.
-As we've previously mentioned, a considerable fraction of collectors included in the network have never co-authored a record.
 If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers, which is lowered by the existence of many singleton collectors in the dataset, with $k=0$.
 If we only consider the giant component, $\langle k\rangle = 6.08$.
 If we exclude the giant component, $\langle k\rangle = 0.51$. 
