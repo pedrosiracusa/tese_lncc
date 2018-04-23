@@ -573,25 +573,18 @@ The average degree and density for the overall network are, respectively, $3.07$
 The UB CWN network is composed by a a total of $2991$ connected components, from which the largest one --- the giant component ($c_1$) ---  contains $46\%$ of all nodes in the network.
 Such a low percentage of nodes in the giant component contrasts to most empirical scientific paper-publishing collaboration networks studied by Newman in one of his $2001$ papers \cite{Newman2001d}, for which the giant components contain as much as $80\% - 90\%$ of all nodes.
 Moreover, only $318$ of the connected components ($c_1, c_2, ..., c_{318}$) are composed by collectors with at least one collaborative tie.
-The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all disconnected nodes (nodes with $k=0$), which we refer to as \textit{singleton} collectors.
+The remaining $2673$ components ($c_{319}, c_{320}, ..., c_{2991}$) are all disconnected nodes (\textit{i.e.} nodes with $k=0$), which we refer to as \textit{singleton} collectors.
 
-Singleton collectors are those who have never recorded specimens collaboratively --- or at least they do not include their collaborators' names as authors of the records ---, and thus are considered to have no structural role in the collaboration network.
-They comprise $39.5\%$ of all nodes in the network.
-% How many records do singleton usually have?
-%
+Singleton collectors are those who have never recorded specimens collaboratively --- or at least they have not included the names of their collaborators in the records as authors ---, and thus are considered to have no structural role in the collaboration network.
+They comprise $39.5\%$ of all nodes in the network, and the fact that they lack connections impacts on the overall network density, making it relatively low.
+In fact, if we instead compute network density by only considering nodes from the giant component $c_1$, we observe an increase from $4.5 \times 10^{-4}$ to $1.95 \times 10^{-3}$. 
+
 One important example of a singleton collector is `\textit{leite,alta}', with a total of $2757$ records, none of which collaborative (inset in Figure~\ref{fig:ub_team_sizes}).  % of records from all singleton collectors
 This comprises $18.14\%$ of all records by singleton collectors.
 All other $2672$ singleton collectors have fewer than $400$ records each.
 Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been obtained in Brazil.
 
-% Remove?
-This observed low size of the giant component might be due to records from foreign teams, which have never collected with anyone from the giant component. 
-These records give a poor coverage of the real activities of these collectors, which could be possibly obtained from other herbaria.
-%
-The low density observed for the whole network is due to the high percentage of isolated nodes, and can be increased by almost $10$ times if we only consider the giant component. 
-The density of the giant component $c_1$ is $1.95 \times 10^{-3}$.
-% What is the degree of these nodes? Where are these collectors from? It is unlikely that novice collectors would record alone, without a supervisor. If these are low-degree nodes they are probably experienced foreign collectors, who have low degrees because they've only contributed to the herbarium with few records (as exchanges).
-
+% Low-degree isolated nodes are probably experienced foreign collectors (who have only contributed to the herbarium with few records (probably exchanges)), as it is unlikely that novice collectors would record alone, without a supervisor. -> Apparently not true
 
 
 \paragraph*{How collaborative are collectors?}
