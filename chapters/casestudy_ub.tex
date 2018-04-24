@@ -557,9 +557,6 @@ This can be investigated with CWN models, as described below.
 % ===============================
 % UB Collectors Coworking Network
 % -------------------------------
-% TODO Figure degree dist.
-% TODO Figure communities (edges weighted with hyperbolic weighting)
-
 
 \subsection{The UB Collectors Coworking Network}
 % TODO: Add average path size connecting collectors
@@ -594,7 +591,7 @@ Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been ob
 By inspecting team sizes of all records in the dataset, we find that the average team size for records in the UB dataset is $1.73$, as a consequence of the fact that $63\%$ of all records are non-collaborative, \textit{i.e.} recorded by a single collector (Figure \ref{fig:ub_team_sizes}).
 %
 Records distribution seems to decay logarithmically with team size, at least for teams with sizes varying from $1$ to $8$.
-For some reason which is not clear for us, records above $8$ are apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artifact).
+For some reason which is not clear for us, including teams larger than $8$ is apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artifact).
 One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record.
 In some records the string containing the collectors names are truncated, which also could also indicate a system-specific constrain towards the maximum string length.
 
@@ -606,33 +603,25 @@ In some records the string containing the collectors names are truncated, which 
 \end{figure}
 
 Collectors in the UB CWN vary substantially regarding their collaborativeness during fieldwork.
-Whereas few ones have collaborated with a large number of collectors throughout their careers (much more than the average $3.07$), almost $40\%$ of them have never co-authored a single record.
-The existence of so many singleton collectors in the dataset (with $k=0$ explains the relatively low average degree score if we consider the entire network. 
-
-If we consider the entire CWN network, collectors collaborate, in average, with $3.07$ distinct collectors throughout their entire careers, which is lowered by the existence of many singleton collectors in the dataset, with $k=0$.
-If we only consider the giant component, $\langle k\rangle = 6.08$.
-If we exclude the giant component, $\langle k\rangle = 0.51$. 
-The average degree lower than $1$ is explained by the existence of so many singleton collectors.
-
-Similarly to the SCN network, degree distribution for the CWN network does not fit a poisson distribution well (which is characteristic of random networks). 
-It fits better a power law with parameter $\alpha=2.2$.
-
-%% degree dist. FIGURE %%
+Whereas few ones have collaborated with a large number of collectors throughout their careers (much more than the average $3.07$), many of them hold very few collaborative ties.
+In fact, almost $40\%$ of them are singleton collectors, having never co-authored a single record.
+%
+Similarly to the SCN network, the degree distribution of the UB CWN is heavy tailed, and thus not well fit by a poisson distribution.
+Such a topology suggests the existence of non-random processes ruling the probability that two collectors get connected, leading to the co-existence of few hubs and many low-degree collectors.
+%% FIGURE: degree dist %%
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist.pdf}
-    \caption{ Degree Dist.}
+    \caption{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
     \label{fig:ub_cwn_degree_dist}
 \end{figure}
 
-Depending on the degree centrality metric we use, we get a different ranking of most influential collectors.
-The non-weighted degree $k$ ranks collectors based on the total number of collaborations they've established to distinct collectors, irrespective of the number of times each association was observed.
-We might want to consider the number of recurrent collaborations with each collaborator, by using the weighted degree metric.
-If we use the weighted degree $k_w$ metric, we must specify which weighting rule to use. 
-If we use the edge \textit{count} attribute, which is simply the number of times a given association between two collectors occur, the weighted degree for each collector is equivalent to his/her total number of collaborative records. 
-
-We could use another weighting rule for calculating the $k_w$ centrality, for example the hyperbolic weighting.
-
+Table \ref{table:ub_cwn_degree} ranks the top-20 collectors on weighted degree centrality, using the hyperbolic weighting rule.
+As discussed in chapter \ref{chapter:network_models}, this rule assigns weights to collectors ties by considering the sizes of the teams where collectors collaborated, such that higher weights are assigned to ties which were originated from collaborations involving smaller teams (minimum size of $2$).
+The weighted degree of a node is given by the sum of the weights of all its edges.
+The top collector is \textit{Howard S. Irwin} (\textit{irwin,hs}), with a weighted degree score of $5696$.
+Although he has not collaborated with many distinct collectors (only $39$), his position on the rank reflects the absolute number of collaborative records authored by him ($6169$), even though this only comprises $34.1\%$ of all his records. 
+%
 \begin{table}[H]
   \caption{}
   \begin{center}
@@ -661,9 +650,20 @@ We could use another weighting rule for calculating the $k_w$ centrality, for ex
       soares,aer & 1557 & 73.0 & 29 & 1135.0 \\
       \hline
   \end{tabular}
-  \label{table:ub_cwn_}
+  \label{table:ub_cwn_degree}
   \end{center}
 \end{table}
+%
+The second collector in the rank, \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), has less than a third of \textit{irwin}'s absolute number of records, although $88.3\%$ of them are collaborative. 
+With a total of $218$ distinct collaborators, she would be placed at the first position if the rank were built based on the non-weighted degree metric ($k$) instead, whilst \textit{'irwin,hs'}, in contrast, would be placed at the $43^{rd}$ position.
+%
+Another case worth mentioning is that of \textit{grando,jv} and \textit{castelobranco,cw}, both of which have only collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
+As a consequence their weighted degree scores $k_w$ are equivalent to the total number of records authored by them ($2256$), whereas their non-weighted degree scores are $k=1$.
+
+Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed.
+On the other hand, the weighted degree score $k_w$ includes into consideration the relevance of each tie, given by some weighting rule.
+
+
 %% FIGURE HERE %%
 
 % TODO: WRONG!! Remember that k_w using count attribute does not give the absolute number of collaborative records!
