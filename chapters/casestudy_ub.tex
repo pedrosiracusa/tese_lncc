@@ -524,14 +524,14 @@ Others as \textit{Pterydaceae}, \textit{Anemiaceae} and \textit{Polypodiacea} ar
 
 
 The remaining $12$ communities are all equivalent to islands, $6$ of which formed by isolated nodes.
-
+%
 Community $4$ contains bryophyte families, mostly recorded by collectors within polygon $(i)$ in Figure \ref{fig:ub_scn_agg_family_general}.
-
+%
 Community $6$ contains algae families, mostly diatoms (polygon $(iii)$ in Figure \ref{fig:ub_scn_agg_family_general}).
-
+%
 Communities $9$ and $7$ are composed by green algae families recorded by collectors within polygon $(ii)$ in Figure \ref{fig:ub_scn_agg_family_general}.
 As `\textit{leite,alta}' is substantially distinct from `\textit{grando,cw}' and `\textit{castelo-branco,}' regarding their recording interests, families \textit{Desmidiaceae} and \textit{Closteriaceae} are included in a distinct island.
-
+%
 Families \textit{Myrtaceae} (\textit{grp $3$}) and \textit{Poaceae} (\textit{grp $5$}) are both very prevalent in the herbarium and are isolated.
 This indicates that they are recorded by more specialized collectors.
 
@@ -591,10 +591,6 @@ Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been ob
 By inspecting team sizes of all records in the dataset, we find that the average team size for records in the UB dataset is $1.73$, as a consequence of the fact that $63\%$ of all records are non-collaborative, \textit{i.e.} recorded by a single collector (Figure \ref{fig:ub_team_sizes}).
 %
 Records distribution seems to decay logarithmically with team size, at least for teams with sizes varying from $1$ to $8$.
-For some reason which is not clear for us, including teams larger than $8$ is apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artifact).
-One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record.
-In some records the string containing the collectors names are truncated, which also could also indicate a system-specific constrain towards the maximum string length.
-
 \begin{figure}[!h]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes.pdf}
@@ -602,11 +598,15 @@ In some records the string containing the collectors names are truncated, which 
     \label{fig:ub_team_sizes}
 \end{figure}
 
-Collectors in the UB CWN vary substantially regarding their collaborativeness during fieldwork.
+For some reason which is not clear for us, including teams larger than $8$ is apparently forbidden in the dataset (we consider the single record with team size $9$ to be an artifact).
+One hypothesis to be verified is that some mechanism specific to the data management system used by UB constrains the maximum number of collectors allowed for each record.
+In some records the string containing the collectors names are truncated, which also could also indicate a system-specific constrain towards the maximum string length.
+
+Collectors in the UB CWN vary substantially regarding their collaborativeness on fieldwork.
 Whereas few ones have collaborated with a large number of collectors throughout their careers (much more than the average $3.07$), many of them hold very few collaborative ties.
 In fact, almost $40\%$ of them are singleton collectors, having never co-authored a single record.
 %
-Similarly to the SCN network, the degree distribution of the UB CWN is heavy tailed, and thus not well fit by a poisson distribution.
+Similarly to the SCN network, the degree distribution of the UB CWN is heavy tailed (Figure \ref{fig:ub_cwn_degree_dist}), and thus is not well fit by a poisson distribution.
 Such a topology suggests the existence of non-random processes ruling the probability that two collectors get connected, leading to the co-existence of few hubs and many low-degree collectors.
 %% FIGURE: degree dist %%
 \begin{figure}[!ht]
@@ -660,16 +660,11 @@ With a total of $218$ distinct collaborators, she would be placed at the first p
 Another case worth mentioning is that of \textit{grando,jv} and \textit{castelobranco,cw}, both of which have only collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
 As a consequence their weighted degree scores $k_w$ are equivalent to the total number of records authored by them ($2256$), whereas their non-weighted degree scores are $k=1$.
 
-Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed.
-On the other hand, the weighted degree score $k_w$ includes into consideration the relevance of each tie, given by some weighting rule.
+Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed, whilst, on the other hand, the weighted degree score $k_w$ takes into consideration the relevance of each tie, given by some weighting rule.
 
 
 %% FIGURE HERE %%
 
-% TODO: WRONG!! Remember that k_w using count attribute does not give the absolute number of collaborative records!
-For a concrete example, \textit{Howard S. Irwin} (\textit{irwin,hs}) is the top collector in terms of absolute number of collaborative ties. He has collected a total of $14803$ specimens in field with others. However, the network indicates that he usually works with a more restricted team of partners. He holds only $39$ links to distinct collectors, which puts him in the $43th$ position of the rank. 
-On the other hand, \textit{James A. Ratter} (\textit{ratter,ja}), who is the third with most connections to distinct collectors, is at the $20th$ position in the $k_w$ rank, with a total of $2962$ collaborative collectors.
-There are only $3$ collectors in common between the top-10 collectors in the $k_w$ and the $k$ ranks.
 % TODO: Include hyperbolic weighting (and compare with degree k)
 
 \paragraph*{Coworking groups.}
