@@ -657,7 +657,7 @@ Although he has not collaborated with many distinct collectors (only $39$), his 
 The second collector in the rank, \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), has less than a third of \textit{irwin}'s absolute number of records, although $88.3\%$ of them are collaborative. 
 With a total of $218$ distinct collaborators, she would be placed at the first position if the rank were built based on the non-weighted degree metric ($k$) instead, whilst \textit{'irwin,hs'}, in contrast, would be placed at the $43^{rd}$ position.
 %
-Another case worth mentioning is that of \textit{grando,jv} and \textit{castelobranco,cw}, both of which have only collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
+Another case worth mentioning is that of `\textit{grando,jv}' and `\textit{castelobranco,cw}', both of which have necessarily and exclusively collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
 As a consequence their weighted degree scores $k_w$ are equivalent to the total number of records authored by them ($2256$), whereas their non-weighted degree scores are $k=1$.
 
 Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed, whilst, on the other hand, the weighted degree score $k_w$ takes into consideration the relevance of each tie, given by some weighting rule.
@@ -668,18 +668,36 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
 % TODO: Include hyperbolic weighting (and compare with degree k)
 
 \paragraph*{Coworking groups.}
-\begin{figure}[!ht]
+
+\begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_communities.pdf}
-    \caption{ Coworking groups.}
+    \caption{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
     \label{fig:ub_cwn_communities}
 \end{figure}
+One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who collaborate on specimens recording in field, which we refer to as \textbf{coworking groups}. 
+%
+In order to detect such groups we've applied the same algorithm for community detection \cite{Blondel2008} as we did for the SCN projections.
+%
+We detected a total of $30$ distinct communities, $11$ of which are detached from the giant component.
+%
+For visualization, we first filtered weaker edges ($k_w < 10$), and then filtered connected components with scores lower than $600$.
+The resulting graph $545$ nodes and $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
+
+Some of these communities correspond to communities of interest, found in the SCN model.
+%
+The bryophytes research group, led by `\textit{camara,peas}' is also cohesive in terms of field expeditions.
+%
+Some of these communities are formed due to the activities of their collectors being temporally spaced from others in the network (as the green one, around `\textit{irwin,hs}'.
+
 
 \paragraph*{Visualizing temporal evolution.}
-\begin{figure}[!ht]
+Collectors collaborations forming their careers.
+
+\begin{figure}[h!]
   	\centering
-    \includegraphics[width=.8\linewidth]{figures/casestudy_ub/ub_cwn_munhoz_collabs.png}
-    \caption{ Munhoz,C.B.R..}
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/ub_cwn_munhoz_collabs.png}
+    \caption{ Temporal evolution of collaborations by Dr. \textit{Cássia~B.R.~Munhoz} (`\textit{munhoz,cbr}', colored in blue), from $1990$ to $2013$. Each frame corresponds to a period of $3$ years, and only collectors who have collaborated at least once with `\textit{munhoz,cbr}' in each period were drawn (red nodes). Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
     \label{fig:ub_cwn_munhoz_collabs}
 \end{figure}
 
