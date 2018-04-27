@@ -675,6 +675,7 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
     \caption{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
     \label{fig:ub_cwn_communities}
 \end{figure}
+
 One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who collaborate on specimens recording in field, which we refer to as \textbf{coworking groups}. 
 %
 In order to detect such groups we've applied the same algorithm for community detection \cite{Blondel2008} as we did for the SCN projections.
@@ -684,32 +685,53 @@ We detected a total of $30$ distinct communities, $11$ of which are detached fro
 For visualization, we first filtered weaker edges ($k_w < 10$), and then filtered connected components with scores lower than $600$.
 The resulting graph $545$ nodes and $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
 
-Some of these communities correspond to communities of interest, from the SCN model.
+% same interest and same coworking
+Some of the communities we found in the CWN are composed by collectors who also compose tight communities of interests from the SCN projection (Figure \ref{fig:ub_scn_family_projCol_communities}).
 %
-The bryophytes research group, led by `\textit{camara,peas}' is also cohesive in terms of field expeditions.
-The group of collectors interested on herbaceous plants, led by `\textit{munhoz,cbr}'.
+One such example is the bryophytes research group, which includes \textit{Paulo Câmara} (\textit{camara,peas}), \textit{Micheline Carvalho Silva} (\textit{carvalhosilva,m}) and \textit{Abel Soares} (\textit{soares,aer}).
+Collectors from this coworking group (colored in purple and located in the northeast region of the giant component in Figure \ref{fig:ub_cwn_communities}) are not only more inclined towards collaborating with each other in field, but are also interested on recording the specific taxonomic group of bryophytes.
+%
+Another example is the coworking group of herbaceous plants collectors (colored in pink), including \textit{Cássia Munhoz} (\textit{munhoz,cbr}), \textit{Aryanne Amaral} (\textit{amaral,ag}), \textit{Thiago de Roure Bandeira Mello} (\textit{mello,trb}) and \textit{Chesterton Eugênio} (\textit{eugenio,cuo}).
 
-Others include nodes that form communities in one but not in the other.
-%
-\textit{Chaves,da} and \textit{Bringel,jba} are tightly connected in the common interests network ( in \textit{grp0}) but are distant in the CWN, having no connections.
-%
-\textit{Faria,J.E.Q} and \textit{Zanatta} are relatively strong collaborators although they show distinct taxonomic interests.
+% same coworking but distinct interests
+Other coworking communities include collectors who happen to be strongly connected by collaborative ties in the CWN despite having distinct taxonomic interests, being weakly connected in the SCN projection.
+One such case is that of \textit{Jair Faria} (\textit{faria,jeq}) and \textit{Maria Rosa Zanatta} (\textit{zanatta,mrv}), having recorded a total of $1524$ specimens together (comprising $64.5\%$ of all records by \textit{zanatta,mrv} and $32.5\%$ of all records by \textit{faria,jeq}).
+Their species bags is substantially dissimilar, though, as `\textit{faria,jeq}' is more focused on family \textit{Myrtaceae} whereas `\textit{zanatta,mrv}' has a more generalist recording profile. 
+They are included in distinct interest communities (\textit{grp4} and \textit{grp6}, Figure \ref{fig:ub_scn_family_projCol_communities}) but in the same coworking group (colored in light blue, Figure \ref{fig:ub_cwn_communities}).
+% Case of heringer,ep and eiten,g
 
-There are also communities that are formed due to the activities of their collectors being temporally spaced from others in the network (as the green one, around `\textit{irwin,hs}'.
+% same interest but distinct coworking
+There are also cases of collectors who, despite being very similar in their taxonomic interests (typically strongly tied in the SCN projection), seldom or never collaborate in field, and are thus not included in the same coworking groups.
+\textit{Chaves,da} and \textit{João Bringel} (\textit{bringel,jba}), for instance, are tightly connected in the common interests network ( in \textit{grp0}) but are distant in the CWN, having no connections.
+% Maybe due to geographical or temporal spacing
+%
+
+
+% Temoral evolution of the CWN
+Some communities reflect a temporal spacing on the recording activities of collectors.
+As collectors careers have limited lifespans, they can only collaborate with contemporary collectors.
+Therefore, the formation of communities in CWNs is temporally constrained. 
+Figure \ref{fig:ub_cwn_temporal_evol} shows the temporal evolution of the network from Figure \ref{fig:ub_cwn_communities}.
+\begin{figure}[h!]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
+    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors who have recorded at least one specimen in each period were drawn. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
+    \label{fig:ub_cwn_temporal_evol}
+\end{figure}
+
+Three 
+Three pioneer coworking groups:
+The first collectors communities to be formed are those around \textit{Howard S. Irwin} (\textit{irwin,hs}); 
+\textit{Ezechias Paulo Heringer} (\textit{heringer,ep});
+\textit{Romeu P. Belém} (\textit{belem,rp});
+(as the green one, around `\textit{irwin,hs}' (Figure \ref{fig:ub_cwn_temporal_evol}).
+Mainly from $1950$ to $1973$.
+
 \textit{Howard Irwin} is included in the same community of interest as `\textit{proenca,ceb}', as they are generalist collectors.
 However, the CWN shows that they form distinct communities, due to the fact that their activities do not overlap very much temporally.
 Their community is the link to the rest of the giant component through \textit{James Ratter} (\textit{ratter,ja}).
 
 
-\paragraph*{Visualizing temporal evolution.}
-Collectors collaborations forming their careers.
-
-\begin{figure}[h!]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption{ Temporal evolution of collaborations network. from $1990$ to $2013$. Each frame corresponds to a period of $3$ years, and only collectors who have collaborated at least once with `\textit{munhoz,cbr}' in each period were drawn (red nodes). Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
-    \label{fig:ub_cwn_temporal_evol}
-\end{figure}
 
 \begin{figure}[h!]
   	\centering
