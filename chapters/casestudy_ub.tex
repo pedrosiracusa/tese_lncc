@@ -684,15 +684,32 @@ We detected a total of $30$ distinct communities, $11$ of which are detached fro
 For visualization, we first filtered weaker edges ($k_w < 10$), and then filtered connected components with scores lower than $600$.
 The resulting graph $545$ nodes and $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
 
-Some of these communities correspond to communities of interest, found in the SCN model.
+Some of these communities correspond to communities of interest, from the SCN model.
 %
 The bryophytes research group, led by `\textit{camara,peas}' is also cohesive in terms of field expeditions.
+The group of collectors interested on herbaceous plants, led by `\textit{munhoz,cbr}'.
+
+Others include nodes that form communities in one but not in the other.
 %
-Some of these communities are formed due to the activities of their collectors being temporally spaced from others in the network (as the green one, around `\textit{irwin,hs}'.
+\textit{Chaves,da} and \textit{Bringel,jba} are tightly connected in the common interests network ( in \textit{grp0}) but are distant in the CWN, having no connections.
+%
+\textit{Faria,J.E.Q} and \textit{Zanatta} are relatively strong collaborators although they show distinct taxonomic interests.
+
+There are also communities that are formed due to the activities of their collectors being temporally spaced from others in the network (as the green one, around `\textit{irwin,hs}'.
+\textit{Howard Irwin} is included in the same community of interest as `\textit{proenca,ceb}', as they are generalist collectors.
+However, the CWN shows that they form distinct communities, due to the fact that their activities do not overlap very much temporally.
+Their community is the link to the rest of the giant component through \textit{James Ratter} (\textit{ratter,ja}).
 
 
 \paragraph*{Visualizing temporal evolution.}
 Collectors collaborations forming their careers.
+
+\begin{figure}[h!]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
+    \caption{ Temporal evolution of collaborations network. from $1990$ to $2013$. Each frame corresponds to a period of $3$ years, and only collectors who have collaborated at least once with `\textit{munhoz,cbr}' in each period were drawn (red nodes). Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
+    \label{fig:ub_cwn_temporal_evol}
+\end{figure}
 
 \begin{figure}[h!]
   	\centering
