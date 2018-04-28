@@ -7,8 +7,9 @@ In this case study we explore and characterize the topologies of our two network
 The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
-Table \ref{table:ub_collectors_florescer} lists some of the most historically relevant collectors who have intensively contributed to the herbarium. 
 
+\paragraph*{Notable collectors.}
+Table \ref{table:ub_collectors_florescer} lists some of the most historically relevant collectors who have intensively contributed to the herbarium. 
 \begin{table}[H]
   \caption{Historically important collectors who have contributed to the UB herbarium.}
   \begin{center}
@@ -35,6 +36,11 @@ Table \ref{table:ub_collectors_florescer} lists some of the most historically re
 \end{table}
 \footnotetext{\url{http://florescer.unb.br/janela4.html}}
 %\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
+
+George Eiten
+Ezechias Paulo Heringer
+
+
 
 We have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}.
 This dataset is also available through the CRIA portal % TODO
@@ -694,16 +700,24 @@ Collectors from this coworking group (colored in purple and located in the north
 Another example is the coworking group of herbaceous plants collectors (colored in pink), including \textit{Cássia Munhoz} (\textit{munhoz,cbr}), \textit{Aryanne Amaral} (\textit{amaral,ag}), \textit{Thiago de Roure Bandeira Mello} (\textit{mello,trb}) and \textit{Chesterton Eugênio} (\textit{eugenio,cuo}).
 
 % same coworking but distinct interests
-Other coworking communities include collectors who happen to be strongly connected by collaborative ties in the CWN despite having distinct taxonomic interests, being weakly connected in the SCN projection.
-One such case is that of \textit{Jair Faria} (\textit{faria,jeq}) and \textit{Maria Rosa Zanatta} (\textit{zanatta,mrv}), having recorded a total of $1524$ specimens together (comprising $64.5\%$ of all records by \textit{zanatta,mrv} and $32.5\%$ of all records by \textit{faria,jeq}).
-Their species bags is substantially dissimilar, though, as `\textit{faria,jeq}' is more focused on family \textit{Myrtaceae} whereas `\textit{zanatta,mrv}' has a more generalist recording profile. 
-They are included in distinct interest communities (\textit{grp4} and \textit{grp6}, Figure \ref{fig:ub_scn_family_projCol_communities}) but in the same coworking group (colored in light blue, Figure \ref{fig:ub_cwn_communities}).
-% Case of heringer,ep and eiten,g
+Other coworking communities include collectors who happen to be strongly connected with collaborative ties in the CWN despite having distinct taxonomic interests, being weakly connected in the SCN projection.
+One such case is that of `\textit{faria,jeq}' and `\textit{zanatta,mrv}', both having recorded a total of $1524$ specimens together (comprising $64.5\%$ of all records by \textit{zanatta,mrv} and $32.5\%$ of all records by \textit{faria,jeq}).
+As the overall composition of their species bags are substantially distinct (`\textit{faria,jeq}' is more interested on family \textit{Myrtaceae} whereas `\textit{zanatta,mrv}' has a more generalist recording profile), they have been included in distinct interest communities (\textit{grp4} and \textit{grp6}, Figure \ref{fig:ub_scn_family_projCol_communities}) though belonging to the same coworking group (colored in light blue, Figure \ref{fig:ub_cwn_communities}).
 
 % same interest but distinct coworking
-There are also cases of collectors who, despite being very similar in their taxonomic interests (typically strongly tied in the SCN projection), seldom or never collaborate in field, and are thus not included in the same coworking groups.
-\textit{Chaves,da} and \textit{João Bringel} (\textit{bringel,jba}), for instance, are tightly connected in the common interests network ( in \textit{grp0}) but are distant in the CWN, having no connections.
-% Maybe due to geographical or temporal spacing
+There are also cases of collectors who, despite having very similar taxonomic interests (typically strongly tied in the SCN projection), seldom or never collaborate in field, and are not included in the same coworking groups.
+\textit{Daniel Augusto Chaves} (\textit{Chaves,da}) and `\textit{bringel,jba}', for instance, have the majority of their species bags composed of family \textit{Asteraceae} ($54.3\%$ for \textit{bringel,jba} and $78.5\%$ for \textit{chaves,da}), being both included in the same interest community (\textit{grp0}, Figure \ref{fig:ub_scn_family_projCol_communities}).
+However, they have never collaborated on specimens recording, not being adjacent and belonging to distinct communities in the CWN (\ref{fig:ub_cwn_communities}).
+%There are apparently no temporal nor geographical impediments explaining the fact that they have never recorded together, as both have a considerable amount of records in the states of Goiás and Minas Gerais and have contemporary careers, with peaks of recording activity around $2011-12$ for \textit{bringel,jba} and around $2013-14$ for \textit{chaves,da}.
+
+% why communities of interest do not overlap with coworking communities
+We consider some possible explanations for why groups of collectors with very similar taxonomic interests would not also form collecting coworking teams.
+* Disjoint temporal and geographical distribution of recording activities;
+* Positive or negative non-professional social relations (\textit{e.g.} friendship or rivality).
+* Teams do not have the information on the collecting activities of others.
+* Taxonomic resolution of the models: Teams might be interested on specific taxonomic groups at ranks that are below the resolution of our model. For instance, they might be interested in the same family, but one group interested on diversity (generalist collecting behavior) while other group is more interested towards a particular genus.
+
+We consider the absence of coworking links between them to be an effect of lack of a social tie linking them.
 %
 
 
