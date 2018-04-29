@@ -684,7 +684,7 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
 
 One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who collaborate on specimens recording in field, which we refer to as \textbf{coworking groups}. 
 %
-In order to detect such groups we've applied the same algorithm for community detection \cite{Blondel2008} as we did for the SCN projections.
+In order to detect such groups we have applied the same algorithm for community detection \cite{Blondel2008} as we did for the SCN projections.
 %
 We detected a total of $30$ distinct communities, $11$ of which are detached from the giant component.
 %
@@ -692,12 +692,12 @@ For visualization, we first filtered weaker edges ($k_w < 10$), and then filtere
 The resulting graph $545$ nodes and $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
 
 % same interest and same coworking
-Some of the communities we found in the CWN are composed by collectors who also compose tight communities of interests from the SCN projection (Figure \ref{fig:ub_scn_family_projCol_communities}).
+Some of the communities we found in the CWN are formed by collectors who also compose tight communities of interests in the SCN projection (Figure \ref{fig:ub_scn_family_projCol_communities}).
 %
 One such example is the bryophytes research group, which includes `\textit{camara,peas}', `\textit{carvalhosilva,m}' and `\textit{soares,aer}'.
-Collectors from this coworking group (colored in purple and located in the northeast region of the giant component in Figure \ref{fig:ub_cwn_communities}) are not only more inclined towards collaborating with each other in field, but are also interested on recording the specific taxonomic group of bryophytes.
+Collectors from this coworking group (colored in purple and located in the northeast region of the giant component in Figure \ref{fig:ub_cwn_communities}) not only mostly collaborate with members from the same group in field, but are also interested on recording the specific taxonomic group of bryophytes.
 %
-Another example is the coworking group of herbaceous plants collectors (colored in pink), including \textit{Cássia Munhoz} (\textit{munhoz,cbr}), \textit{Aryanne Amaral} (\textit{amaral,ag}), \textit{Thiago de Roure Bandeira Mello} (\textit{mello,trb}) and \textit{Chesterton Eugênio} (\textit{eugenio,cuo}).
+Another similar example is the coworking group of herbaceous plants collectors (colored in pink), including `\textit{munhoz,cbr}', `\textit{amaral,ag}', `\textit{mello,trb}' and `\textit{eugenio,cuo}', although this group is apparently more open to collaborating with non-members.
 
 % same coworking but distinct interests
 Other coworking communities include collectors who happen to be strongly connected with collaborative ties in the CWN despite having distinct taxonomic interests, being weakly connected in the SCN projection.
@@ -706,7 +706,7 @@ As the overall composition of their species bags are substantially distinct (`\t
 
 % same interest but distinct coworking
 There are also cases of collectors who, despite having very similar taxonomic interests (typically strongly tied in the SCN projection), seldom or never collaborate in field, and are not included in the same coworking groups.
-\textit{Daniel Augusto Chaves} (\textit{Chaves,da}) and `\textit{bringel,jba}', for instance, have the majority of their species bags composed of family \textit{Asteraceae} ($54.3\%$ for \textit{bringel,jba} and $78.5\%$ for \textit{chaves,da}), being both included in the same interest community (\textit{grp0}, Figure \ref{fig:ub_scn_family_projCol_communities}).
+\textit{Daniel Augusto Chaves} (\textit{Chaves,da}) and `\textit{bringel,jba}', for instance, have the majority of their species bags composed of family \textit{Asteraceae} ($54.3\%$ for `\textit{bringel,jba}' and $78.5\%$ for `\textit{chaves,da}'), being both included in the same interest community (\textit{grp0}, Figure \ref{fig:ub_scn_family_projCol_communities}).
 However, they have never collaborated on specimens recording, not being adjacent and belonging to distinct communities in the CWN (\ref{fig:ub_cwn_communities}).
 %There are apparently no temporal nor geographical impediments explaining the fact that they have never recorded together, as both have a considerable amount of records in the states of Goiás and Minas Gerais and have contemporary careers, with peaks of recording activity around $2011-12$ for \textit{bringel,jba} and around $2013-14$ for \textit{chaves,da}.
 
@@ -715,20 +715,22 @@ We consider some possible factors for explaining why groups of collectors with v
 %
 First, as coworking relations are based on the physical recording of organisms taking place at some location and date, they can only possibly exist between collectors whose recording activities overlap both in geographical and temporal spaces.
 As temporal and geographical distances between collectors increase, they consequently become more unlikely of developing collaborations, constrained by the limited lifespan of their own careers.
-%
+
 Second, non-professional relationships could also facilitate or hinder the establishment of new coworking ties between individuals. 
-Positive relationships (\textit{e.g.} friendship) could lead two collectors to collaborate irrespective of their own taxonomic interests, for instance, if they simply mean to be companions of each other and help on their respective field recordings.  
+Positive relationships (\textit{e.g.} friendship) could lead two collectors to collaborate irrespective of their own taxonomic interests, for instance, if they simply mean to be companions of each other and help on the field work of their friend.
 On the other hand negative relationships, such as rivality, can prevent potentially fruitfull coworking relationships to establish between collectors who record very similar taxonomic groups at the same place and time.
 Moreover, people have limited information on the activities of other collectors and research groups, and thus might not collaborate simply as a consequence of not being aware of each other.
-%
+
 Last, we might fail to grasp a complete picture of how interest groups are truly structured in the SCN depending on the taxonomic resolution we adopt while inspecting it.
 To exemplify, consider the scenario in which we detect a subset of collectors composing a community in a family-aggregated projected SCN, such as that in Figure \ref{fig:ub_cwn_communities}.
 At the taxonomic resolution of family, we would naturally assume that all those collectors have very similar taxonomic interests, as the reason they are included in the same community is that they have very simlar ``families signatures" distinguishing them from the rest of the collectors. 
-However, if increased the taxonomic resolution of the model (\textit{e.g.} to genus), we might observe the community to subdivide, each of them containing collectors who, although interested in the same family, collect distinct sets of organisms belonging to it.
-%
+However, if we increased the taxonomic resolution of the model (\textit{e.g.} to genus), we might observe the community to subdivide, each of them containing collectors who, although interested in the same family, collect distinct sets of organisms belonging to it.
+Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not detectable in lower-resolution aggregations.
 
 
 % Temoral evolution of the CWN
+\paragraph*{Temporal evolution of the CWN}
+% Although our model does not incorporate temporal dimension in its structure -> We built the frames by querying the original dataset, used to build the CWN.
 The temporal evolution of the UB CWN (Figure \ref{fig:ub_cwn_temporal_evol}) shows the formation of three important pioneer collector groups, from $1950$ to $1981$.
 Some communities reflect a temporal spacing on the recording activities of collectors.
 As collectors careers have limited lifespans, they can only collaborate with contemporary collectors.
