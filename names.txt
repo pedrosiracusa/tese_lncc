@@ -1,43 +1,43 @@
 amaral,ag           | Aryanne Gonçalves Amaral                          | http://lattes.cnpq.br/0553088328180564
 anderson,wr         | William Russell Anderson                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000000177
-belem,rp            | Romeu P. Belém
+belem,rp            | Romeu P. Belém                                    | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000026951
 bridgewater,s       | Sam G. M. Bridgewater                             | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000120171
-bringel,jba         | João Bernardo de Azevedo Bringel Júnior
+bringel,jba         | João Bernardo de Azevedo Bringel Júnior           | http://lattes.cnpq.br/9359704960057451
 camara,peas         | Paulo Eduardo Aguiar Saraiva Câmara               | http://lattes.cnpq.br/2742831544064073
-carvalhosilva,m     | Micheline Carvalho Silva
-castelobranco,cw    | Christina Wyss Castelo Branco
+carvalhosilva,m     | Micheline Carvalho Silva                          | http://lattes.cnpq.br/1015868478480965
+castelobranco,cw    | Christina Wyss Castelo Branco                     | http://lattes.cnpq.br/6129052109183586
 chaves,da           | Daniel Augusto Chaves                             | http://lattes.cnpq.br/6993370381419092
-dantas,ts           | Tamara Silva Dantas
+dantas,ts           | Tamara Silva Dantas                               | http://lattes.cnpq.br/6233687711682398
 eiten,g             | George Eiten                                      | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000002352
 eiten,lt            | Liene Teixeira Eiten                              | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000002353
 eugenio,cuo         | Chesterton Ulysses Orlando Eugênio                | http://lattes.cnpq.br/3694741825113110
-faria,ala           | Allan Laid Alkimim Faria
-faria,jeq           | Jair Eustáquio Quintino de Faria Júnior
+faria,ala           | Allan Laid Alkimim Faria                          | http://lattes.cnpq.br/3988533384771339
+faria,jeq           | Jair Eustáquio Quintino de Faria Júnior           | http://lattes.cnpq.br/3214384669945455
 fonseca,sf          | Sidney F. da Fonsêca                              | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000117349
-gama,r              | Renato Gama
-grando,jv           | João Vademar Grando
+gama,r              | Renato Gama Dias Neto                             | http://lattes.cnpq.br/7699197078019809
+grando,jv           | João Vademar Grando                               | http://lattes.cnpq.br/6229685164094420
 harley,rm           | Raymond Mervyn Harley                             | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003418
 heringer,ep         | Ezechias Paulo Heringer                           | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003587
 irwin,hs            | Howard Samuel Irwin                               | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003953
 kirkbride,mcg       | Maria Cristina Garcia Kirkbride                   | -
 kirkbride-junior,jh | Joseph Harold Kirbride Jr.                        | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000011449
-leite,alta          | Ana Lúcia Tostes de Aquino Leite
+leite,alta          | Ana Lúcia Tostes de Aquino Leite                  | http://lattes.cnpq.br/7719191749294093 
 magalhaes,m         | Geraldo Mendes Magalhães                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000005315
-martins,ds          | Drielle dos Santos Martins
-mello,trb           | Thiago de Roure Bandeira Mello
+martins,ds          | Drielle dos Santos Martins                        | http://lattes.cnpq.br/5209656812635059
+mello,trb           | Thiago de Roure Bandeira Mello                    | http://lattes.cnpq.br/0930415350491316 
 munhoz,cbr          | Cássia Beatriz Rodrigues Munhoz                   | http://lattes.cnpq.br/9973242126324510
-oliveira,rc         | Regina Célia de Oliveira
-oliveira,rir        | Roni Ivan Rocha de Oliveira
+oliveira,rc         | Regina Célia de Oliveira                          | http://lattes.cnpq.br/2968817136128886
+oliveira,rir        | Roni Ivan Rocha de Oliveira                       | http://lattes.cnpq.br/7006488728244815
 onishi,e            | Eunice Onishi                                     | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000053001
-pinheiro,eml        | Eliana Marília Lima Pinheiro
+pinheiro,eml        | Eliana Marília Lima Pinheiro                      | http://lattes.cnpq.br/7238835279276067
 pires,jn            | João Murça Pires                                  | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000006559
 proenca,ceb         | Carolyn Elinores Barnes Proença                   | http://lattes.cnpq.br/8243382046974477
-ratter,ja           | James Alexander Ratter
+ratter,ja           | James Alexander Ratter                            | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000023562
 santos,rrb          | Raimundo Reis dos Santos                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000032907
-soares,aer          | Abel Eustáquio R. Soares
+soares,aer          | Abel Eustáquio Rocha Soares                       | http://lattes.cnpq.br/4908757546415140
 souza,mgm           | Maria das Graças Machado de Souza                 | http://lattes.cnpq.br/2817470874123772
 souza,rr            | Raimundo Souza                                    | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000055998 
-souza,rv            | Ronaldo Viveiros de Sousa
+souza,rv            | Ronaldo Viveiros de Sousa                         | http://lattes.cnpq.br/2008471425847512
 staggmeyer,vg       | Vanessa Graziele Staggemeier                      | http://lattes.cnpq.br/4357034543526737
 stieber,mt          | Michael Thomas Stieber                            | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000010969
-zanatta,mrv         | Maria Rosa V. Zanatta
+zanatta,mrv         | Maria Rosa Vargas Zanatta                         | http://lattes.cnpq.br/5981278331253704
