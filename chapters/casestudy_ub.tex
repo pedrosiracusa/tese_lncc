@@ -735,32 +735,32 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities for the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
+    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
     \label{fig:ub_cwn_temporal_evol}
 \end{figure}
 
 We investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1955$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
 Frames aggregate and display collaborations (edges) occurring within the respective periods, and only collectors showing significant activity within each period are plotted.
-We consider the activity of a collector to be significant if the number of occurrences recorded within the period comprises at least $1\%$ of his/her absolute number of records.
-Although our proposed CWN model does not incorporate the temporal dimension in its structure, we were able to build the frames by querying the UB species occurrence dataset, based on which the network was constructed.
+We consider the activity of a collector to be significant if the number of occurrences recorded within the period comprises at least $5\%$ of his/her absolute number of records.
+Although our proposed CWN model does not incorporate the temporal dimension in its structure, we were able to build the frames by querying the UB species occurrence dataset from which the network was constructed.
 
-Three pioneer collectors groups, which we refer to the \textbf{first generation} of botanists (with most of their recording activities concentrated from $1958$ to $1981$), were historically remarkable for having largely contributed to the formation of the UB herbarium (frames $1-4$ in Figure \ref{fig:ub_cwn_temporal_evol}).
-% First generation
+Three pioneer collectors groups, which we refer to as the \textbf{first generation} of botanists (with most of their recording activities concentrated from $1955$ to $1982$), were historically remarkable for having largely contributed to the early formation of the UB herbarium (frames $1-4$ in Figure \ref{fig:ub_cwn_temporal_evol}).
+% First generation (1955-82)
 % Blue group
 The first group includes \textit{heringer,ep}, \textit{eiten,g} and \textit{eiten,lt}.
-\textit{Ezechias Paulo Heringer} (\textit{heringer,ep}) is regarded as one of the founders of the UB herbarium, having led the first collection expeditions in which the first samples which became its basis were gathered \cite{Walter2001}.
-His most intensive collecting activities date from $1950$ to $1981$, period in which he has collaborated with other important collectors such as \textit{Alberto Castellanos} (\textit{castellanos,a}) and \textit{George Eiten} (\textit{eiten,g}). 
-\textit{Eiten} is also a historically relevant collector for the herbarium, having contributed with an extensive set of records of plants, mainly from the Cerrado biome \cite{Gomes2012}.
-\textit{Eiten}'s known strong collaboration with first his first wife, \textit{eiten,lt}, is captured by our network model, as shown in frames $2$ and $3$ in Figure \ref{fig:ub_cwn_temporal_evol}.
-\textit{Heringer}'s collaborative recordings with \textit{eiten,g} were concentrated within the period from $1974$ to $1981$, and took place at the states of Minas Gerais and Goiás.
+\textit{Ezechias Paulo Heringer} (\textit{heringer,ep}) is regarded as one of the founders of the UB herbarium, having led the first exploratory expeditions for sampling the flora of the Federal District \cite{Walter2001}.
+During his earlier activities (around $1955$) he has collaborated with \textit{castellanos,a}, a renowned Argentine botanist who visited the region during the construction of the city of Brasília.
+Later in his career ($1969$ to $1975$), \textit{heringer,ep} has also teamed up with \textit{eiten,g}, recording specimens mainly in the states of Minas Gerais and Goiás.
+\textit{George Eiten} (\textit{eiten,g}) is also considered a historically relevant collector for the herbarium, having contributed with an extensive set of plant records, mainly from the Cerrado biome \cite{Gomes2012}.
+\textit{Eiten}'s known strong collaboration with first his first wife, \textit{eiten,lt}, is captured by our network model, as shown in the first $3$ frames in Figure \ref{fig:ub_cwn_temporal_evol}.
 
 % Green group
 A second group which also heavily contributed to the formation of the herbarium is the one composed by \textit{irwin,hs}, \textit{anderson,wr}, \textit{ratter,ja} \textit{harley,rm}, \textit{pires,jn}, among others.
 \textit{Howard Irwin} (\textit{irwin,hs}) was the head of a series of exploratory expeditions to the Central Brazilian Highlands from $1964$ to $1971$, which were part of a collaborative program between the New York Botanical Garden (NYBG) and the University of Brasília \cite{Irwin1996}.
 Since the beginning of the of the expeditions we observe a strong association between \textit{irwin,hs} and two of his field assistants (\textit{souza,rr} and \textit{santos,rrb}), shown in frames $2$ and $3$ from Figure \ref{fig:ub_cwn_temporal_evol}.
-Other important collectors, including \textit{harley,rm}, \textit{fonseca,sf} and \textit{onishi,e}, have later on joined the team around \textit{irwin,hs}, contributing to the expedition in the period from $1966$ to $1973$.
+Other important collectors, including \textit{harley,rm}, \textit{fonseca,sf} and \textit{onishi,e}, have later on joined the team around \textit{irwin,hs}, contributing to the expedition in the period from $1969$ to $1975$.
 %
-It is also noticeable the association between \textit{anderson,wr}, \textit{kirkbride-junior,jh} and \textit{stieber,mt}, in the time frame from $1966$ to $1973$.
+It is also noticeable the association between \textit{anderson,wr}, \textit{kirkbride-junior,jh} and \textit{stieber,mt}, in the time frame from $1969$ to $1975$.
 \textit{William Anderson} (\textit{anderson,wr}) was a botanist from the NYBG, who continued the expeditions initiated by his colleague \textit{irwin,hs} on $1971$ \cite{Irwin1996}, together with \textit{kirkbride-junior,jh}, a graduate student at the same institution.
 %
 \textit{James Ratter} (\textit{ratter,ja}) was another important foreign collector of the herbarium, having collaborated with at least two different generations of botanists.
@@ -769,15 +769,21 @@ The second generation, which is described below, is composed by nodes in the mor
 We therefore consider him to be a ``temporal bridge'', connecting two important parts of the network which do not overlap temporally.
 
 % Purple group
-The third group is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1950$ to $1973$.
+The third group is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1955$ to $1968$.
 
-% Second generation
+% Second generation (1983-2003)
+The \textbf{second generation} of collectors are those more active within the period from $1983$ to $2003$ (frames $5$ to $7$), and are placed in the more towards the central region of the network.
+%
+Two relevant collectors from the earlier second generation are \textit{castelobranco,cw}, \textit{grando,jv} and \textit{leite,alta} with most of their activity ranging from $1983$ to $1989$.
+As we previously pointed out in this text, \textit{castelobranco,cw} and \textit{grando,jv} have collaborated on all their records, whereas \textit{leite,alta} is a singleton collector, having no collaborative records at all.
+
+Other important second-generation collectors are \textit{proenca,ceb} and \textit{souza,mgm}, with activities concentrated from $1990$ to $2003$.
 
 The more central region of the network starts to grow around $1990$, with the remarkable ascension of `\textit{proenca,ceb}', `\textit{souza,mgm}',
 
 \textit{ratter,ja} has an important role on bridging the collectors temporally (he has collaborated with both the teams of \textit{irwin} and \textit{proenca,ceb}.
 
-
+% Third generation (2004-2017)
 
 
 Three 
