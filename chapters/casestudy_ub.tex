@@ -8,7 +8,7 @@ The University of Brasília Herbarium (UB) is a reference collection for the flo
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
 
-\paragraph*{Notable collectors.}
+\paragraph*{Remarkable collectors.}
 Table \ref{table:ub_collectors_florescer} lists some of the most historically relevant collectors who have intensively contributed to the herbarium. 
 \begin{table}[H]
   \caption{Historically important collectors who have contributed to the UB herbarium.}
@@ -210,6 +210,7 @@ For the CWN model we only filtered out records with null entries for the collect
 Additionally, a previously elaborated names map for the UB dataset collectors was passed in during SCN construction, facilitating the process of remapping names variants to entities. 
 Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{``Incógnito"}, \textit{``Ignorado"}, \textit{``Ilegível"} and \textit{``?"} were excluded from the network model right after its creation.
 
+A table mapping each id to the collector name is presented in the appendix.
 
 
 
@@ -723,7 +724,7 @@ Moreover, people have limited information on the activities of other collectors 
 
 Last, we might fail to grasp a complete picture of how interest groups are truly structured in the SCN depending on the taxonomic resolution we adopt while inspecting it.
 To exemplify, consider the scenario in which we detect a subset of collectors composing a community in a family-aggregated projected SCN, such as that in Figure \ref{fig:ub_cwn_communities}.
-At the taxonomic resolution of family, we would naturally assume that all those collectors have very similar taxonomic interests, as the reason they are included in the same community is that they have very simlar ``families signatures" distinguishing them from the rest of the collectors. 
+At the taxonomic resolution of family, we would naturally assume that all those collectors have very similar taxonomic interests, as the reason they are included in the same community is that they have very simlar ``families signatures'' distinguishing them from the rest of the collectors. 
 However, if we increased the taxonomic resolution of the model (\textit{e.g.} to genus), we might observe the community to subdivide, each of them containing collectors who, although interested in the same family, collect distinct sets of organisms belonging to it.
 Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not detectable in lower-resolution aggregations.
 
@@ -734,12 +735,13 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors who have recorded at least one specimen in each period were drawn. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
+    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities for the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
     \label{fig:ub_cwn_temporal_evol}
 \end{figure}
 
-We investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1950$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
-Frames aggregate and display collaborations (edges) occurring within the respective periods, and only collectors who have recorded at least one specimen within each period are represented. 
+We investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1955$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
+Frames aggregate and display collaborations (edges) occurring within the respective periods, and only collectors showing significant activity within each period are plotted.
+We consider the activity of a collector to be significant if the number of occurrences recorded within the period comprises at least $1\%$ of his/her absolute number of records.
 Although our proposed CWN model does not incorporate the temporal dimension in its structure, we were able to build the frames by querying the UB species occurrence dataset, based on which the network was constructed.
 
 Three pioneer collectors groups, which we refer to the \textbf{first generation} of botanists (with most of their recording activities concentrated from $1958$ to $1981$), were historically remarkable for having largely contributed to the formation of the UB herbarium (frames $1-4$ in Figure \ref{fig:ub_cwn_temporal_evol}).
@@ -764,7 +766,7 @@ It is also noticeable the association between \textit{anderson,wr}, \textit{kirk
 \textit{James Ratter} (\textit{ratter,ja}) was another important foreign collector of the herbarium, having collaborated with at least two different generations of botanists.
 The first generation we refer to is the one formed by collectors cited above (including \textit{irwin,hs}, \textit{anderson,wr} and \textit{harley,rm}), most of which have participated in the context of the Central Brazilian Highlands expeditions.
 The second generation, which is described below, is composed by nodes in the more central region of the network, including \textit{proenca,ceb}, \textit{munhoz,cbr}.
-We therefore consider him to be a ``temporal bridge", connecting two important parts of the network which do not overlap temporally.
+We therefore consider him to be a ``temporal bridge'', connecting two important parts of the network which do not overlap temporally.
 
 % Purple group
 The third group is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1950$ to $1973$.
