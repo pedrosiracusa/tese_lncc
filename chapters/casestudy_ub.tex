@@ -719,7 +719,7 @@ As temporal and geographical distances between collectors increase, they consequ
 Second, non-professional relationships could also facilitate or hinder the establishment of new coworking ties between individuals. 
 Positive relationships (\textit{e.g.} friendship) could lead two collectors to collaborate irrespective of their own taxonomic interests, for instance, if they simply mean to be companions of each other and help on the field work of their friend.
 On the other hand negative relationships, such as rivality, can prevent potentially fruitfull coworking relationships to establish between collectors who record very similar taxonomic groups at the same place and time.
-Moreover, people have limited information on the activities of other collectors and research groups, and thus might not collaborate simply as a consequence of not being aware of each other.
+Moreover, people have limited information on the activities of other collectors and research groups, and thus might not collaborate simply as a consequence of not being acquainted of each other.
 
 Last, we might fail to grasp a complete picture of how interest groups are truly structured in the SCN depending on the taxonomic resolution we adopt while inspecting it.
 To exemplify, consider the scenario in which we detect a subset of collectors composing a community in a family-aggregated projected SCN, such as that in Figure \ref{fig:ub_cwn_communities}.
@@ -729,13 +729,46 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 
 
 % Temoral evolution of the CWN
-\paragraph*{Temporal evolution of the CWN}
-% Although our model does not incorporate temporal dimension in its structure -> We built the frames by querying the original dataset, used to build the CWN.
-The temporal evolution of the UB CWN (Figure \ref{fig:ub_cwn_temporal_evol}) shows the formation of three important pioneer collector groups, from $1950$ to $1981$.
-Some communities reflect a temporal spacing on the recording activities of collectors.
-As collectors careers have limited lifespans, they can only collaborate with contemporary collectors.
-Therefore, the formation of communities in CWNs is temporally constrained. 
-Figure \ref{fig:ub_cwn_temporal_evol} shows the temporal evolution of the network from Figure \ref{fig:ub_cwn_communities}.
+\paragraph*{Temporal evolution of the CWN.}
+%
+We investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1950$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
+Frames aggregate and display collaborations (edges) occurring within the respective periods, and only collectors who have recorded at least one specimen within each period are represented. 
+Although our proposed CWN model does not incorporate the temporal dimension in its structure, we were able to build the frames by querying the UB species occurrence dataset, based on which the network was constructed.
+
+Three pioneer collectors groups, which we refer to the first generation of botanists (with most of their recording activities concentrated from $1958$ to $1981$), were historically remarkable for having largely contributed to the formation of the UB herbarium (frames $1-4$ in Figure \ref{fig:ub_cwn_temporal_evol}).
+% First generation
+% Blue group
+The first group includes \textit{heringer,ep}, \textit{eiten,g} and \textit{eiten,lt}.
+\textit{Ezechias Paulo Heringer} (\textit{heringer,ep}) is regarded as one of the founders of the UB herbarium, having led the first collection expeditions in which the first samples which became its basis were gathered \cite{Walter2001}.
+His most intensive collecting activities date from $1950$ to $1981$, period in which he has collaborated with other important collectors such as \textit{Alberto Castellanos} (\textit{castellanos,a}) and \textit{George Eiten} (\textit{eiten,g}). 
+\textit{Eiten} is also a historically relevant collector for the herbarium, having contributed with an extensive set of records of plants, mainly from the Cerrado biome \cite{Gomes2012}.
+\textit{Eiten}'s known strong collaboration with first his first wife, \textit{eiten,lt}, is captured by our network model, as shown in frames $2$ and $3$ in Figure \ref{fig:ub_cwn_temporal_evol}.
+\textit{Heringer}'s collaborative recordings with \textit{eiten,g} were concentrated within the period from $1974$ to $1981$, and took place at the states of Minas Gerais and Goiás.
+
+% Green group
+A second group which also heavily contributed to the formation of the herbarium is the one composed by \textit{irwin,hs}, \textit{anderson,wr}, \textit{ratter,ja} \textit{harley,rm}, \textit{pires,jn}, among others.
+\textit{Howard Irwin} (\textit{irwin,hs}) was the head of a series of exploratory expeditions to the Central Brazilian Highlands from $1964$ to $1971$, which were part of a collaborative program between the New York Botanical Garden (NYBG) and the University of Brasília \cite{Irwin1996}.
+Since the beginning of the of the expeditions we observe a strong association between \textit{irwin,hs} and two of his field assistants (\textit{souza,rr} and \textit{santos,rrb}), shown in frames $2$ and $3$ from Figure \ref{fig:ub_cwn_temporal_evol}.
+Other important collectors, including \textit{harley,rm}, \textit{fonseca,sf} and \textit{onishi,e}, have later on joined the team around \textit{irwin,hs}, contributing to the expedition in the period from $1966$ to $1973$.
+%
+It is also noticeable the association between \textit{anderson,wr}, \textit{kirkbride-junior,jh} and \textit{stieber,mt}, in the time frame from $1966$ to $1973$.
+\textit{William Anderson} (\textit{anderson,wr}) was a botanist from the NYBG, who continued the expeditions initiated by his colleague \textit{irwin,hs} on $1971$ \cite{Irwin1996}, together with \textit{kirkbride-junior,jh}, a graduate student at the same institution.
+%
+\textit{James Ratter} (\textit{ratter,ja}) was another important foreign collector of the herbarium, having collaborated with at least two different generations of botanists.
+The first generation we refer to is the one formed by collectors cited above (including \textit{irwin,hs}, \textit{anderson,wr} and \textit{harley,rm}), most of which have participated in the context of the Central Brazilian Highlands expeditions.
+The second generation, which is described below, is composed by nodes in the more central region of the network, including \textit{proenca,ceb}, \textit{munhoz,cbr}.
+We therefore consider him to be a ``temporal bridge", connecting two important parts of the network which do not overlap temporally.
+
+% Purple group
+The third group is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1950$ to $1973$.
+
+% Second generation
+
+The more central region of the network starts to grow around $1990$, with the remarkable ascension of `\textit{proenca,ceb}', `\textit{souza,mgm}',
+
+\textit{ratter,ja} has an important role on bridging the collectors temporally (he has collaborated with both the teams of \textit{irwin} and \textit{proenca,ceb}.
+
+
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}

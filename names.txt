@@ -1,33 +1,43 @@
 amaral,ag           | Aryanne Gonçalves Amaral                          | http://lattes.cnpq.br/0553088328180564
-anderson,wr         | William Russell Anderson                          | http://www.ipni.org/ipni/idAuthorSearch.do?id=201-1
+anderson,wr         | William Russell Anderson                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000000177
 belem,rp            | Romeu P. Belém
+bridgewater,s       | Sam G. M. Bridgewater                             | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000120171
 bringel,jba         | João Bernardo de Azevedo Bringel Júnior
 camara,peas         | Paulo Eduardo Aguiar Saraiva Câmara               | http://lattes.cnpq.br/2742831544064073
 carvalhosilva,m     | Micheline Carvalho Silva
 castelobranco,cw    | Christina Wyss Castelo Branco
+chaves,da           | Daniel Augusto Chaves                             | http://lattes.cnpq.br/6993370381419092
 dantas,ts           | Tamara Silva Dantas
 eiten,g             | George Eiten                                      | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000002352
-eiten,lt            | Liene Teixeira Eiten                              | http://www.ipni.org/ipni/idAuthorSearch.do?id=2497-1
+eiten,lt            | Liene Teixeira Eiten                              | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000002353
 eugenio,cuo         | Chesterton Ulysses Orlando Eugênio                | http://lattes.cnpq.br/3694741825113110
 faria,ala           | Allan Laid Alkimim Faria
 faria,jeq           | Jair Eustáquio Quintino de Faria Júnior
+fonseca,sf          | Sidney F. da Fonsêca                              | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000117349
 gama,r              | Renato Gama
 grando,jv           | João Vademar Grando
-harley,rm           | Raymond Mervyn Harley                             | http://www.ipni.org/ipni/idAuthorSearch.do?id=3662-1
+harley,rm           | Raymond Mervyn Harley                             | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003418
 heringer,ep         | Ezechias Paulo Heringer                           | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003587
 irwin,hs            | Howard Samuel Irwin                               | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000003953
+kirkbride,mcg       | Maria Cristina Garcia Kirkbride                   | -
+kirkbride-junior,jh | Joseph Harold Kirbride Jr.                        | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000011449
 leite,alta          | Ana Lúcia Tostes de Aquino Leite
+magalhaes,m         | Geraldo Mendes Magalhães                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000005315
 martins,ds          | Drielle dos Santos Martins
 mello,trb           | Thiago de Roure Bandeira Mello
 munhoz,cbr          | Cássia Beatriz Rodrigues Munhoz                   | http://lattes.cnpq.br/9973242126324510
 oliveira,rc         | Regina Célia de Oliveira
 oliveira,rir        | Roni Ivan Rocha de Oliveira
+onishi,e            | Eunice Onishi                                     | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000053001
 pinheiro,eml        | Eliana Marília Lima Pinheiro
+pires,jn            | João Murça Pires                                  | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000006559
 proenca,ceb         | Carolyn Elinores Barnes Proença                   | http://lattes.cnpq.br/8243382046974477
 ratter,ja           | James Alexander Ratter
+santos,rrb          | Raimundo Reis dos Santos                          | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000032907
 soares,aer          | Abel Eustáquio R. Soares
 souza,mgm           | Maria das Graças Machado de Souza                 | http://lattes.cnpq.br/2817470874123772
+souza,rr            | Raimundo Souza                                    | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000055998 
 souza,rv            | Ronaldo Viveiros de Sousa
 staggmeyer,vg       | Vanessa Graziele Staggemeier                      | http://lattes.cnpq.br/4357034543526737
+stieber,mt          | Michael Thomas Stieber                            | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000010969
 zanatta,mrv         | Maria Rosa V. Zanatta
-chaves,da           | Daniel Augusto Chaves                             | http://lattes.cnpq.br/6993370381419092
