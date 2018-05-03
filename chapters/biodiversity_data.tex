@@ -18,6 +18,9 @@
 % Data from citizen science projects are structured similarly, with a few differences: (i) absence of vouchered specimens; (ii) taxonomic determinations result from a collaborative community, not necessarily composed of specialists. 
 
 
+% Museum data (aka species occurrence data)
+% Issues with museum data
+% Errors and biases \ref{Newbold2010}
 
 
 % Biological collections data coverage and completeness \cite{Funk1999}.
@@ -122,6 +125,11 @@
 % Some standards provide guidelines for including collectors names: last name + first initials...
 % However different standards give distinct guidelines and thus name variants are common.
 % How to map all name variants to the same entity? -> This leads to the Entity-resolution problem
+Some common issues are: (i) including only the name of the first author of the occurrence, and eventually et.al grouping all other collectors;
+(ii) format inconsistences when including multiple collectors. Some datasets do not use unique delimiter characters for separating collectors names, and thus affects the process of names atomization.
+(iii) As collectors names are usually included in the form of last name followed by first initials, there are many cases of homonymous, especially for very common surnames (e.g. silva, souza,...).
+There are also heteronymous, when distinct names variants are assigned to the same person. It can happen that two people have the same last name and their initials are the same (e.g. André Machado Souza or Ana Maria Souza leads to A.M.Souza).
+This can also be the result of typos (e.g. souza becoming souza), or simply omiting parts of the name (e.g. if there are two collectors, A.M.Souza and A.P.Souza, omitting the middle initial makes their names indistinguishable).
 
 % Data fit for use
 

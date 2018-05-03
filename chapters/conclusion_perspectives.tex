@@ -4,38 +4,53 @@
 % ===========
 % Conclusions
 % -----------
+We provided a conceptual basis for a network-based framework aiming to describe biological collections as an ensemble of contributions by collectors.
+The basis consists, more especifically, of two network models, giving distinct perspectives on the recording behavior of collectors
+They can can be structured from species occurrence datasets, largely available for many collections in the world.
+The models essentialy depend on two fields: the collectors field and the species name field.
+we show that modeling biological collections formation by focusing on the interests and relationships between collectors can be insightful for uncovering hidden mechanisms leading to the current composition of the herbarium. 
+
+% Quality of the recordedBy field
+In the scope of this work we assumed the species identity determination issue to be resolved, and handled by the data platform we used, GBIF. 
+This should also be considered if one is to use data from other sources, from which the determination issue may not be properly resolved.
+The quality of the models are essentially limited by the quality of the field containing collectors names.
+As this field is traditionally not very relevant for most biodiversity data applications, it is not surprising that it is relatively overlooked.
+Some of the most common issues with the field are naming inconsistencies and authorship omission (described in chapter 2).
+
+We chose the University of Brasília herbarium for our case study due to the relatively high quality of those fields.
+It is also important to analyze collectors communities belonging to other collections, and eventually join perspectives from distinct collections to produce a more holistic view of collectors activities.
 
 
-
-We show that modeling biological collections formation by focusing on the interests and relationships between collectors can be insightful for uncovering hidden mechanisms leading to the current composition of the herbarium. 
-
-
-% An issue with species bag 
 % One issue with the species bag is that it does not incorporate phylogenetic proximity of the taxa when computing the distance of two collectors.
 % It would be nice to compute collectors proximity based not only on the absolute composition of their bags but also on the phylogenetic distance of taxa themselves.
 % Look at the word2vec algorithm... may be there's some perspective there..
 
 
-
-
-% Although we have here explored the UB herbarium, we could also analyze collectors communities belonging to other collections.
-% Model quality is limited by the quality of the collectors field, which is usually overlooked in most uses of collections data.
-
 % ============
 % Perspectives
 % ------------
 
-% Species-determiners networks
-% Also model species-identifiers network, where people are linked to species they identify.
-% We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
+Although we have provided a basis for the network-based framework, we present some features which we believe are essential to be incorporated in order to allow broader applications of the model.
 
+
+% Entities resolution and joining with other botanist datasets
+% ------------------------------------------------------------
+% We want to validate the ids used for collectors in the occurrences dataset, using the structure of the CWN as a starting point. 
+% We select a subset of most influential collectors (and we manually resolve their identities) and ask them to identify and forward a message to 5 of their acquainted we suggest. The acquaintances are suggested based on the strengtheness of their links in the CWN.
+% We must discover a set of nodes which would make the messages flow more efficiently, reducing the chance of being ignored.
+% If the messages are directed from a more influential collector to a less influential one, we expect it to be less likely to be answered and forwarded.
+% The CWN provides a structure of collaborations, such that botanists who have collaborated in field are expected to be acquainted to each other.
+% We can identify key collectors from which information spreads most efficiently, and message them asking them to identify their collaborators, pointing out more structured references on the web, such as in the lattes platform, orcid....
+% 
+
+% Including the temporal and geographic dimensions
+% ------------------------------------------------
 % Including the temporal dimension
 % Social network are by nature dynamic, as they evolve over time. New interactions between entities form continuously whereas other ties break.
 % Observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
 % In our study, however, we haven't yet included the temporal dimension. 
 
-
-% Including the spatial dimension
+% Including the geographic dimension
 % The study of collectors carreer trajectories cite{Borgatti2015, conclusion} depends on incorporating temporal and geographic dimensions.
 
 
@@ -51,6 +66,22 @@ We show that modeling biological collections formation by focusing on the intere
 % ============
 % Applications
 % ------------
+Here we briefly discuss some of the possible further developments from our models.
+
+
+
+% Ellaboration of red lists
+% -------------------------
+% Red lists are necessary for pointing prioritary species for conservation e.g. the Brazilian flora red list
+% Besides data, it is also necessary to include a team of specialists for validating and evaluating the conservation status of species.
+% We can use interest networks for systematically selecting potential collaborators
+% We can use the expertise of collectors towards the areas that they have visited and the distributions of species of their expertise;
+% We also can identify taxonomist specialists as those who determine the taxonomic identity of exsiccates (species-identifier networks, extending CWNs). They would best contribute as taxonomists
+% Then we can select an optimal set of specialists for contributing in more specific aspects of the elaboration of lists
+
+% Species-determiners networks
+% Also model species-identifiers network, where people are linked to species they identify.
+% We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
 
 
 % Collectors Profiling and activities history
@@ -91,5 +122,6 @@ We show that modeling biological collections formation by focusing on the intere
 % GDMs {Ferrier: Mapping Spatial Pattern in Biodiversity for Regional Conservation Planning: Where to from Here?}
 
 
-
+% Extending to other types of biodiversity data
+% ---------------------------------------------
 % Although here we have tackled the specific class of collection (herbarium), this framework can be extended to others communities, such as citizen scientists, photographers...
