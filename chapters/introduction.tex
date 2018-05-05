@@ -2,21 +2,63 @@
 
 % Threats to biodiversity and public policies
 As a side effect of global environmental changes associated to the rapid growth of the human population, we currently face an alarming scenario of biodiversity loss, as species are disappearing at rates that by far exceed natural extinction rates \cite{Ceballos2015}.
-In fact, extinction rates observed for the last century stand out similarly to the $5$ previous events of mass extinctions (Ordovician-Silurian, Late Devonian, Permian-Triassic, End Triassic, and Cretaceous-tertiary), with strong evidence that the current will turn out to be the $6th$ \cite{Wake2008}.
+In fact, extinction rates observed for the last century stand out similarly to the $5$ previous events of mass extinctions (Ordovician-Silurian, Late Devonian, Permian-Triassic, End Triassic, and Cretaceous-tertiary), with strong evidence that the current will turn out to be the $6th$ one \cite{Wake2008}.
 Among the main types of known threats to biodiversity are climate change, habitat loss and biological invasion, all of which associated to human activities \cite{Wilcove1998}.
 
-Nevertheless, the suscebility of a particular species to extinction depends on many specific attributes.
-We calculate the risk that a particular species becomes extinct by assessing its conservation status, which involves the consideration of several factors, including those related to the sizes and dynamics of its populations, as well as their responses to threats they are exposed to
-Evaluating the extension of the geographical distribution of the species is also essential for assessing its conservation status. % check IUCN criteria
-Narrowly distributed species tend to be more susceptive to extinction than those with wider distributions.
-However, we still know very little about the diversity of organisms and their distribution on earth, as well as we lack a thorough scientific understanding on the natural processes that lead to patterns of species geographical distribution.
 
-Despite the costs associated to collecting new biodiversity data, we need it to take scientific-informed decisions, for mitigating the impact of human activities in the environment \cite{Dozzier_4paradigm_2009, Funk1999}.
-We need to use biodiversity data that is already available the best as we can, taking as much information as possible from data that is already available.
+% Mitigate threats
+In face of this alarming scenario, understanding how environmental factors affect natural communities has been a central concern in ecology and biodiversity conservation research.
+Advances in this directions are not only fundamental for improving scientific understanding on the mechanistic aspects of environmental impacts, but also for supporting environmental-related decision-making, allowing us to elaborate more effective plans for mitigating the impacts of human activities on natural systems.
+Moreover, not all species are equally susceptible to the same cateogries of threats, and thus successful conservation efforts should prioritize those that are more sensitive to threats they experience, besides more genetically and ecologically relevant.
+This involves considerating several species-specific aspects, including those related to life-history traits (\textit{e.g.} generation length), the sizes and dynamics of the populations and the extension of their geographical distributions \cite{iucn_categ_crit}.
 
+% Biological collections supporting conservation
+% Nualart2017: Brings examples of nhc data uses for conservation
+% Graham2004: section: application of spatial analysis of NHC for conservation assessment and planning
+% Others: Soberon2004, Peterson2002a
+In this context, biological collections (here used as a synonym for natural-history collections (NHC)) stand as fundamental sources of biodiversity information, as they hold physical exemplaries that testify the existence of organisms in both temporal and geographic spaces.
+% Document biodiversity
+Besides supporting conservation applications, biological collections have potentialized the discovery of new species \cite{Kemp2015}.
+
+% biological collections are being digitized -> increasing amounts of data
+
+
+
+
+
+
+
+%%
+%In practice however, we often lack a thorough knowledge on many of those aspects.
+%We are often compelled to work with very limited knowledge.
+%One difficulty, however, is that we must take scientific-iinformed decisions even with very limited knowledge on the ecology, the diversity and the distribution of organisms on Earth.
+%We also lack a thorough scientific understanding on the factors and processes that lead to the geographical distribution of species.
+%Despite, we still need to take scientific-informed decisions in order to mitigate the impact of human activities on the environment and biodiversity \cite{Dozzier_4paradigm_2009, Funk1999}.
+%Biodiversity informatics provides an evidence-based approach for understanding some of those aspects, based on data.
+%
+
+% Big data in Biodiversity
+Currently, in the era of Big Data, there's a massive amount of biodiversity data available. 
+The term Big Data refers to the fact that data is being produced in a rate that makes its processing a challenge.
+A great variety of devices producing data in large scales.
+A variety of low-cost sensors and cheap storage facilitate data collection, while reducing costs.
+Information about the occurrence of specimen in regions is turning massive and freely available,
+Biodiversity data comes from diverse sources, each of them with their own particularities (varied structures, sampling methods...).
+Data collection can be opportunistic or use experimental designs (such as grids).
+Currently, with the advent of open-science, researchers and institutions are becoming more willing to share their datasets. 
+Many initiatives supporting open-science like GBIF\footnote{\url{gbif.org}} \cite{gbif} and DataOne are scientific biodiversity data aggregators, and help institutions publishing their datasets using best practices and standards. % how many records in gbif?
+Such institutions are providing open access to biodiversity data.
+
+
+
+Data is increasingly being made available
+However, we still need to take information from it
 % Biodiversity informatics
+Biodiversity informatics provides an evidence-based approach for understanding some of those aspects, based on data.
 The application of information technologies for managing, exploring, analyzing and interpreting primary biodiversity data has led to the rise of the field of Biodiversity Informatics \cite{Soberon2004}.
 Typically, primary biodiversity data that is useful for biodiversity informatics studies concern specimens occurrence records.
+There are costs associated to collecting new biodiversity data.
+We need to be able to use biodiversity data that is already available the best as we can, taking as much information as possible from data that is already available.
 
 % SDM for wildlife management
 % Newbold2010
@@ -30,17 +72,6 @@ Priority areas selection. %[ check Schulman 2003: Nature conservation in Amazoni
 Current challenge on Species Distribution Modeling include obtaining a sufficient amount of data with sufficient quality \cite{Araujo2006}.
 
 
-% Big data in Biodiversity
-Currently, in the era of Big Data, there's a massive amount of biodiversity data available. 
-The term Big Data refers to the fact that data is being produced in a rate that makes its processing a challenge.
-A great variety of devices producing data in large scales.
-A variety of low-cost sensors and cheap storage facilitate data collection, while reducing costs.
-Information about the occurrence of specimen in regions is turning massive and freely available,
-Biodiversity data comes from diverse sources, each of them with their own particularities (varied structures, sampling methods...).
-Data collection can be opportunistic or use experimental designs (such as grids).
-Currently, with the advent of open-science, researchers and institutions are becoming more willing to share their datasets. 
-Many initiatives supporting open-science like GBIF\footnote{\url{gbif.org}} \cite{gbif} and DataOne are scientific biodiversity data aggregators, and help institutions publishing their datasets using best practices and standards. % how many records in gbif?
-Such institutions are providing open access to biodiversity data.
 
 
 % Citizen science in Biodiversity
@@ -61,8 +92,9 @@ Data life cycle includes (i) data management planning; (ii) data collection; (ii
 
 
 % Big data challenge: Data-intensive analysis
+Given the challenges concerning the complexities of biodiversity data, new approaches are needed for
 We need new approaches for analyzing data, which is currently freely available in massive amounts.
-Moreover, ecology is becoming a data-intensive science, and thus requires the adoption of data-driven approaches \cite{Kelling2009}.
+Ecology is becoming a data-intensive science, and thus requires the adoption of data-driven approaches, in addition to more traditionally hypothesis-based approaches \cite{Kelling2009}.
 More traditionally, ecology is more hypothesis-driven, as an investigator states hypotheses a priori from her own knowledge, and expects certain patterns to be observed in data she collects.
 A data-driven approach, on the other hand, seeks to unravel relevant patterns from data, which can then be used for generating domain-specific hypotheses.
 Data-intensive science gives us the opportunity of studying natural systems, which are inherently complex, more thoroughly.
@@ -70,9 +102,9 @@ Data-intensive science gives us the opportunity of studying natural systems, whi
 
 % Big data challenge: Data bias
 Another issue is data bias, which arises when records are not obtained from random sampling \cite{Daru2017}
-Using biased data can impact the quality of models built on it.
+Using biased data can impact the quality of models built on it \cite{Newbold2010}.
 Data from biological collections (or museum data) is often biased \cite{Daru2017}.
-Biological collection data is typically collected in clustered areas with very high collecting effort, and clusters are scattered \cite{VanGemerden2005}.
+Biological collection data is typically collected in clustered areas (collection centres) with very high collecting effort, and clusters are scattered \cite{Nelson1990, VanGemerden2005}.
 Many algorithms for building SDMs assume data is randomly collected, and are thus particularly sensitive to biases \cite{Araujo2016} .
 Maxent must be corrected for sampling bias.% check {Kramer-Schadt, Stephanie, et al. "The importance of correcting for sampling bias in MaxEnt species distribution models." Diversity and Distributions 19.11 (2013): 1366-1379.}\cite{Kramer-Schadt2013}
 % Bias needs to be characterized, and accounted for.
@@ -98,10 +130,15 @@ Thus we use network analysis for enriching biological collection datasets (Datas
 % < Add illustration >
 
 
-% Overview of this document
+% Overview of the dissertation
 In chapter 2 we provide an overview of biodiversity data
-In chapter 3 we formally describe the network models, using the framework of graph theory.
-In chapter 4 we apply the network models for a case study of a real-world biological collection, the University of Brasília herbarium.
+%
+In chapter 3 we formally propose two network models as a basis for understanding how the taxonomic interests and collaborative behavior of collectors shape the composition of biological collections.
+The models are based on graph theory.
+%
+In chapter 4 we provide a case study using the dataset of the University of Brasília herbarium.
+We structure, where we explore theapply the network models for a case study of a real-world biological collection, the University of Brasília herbarium.
+%
 In chapter 5 we present future perspectives to be achieved with the models here proposed.
 
 

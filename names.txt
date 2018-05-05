@@ -41,3 +41,7 @@ souza,rv            | Ronaldo Viveiros de Sousa                         | http:/
 staggmeyer,vg       | Vanessa Graziele Staggemeier                      | http://lattes.cnpq.br/4357034543526737
 stieber,mt          | Michael Thomas Stieber                            | https://plants.jstor.org/stable/10.5555/al.ap.person.bm000010969
 zanatta,mrv         | Maria Rosa Vargas Zanatta                         | http://lattes.cnpq.br/5981278331253704
+simon,mf            | Marcelo Fragomeni Simon                           | http://lattes.cnpq.br/8588589377152882
+lima,jcm            | 
+carvalho,avm
+ribeiro,aro         | André Rodolfo de Oliveira Ribeiro                 | http://lattes.cnpq.br/6319309184129826
