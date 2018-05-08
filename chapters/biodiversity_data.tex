@@ -1,10 +1,11 @@
 \chapter{Background on Biological Collections}\label{biodiversity_data}
 
-%\chapter{Understanding Biological Collections Data}\label{biodiversity_data}
+Biological collections, including herbaria, natural history museums are repositories of life, where physical individuals are stored, being an invaluable source of primary data on biodiversity.
+Specimens are vouchered.
+Throughout this text we use biological collections as a synonym for Natural History Collections (NHC), a term that is widely used in the biodiversity informatics literature.
+Biological collections are composed of records which have been obtained by distinct people in distinct contexts, and is usually opportunistic as opposed to having random sampling designs % cite{}
 
 % Biological collections
-% Also known as natural museum or Natural History Collections (NHC).
-% Biological collections such as herbaria and museums are a valuable source of biodiversity data.
 % Many new species are discovered from collections samples \cite{Kemp2015}.
 % Data collection is typically opportunistic.
 % In scientific biological collections specimens are vouchered \cite{}.
@@ -153,11 +154,12 @@ In order to make data fit for its intended use the analyst must perform data cle
 % ----------------
 %% Museum-based informatics{Graham2004}
 
+Determination is the assignment of the record specimen to a taxon.
 
 \begin{figure}[h!]
   	\centering
-    \includegraphics[width=0.8\linewidth]{figures/er_occurrence.png}
-    \caption{Entity-relationship diagram for occurrences.}
+    \includegraphics[width=\linewidth]{figures/collections_data/occurrences_er.pdf}
+    \caption{Entity-relationship diagram illustrating the main features of occurrence records.}
     \label{fig:er_occurrences}
 \end{figure}
 
@@ -165,6 +167,7 @@ In order to make data fit for its intended use the analyst must perform data cle
 % =====================
 % Terms and Definitions
 % ---------------------
+\section{Biodiversity Terms and Definitions}
 Before delving into the characterization of biodiversity data we review the definitions of some domain-specific terms that will be used throughout this text. 
 We specifically use definitions from the \textit{International Code of Nomenclature for algae, fungi and plants} (ICN) \cite{McNeill2012}. This document outlines a set of rules and guidelines for scientifically naming and grouping plants, fungi and algae, consisting of a universally adopted reference by the botanical scientific community. Nomenclature best-practices for other groups of organisms are governed by other (though similar) documents.
 
