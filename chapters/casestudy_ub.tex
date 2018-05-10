@@ -2,8 +2,14 @@
 % herbarium page: http://florescer.unb.br/bol/
 % Add herbarium historical
 
-In this case study we explore and characterize the topologies of our two network models (presented in chapter \ref{chapter:network_models}) constructed from an empirical biological collection dataset.
-%
+In this chapter we use our models proposed in chapter \ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
+By exploring basic topological features of the networks, we investigate the formation of
+\textit{(i)} groups of collectors with similar taxonomic collecting interests;
+\textit{(ii)} groups of taxa which are often recorded by similar sets of collectors;
+\textit{(iii)} groups of collectors who collaborate by recording specimens together in collecting expeditions. 
+From network structure we can also identify collectors that are most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group.
+Taxa that are either widely collected and those that are collected by very specific groups of collectors are also easily identified from network structure.
+
 The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
@@ -35,8 +41,7 @@ Table \ref{table:ub_collectors_florescer} lists some historically relevant colle
 \footnotetext{\url{http://florescer.unb.br/janela4.html}}
 %\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
 
-We have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}.
-This dataset is also available through the CRIA portal. % TODO
+In this case study we have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}. The entire dataset was downloaded through the portal.
 
 Before actually building the network models we first executed some data cleaning routines against the dataset, which basically consisted of filtering out unwanted records and resolving some inconsistencies in collectors names.
 %
@@ -171,6 +176,7 @@ In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Temporal characterization
 % TODO: Include # species accumulation in the figure
+
 Almost $98\%$ of the records contain information about their collection dates.
 The oldest records in the herbarium dataset date from 1800.
 However, more intensive collection activity started around 1960. Around 8000 records in the herbarium date up to that time (Figure \ref{fig:ub_records_timeseries}(c)). 
@@ -178,8 +184,8 @@ From 1950 to present, there are two apparent peaks in collection activity around
 
   \begin{figure}[h!]
   	\centering
-    \includegraphics[width=\linewidth]{figures/ub_records_timeseries.png}
-    \caption{Recording activities registered in the UB herbarium since 1800, aggregated by year. (a) Absolute record counts for each year. (b) Cumulative counts of records in a linear scale. (c) Cumulative counts of records using a logarithmic scale.}
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/ub_records_timeseries.pdf}
+    \caption{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
     \label{fig:ub_records_timeseries}
   \end{figure}
 
@@ -195,7 +201,10 @@ From 1950 to present, there are two apparent peaks in collection activity around
 % Average collector/species & species/collector  (with percentages)
 
 For exploring the recording behavior of UB collectors in terms of their taxonomic preferences and collaborations we built a Species-collectors network model (SCN), linking collectors to the species they've recorded; and a Collectors coworking network (CWN), linking collectors who collaborated during field recording.
+We first prepared data by applying some preprocessing routines.
 
+\subsection{Preparing data}
+Before we built the network models we passed the UB occurrences dataset into a preparation process.
 Some data preprocessing routines including names atomization and null values filtering were executed in the tabular dataset before it could be used to build the models. 
 For the SCN we filtered out records with taxonomic resolution lower than species.
 For the CWN model we only filtered out records with null entries for the collectors field.
