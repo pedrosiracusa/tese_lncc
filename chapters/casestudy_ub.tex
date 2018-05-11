@@ -62,13 +62,45 @@ We used the \textit{Python v.3.6} language loaded with packages \textit{Pandas},
 \section{Dataset Exploration}\label{section:ub_exploration}
 % Check {Haripersaud2009}
 
+At the time of this study, the entire occurrences dataset from the UB herbarium had a total of $185311$ records.
+We initially loaded all of them to computer memory for the exploratory analysis.
+As the dataset file contains a total of $235$ fields (most of which holding are null or irrelevant for our application), we selectively loaded only a subset of them, most of which (except \textit{issue}) follow \textit{Darwin Core} terms standards\footnote{\url{http://rs.tdwg.org/dwc/terms}}:
+
+\paragraph*{recordedBy.} Contains a list with the number of people or groups who have authored an occurrence record. 
+Names are included in a single string and separated by some delimiter character. 
+Although the vertical bar (' | ') bar is officially recommended by \textit{TDWG}, this field in the UB herbarium dataset uses a semicolon character (' ; ') as delimiter.
+
+\paragraph*{eventDate.} The date-time string representing the moment when the recording act happened.
+
+\paragraph*{stateProvince.} The name of the state where the occurrence was recorded.
+
+\paragraph*{countryCode.} The code of the country where the occurrence was recorded.
+
+\paragraph*{decimalLatitude.} The geographic latitude coordinate of the place where the occurrence was recorded. 
+Datum is assumed to be \textit{WGS84} for all records in the UB herbarium.
+
+\paragraph*{decimalLongitude.} The geographic longitude coordinate of the place where the occurrence was recorded.
+Datum is assumed to be \textit{WGS84} for all records in the UB herbarium.
+
+\paragraph*{issue.} This field is not part of the \textit{Darwin Core} standard.% TODO: check the description in gbif
+
+\paragraph*{scientificName.} The scientific name assigned to the specimen, at the lowest taxonomic resolution as it can be determined. The authorship of the name is also included for many records.
+
+\paragraph*{taxonRank.} The taxonomic rank of the name in the \textit{scientificName} field.
+
+As fields \textit{recordedBy} and \textit{scientificName} are both critical for later constructing the network models, we filtered the records set and removed records for which values in either of those fields were missing.
+The resulting dataset had a total of $185301$ records. 
+
 % --------------------------
 % Taxonomic characterization
 
-Our first step after loading the dataset into memory was to filter out records with missing values in fields \textit{recordedBy} or \textit{scientificName}, as they are critical for building the network models.
-At the time of this study the resulting dataset had a total of 185301 records. However not all records have been identified up to the taxonomic resolution of \textit{species}, as shown in Table \ref{table:dset_taxonomicres_counts}. 
-As taxons hold a tree-like hierarchical relationship, those at more inclusive (broader) ranks can be successfully derived from more restrictive ones, but not the inverse. Each child taxon have exactly one parent, but a parent taxon can have one or more children.
-To give an example, the table shows that approximately $76\%$ of the records are at the resolution of species. However the species identity of records at higher resolutions, in this case form or variety, are automatically determined by following parental paths. This makes species identity derivable for approximately $82\%$ of the records, as shown in the cumulative percentage for the species rank.
+%
+From 
+However not all records have been identified up to the taxonomic resolution of \textit{species}, as shown in Table \ref{table:dset_taxonomicres_counts}. 
+As taxons relate to each other on a tree-like hierarchical structure (each child taxon has exactly one parent, but a parent taxon can have one or more children), those at more inclusive (broader) ranks can be successfully derived from more restrictive ones, but not the inverse. 
+To give an example, the table shows that approximately $76\%$ of the records are at the resolution of species. 
+However the species identity of records at higher resolutions, in this case form or variety, are automatically determined by following parental paths. 
+This makes species identity derivable for approximately $82\%$ of the records, as shown in the cumulative percentage for the species rank.
 
 For the construction of SCNs we must make sure only to include records that were identified up to the same taxonomic resolution as the model itself, keeping in mind that lower-resolution entities can be derived from higher-resolution ones. 
 For CWNs, on the other hand, the taxonomic resolution of each record is not relevant for model construction, as edges are built using only collector cliques. In this case all records with at least two collectors can be used, irrespective of their taxonomic resolution.
