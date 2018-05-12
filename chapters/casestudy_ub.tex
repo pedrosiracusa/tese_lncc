@@ -97,12 +97,14 @@ This field is included by GBIF during data preprocessing, and is not part of the
 % Taxonomic characterization
 \paragraph*{Taxonomic composition.}
 % 
-Not every record in the dataset has been identified to the taxonomic resolution of \textit{species}, as shown in Table \ref{table:dset_taxonomicres_counts}. 
-Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.
-While $75.96\%$ of the records are at the resolution of \textit{species}, a higher percentage of records ($82.23\%$, including records at the resolutions of \textit{subspecies}, \textit{form} and \textit{variety}) have their taxonomic identity determined at the rank of \textit{species}.
+For exploring the taxonomic composition of the dataset we first removed $10$ records with missing values for the \textit{scientificName} field.
+From the remaining $185301$ records, most have a taxonomic resolution at the \textit{species} level ($75.96\%$), followed by \textit{genus} ($13.17\%$) and \textit{variety}($4.82\%$), as shown by absolute metrics in Table \ref{table:dset_taxonomicres_counts}. 
+However, the percentage of records which can be determined at the rank of \textit{species} is slightly higher ($82.23\%$), and is given by the cumulative metrics in the table. 
+This happens because the \textit{species} identity of records at higher taxonomic resolutions (in this case \textit{form} and \textit{variety}) are directly determined, as explained in section \ref{section:biodiversity_terms}.
+Similarly, although only $1.08\%$ of the records have a taxonomic resolution at the \textit{kingdom} level, all records are taxonomically determined at that rank.
 
 \begin{table}[H]
-  \caption{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Cumulative metrics show the total amount of records for which the taxonomic identity is determined at each rank.}
+  \caption{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.}
   \begin{center}
   \begin{tabular}{l c c c c}
        & count & \% & cumulative count & cumulative \% \\
@@ -123,14 +125,17 @@ While $75.96\%$ of the records are at the resolution of \textit{species}, a high
 \end{table}
 
 
-
-
+Table \ref{table:taxa_counts} shows the number of distinct taxa at each rank and lists the ones with the highest numbers of records.
+The herbarium is mostly composed by plants (kingdom \textit{Plantae}, represented by $96.72\%$ of the records), followed by \textit{Chromista} (including some algae), \textit{Funghi} and \textit{Bacteria}.
+Vascular plants (phylum \textit{Tracheophyta}) compose $82.89\%$ of the herbarium, whereas \textit{Bryohpyta} (mosses), \textit{Ochrophyta} (algae from kingdom \textit{Chromista}) and \textit{Charophtya} (algae from kingdom \textit{Plantae}) are also respresentative.
+At the family rank, \textit{Fabaceae}, is the most representative one ($10.39\%$), followed by \textit{Myrtaceae} ($6.93\%$), \textit{Asteraceae} ($6.08\%$) and \textit{Rubiaceae} ($5.10\%$). 
+The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia} and \textit{Sematophyllum subpinnatum}, the first three being flowering plants and the latter a species of moss.
 
 \begin{table}[t]
-  \caption{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-5 most recorded taxa is included with their respective counts.}
+  \caption{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-4 most recorded taxa is included with their respective counts.}
 \begin{center}
   \begin{tabular}{c c c c c}
-    & num of taxa & top-5 taxa & num of records & \% of records \\
+    & num of taxa & top-4 taxa & num of records & \% of records \\
    \hline
     kingdom & 5 &
 	\begin{tabular}[t]{{@{}c@{}}}Plantae\\Chromista\\Fungi\\Bacteria\end{tabular} &
@@ -163,12 +168,14 @@ While $75.96\%$ of the records are at the resolution of \textit{species}, a high
   \hline
   \end{tabular}
 \end{center}
-  \label{table:taxons}
+  \label{table:taxa_counts}
 \end{table}
 
 % --------------------------
 % Geographic characterization
+\paragraph*{Geographic distribution.}
 
+Next we explored the geographic distribution of the herbarium records.
 From the set of $185301$ records approximately $48\%$ (a total of $89216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform \cite{gbif_dataprocessing}.
 During geospatial validation the routines check for each record ($i$) if geographical coordinates are erroneously assigned to zero latitude and longitude; ($ii$) if geographic coordinates are in fact placed within the boundaries of the country if indicated; and ($iii$) if lat/long values are likely to having been swapped or negated during recording.
 If inconsistencies are detected during the execution of such routines, issues are registered for each record, priorly to making the dataset available for download or query via API. 
@@ -211,6 +218,8 @@ In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely 
   
 % --------------------------
 % Temporal characterization
+\paragraph*{Temporal distribution.}
+
 % TODO: Include # species accumulation in the figure
 
 Almost $98\%$ of the records contain information about their collection dates.
