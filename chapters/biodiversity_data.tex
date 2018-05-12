@@ -15,24 +15,24 @@
 % Biological collections
 Biological collections (mainly herbaria and natural history museums) are repositories where biological materials, in the form of physical specimens, are systematically deposited and preserved to be used for scientific purposes. 
 Throughout this text we use biological collections as a synonym for \textit{Natural History Collections (NHC)}, the later term being more widely adopted in biodiversity informatics literature.
-Such collections are typically hosted and curated by institutions like herbaria and natural history museums, which provide appropriated physical infrastructure and human resources for ensuring both the long-term preservation of the collections and their accessibility to the scientific community.
+Such collections are typically hosted and curated by institutions like herbaria and natural history museums, which provide appropriate physical infrastructure and human resources for ensuring both the long-term preservation of the collections and their accessibility to the scientific community.
 In addition, these institutions usually count with large networks of associated contributors, including professional collectors and taxonomists.
 
 Physical specimens stored in biological collections (also referred to as \textit{vouchers}) are often associated to complementary contextual information, either annotated by the responsible collectors during the collecting act; or annotated at later stages, after the specimen is deposited in the collection \cite{Chapman2005}. %Metadata?
 Information from the collection event include the date and time and location where the specimen was collected; the names of the collectors who were involved in the collection; and eventual field notes describing contextual remarks, such as weather conditions, habitat features, or the sampling method used.
 Other types of information, such as the taxonomic identity of the specimen, are determined by taxonomists after its deposition, and can be re-evaluated by specialists several times.
-In order to facilitate the management and improve the accessibility of such information, most institutions currently maintain it organized in digital spreadsheets or in relational database systems, while also keeping a references to the physical specimens they refer to.
+In order to facilitate the management and improve the accessibility of such information, most institutions currently maintain it organized in digital spreadsheets or in relational database systems, while also keeping references to the physical specimens they refer to.
 Some institutions are even deploying efforts towards digitizing the physical specimens \cite{}.
 
 species occurrence records, which represent punctual collecting events where a specimen is recorded by a collector (or a team of collectors) at some geographic location, date and time (Figure \ref{fig:occurrences_er}).
 Recorded specimens are vouchered.
 An advantage of having vouchered specimens is that the taxonomic identity can be later verified, which is not possible in many cases when no physical specimens are available.
 Biological collections are composed of records which have been obtained by distinct people in distinct contexts, having been usually obtained in opportunistic fashion, as opposed to having random sampling designs % cite{}
-We consider specimens occurrence records the primary biodiversity data (or museum data), although occurrence records are not exclusive of biological collections.
+We consider specimen occurrence records the primary biodiversity data (or museum data), although occurrence records are not exclusive of biological collections.
 
 % Occurrence data
-Species occurrence records represent punctual collecting events, where a specimen is recorded by a colletor or a team of collectors, at some geographic location, date and time (Figure \ref{fig:occurrences_er}).
-Records may include additional contextual information from fieldnotes taken by collectors during the collection act.
+Species occurrence records represent punctual collecting events, where a specimen is recorded by a collector or a team of collectors, at some geographic location, date and time (Figure \ref{fig:occurrences_er}).
+Records may include additional contextual information from field notes taken by collectors during the collection act.
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/collections_data/occurrences_er.pdf}
