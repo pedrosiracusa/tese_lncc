@@ -67,32 +67,30 @@ For our application, however, only a small subset of those fields were considere
 Most of these fields (except for \textit{issue}), which we briefly describe below, follow \textit{Darwin Core} terms standards\footnote{\url{http://rs.tdwg.org/dwc/terms}}:
 
 % Terms definitions
-
-\paragraph*{recordedBy.} Contains a list with the number of people or groups who have authored an occurrence record. 
+\begin{description}[align=left,labelindent=1cm]
+\item [recordedBy.] Contains a list with the number of people or groups who have authored an occurrence record. 
 Names are included in a single string and separated by some delimiter character. 
-Although the vertical bar (' | ') bar is officially recommended by \textit{TDWG}, this field in the UB herbarium dataset uses a semicolon character (' ; ') as delimiter.
+Although the vertical bar (` | ') bar is officially recommended by \textit{TDWG}, this field in the UB herbarium dataset uses a semicolon character (` ; ') as delimiter.
 %
-\paragraph*{eventDate.} The date-time string representing the moment when the recording act happened.
+\item [eventDate.] The date-time string representing the moment when the recording act happened.
 %
-\paragraph*{stateProvince.} The name of the state where the occurrence was recorded.
+\item [stateProvince.] The name of the state where the occurrence was recorded.
 
-\paragraph*{countryCode.} The code of the country where the occurrence was recorded.
+\item [countryCode.] The code of the country where the occurrence was recorded.
 
-\paragraph*{decimalLatitude.} The geographic latitude coordinate of the place where the occurrence was recorded. 
+\item [decimalLatitude.] The geographic latitude coordinate of the place where the occurrence was recorded. 
 Datum is assumed to be \textit{WGS84} for all records in the UB herbarium.
 
-\paragraph*{decimalLongitude.} The geographic longitude coordinate of the place where the occurrence was recorded.
+\item [decimalLongitude.] The geographic longitude coordinate of the place where the occurrence was recorded.
 Datum is assumed to be \textit{WGS84} for all records in the UB herbarium.
 
-\paragraph*{issue.} A sequence of data issues that have been identified in the record.
+\item [issue.] A sequence of data issues that have been identified in the record.
 This field is included by GBIF during data preprocessing, and is not part of the \textit{Darwin Core} standard.% https://www.gbif.org/infrastructure/processing
 
-\paragraph*{scientificName.} The scientific name assigned to the specimen, at the lowest taxonomic resolution as it can be determined. The authorship of the name is also included for many records.
+\item [scientificName.] The scientific name assigned to the specimen, at the lowest taxonomic resolution as it can be determined. The authorship of the name is also included for many records.
 
-\paragraph*{taxonRank.} The taxonomic rank of the name in the \textit{scientificName} field.
-\\
-
-
+\item [taxonRank.] The taxonomic rank of the name in the \textit{scientificName} field.
+\end{description}
 
 % --------------------------
 % Taxonomic characterization
@@ -104,7 +102,7 @@ However, the percentage of records which can be determined at the rank of \texti
 This happens because the \textit{species} identity of records at higher taxonomic resolutions (in this case \textit{form} and \textit{variety}) are directly determined, as explained in section \ref{section:biodiversity_terms}.
 Similarly, although only $1.08\%$ of the records have a taxonomic resolution at the \textit{kingdom} level, all records are taxonomically determined at that rank.
 
-\begin{table}[H]
+\begin{table}
   \caption{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.}
   \begin{center}
   \begin{tabular}{l c c c c}
@@ -172,6 +170,7 @@ The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianen
   \label{table:taxa_counts}
 \end{table}
 
+\clearpage
 % --------------------------
 % Geographic characterization
 \paragraph*{Geographic distribution.}
@@ -239,7 +238,7 @@ The first is around years $1966$ and $1968$, the second around $1988$, and the t
 \end{figure}
 
 
-
+\clearpage
 
 
 % ---------------------------
