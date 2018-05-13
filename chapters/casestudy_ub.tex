@@ -6,16 +6,16 @@
 
 In this chapter we use our models proposed in chapter \ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
 By exploring basic topological features of the networks, we investigate the formation of
-\textit{(i)} groups of collectors with similar taxonomic collecting interests;
-\textit{(ii)} groups of taxa which are often recorded by similar sets of collectors;
-\textit{(iii)} groups of collectors who collaborate by recording specimens together in collecting expeditions. 
+(\textit{i}) groups of collectors with similar taxonomic collecting interests;
+(\textit{ii}) groups of taxa which are often recorded by similar sets of collectors;
+(\textit{iii}) groups of collectors who collaborate by recording specimens together in collecting expeditions. 
 From network structure we can also identify collectors that are most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group.
 Taxa that are either widely collected and those that are collected by very specific groups of collectors are also easily identified from network structure.
 
 The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
-Table \ref{table:ub_collectors_florescer} lists some historically relevant collectors who have intensively contributed to the herbarium, according to the \textit{Florescer project}. 
+Table \ref{table:ub_collectors_florescer} lists some historically relevant collectors who have intensively contributed to the herbarium, according to the \textit{Florescer} project \cite{florescer}. 
 \begin{table}[H]
   \caption{Historically important collectors who have contributed to the UB herbarium.}
   \begin{center}
@@ -177,13 +177,15 @@ The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianen
 
 Next we explored the geographic distribution of the herbarium records.
 From the set of $185301$ records approximately $48\%$ (a total of $89216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform \cite{gbif_dataprocessing}.
-During geospatial validation the routines check for each record ($i$) if geographical coordinates are erroneously assigned to zero latitude and longitude; ($ii$) if geographic coordinates are in fact placed within the boundaries of the country if indicated; and ($iii$) if lat/long values are likely to having been swapped or negated during recording.
+Routines perform geospatial validation by checking, for each record, (\textit{i}) if geographical coordinates are erroneously assigned to zero latitude and longitude; (\textit{ii}) if geographic coordinates are in fact placed within the boundaries of the country if indicated; and (\textit{iii}) if lat/long values are likely to having been swapped or negated during recording.
 If inconsistencies are detected during the execution of such routines, issues are registered for each record, priorly to making the dataset available for download or query via API. 
 % http://www-old.gbif.org/infrastructure/processing
 
-As shown in Figure \ref{fig:venn_geospatial_issues} most geospatial issues are due to records being assigned to zero coordinates (zero latitude and longitude), which also makes them laying outside of the country boundaries. As a consequence they are tagged as having both the ``Zero Coordinates'' (ZC) and ``Country Coordinates Mismatch'' (CCM) issues, being represented in the figure as the intersection between CCM and ZC.
+As shown in Figure \ref{fig:venn_geospatial_issues} most geospatial issues are due to records being assigned to zero coordinates (zero latitude and longitude), which also makes them laying outside of the country boundaries. 
+As a consequence they are tagged as having both the ``Zero Coordinates'' (ZC) and ``Country Coordinates Mismatch'' (CCM) issues, being represented in the figure as the intersection between CCM and ZC.
 Some records with only the CCM issue were not misplaced in coordinates $(0,0)$, but still were improperly placed outside the country frontiers. 
 On the other hand, records with only the ZC issue are those which were misplaced in coordinates $(0,0)$ but were lacking information about the country, and therefore couldn't be classified as being outside the country frontiers.
+Records which were not interpreted as having geospatial issues comprise approximately $52\%$ of the dataset, and the coordinates of those which are located around the Brazilian territory are shown in Figure \ref{fig:occurrence_map}. 
 
   \begin{figure}[h!]
   	\centering
@@ -192,51 +194,48 @@ On the other hand, records with only the ZC issue are those which were misplaced
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
-Records without geospatial issues comprise approximately $52\%$ of the dataset, and their coordinates are shown in Figure \ref{fig:occurrence_map}. Notice that the figure extent is constrained around the Brazilian territory, and records outside the canvas are omitted. Although most records deposited in the UB herbarium were collected in Brazil, there is also a considerable amount of records from many other countries (Figure \ref{fig:recs_by_cntry_state}a), that were been obtained from herbaria exchange activities or international recording expeditions. According to the herbarium description available from the \textit{Florescer project} webpage \footnotemark[\getrefnumber{footnote:florescer}], records from the Amazon and Atlantic forest were mostly exchanges under the curatorship of \textit{Dr. João Murça Pires} and \textit{Dr. Graziela Maciel Barroso}, respectively. A considerable part of international records were exchanges incorporated under the curatorship of \textit{Dr. George Eiten}.  
+Most records deposited in the UB herbarium were collected in Brazil ($94.47\%$), from which the Federal District is the most sampled federative unit despite its relatively small area (Figure \ref{fig:recs_by_cntry_state}b).
+Records in the Federal District comprise $30.56\%$ of those from within the Brazilian territory. 
+Other states with relatively high collecting effort are Goiás ($22.10\%$), Minas Gerais ($14.51\%$) and Mato Grosso ($7.86\%$), which, together with the Federal District, correspond to $75\%$ of all records from Brazil.
+Such a geographical bias in the occurrences distribution can be explained by the fact that UB is physically located at the University of Brasilia, making it more viable for associated collectors to perform collecting expeditions in nearby locations.
+Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas might become more inclined towards depositing their recordings in the institution.
+Figure \ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region. 
+The UB herbarium is also includes a total of $10252$ records from other countries (Figure \ref{fig:recs_by_cntry_state}a), which are are derived from exchanges with foreign herbaria (under the curatorship of \textit{Dr. George Eiten}, according to the \textit{Florescer} project webpage \cite{florescer}) and from international recording expeditions performed by collectors associated to UB.
 
 
-  \begin{figure}[!htb]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/occurrence_map.png}
-    \caption{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
-    \label{fig:occurrence_map}
-  \end{figure}
-  
-  \begin{figure}[!htb]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/recs_by_cntry_state.png}
-    \caption{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
-    \label{fig:recs_by_cntry_state}
-  \end{figure}
-  
-Within the Brazilian territory, the Federal District was the most sampled federative unit despite its small area, followed by the state of Goiás (\ref{fig:recs_by_cntry_state}b). 
-Such a geographic bias in the occurrences distribution can be explained by the fact that UB is physically located in the University of Brasilia, making it more viable for associated collectors to record in nearby locations.
-Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas become more inclined to deposit their recordings in the institution.
-In fact, figure \ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region. 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/occurrence_map.png}
+\caption{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
+\label{fig:occurrence_map}
+\end{figure}
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/recs_by_cntry_state.png}
+\caption{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
+\label{fig:recs_by_cntry_state}
+\end{figure}
 
   
 % --------------------------
 % Temporal characterization
 \paragraph*{Temporal distribution.}
 
-% TODO: Include # species accumulation in the figure
+Although preprocessing routines in GBIF also include the interpretation of date-time values in the \textit{eventDate} field, no flags regarding date-time inconsistencies have been assigned to any of the records from the UB dataset.
+A total of $181254$ records, which comprises $97.86\%$ of the $185301$ records we explored, contain information about their collection dates.
+The temporal distribution of the records spans the period from year $1800$ up to $2017$, although a more intensive collection activity starts around year $1960$ (Figure \ref{fig:ub_records_timeseries}).
+In fact, the vast majority of records ($96.11\%$) are concentrated within the period from $1960$ to $2017$ (an average of $3000$ records per year), whereas the period from $1800$ to $1959$ includes only $3.9\%$ of the records, with an average of $45$ records per year.
+Moreover, the number of records accumulated during the last $30$ years (from $1988$ to $2017$) is equal to the number of records from $1800$ to $1987$ ($188$ years). 
+Three peaks of activity are most pronounced in Figure \ref{fig:ub_records_timeseries}.
+The first is around years $1966$ and $1968$, the second around $1988$, and the third around $2012$.
 
-Almost $98\%$ of the records contain information about their collection dates.
-The oldest records in the herbarium dataset date from 1800.
-However, more intensive collection activity started around 1960. Around 8000 records in the herbarium date up to that time (Figure \ref{fig:ub_records_timeseries}(c)). 
-From 1950 to present, there are two apparent peaks in collection activity around year 1965 and 2013 (Figure \ref{fig:ub_records_timeseries}(a)). % Why?
-
-  \begin{figure}[h!]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/ub_records_timeseries.pdf}
-    \caption{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
-    \label{fig:ub_records_timeseries}
-  \end{figure}
-
-
-
-
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/casestudy_ub/ub_records_timeseries.pdf}
+\caption{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
+\label{fig:ub_records_timeseries}
+\end{figure}
 
 
 
