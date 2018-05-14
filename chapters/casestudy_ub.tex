@@ -263,17 +263,17 @@ The data preparation process consisted of
 (\textit{v}) filtering out inadequate collectors names. %such as et al, incognito... performed after the network is built
 
 In the first step we intially removed all records in which either fields \textit{recordedBy} or \textit{scientificName} had missing values, as these are both critical for the construction of the network models.
-In order to build the SCN at the taxonomic resolution of \textit{species}, we next selected records for which the taxonomic identity could be resolved at that rank.
+In order to build the SCN at the taxonomic resolution of \textit{species} we only selected records for which the taxonomic identity could be resolved at that rank.
 We did this by discarding records with taxonomic ranks at higher levels than \textit{species}, \textit{i.e.}, from \textit{genus} to \textit{kingdom}.
 For records at lower ranks (\textit{form} and \textit{variety}), we directly obtained their \textit{species} identity.
-Therefore we used $82\%$ of the records in the dataset (a total of $152379$ records, as shown in Table \ref{table:dset_taxonmicres_counts}) for building the networks.
+Therefore we used $82\%$ of the records from the dataset (a total of $152379$ records, as shown in Table \ref{table:dset_taxonomicres_counts}) for building the networks.
 Although the taxonomic resolution of records is not relevant at all for the construction of the CWN model (edges are built exclusively using cliques of collectors, a process described in section \ref{section:cwn_construction_fromdata}), we chose to use the same set of records we used for building the SCN.
 
-The second step consisted of iterating each row and splitting the string that stores collectors names, in the \textit{recordedBy} field. 
+The second step consisted of iterating each row and splitting the string containing collectors names, stored in the \textit{recordedBy} field. 
 We splitted the strings using the semicolon character (` ; '), which is used as the delimiter for the majority of entries in the UB dataset.
 In some few occurrences, however, names are delimited by other characters, for instance ` , ', ` / ' and ` \& '.
 We deal with these cases by replacing inconsistent delimiters manually and storing the changes in a separated file.
-After the names atomization process, each string originates a list of strings and is stored in a new field named \textit{recordedBy_atomized}.
+After the names atomization process, each string originates a list of strings which is stored in a new field named \textit{recordedBy\_atomized}.
 
 We included a normalization routine in order to obtain unicode identities for collectors from their names.
 Each name is initially split in its two component parts (see \ref{section:ub_exploration}), using the comma character as the delimiter.
