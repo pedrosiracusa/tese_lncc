@@ -76,8 +76,6 @@ First, they allow representing entities and their interactions in a structured w
 Second, graph theory provides a bunch of well established data structures, metrics, and algorithms for systematically representing, characterizing, and exploring the topologies of complex networks.
 Finally, the availability of a considerable amount of graph visualization tools and techniques helps analysts to obtain insights from network structures by allowing them to focus on different aspects of the networked complex system depending on their own interests.
 
-\luiz{Parei minha revisão aqui}
-
 
 % Graph formal definition, undirected/weighted graphs
 A graph is formally defined as a pair $G=(V,E)$, where $V$ is the set of vertices and $E$ is the set of edges that compose the graph~(Figure~\ref{fig:graphs}). 
@@ -97,6 +95,7 @@ Graphs are also classified regarding the nature of their edges.
 A graph in which all edges are weighted is known as a \textit{weighted graph}, whilst a \textit{unweighted graph} is exclusively composed of unweighted edges.
 %
 Given the nature of the networks modeled in the context of this project, we specifically focus on properties of \textbf{undirected weighted graphs} for the rest of this section.
+
 
 \textit{Attributes} allow representing non-topological features that are relevant in the context of the modeled networked system, and can be optionally assigned to both edges and vertices in a graph.
 For example, we might want to model a social network in which age and gender information about individuals are relevant for the intended analyses.
@@ -123,7 +122,7 @@ This representation is also compact enough to be adopted for graph storage and d
 Most algorithms, however, perform better by using alternative representations, such as \textit{adjacency lists} or \textit{adjacency matrices}. 
 
 \textit{Adjacency matrices} are a way of representing graphs in matrix form, in which elements store adjacencies between pairs of vertices.
-An adjacency matrix $A$ is defined as having non-zero entries $a_{i j}$\textit{ iff } $(i,j)\in E$ which, in weighted graphs, correspond to the weight assigned to edge $(i,j)$.
+An adjacency matrix $A$ is defined as having non-zero entries $a_{i j}$\textit{ iff } \luiz{melhor {\em if and only if}, acredito que os biólogos não entenderão a abreviação} $(i,j)\in E$ which, in weighted graphs, correspond to the weight assigned to edge $(i,j)$.
 Given the equivalence between edges $(i,j)$ and $(j,i)$ in undirected graphs, adjacency matrices in this case are always symmetric, meaning information is stored redundantly in its structure.
 %
 Besides, the size of an adjacency matrix grows quadratically with the number of vertices in the graph, which would make loading and processing large graphs in computer memory problematic.
@@ -132,6 +131,8 @@ Adjacency matrices can thus be optimized for storage and performance by adopting
 An alternative way to represent sparse networks is to use the \textit{adjacency list} representation, which in short consists of storing a list of neighbors for every single vertex in the network. 
 The adjacency list illustrated in Figure~\ref{fig:graphs} is structured as an array for which each entry represents a vertex.
 Moreover, each entry holds a reference for a linked list, containing all neighbors of the vertex. Each element in the list keeps a reference to the next element and stores the weight of the edge connecting it to the vertex in the array.
+
+\luiz{Parei minha revisão aqui}
 
 % Definitions and metrics
 As previously mentioned, one of the main benefits of adopting graphs for representing networks is the availability of a whole set of well-established metrics and definitions that allow analysts to explore and characterize the topologies of their networked systems.
