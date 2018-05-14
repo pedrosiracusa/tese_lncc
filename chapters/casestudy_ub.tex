@@ -71,6 +71,9 @@ Most of these fields (except for \textit{issue}), which we briefly describe belo
 \item [recordedBy.] Contains a list with the number of people or groups who have authored an occurrence record. 
 Names are included in a single string and separated by some delimiter character. 
 Although the vertical bar (` | ') bar is officially recommended by \textit{TDWG}, this field in the UB herbarium dataset uses a semicolon character (` ; ') as delimiter.
+The UB convention for collectors names makes them composed of two parts, which are separated by a comma (` , ') character.
+The first part is the collector's last name, with the first character capitalized; and the second part corresponds to the first initials of the names, all capitalized and appended with a period.
+A collector named `\textit{João da Silva Simão}', for instance, would be included as `\textit{Simão, J. S.}'.
 %
 \item [eventDate.] The date-time string representing the moment when the recording act happened.
 %
@@ -246,41 +249,56 @@ The first is around years $1966$ and $1968$, the second around $1988$, and the t
 % Network models construction
 \section{Network models construction}
 
-
-% Build SCN
-% What is the species with more collectors? What is the collector with more species?
-% Average collector/species & species/collector  (with percentages)
-
-For exploring the recording behavior of UB collectors in terms of their taxonomic preferences and collaborations we built a Species-collectors network model (SCN), linking collectors to the species they've recorded; and a Collectors coworking network (CWN), linking collectors who collaborated during field recording.
-We first prepared data by applying some preprocessing routines.
+In this section we describe the main features of the Species-collector Network (SCN) and the Collector CoWorking Network (CWN) constructed from the UB herbarium occurrences dataset.
+Using these models we explore the diversity of recording behaviors of the collectors who contribute to UB, in terms of their taxonomic preferences and collaborativeness during collecting expeditions.
+We start by describing our data preparation routine, necessary for improving the quality of the network models.
 
 \subsection{Data Preparation} \label{section:ub_data_preparation}
-Before we built the network models we passed the UB occurrences dataset into a preparation process.
-Some data preprocessing routines including names atomization and null values filtering were executed in the tabular dataset before it could be used to build the models. 
+Before feeding the UB occurrences dataset for actually building the network models, we the tabular dataset to some data filtering and transformation routines.
+The data preparation process consisted of 
+(\textit{i}) selectively filtering occurrence records from which relevant social ties could be derived for both network models; 
+(\textit{ii}) extracting atomized collectors names from the \textit{recordedBy} field, which originally contains a string of names;
+(\textit{iii}) normalizing the extracted collectors names to obtain their id's;
+(\textit{iv}) resolving collectors names inconsistencies and mapping names variants to common entities;
+(\textit{v}) filtering out inadequate collectors names. %such as et al, incognito... performed after the network is built
 
-For the construction of SCNs we must make sure only to include records that were identified up to the same taxonomic resolution as the model itself, keeping in mind that lower-resolution entities can be derived from higher-resolution ones. 
-For CWNs, on the other hand, the taxonomic resolution of each record is not relevant for model construction, as edges are built using only collector cliques. In this case all records with at least two collectors can be used, irrespective of their taxonomic resolution.
+In the first step we intially removed all records in which either fields \textit{recordedBy} or \textit{scientificName} had missing values, as these are both critical for the construction of the network models.
+In order to build the SCN at the taxonomic resolution of \textit{species}, we next selected records for which the taxonomic identity could be resolved at that rank.
+We did this by discarding records with taxonomic ranks at higher levels than \textit{species}, \textit{i.e.}, from \textit{genus} to \textit{kingdom}.
+For records at lower ranks (\textit{form} and \textit{variety}), we directly obtained their \textit{species} identity.
+Therefore we used $82\%$ of the records in the dataset (a total of $152379$ records, as shown in Table \ref{table:dset_taxonmicres_counts}) for building the networks.
+Although the taxonomic resolution of records is not relevant at all for the construction of the CWN model (edges are built exclusively using cliques of collectors, a process described in section \ref{section:cwn_construction_fromdata}), we chose to use the same set of records we used for building the SCN.
 
-For the SCN we filtered out records with taxonomic resolution lower than species.
-Next, as we intended to build our models at the taxonomic resolution of \textit{species}, we filtered out records with resolutions below that rank (from \textit{genus} to \textit{kingdom}). 
-The species identity for taxa at higher resolutions (such as \textit{form} and \textit{variety}) were directly obtained. 
-Records at the taxonomic resolution of \textit{species} (or higher) comprise $82.23\%$ of the dataset (Table \ref{table:dset_taxonomicres_counts}).
-The resulting dataset had a total of $140763$ records. 
+The second step consisted of iterating each row and splitting the string that stores collectors names, in the \textit{recordedBy} field. 
+We splitted the strings using the semicolon character (` ; '), which is used as the delimiter for the majority of entries in the UB dataset.
+In some few occurrences, however, names are delimited by other characters, for instance ` , ', ` / ' and ` \& '.
+We deal with these cases by replacing inconsistent delimiters manually and storing the changes in a separated file.
+After the names atomization process, each string originates a list of strings and is stored in a new field named \textit{recordedBy_atomized}.
 
-For the CWN model we only filtered out records with null entries for the collectors field.
-Additionally, a previously elaborated names map for the UB dataset collectors was passed in during SCN construction, facilitating the process of remapping names variants to entities. 
-Finally, nodes derived from noise entities such as \textit{``et. al"}, \textit{``Incógnito"}, \textit{``Ignorado"}, \textit{``Ilegível"} and \textit{``?"} were excluded from the network model right after its creation.
+We included a normalization routine in order to obtain unicode identities for collectors from their names.
+Each name is initially split in its two component parts (see \ref{section:ub_exploration}), using the comma character as the delimiter.
+Next, each part of the name is passed into a unicode normalization function, which forces all characters to lowercase and removes any accents, periods and spaces. 
+Finally the name is recomposed by joining the first initials to the last name with a comma.
+For instance, name `\textit{Simão, J. S.}' would be normalized into `\textit{simao,js}'.
+A table mapping each collector's identity to their actual name is presented in Appendix \ref{appendix:collectors_ids}.
 
-A table mapping each id to the collector name is presented in the appendix.
+Names were mapped to their respective atomized version and were stored in a \textit{names map} file, which was later passed in to the constructor methods that built the network models.
+However, we still faced the problem of resolving names inconsistencies (step (\textit{iv})).
+For dealing with these issues, we included new entries in the same \textit{names map}, keying variants of each name are to their ``correct forms''.
+
+After the networks were built, the last step was to remove entities which we considered to be ``noise'' in the network, such as `\textit{etal}' (from \textit{et. al}), `\textit{incognito}', `\textit{ignorado}', `\textit{ilegivel}' or `\textit{?}'.
+
+
+
 
 
 
 % ==========================
 % Species-collectors Network
 % --------------------------
-\subsection{The UB Species-collectors Network} \label{section:ub_scn}
+\subsection{The UB Species-Collector Network} \label{section:ub_scn}
 
-The resulting network had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ undirected edges connecting nodes from opposite sets. 
+The SCN model of the UB herbarium had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ undirected edges connecting nodes from opposite sets. 
 Average degree for the collectors and species set are respectively $21.08$ and $9.30$.
 
 \paragraph*{Connected components.}
