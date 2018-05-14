@@ -106,7 +106,7 @@ This happens because the \textit{species} identity of records at higher taxonomi
 Similarly, although only $1.08\%$ of the records have a taxonomic resolution at the \textit{kingdom} level, all records are taxonomically determined at that rank.
 
 \begin{table}
-  \caption{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.}
+  \caption[Number of records with taxonomic resolution at each rank.]{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.}
   \begin{center}
   \begin{tabular}{l c c c c}
        & count & \% & cumulative count & cumulative \% \\
@@ -134,7 +134,7 @@ At the family rank, \textit{Fabaceae}, is the most representative one ($10.39\%$
 The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia} and \textit{Sematophyllum subpinnatum}, the first three being flowering plants and the latter a species of moss.
 
 \begin{table}[t]
-  \caption{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-4 most recorded taxa is included with their respective counts.}
+  \caption[Number of distinct taxa at each taxonomic rank in the dataset.]{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-4 most recorded taxa is included with their respective counts.}
 \begin{center}
   \begin{tabular}{c c c c c}
     & num of taxa & top-4 taxa & num of records & \% of records \\
@@ -193,7 +193,7 @@ Records which were not interpreted as having geospatial issues comprise approxim
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.6\linewidth]{figures/venn_geospatial_issues.png}
-    \caption{Number of occurrences from the UB herbarium dataset classified within each geospatial issue class. \textit{NGI}: Records with no geospatial issues; \textit{CCM}: Country Coordinates Mismatch issue; \textit{ZC}: Zero Coordinates issue.}
+    \caption[Number of occurrences from the UB herbarium dataset classified within each geospatial issue class.]{Number of occurrences from the UB herbarium dataset classified within each geospatial issue class. \textit{NGI}: Records with no geospatial issues; \textit{CCM}: Country Coordinates Mismatch issue; \textit{ZC}: Zero Coordinates issue.}
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
@@ -209,14 +209,14 @@ The UB herbarium is also includes a total of $10252$ records from other countrie
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\linewidth]{figures/occurrence_map.png}
-\caption{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
+\caption[Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory.]{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
 \label{fig:occurrence_map}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\linewidth]{figures/recs_by_cntry_state.png}
-\caption{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
+\caption[Top-10 countries and Brazilian states with most occurrence records deposited in the UB herbarium]{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
 \label{fig:recs_by_cntry_state}
 \end{figure}
 
@@ -236,7 +236,7 @@ The first is around years $1966$ and $1968$, the second around $1988$, and the t
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/casestudy_ub/ub_records_timeseries.pdf}
-\caption{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
+\caption[Recording activities registered in the UB herbarium aggregated by year, since $1930$.]{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
 \label{fig:ub_records_timeseries}
 \end{figure}
 
@@ -333,7 +333,7 @@ However, by visually inspecting the degree distribution of collectors in Figure 
 On the other hand, there are also some few collectors who have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; and \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. Nodes that are very intensely connected in the network are called hubs.
 
 \begin{table}[t]
-\caption{ Degree centrality metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degree $k$, weighted degree $k_w$ and normalized degree $k^*$ are listed.}
+\caption[Degree centrality metrics for the UB SCN model.]{ Degree centrality metrics for the UB SCN model. For each nodes set the total number of nodes, average degree $\langle k \rangle$, top-10 highest-degree nodes and their respective degree $k$, weighted degree $k_w$ and normalized degree $k^*$ are listed.}
 \begin{center}
 	\input{tables/casestudy_ub/table_ub_scn_degrees}
 \end{center}
@@ -343,7 +343,7 @@ On the other hand, there are also some few collectors who have recorded much mor
   \begin{figure}[t]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
-    \caption{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
+    \caption[Degree distribution for both species and collectors nodes.]{Degree distribution for both species ($a$ and $c$) and collectors ($b$ and $d$) nodes. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws ($a$ has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots $a$ and $b$, respectively. The exponential cutoff in $a$ is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $c$ and $d$, respectively.}
     \label{fig:ub_scn_degree_dist}
   \end{figure}
 
@@ -404,7 +404,7 @@ As this edges filtering routine resulted in many isolated collectors, most of wh
   \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_agg_family_general.pdf}
-    \caption[alt]{ General aspect of the UB SCN network taxonomically aggregated onto the family rank. Species and collectors are respectively represented as pink and green nodes, and edges are weighted according to their \textit{count} attribute. Nodes sizing is based on their \textit{count} attribute, whilst edges color and width reflect their weight. For improving visualization we first filtered out edges with weight lower than $20$ and then omitted isolated nodes from the resulting graph. Nodes within poligons $(i)$, $(ii)$ and $(iii)$ compose visually distinguishable communities. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive graph in the author's personal web page\footnotemark. }
+    \caption[General aspect of the UB SCN taxonomically aggregated at the family rank.]{ General aspect of the UB SCN taxonomically aggregated at the family rank. Species and collectors are respectively represented as pink and green nodes, and edges are weighted according to their \textit{count} attribute. Nodes sizing is based on their \textit{count} attribute, whilst edges color and width reflect their weight. For improving visualization we first filtered out edges with weight lower than $20$ and then omitted isolated nodes from the resulting graph. Nodes within poligons $(i)$, $(ii)$ and $(iii)$ compose visually distinguishable communities. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive graph in the author's personal web page\footnotemark. }
     \label{fig:ub_scn_agg_family_general}
   \end{figure}
   \footnotetext{ \url{https://pedrosiracusa.github.io/networks/ub_scn_agg_family} }
@@ -466,7 +466,7 @@ We used the species bag / quorum similarity rule (expression \ref{equation:cosin
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
-    \caption{ Communities in the collectors-projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
+    \caption[Communities in the collectors projection of the family-aggregated SCN.]{ Communities in the collectors projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities.}
     \label{fig:ub_scn_family_projCol_communities}
 \end{figure}
 The collectors projection of the family-aggregated UB SCN network has a total of $6768$ nodes and $5,431,799$ edges, with average node degree $\langle k \rangle = 1605$.
@@ -492,7 +492,7 @@ In addition, we verify that higher-rank aggregations lead to denser networks for
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_filter_thresh.pdf}
-    \caption{ Reduction in the density of SCN collectors (a) and species (b) projections as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange) and at the original taxonomic resolution of species (green). }
+    \caption[Reduction in the density of SCN collectors and species projections as a consequence of increasing filtering threshold.]{ Reduction in the density of SCN collectors (a) and species (b) projections as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange) and at the original taxonomic resolution of species (green). }
     \label{fig:ub_scn_filter_thresh}
 \end{figure}
 
@@ -574,7 +574,7 @@ A better approach for identifying such groups of interests is described below, a
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
-    \caption{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $600$ were also omitted from the figure. Colors are used to distinguish communities and nodes sizes reflect families prevalence in the dataset.}
+    \caption[Communities in the species projection of the family-aggregated SCN.]{ Communities in the species projection of the family-aggregated SCN in figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $600$ were also omitted from the figure. Colors are used to distinguish communities and nodes sizes reflect families prevalence in the dataset.}
     \label{fig:ub_scn_family_projSp_communities}
 \end{figure}
 
@@ -680,7 +680,7 @@ Records distribution seems to decay logarithmically with team size, at least for
 \begin{figure}[!h]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes.pdf}
-    \caption{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data (using team sizes from $1$ to $8$) using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records singleton collectors typically hold, with records numbers logarithmically binned using base $2$. }
+    \caption[Percentage of occurrence records in the UB dataset for each team size.]{ Percentage of occurrence records in the UB dataset for each team size. The orange line represents an exponential fit to the data (using team sizes from $1$ to $8$) using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records singleton collectors typically hold, with records numbers logarithmically binned using base $2$. }
     \label{fig:ub_team_sizes}
 \end{figure}
 
@@ -698,7 +698,7 @@ Such a topology suggests the existence of non-random processes ruling the probab
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist.pdf}
-    \caption{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
+    \caption[Degree distribution for the UB herbarium CWN network.]{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
     \label{fig:ub_cwn_degree_dist}
 \end{figure}
 
@@ -709,7 +709,7 @@ The top collector is \textit{Howard S. Irwin} (\textit{irwin,hs}), with a weight
 Although he has not collaborated with many distinct collectors (only $39$), his position on the rank reflects the absolute number of collaborative records authored by him ($6169$), even though this only comprises $34.1\%$ of all his records. 
 %
 \begin{table}[H]
-  \caption{}
+  \caption[Top-20 collectors of the UB CWN, ranked by the weighted degree centrality score.]{Top-20 collectors of the UB CWN, ranked by the weighted degree $k_w$ centrality score. Both the absolute number of records and the percentage of those which have been collected collaboratively (involving at least two collectors) are given for each collector. The degree centrality $k$ represents the number of collaborative ties linking a collector to distinct collaborators, whereas the weighted degree is computed with the hyperbolic weighting function.}
   \begin{center}
   \begin{tabular}{l r r r r}
       collector & num of records & \% collaborative & $k$ & $k_w$ \\
@@ -758,7 +758,7 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_communities.pdf}
-    \caption{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
+    \caption[Coworking groups in a the UB CWN.]{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
     \label{fig:ub_cwn_communities}
 \end{figure}
 
@@ -816,7 +816,7 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
+    \caption[Temporal evolution of the UB CWN.]{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
     \label{fig:ub_cwn_temporal_evol}
 \end{figure}
 
