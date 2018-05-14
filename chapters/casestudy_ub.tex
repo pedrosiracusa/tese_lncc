@@ -254,7 +254,7 @@ Using these models we explore the diversity of recording behaviors of the collec
 We start by describing our data preparation routine, necessary for improving the quality of the network models.
 
 \subsection{Data Preparation} \label{section:ub_data_preparation}
-Before feeding the UB occurrences dataset for actually building the network models, we the tabular dataset to some data filtering and transformation routines.
+Before we could use the UB occurrences dataset for actually building the network models, we the submitted the tabular dataset to some data filtering and transformation routines.
 The data preparation process consisted of 
 (\textit{i}) selectively filtering occurrence records from which relevant social ties could be derived for both network models; 
 (\textit{ii}) extracting atomized collectors names from the \textit{recordedBy} field, which originally contains a string of names;
@@ -263,30 +263,29 @@ The data preparation process consisted of
 (\textit{v}) filtering out inadequate collectors names. %such as et al, incognito... performed after the network is built
 
 In the first step we intially removed all records in which either fields \textit{recordedBy} or \textit{scientificName} had missing values, as these are both critical for the construction of the network models.
-In order to build the SCN at the taxonomic resolution of \textit{species} we only selected records for which the taxonomic identity could be resolved at that rank.
-We did this by discarding records with taxonomic ranks at higher levels than \textit{species}, \textit{i.e.}, from \textit{genus} to \textit{kingdom}.
-For records at lower ranks (\textit{form} and \textit{variety}), we directly obtained their \textit{species} identity.
-Therefore we used $82\%$ of the records from the dataset (a total of $152379$ records, as shown in Table \ref{table:dset_taxonomicres_counts}) for building the networks.
+In order to build the SCN at the taxonomic resolution of \textit{species} we only selected records at equal or lower ranks, for which the taxonomic identity could be resolved at the level of \textit{species}.
+In other words, we used records at resolutions of \textit{form}, \textit{variety}, \textit{subspecies} and \textit{species}, corresponding to $82\%$ of the original records from the dataset (a total of $152379$ records, as shown in Table \ref{table:dset_taxonomicres_counts}).
+All records with taxonomic resolution higher than \textit{species} (from \textit{genus} to \textit{kingdom}) were not used for the construction of the networks.
 Although the taxonomic resolution of records is not relevant at all for the construction of the CWN model (edges are built exclusively using cliques of collectors, a process described in section \ref{section:cwn_construction_fromdata}), we chose to use the same set of records we used for building the SCN.
 
-The second step consisted of iterating each row and splitting the string containing collectors names, stored in the \textit{recordedBy} field. 
-We splitted the strings using the semicolon character (` ; '), which is used as the delimiter for the majority of entries in the UB dataset.
+The names atomization step consisted of iterating each record from the UB dataset and splitting the corresponding string containing collectors names, which is stored in the \textit{recordedBy} field. 
+We splitted the strings on the semicolon character (` ; '), which is used as the delimiter for the majority of entries.
 In some few occurrences, however, names are delimited by other characters, for instance ` , ', ` / ' and ` \& '.
-We deal with these cases by replacing inconsistent delimiters manually and storing the changes in a separated file.
-After the names atomization process, each string originates a list of strings which is stored in a new field named \textit{recordedBy\_atomized}.
+We dealt with these cases by replacing inconsistent delimiters manually and storing the changes in a separated file, without modifying the original dataset.
+The process originates a list of strings for each record, containing the names of each collector associated to it.
+A new field named \textit{recordedBy\_atomized} is created for holding the lists of names, and is later used to construct the network models.
 
-We included a normalization routine in order to obtain unicode identities for collectors from their names.
+In order to obtain unicode identities for collectors, we defined a unicode normalization function, which is executed on collectors names strings upon network construction (step \textit{iii}).
 Each name is initially split in its two component parts (see \ref{section:ub_exploration}), using the comma character as the delimiter.
-Next, each part of the name is passed into a unicode normalization function, which forces all characters to lowercase and removes any accents, periods and spaces. 
+Next, each part of the name is passed into the normalization function, which forces all characters to lowercase and removes any accents, periods and spaces. 
 Finally the name is recomposed by joining the first initials to the last name with a comma.
-For instance, name `\textit{Simão, J. S.}' would be normalized into `\textit{simao,js}'.
-A table mapping each collector's identity to their actual name is presented in Appendix \ref{appendix:collectors_ids}.
-
-Names were mapped to their respective atomized version and were stored in a \textit{names map} file, which was later passed in to the constructor methods that built the network models.
-However, we still faced the problem of resolving names inconsistencies (step (\textit{iv})).
+For instance, name `\textit{Simão, J. S.}' would be normalized to `\textit{simao,js}'.
+Names were mapped to their respective normalized forms and were stored in a \textit{names map} file, which was later passed in to the constructor methods that built the network models.
+A table mapping the identities of some of the main collectors from UB to their respective names is presented in Appendix \ref{appendix:collectors_ids}.
+However, we still faced the problem of resolving names inconsistencies (step \textit{iv}).
+If a collector is associated to multiple names variants, she gets consequently represented as multiple entities in the network, which should be avoided as to ensure the semantic correctedness of the models.
 For dealing with these issues, we included new entries in the same \textit{names map}, keying variants of each name are to their ``correct forms''.
-
-After the networks were built, the last step was to remove entities which we considered to be ``noise'' in the network, such as `\textit{etal}' (from \textit{et. al}), `\textit{incognito}', `\textit{ignorado}', `\textit{ilegivel}' or `\textit{?}'.
+Finally, after the networks were built, the last step was to remove entities which we considered to be ``noise'' in the network, such as `\textit{etal}' (from \textit{et. al}), `\textit{incognito}', `\textit{ignorado}', `\textit{ilegivel}' or `\textit{?}'.
 
 
 
@@ -301,7 +300,7 @@ After the networks were built, the last step was to remove entities which we con
 The SCN model of the UB herbarium had a total of $6768$ collectors and $15344$ species nodes, with a total of $142647$ undirected edges connecting nodes from opposite sets. 
 Average degree for the collectors and species set are respectively $21.08$ and $9.30$.
 
-\paragraph*{Connected components.}
+\paragraph{Connected components.}
 The UB SCN network is composed by a total of $351$ connected components, the largest of which (the giant component, or $c_1$) contains most nodes in the network ($93.6\%$ of the collectors and $95.0\%$ of the species). 
 From a collector's perspective, the requirement for it to belong to the giant component is that it must have collected at least one species in common with another collector who is already included in the giant component. The same reasoning applies to species nodes as well by observing the inverse relationship.
 Apart from the giant component, most other connected components contain as few as two or three nodes. These represent collectors who have never recorded a species in common with any collector from $c_1$; and conversely, species that have never been collected by any of those $c_1$ collectors.
@@ -327,7 +326,7 @@ She holds a total of $2757$ records, from $87$ distinct species, all of them bei
 
 
 
-\paragraph*{Number of species per collector.}
+\paragraph{Number of species per collector.}
 Collectors contributing to the UB herbarium have, in average, recorded and successfully deposited approximately $21.1$ distinct species in that collection during their careers (Table \ref{table:ub_scn_degrees}). This value is obtained by computing the average degree $\langle k_{col} \rangle$ from all nodes in $S_{col}$ set, and would be equivalent to the expected number of species for a randomly selected collector if the SCN were a random network \cite{Albert2002}.
 However, by visually inspecting the degree distribution of collectors in Figure \ref{fig:ub_scn_degree_dist}(b and d) we realize that the vast majority of collectors have recorded very few species. In fact, around $86.7\%$ of the collectors have degrees below or equal $floor(\langle k_{col} \rangle)$, and around $79\%$ have recorded $10$ or fewer species.
 On the other hand, there are also some few collectors who have recorded much more species than the average, as it is the case of \textit{Howard S. Irwin} (\textit{irwin,hs}), with a total of $4535$ records of distinct species; and \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), with $1888$ distinct species. Nodes that are very intensely connected in the network are called hubs.
@@ -360,7 +359,7 @@ In our case data shows that collectors hubs tend to be more central than species
 
 
 
-\paragraph*{Number of collectors per species.}
+\paragraph{Number of collectors per species.}
 For the species nodes set ($S_{sp}$), the average degree $\langle k_{sp}\rangle \approx 9.5$, which can be interpreted as that species in the UB herbarium have been collected by approximately $9.5$ distinct collectors, in average. 
 The total number of times each species has been recorded and the percentage of collectors that have recorded them at least once are given by the $k_w$ and $k^*$ metrics, respectively (Table \ref{table:ub_scn_degrees}).
 
@@ -373,7 +372,7 @@ A particularity that can be observed in the species degree distribution is the e
 This behavior can be better adjusted by using a slight variant of the power law function $p(k) \sim e^{-\lambda k} k^{-\alpha}$, which is obtained by simply including an exponential cutoff term. We call this variant a truncated power law function. The dashed curve in Figure \ref{fig:ub_scn_degree_dist}a represents a truncated power with parameters $\alpha=1.38$ and $\lambda =0.014$, which was fit to the species degree distribution data.
 
 
-\paragraph*{How densely connected are species and collectors?}
+\paragraph{How densely connected are species and collectors?}
 The density of the network is the ratio between the number of actual number of edges in the network and the maximum possible number of edges, in case every collector were linked to every species. This metric informs us how far the network is of being complete, in which case its density becomes $d=1$. For a bipartite network, density can be computed as $d = \frac{|E|}{|S_{col}| |S_{sp}|}$, where $|E|$ is the number of edges in the network and $|S_{col}|$ and $|S_{sp}|$ are the number of collectors and species, respectively.
 
 The observed density for the overall UB species-collectors network is approximately $1.37 \times 10^{-3}$, meaning that the probability that we find an edge linking two arbitrary nodes from opposite sets is about $0.14\%$. Additionally, as shown in Figure \ref{fig:ub_scn_tax_agg_curves}, network density increases as we perform taxonomic aggregations onto successively higher-hierarchy ranks.
@@ -382,7 +381,7 @@ In most social networks, however, not all regions are equally dense, as entities
 % find parameters for network density (compare with other networks in literature)
 
 
-\paragraph*{Communities of common interests.}
+\paragraph{Communities of common interests.}
 Communities in a species-collectors network are composed by groups of collectors who are specifically interested in a particular subset of organisms which are, in turn, not usually recorded by the rest of the herbarium collectors. 
 As the number of edges linking members within a community is far greater than those connecting members to non-members, communities can be visually detected as clusters of nodes which are relatively well separated from the rest of the network when using force-directed algorithms \cite{Jacomy2014} for graph layout.
 
@@ -396,7 +395,7 @@ As this edges filtering routine resulted in many isolated collectors, most of wh
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_tax_agg_curves.pdf}
-    \caption{ Number of taxa ($S_{sp}$ nodes), edges and network density for UB SCN aggregations onto successive taxonomic ranks. }
+    \caption{ Number of taxa ($S_{sp}$ nodes), edges and network density for the UB SCN aggregations onto successive taxonomic ranks. }
     \label{fig:ub_scn_tax_agg_curves}
   \end{figure}
 
@@ -462,7 +461,7 @@ We used the species bag / quorum similarity rule (expression \ref{equation:cosin
 % The Col set projection
 % TODO
 %   - explain that nodes sizing in the figure represent the number of records for each collector in the herbarium dataset
-\paragraph*{Communities in the collectors projection.}
+\paragraph{Communities in the collectors projection.}
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
@@ -492,7 +491,7 @@ In addition, we verify that higher-rank aggregations lead to denser networks for
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_filter_thresh.pdf}
-    \caption[Reduction in the density of SCN collectors and species projections as a consequence of increasing filtering threshold.]{ Reduction in the density of SCN collectors (a) and species (b) projections as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange) and at the original taxonomic resolution of species (green). }
+    \caption[Reduction in the density of the species and collectors projections of the UB SCN, as a consequence of increasing filtering threshold.]{ Reduction in the density of the collectors (a) and species (b) projections of the UB SCN, as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange) and at the original taxonomic resolution of species (green). }
     \label{fig:ub_scn_filter_thresh}
 \end{figure}
 
@@ -570,7 +569,7 @@ A better approach for identifying such groups of interests is described below, a
 
 % ======================
 % The Sp set projection
-\paragraph*{Communities in the species projection.}
+\paragraph{Communities in the species projection.}
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
@@ -641,10 +640,10 @@ This can be investigated with CWN models, as described below.
 
 
 % ===============================
-% UB Collectors Coworking Network
+% UB Collector Coworking Network
 % -------------------------------
 
-\subsection{The UB Collectors Coworking Network} \label{section:ub_cwn}
+\subsection{The UB Collector CoWorking Network} \label{section:ub_cwn}
 % TODO: Add average path size connecting collectors
 % From table \ref{table:ub_collectors_florescer}, \textit{Irwin} mostly contributed to the UB herbarium from year $1962$ to $1976$, in the context of the Central Brazil Expedition carried out by the New York Botanical Garden \footnote{\url{http://sciweb.nybg.org/science2/hcol/planalto/index.asp}}. Together with \textit{William R. Anderson} (\textit{anderson,wr}), \textit{Irwin} was a key member of the expedition staff. 
 
@@ -652,7 +651,7 @@ As the UB was built based on the same set of records as the SCN model explored i
 A total of $10391$ edges represent collaborative ties between collectors.
 The average degree and density for the overall network are, respectively, $3.07$ and $4.5 \times 10^{-4}$.
 
-\paragraph*{Connected components.}
+\paragraph{Connected components.}
 The UB CWN network is composed by a a total of $2991$ connected components, from which the largest one --- the giant component ($c_1$) ---  contains $46\%$ of all nodes in the network.
 Such a low percentage of nodes in the giant component contrasts to most empirical scientific paper-publishing collaboration networks studied by Newman in one of his $2001$ papers \cite{Newman2001d}, for which the giant components contain as much as $80\% - 90\%$ of all nodes.
 Moreover, only $318$ of the connected components ($c_1, c_2, ..., c_{318}$) are composed by collectors with at least one collaborative tie.
@@ -670,7 +669,7 @@ Moreover, $81.1\%$ of occurrences recorded by a singleton collector have been ob
 % Low-degree isolated nodes are probably experienced foreign collectors (who have only contributed to the herbarium with few records (probably exchanges)), as it is unlikely that novice collectors would record alone, without a supervisor. -> Apparently not true
 
 
-\paragraph*{How collaborative are collectors?}
+\paragraph{How collaborative are collectors?}
 % We use metrics such as average degree, degree distribution, ... as measures of collector collaborativity.
 
 % Team sizes
@@ -698,7 +697,7 @@ Such a topology suggests the existence of non-random processes ruling the probab
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist.pdf}
-    \caption[Degree distribution for the UB herbarium CWN network.]{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
+    \caption[Degree distribution for the UB CWN.]{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
     \label{fig:ub_cwn_degree_dist}
 \end{figure}
 
@@ -753,7 +752,7 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
 
 % TODO: Include hyperbolic weighting (and compare with degree k)
 
-\paragraph*{Coworking groups.}
+\paragraph{Coworking groups.}
 
 \begin{figure}[h!]
   	\centering
@@ -811,7 +810,7 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 
 
 % Temoral evolution of the CWN
-\paragraph*{Temporal evolution of the CWN.}
+\paragraph{Temporal evolution of the CWN.}
 
 \begin{figure}[h!]
   	\centering
@@ -876,7 +875,7 @@ Another important community emerging in this period is the bryophytes lab team.
 
 
 % Assortativity
-\paragraph*{Do collaborative collectors prefer to work with others who are also collaborative?}
+\paragraph{Do collaborative collectors prefer to work with others who are also collaborative?}
 One relevant question we might ask is whether collectors tend to form collaborative ties preferentially with others holding a similar number of collaborative ties.
 Here we refer to collaborative collectors as those holding collaborative ties with many distinct collectors, irrespective of the number of times each individual link occurs. Those collectors which hold strong collaborative ties with few collaborators are thus less collaborative than the former case. In this sense, $proenca,ceb$ is considered more collaborative than $irwin,hs$, for instance.
 
@@ -892,7 +891,7 @@ By using this metric we assess whether a correlation exists between the degrees 
 The result is bound to the $[-1,1]$ interval, where a score of $1$ indicates perfect assortativity and a score of $-1$, perfect dissortativity.
 Scores close to $0$ indicate that no correlation exists between nodes, and thus the network is neither assortative nor dissortative.
 
-For the UB collectors coworking network we obtained an assortativity score of $-0.0034$ for the network as a whole, including all the isolated components; and a score of $-0.0308$ only considering the giant component.
+For the UB CWN we obtained an assortativity score of $-0.0034$ for the network as a whole, including all the isolated components; and a score of $-0.0308$ only considering the giant component.
 Both coefficients are negative and very close to zero, suggesting that collectors do collaborate with others irrespectively of their degrees. In other words, we do not observe a significant degree correlation between nodes in this network. 
 This result contrasts with those from Newman's paper \cite{Newman2003b}, which shows that typically social networks display assortative mixing. Additionally states that this is one of the aspects that differentiate social networks differentiate from other types of networks. In other words, high degree nodes tend to associate to other high-degree ones. Nodes tend to associate to others of similar degree.
 This is not the case for the CWN network. If we consider the network as whole, including the many isolated components, we get an assortativity coefficient of $-0.0034$, whereas if we consider only the giant component it is $-0.0308$. 
