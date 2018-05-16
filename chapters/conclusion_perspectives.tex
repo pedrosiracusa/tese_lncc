@@ -4,11 +4,33 @@
 % ===========
 % Conclusions
 % -----------
-We provided a conceptual basis for a network-based framework aiming to describe biological collections as an ensemble of contributions by collectors.
-The basis consists, more especifically, of two network models, giving distinct perspectives on the recording behavior of collectors
-They can can be structured from species occurrence datasets, largely available for many collections in the world.
-The models essentialy depend on two fields: the collectors field and the species name field.
-we show that modeling biological collections formation by focusing on the interests and relationships between collectors can be insightful for uncovering hidden mechanisms leading to the current composition of the herbarium. 
+In this dissertation we proposed the conceptual basis of a new approach for describing the assemblage of biological collections as a social process, driven by the taxonomic interests of contributor collectors as well as their social interactions.
+We provided methods for structuring species occurrence data from biological collections into two main classes of network models, each giving distinct perspectives on the recording behavior of collectors.
+\textbf{Species-Collector Networks} (SCNs) model interest relations between collectors and taxa they record, whilst \textbf{Collector CoWorking Networks} (CWNs) represent collaborative ties between collectors co-authoring specimens records. 
+We use the social network analytics framework \cite{Barbier2011, Stork2015} as the theoretical foundation for characterizing topological features of the networks and uncovering hidden mechanisms leading to the composition of biological collections.
+%
+% Why structure collections data as networks?
+According to \cite*{Marin2011}, adopting network-based approaches allows analysts to
+(\textit{i}) investigate the effects of interactions between individuals on shaping their own behaviors, rather than simply comparing static attributes of individuals within a population; and
+(\textit{ii}) investigate the formation of non-homogeneous communities, composed by individuals interacting with their groups at varying levels of commitment.
+These aspects are particularly relevant for biological collections, as collectors are...
+%Groups and communities % Stork2015 chapt3
+%Discoverying communities is very relevant as it allows us to cluster and summarize collectors with similar profiles.
+%We can also identify collectors who are most relevant in each community, and which ones bridge communities.
+%Position of the actors % Stork2015 chapt3
+
+% The case study
+We demonstrated the use of our models by exploring the dataset from the University of Brasília Herbarium.
+In that case study we explored structural properties of both network models and investigated the formation of communities of collaboration and interests.
+We also assessed the distinctiveness of collectors regarding their taxonomic interests, their colaborativity with other collectors from within and outside their collaboration and interests communities, and the temporal evolution of collaborative recording in the herbarium.
+
+
+We also investigated how strongly associated taxonomic groups are, based on their
+The model had a relatively good quality because, as the herbarium staff uses the BRAHMS system for data management, giving a quality, consistency to the field containing collectors names.
+One possible limitation is the low quality of the collectors field.
+
+
+
 
 % Quality of the recordedBy field
 In the scope of this work we assumed the species identity determination issue to be resolved, and handled by the data platform we used, GBIF. 
@@ -16,6 +38,7 @@ This should also be considered if one is to use data from other sources, from wh
 The quality of the models are essentially limited by the quality of the field containing collectors names.
 As this field is traditionally not very relevant for most biodiversity data applications, it is not surprising that it is relatively overlooked.
 Some of the most common issues with the field are naming inconsistencies and authorship omission (described in chapter 2).
+
 
 
 % Regarding the UB case study
@@ -52,6 +75,19 @@ It is also important to analyze collectors communities belonging to other collec
 
 Although we have provided a basis for the network-based framework, we present some features which we believe are essential to be incorporated in order to allow broader applications of the model.
 
+% Q1: Influential analysis
+\paragraph*{How does a influential collectors influence others?}
+In the context of our work, we could investigate how the collecting behavior and taxonomic interests of novice collectors are influenced by their association with more experienced ones, at least at the beginning of their careers.
+As it naturally happens in many social systems, actions taken by individuals can be strongly influentiated by the behavior of others at more privileged positions.
+The influential power of an individual depends not only on the absolute number of connections they hold with other members, but also on how strongly they intermediate other connections, how close they are to every other individual in the network, and how influential are their own connections.
+
+% Q2: Structural equivalence %  see Stork2015 ch3
+Nodes are structurally equivalent if they occupy similar positions in the network, with similar connections.
+Is a simplistic measure of the role of the node
+Collectors in SCNs are equivalent if they collect similar 
+structural equivalent collectors are redundant
+Taxa recorded by collectors who do not have structural equivalence are more succeptible to stop being recorded, in the absence of its collector.
+
 
 % Entities resolution and joining with other botanist datasets
 % ------------------------------------------------------------
@@ -61,7 +97,7 @@ Although we have provided a basis for the network-based framework, we present so
 % If the messages are directed from a more influential collector to a less influential one, we expect it to be less likely to be answered and forwarded.
 % The CWN provides a structure of collaborations, such that botanists who have collaborated in field are expected to be acquainted to each other.
 % We can identify key collectors from which information spreads most efficiently, and message them asking them to identify their collaborators, pointing out more structured references on the web, such as in the lattes platform, orcid....
-% 
+% Stork2015 chapt.2 -> transmission 
 
 % Including the temporal and geographic dimensions
 % ------------------------------------------------
@@ -117,6 +153,7 @@ Here we briefly discuss some of the possible further developments from our model
 
 % Building Recommender Systems
 % ----------------------------
+\paragraph*{Building recommender systems.}
 % Sampling Site Recommendation
 % Assisted planning of future biodiversity surveying is key for improving herbarium data \cite{Graham2004}.
 % Strategic sampling in unsurveyed areas: identify gaps in environmental and geographic coverages \cite{Graham2004}.
@@ -126,13 +163,23 @@ Here we briefly discuss some of the possible further developments from our model
 
 % Collaborative filtering: The system gather information about the interest of the collectors and then proposes collectors to record new species based on the interests of others.
 % Team formation support: How to optimally assemble a team of specialists who are willing to work together?
+% Link prediction: Trying to predict which ties are most likely to form between entities in the network in the near future.
+
+% Use Case: "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
+% < add illustration >
 
 
 % Collector's productivity Score
 % ------------------------------
-% Metrics of collectors could be used by science financing agencies
-% More value to careers as naturalists
-% Incentivate collectors to share records, supporting open science
+\paragraph*{Assessing collectors productivity.}
+On their duty of managing the application of public resources to scientific initiatives, research funding agencies deal with the problem of prioritizing proposals from researchers who are most capable of prividing signifficant advance in their respective fields.
+Metrics for assessing the academic productivity of researchers usually take into account metrics such as the number of papers published in high-impact journals. 
+In this sense, the work of field naturalists has been largely unappreciated by financing agencies.
+As a consequence, researches have directed their careers towards activities that are
+Another possible application of the network models is assigning scores to collectors based on their recording patterns, which could become produtivity metrics.
+Those metrics can be used by science financing agencies, to incentivate scientists to invest in their careers as naturalists, aggregate scientific value to it.
+Their metrics depends on centrality scores.
+As the metrics are calculated based on published occurrence records, this would incentivate data curators towards sharing their data, supporting open science.
 
 
 % SDM
@@ -144,10 +191,6 @@ Here we briefly discuss some of the possible further developments from our model
 
 
 
-% Link prediction: Trying to predict which ties are most likely to form between entities in the network in the near future.
-
-% Use Case: "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
-% < add illustration >
 
 
 

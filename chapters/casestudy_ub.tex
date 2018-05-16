@@ -4,20 +4,21 @@
 % -----
 % Intro
 
-In this chapter we use our models proposed in chapter \ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
+In this chapter we use the models we proposed in chapter \ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and the collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
 By exploring basic topological features of the networks, we investigate the formation of
 (\textit{i}) groups of collectors with similar taxonomic collecting interests;
 (\textit{ii}) groups of taxa which are often recorded by similar sets of collectors;
 (\textit{iii}) groups of collectors who collaborate by recording specimens together in collecting expeditions. 
-From network structure we can also identify collectors that are most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group.
-Taxa that are either widely collected and those that are collected by very specific groups of collectors are also easily identified from network structure.
+From network structure we can also identify collectors that are most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group in the collection.
+Taxa that are either widely collected or collected by very specific groups of collectors are also easily identified from network structure.
 
 The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
 Table \ref{table:ub_collectors_florescer} lists some historically relevant collectors who have intensively contributed to the herbarium, according to the \textit{Florescer} project \cite{florescer}. 
+
 \begin{table}[H]
-  \caption{Historically important collectors who have contributed to the UB herbarium.}
+  \caption{Historically important collectors for the UB herbarium.}
   \begin{center}
   \begin{tabular}{l l l}
       & activity years & contribution\\
@@ -44,9 +45,9 @@ Table \ref{table:ub_collectors_florescer} lists some historically relevant colle
 %\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
 
 In this case study we have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}. 
-The entire dataset was downloaded through the portal and loaded in memory in a personal computer for analysis.
+The entire dataset was downloaded through the portal and loaded into memory in a personal computer for analysis.
 %
-Before building the network models we first performed a quick exploratory analysis of the UB dataset, for a general overview on its taxonomic composition, the temporal and geographical distribution of the records, as well as the main issues associated to the dataset (section \ref{section:ub_exploration}).
+Before building the network models we first performed a quick exploratory analysis of the UB dataset, for grasping a general overview on its taxonomic composition, the temporal and geographical distribution of the records, as well as the main issues associated to the dataset (section \ref{section:ub_exploration}).
 We also performed data cleaning and transformation routines for dealing with the names atomization and entity resolution problems (as described in chapter \ref{}) and improving the quality of the fields from which the network models are constructed (section \ref{section:ub_data_preparation}).
 Finally, in sections \ref{section:ub_scn} and \ref{section:ub_cwn} we present the SCN and CWN models built from the UB dataset and explore some of their topological features. 
 %
@@ -68,9 +69,9 @@ Most of these fields (except for \textit{issue}), which we briefly describe belo
 
 % Terms definitions
 \begin{description}[align=left,labelindent=1cm]
-\item [recordedBy.] Contains a list with the number of people or groups who have authored an occurrence record. 
+\item [recordedBy.] Contains a list with the names of people or groups who have authored an occurrence record. 
 Names are included in a single string and separated by some delimiter character. 
-Although the vertical bar (` | ') bar is officially recommended by \textit{TDWG}, this field in the UB herbarium dataset uses a semicolon character (` ; ') as delimiter.
+Although the vertical bar (` | ') bar is officially recommended by \textit{TDWG}, names are separated by a semicolon character (` ; ') in the UB dataset. 
 The UB convention for collectors names makes them composed of two parts, which are separated by a comma (` , ') character.
 The first part is the collector's last name, with the first character capitalized; and the second part corresponds to the first initials of the names, all capitalized and appended with a period.
 A collector named `\textit{João da Silva Simão}', for instance, would be included as `\textit{Simão, J. S.}'.
@@ -90,7 +91,7 @@ Datum is assumed to be \textit{WGS84} for all records in the UB herbarium.
 \item [issue.] A sequence of data issues that have been identified in the record.
 This field is included by GBIF during data preprocessing, and is not part of the \textit{Darwin Core} standard.% https://www.gbif.org/infrastructure/processing
 
-\item [scientificName.] The scientific name assigned to the specimen, at the lowest taxonomic resolution as it can be determined. The authorship of the name is also included for many records.
+\item [scientificName.] The scientific name assigned to the specimen, at the lowest taxonomic resolution as it can be determined. The authorship of the name is also included for many records, although not relevant for this study.
 
 \item [taxonRank.] The taxonomic rank of the name in the \textit{scientificName} field.
 \end{description}
@@ -100,9 +101,9 @@ This field is included by GBIF during data preprocessing, and is not part of the
 \paragraph*{Taxonomic composition.}
 % 
 For exploring the taxonomic composition of the dataset we first removed $10$ records with missing values for the \textit{scientificName} field.
-From the remaining $185301$ records, most have a taxonomic resolution at the \textit{species} level ($75.96\%$), followed by \textit{genus} ($13.17\%$) and \textit{variety}($4.82\%$), as shown by absolute metrics in Table \ref{table:dset_taxonomicres_counts}. 
+From the remaining $185301$ records, most had a taxonomic resolution at the \textit{species} level ($75.96\%$), followed by \textit{genus} ($13.17\%$) and \textit{variety}($4.82\%$), as shown by absolute metrics in Table \ref{table:dset_taxonomicres_counts}. 
 However, the percentage of records which can be determined at the rank of \textit{species} is slightly higher ($82.23\%$), and is given by the cumulative metrics in the table. 
-This happens because the \textit{species} identity of records at higher taxonomic resolutions (in this case \textit{form} and \textit{variety}) are directly determined, as explained in section \ref{section:biodiversity_terms}.
+This happens because the \textit{species} identity of records at higher taxonomic resolutions (in this case \textit{form}, \textit{variety} and \textit{subspecies}) are directly determined, as explained in section \ref{section:biodiversity_terms}.
 Similarly, although only $1.08\%$ of the records have a taxonomic resolution at the \textit{kingdom} level, all records are taxonomically determined at that rank.
 
 \begin{table}
@@ -127,11 +128,11 @@ Similarly, although only $1.08\%$ of the records have a taxonomic resolution at 
 \end{table}
 
 
-Table \ref{table:taxa_counts} shows the number of distinct taxa at each rank and lists the ones with the highest numbers of records.
+Table \ref{table:taxa_counts} shows the number of distinct taxa at each rank and lists those with the highest numbers of records.
 The herbarium is mostly composed by plants (kingdom \textit{Plantae}, represented by $96.72\%$ of the records), followed by \textit{Chromista} (including some algae), \textit{Funghi} and \textit{Bacteria}.
-Vascular plants (phylum \textit{Tracheophyta}) compose $82.89\%$ of the herbarium, whereas \textit{Bryohpyta} (mosses), \textit{Ochrophyta} (algae from kingdom \textit{Chromista}) and \textit{Charophtya} (algae from kingdom \textit{Plantae}) are also respresentative.
+Vascular plants (phylum \textit{Tracheophyta}) compose $82.89\%$ of the herbarium, although \textit{Bryohpyta} (mosses), \textit{Ochrophyta} (algae from kingdom \textit{Chromista}) and \textit{Charophtya} (algae from kingdom \textit{Plantae}) are also respresentative.
 At the family rank, \textit{Fabaceae}, is the most representative one ($10.39\%$), followed by \textit{Myrtaceae} ($6.93\%$), \textit{Asteraceae} ($6.08\%$) and \textit{Rubiaceae} ($5.10\%$). 
-The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia} and \textit{Sematophyllum subpinnatum}, the first three being flowering plants and the latter a species of moss.
+The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia} and \textit{Sematophyllum subpinnatum}, the first three flowering plants and the latter a species of moss.
 
 \begin{table}[t]
   \caption[Number of distinct taxa at each taxonomic rank in the dataset.]{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-4 most recorded taxa is included with their respective counts.}
@@ -430,7 +431,7 @@ The first two researchers, which have been included in community $i$, are mostly
 \textit{Micheline C. Silva}, however, also shows interest towards \textit{Piperaceae}, a family of flowering plants that has also been considerably recorded by collectors from the network core. 
 Therefore, \textit{Piperaceae} is an important node connecting community $i$ to the network core, as it intermediates many paths between collectors from both network regions.
 %
-Some PhD and MSc students from the cryptogams lab including \textit{Abel Eustáquio R. Soares} (\textit{soares,aer}), \textit{Allan Laid Alkimim Faria} (\textit{faria,ala}), \textit{Ronaldo Viveiros de Sousa} (\textit{souza,rv}), \textit{Tamara Silva Dantas} (\textit{dantas,ts}), \textit{Renato Gama} (\textit{gama,r}) and \textit{Eliana Marília Lima Pinheiro} (\textit{pinheiro,eml}) have also been placed in community $i$, and their closeness to their academic supervisor \textit{`camara,peas'} reflect their common taxonomic interests in bryophytes.
+Some PhD and MSc students from the cryptogams lab including `\textit{soares,aer}', `\textit{faria,ala}', `\textit{souza,rv}', `\textit{dantas,ts}', `\textit{gama,r}' and `\textit{pinheiro,eml}' have also been placed in community $i$, and their closeness to their academic supervisor `\textit{camara,peas}' reflect their common taxonomic interests in bryophytes.
 
 Although she is one of the principal investigators of the \textit{Cryptogams Lab}, \textit{`souza,mgm'} was placed in community $iii$ instead of $i$ due to her taxonomic interest towards algae, a taxonomic group which is overlooked by the vast majority of collectors in the herbarium, including bryophytes collectors. 
 She is mostly interested in families \textit{Eunotiaceae}, \textit{Naviculaceae}, \textit{Pinnulariaceae}, which compose a group of algae known as diatoms.
@@ -438,7 +439,7 @@ There are two more collectors in community $iii$.
 Together with \textit{`souza,mgm'}, \textit{Roni Ivan Rocha de Oliveira} (\textit{oliveira,rir}) was a member of a survey on the diatoms acquatic biota of the Paranã River, during years 2002 and 2003.
 \textit{Drielle dos Santos Martins} (\textit{martins,ds}) was an undergraduate student and a lichen collector, having been supervised by \textit{souza,mgm}.
 
-Another community of algae collectors is the one formed by \textit{Ana Lúcia Tostes de Aquino Leite} (\textit{leite,alta}), \textit{João Vademar Grando} \textit{grando,jv} and \textit{Christina Wyss Castelo Branco} (\textit{castelobranco,cw}) (community $ii$), which also happens to be the connected component $c_2$ itself.
+Another community of algae collectors is the one formed by `\textit{leite,alta}', `\textit{grando,jv}' and `\textit{castelobranco,cw}' (community $ii$), which also happens to be the connected component $c_2$ itself.
 \textit{Ana Lúcia Leite} has intensely collected continental green algae from family \textit{Desmidiaceae} in the Federal District while pursuing her MSc degree at the University of Brasília.
 During that period she has also collected some specimens from another green algae family, \textit{Closteriaceae}, which has not been recorded by anyone else from the UB herbarium.
 She is regarded as one of the UB historically relevant collectors (Table \ref{table:ub_collectors_florescer}).
@@ -744,22 +745,26 @@ With a total of $218$ distinct collaborators, she would be placed at the first p
 %
 Another case worth mentioning is that of `\textit{grando,jv}' and `\textit{castelobranco,cw}', both of which have necessarily and exclusively collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
 As a consequence their weighted degree scores $k_w$ are equivalent to the total number of records authored by them ($2256$), whereas their non-weighted degree scores are $k=1$.
-
+%
 Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed, whilst, on the other hand, the weighted degree score $k_w$ takes into consideration the relevance of each tie, given by some weighting rule.
 
-
-%% FIGURE HERE %%
-
-% TODO: Include hyperbolic weighting (and compare with degree k)
-
-\paragraph{Coworking groups.}
+The \textit{betweeness} centrality metric is also frequently used in social networks analytics for ranking collectors who act as ``bridges'', intermediating a considerable fraction of shortest paths between pairs of nodes in the network. 
+We compute betweeness centrality of a node $v$ by making $c_B(v) =\sum_{s,t \in V} \frac{\sigma(s, t|v)}{\sigma(s, t)}$, where $V$ is the node set; $\sigma(s,t)$ is the number of shortest paths between nodes $s, t \in V$ (both $s$ and $v$ different from $v$); and $\sigma(s,t|v)$ is the number of shortest paths between $s$ and $v$ that are intermediated by $v$ \cite{Brandes2008}. 
+The $4$ collectors with highest betweeness centrality scores in the UB CWN are `\textit{proenca,ceb}' ($0.38$), `\textit{faria,jeq}' ($0.18$), `\textit{mendes,vc}' ($0.14$), `\textit{ratter,ja}' ($0.13$).
+The first three collectors are also included in the degree centrality rank, in table \ref{table:ub_cwn_degree}, although \textit{ratter,ja} is not (he occupies the $21th$ position, with $k=111$).
+By inspecting \ref{fig:ub_cwn_communities}, we verify that in fact all those collectors are in strategic positions.
+\textit{Carolyn E. Proença} (\textit{proenca,ceb}) is located at the center of the network, while `\textit{mendes,vc}' and `\textit{faria,jeq}' also interconnect nodes from many distinct communities.
+\textit{James A. Ratter} (\textit{ratter,ja}) is a very important node bridging a very relevant group (the green one, centered in \textit{irwin,hs}) to the rest of the network.
 
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_communities.pdf}
-    \caption[Coworking groups in a the UB CWN.]{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
+    \caption[Coworking groups in the UB CWN.]{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness.}
     \label{fig:ub_cwn_communities}
 \end{figure}
+
+
+\paragraph{Coworking groups.}
 
 One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who collaborate on specimens recording in field, which we refer to as \textbf{coworking groups}. 
 %
@@ -798,7 +803,7 @@ First, as coworking relations are based on the physical recording of organisms t
 As temporal and geographical distances between collectors increase, they consequently become more unlikely of developing collaborations, constrained by the limited lifespan of their own careers.
 
 Second, non-professional relationships could also facilitate or hinder the establishment of new coworking ties between individuals. 
-Positive relationships (\textit{e.g.} friendship) could lead two collectors to collaborate irrespective of their own taxonomic interests, for instance, if they simply mean to be companions of each other and help on the field work of their friend.
+Positive relationships (\textit{e.g.} friendship) could lead two collectors to collaborate irrespective of their own taxonomic interests, for instance, if they simply mean to be companions of each other and help their friend on field collections.
 On the other hand negative relationships, such as rivality, can prevent potentially fruitfull coworking relationships to establish between collectors who record very similar taxonomic groups at the same place and time.
 Moreover, people have limited information on the activities of other collectors and research groups, and thus might not collaborate simply as a consequence of not being acquainted of each other.
 
