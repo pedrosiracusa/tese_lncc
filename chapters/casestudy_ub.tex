@@ -751,8 +751,8 @@ Thus, the non-weighted degree score $k$ ranks collectors based on their total nu
 The \textit{betweeness} centrality metric is also frequently used in social networks analytics for ranking collectors who act as ``bridges'', intermediating a considerable fraction of shortest paths between pairs of nodes in the network. 
 We compute betweeness centrality of a node $v$ by making $c_B(v) =\sum_{s,t \in V} \frac{\sigma(s, t|v)}{\sigma(s, t)}$, where $V$ is the node set; $\sigma(s,t)$ is the number of shortest paths between nodes $s, t \in V$ (both $s$ and $v$ different from $v$); and $\sigma(s,t|v)$ is the number of shortest paths between $s$ and $v$ that are intermediated by $v$ \cite{Brandes2008}. 
 The $4$ collectors with highest betweeness centrality scores in the UB CWN are `\textit{proenca,ceb}' ($0.38$), `\textit{faria,jeq}' ($0.18$), `\textit{mendes,vc}' ($0.14$), `\textit{ratter,ja}' ($0.13$).
-The first three collectors are also included in the degree centrality rank, in table \ref{table:ub_cwn_degree}, although \textit{ratter,ja} is not (he occupies the $21th$ position, with $k=111$).
-By inspecting \ref{fig:ub_cwn_communities}, we verify that in fact all those collectors are in strategic positions.
+The first three collectors are also included in the degree centrality rank, in Table \ref{table:ub_cwn_degree}, although \textit{ratter,ja} is not (he occupies the $21th$ position, with $k=111$).
+By inspecting Figure \ref{fig:ub_cwn_communities}, we verify that in fact all those collectors are in strategic positions.
 \textit{Carolyn E. Proença} (\textit{proenca,ceb}) is located at the center of the network, while `\textit{mendes,vc}' and `\textit{faria,jeq}' also interconnect nodes from many distinct communities.
 \textit{James A. Ratter} (\textit{ratter,ja}) is a very important node bridging a very relevant group (the green one, centered in \textit{irwin,hs}) to the rest of the network.
 
