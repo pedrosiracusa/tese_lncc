@@ -141,14 +141,14 @@ We next review some of the main concepts for network analysis that are useful in
 \paragraph*{Path.}
 A path can be thought of as a chain of adjacent vertices composing a route through which information may flow in a graph.
 For undirected graphs, there exists a \textit{path} of length $n$ between a given pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
-A pair of vertices is said to be \textit{connected} if at least one path exists between these vertices. The shortest path between a pair of vertices is defined as the \textit{distance} between these vertices.
+A pair of vertices is said to be \textit{connected} if at least one path exists between these vertices. The shortest path between a pair of vertices is defined as the \textit{distance} between them.
 %A graph can be described in terms of its \textit{average path length}, which is computed by averaging the path lengths between all pairs of connected vertices.
 Finally, the \textit{diameter} of a graph is given by the largest distance between any pair of vertices composing it, although some authors alternatively define \textit{diameter} of a graph as the average length of all the shortest paths between the pairs of vertices.
 
 \paragraph*{Connected component.}
 A connected component is a subset of vertices in the graph in which all included vertices are \textit{connected} to every other one by at least one path.
 Moreover, this subset is required to be maximal, meaning that all vertices in the network for which the inclusion property holds should also be included in the component. 
-A graph can be composed of many distinct connected components completely disconnected from each other. In the case of a graph with more than one distinct connected component, if one of this components comprises the majority of the graph nodes, then this component is called the \textbf{giant component}.
+A graph can be composed of many distinct connected components completely disconnected from each other. In the case of a graph with more than one distinct connected component, if one of these components comprises the majority of the nodes in the graph, then it is called the \textbf{giant component}.
 
 \paragraph*{Clique.}
 A clique is a structure composed of a subset of vertices in which all included vertices are \textit{adjacent} to each other.
@@ -156,21 +156,21 @@ The set of edges that composes a clique is obtained by computing the pairwise co
 
 \paragraph*{Density.}
 Density is one of the simplest metrics for assessing graph connectivity and indicates the proportion of pairs of vertices that are connected by edges.
-For a graph with $n$ vertices, density is given by $\frac{2E}{n(n-1)}$, where $E$ is the number of edges in the graph.
+For a graph with $n$ vertices, its density is given by $\frac{2E}{n(n-1)}$, where $E$ is the number of edges in the graph.
 Possible values for density are thus limited from $0$ to $1$, where $1$ is obtained for a \textit{complete graph} (or a \textit{clique}) and $0$ would be obtained for a graph with no edges.
 This concept is the inverse of graph \textit{sparsity}. 
 
 
 \paragraph*{Clustering.}
 Density alone is seldom a sufficient metric for investigating relevant patterns of connectivity in real-world networks, as their topologies usually display \textit{clustering patterns}.
-\textit{Clusters} are regions in the graph in which vertices are significantly more densely connected than average and more loosely connected with other vertices from the reminder of the graph. 
+\textit{Clusters} are regions in the graph in which vertices are significantly more densely connected than average and more loosely connected with other vertices from the remainder of the graph. 
 Clustering analysis is particularly useful in the context of social network analysis for identifying communities.
 %
-\textit{Clustering coefficients} are used to characterize the how clustered vertices are in a graph, and can be defined as either local or global metrics.
+\textit{Clustering coefficients} are used to characterize how clustered vertices are in a graph, and can be defined as either local or global metrics.
 The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connected to $i$ and $k_i$ is the degree of $i$.
 To illustrate with an intuitive example within the context of social networks, a local clustering coefficient is an answer to the question ``To what extend pairs of my friends are also friends themselves?''.
 %
-The global clustering metric $c_{\Delta}$, on the other hand, computes the fraction of triplets in the graph that composes cliques of three nodes~(i.e., triangles). A triplet is three nodes that are connected by either two (open triplet) or three (closed triplet) undirected ties. A triangle therefore includes three closed triplets, one centered on each of the nodes. In short, \begin{equation}\label{eq:globalclustering}
+The global clustering metric $c_{\Delta}$, on the other hand, computes the fraction of triplets in the graph that compose cliques of three nodes~(\textit{i.e.}, triangles). A triplet is a set of three nodes connected by either two (open triplet) or three (closed triplet) undirected ties. A triangle therefore includes three closed triplets, one centered on each of the nodes. In short, \begin{equation}\label{eq:globalclustering}
 c_{\Delta} = \frac{3 \times numOfTriangles}{numOfTriples}.
 \end{equation}
 
