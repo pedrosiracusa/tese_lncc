@@ -875,29 +875,6 @@ An important community which emerged during this period is the bryophytes lab te
 \textit{Paulo Eduardo Câmara} (\textit{camara,peas}) initiated his recording activities in $1997-2003$, followed by `\textit{carvalhosilva,m}' and `\textit{soares,aer}' in $2004-2010$. These three collectors formed the base of the group, which grew significantly in the period from $2011$ to $2017$, as it was joined by several students. 
 
 
-% Assortativity
-\paragraph{Do collaborative collectors prefer to work with others who are also collaborative?}
-One relevant question we might ask is whether collectors tend to form collaborative ties preferentially with others holding a similar number of collaborative ties.
-Here we refer to collaborative collectors as those holding collaborative ties with many distinct collectors, irrespective of the number of times each individual link occurs. Those collectors which hold strong collaborative ties with few collaborators are thus less collaborative than the former case. In this sense, $proenca,ceb$ is considered more collaborative than $irwin,hs$, for instance.
-
-More concretely, we want to assess whether the network is assortatively mixed.
-If this is the case then we would expect to observe that most collaborators of very collaborative collectors are also very collaborative.
-Conversely, collectors that do not hold many ties, for instance novice or non-collaborative experienced collectors, should preferentially connect with others with similar degrees.
-This would lead to a network where highly collaborative collectors are clustered together, composing a solid core. Less collaborative ones would, instead, tend to be marginalized. % TODO: add a figure comparing those patterns
-
-For assessing network mixing pattern we calculated the Pearson correlation coefficient $r = \frac{\sum_{xy} xy(e_{xy}-a_xb_y)}{\sigma_a \sigma_b}$ , as proposed by Newman \cite{Newman2003c} (eq. 21).
-The term $e_{xy}$ represents the fraction of edges that connect nodes with degrees $x$ and $y$ in the network, such that $\sigma_{xy}e_{xy}=1$. 
-Computing the correlation coefficient involves comparing the term $e_{xy}$ with the product between the percentage of all edges that start in a $x$-degree node ($a_x$) and the percentage of all edges that end in a $y$-degree node ($b_y$). The computation is carried out for each combination of degree values $x$ and $y$.
-By using this metric we assess whether a correlation exists between the degrees of each pair of nodes which are connected by an edge. 
-The result is bound to the $[-1,1]$ interval, where a score of $1$ indicates perfect assortativity and a score of $-1$, perfect dissortativity.
-Scores close to $0$ indicate that no correlation exists between nodes, and thus the network is neither assortative nor dissortative.
-
-For the UB CWN we obtained an assortativity score of $-0.0034$ for the network as a whole, including all the isolated components; and a score of $-0.0308$ only considering the giant component.
-Both coefficients are negative and very close to zero, suggesting that collectors do collaborate with others irrespectively of their degrees. In other words, we do not observe a significant degree correlation between nodes in this network. 
-This result contrasts with those from Newman's paper \cite{Newman2003b}, which shows that typically social networks display assortative mixing. Additionally states that this is one of the aspects that differentiate social networks differentiate from other types of networks. In other words, high degree nodes tend to associate to other high-degree ones. Nodes tend to associate to others of similar degree.
-This is not the case for the CWN network. If we consider the network as whole, including the many isolated components, we get an assortativity coefficient of $-0.0034$, whereas if we consider only the giant component it is $-0.0308$. 
-% but check {Bearman2004}... similar assortativity
-
 
 % TODO: Betweeness: Which collectors facilitate collaborative behavior?
  
@@ -927,18 +904,6 @@ This is not the case for the CWN network. If we consider the network as whole, i
 %% x. The Expert-location problem {Chapt. 8 of book Social Network Data Analytics}
 %%% The expert team formation problem: How can we best select experts for a given job, based on how willing they are of collaborating together?
 %%% Combine both SCN and CWN
-\newcounter{QuestionsCounter}
-\setcounter{QuestionsCounter}{1}
-
-\subsubsection*{Question \arabic{QuestionsCounter}: What team sizes do collectors usually form?}
-% Average team sizes
-
-\stepcounter{QuestionsCounter}
-\subsubsection*{Question \arabic{QuestionsCounter}: <Another question>}
-
-\stepcounter{QuestionsCounter}
-\subsubsection*{Question \arabic{QuestionsCounter}: Who are specialist/generalist collectors?}
-% References {Newman2004}
 
 
 % Statistical characterization of CWN structure
