@@ -701,10 +701,10 @@ Such a topology suggests the existence of non-random processes ruling the probab
 \end{figure}
 
 Table \ref{table:ub_cwn_degree} ranks the top-20 collectors on weighted degree centrality, using the hyperbolic weighting rule.
-As discussed in section \ref{section:cwn}, this rule assigns weights to collectors ties by considering the sizes of the teams where collectors collaborated, such that higher weights are assigned to ties which were originated from collaborations involving smaller teams (minimum size of $2$).
+As discussed in section \ref{section:cwn}, this rule assigns weights to collectors ties by considering the sizes of the teams in which collectors collaborated, such that higher weights are assigned to ties which were originated from collaborations involving smaller teams (minimum size of $2$).
 The weighted degree of a node is given by the sum of the weights of all its edges.
-The top collector is \textit{Howard S. Irwin} (\textit{irwin,hs}), with a weighted degree score of $5696$.
-Although he has not collaborated with many distinct collectors (only $39$), his position on the rank reflects the absolute number of collaborative records authored by him ($6169$), even though this only comprises $34.1\%$ of all his records. 
+The top collector is `\textit{irwin,hs}', with a weighted degree score of $5696$.
+Although he has not collaborated with many distinct collectors (a total of $39$), his position on the rank reflects the absolute number of collaborative records authored by him ($6169$), even though this only comprises $34.1\%$ of all his records. 
 %
 \begin{table}[H]
   \caption[Top-20 collectors of the UB CWN, ranked by the weighted degree centrality score.]{Top-20 collectors of the UB CWN, ranked by the weighted degree $k_w$ centrality score. Both the absolute number of records and the percentage of those which have been collected collaboratively (involving at least two collectors) are given for each collector. The degree centrality $k$ represents the number of collaborative ties linking a collector to distinct collaborators, whereas the weighted degree is computed with the hyperbolic weighting function.}
@@ -738,21 +738,21 @@ Although he has not collaborated with many distinct collectors (only $39$), his 
   \end{center}
 \end{table}
 %
-The second collector in the rank, \textit{Carolyn E. B. Proença} (\textit{proenca,ceb}), has less than a third of \textit{irwin}'s absolute number of records, although $88.3\%$ of them are collaborative. 
-With a total of $218$ distinct collaborators, she would be placed at the first position if the rank were built based on the non-weighted degree metric ($k$) instead, whilst \textit{'irwin,hs'}, in contrast, would be placed at the $43^{rd}$ position.
+The second collector in the rank, `\textit{proenca,ceb}', has less than a third of \textit{irwin}'s absolute number of records, although $88.3\%$ of them are collaborative. 
+With a total of $218$ distinct collaborators, she would be placed at the first position if the rank were built based on the non-weighted degree score ($k$) instead, whilst \textit{'irwin,hs'}, in contrast, would be placed at the $43^{rd}$ position.
 %
 Another case worth mentioning is that of `\textit{grando,jv}' and `\textit{castelobranco,cw}', both of which have necessarily and exclusively collaborated to each other in all their records (\textit{i.e.}, team size is $2$ for all records).
 As a consequence their weighted degree scores $k_w$ are equivalent to the total number of records authored by them ($2256$), whereas their non-weighted degree scores are $k=1$.
 %
-Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed, whilst, on the other hand, the weighted degree score $k_w$ takes into consideration the relevance of each tie, given by some weighting rule.
+Thus, the non-weighted degree score $k$ ranks collectors based on their total number of distinct collaborators, irrespective of the  number of times each association has been observed, whilst, on the other hand, the weighted degree score $k_w$ takes into consideration the relevance of each tie, considering that collectors collaborating in smaller teams are relatively more strongly tied.
 
 The \textit{betweeness} centrality metric is also frequently used in social networks analytics for ranking collectors who act as ``bridges'', intermediating a considerable fraction of shortest paths between pairs of nodes in the network. 
-We compute betweeness centrality of a node $v$ by making $c_B(v) =\sum_{s,t \in V} \frac{\sigma(s, t|v)}{\sigma(s, t)}$, where $V$ is the node set; $\sigma(s,t)$ is the number of shortest paths between nodes $s, t \in V$ (both $s$ and $v$ different from $v$); and $\sigma(s,t|v)$ is the number of shortest paths between $s$ and $v$ that are intermediated by $v$ \cite{Brandes2008}. 
+We compute betweeness centrality of a node $v$ by making $c_B(v) =\sum_{s,t \in V} \frac{\sigma(s, t|v)}{\sigma(s, t)}$, where $V$ is the node set; $\sigma(s,t)$ is the number of shortest paths between nodes $s, t \in V$ (both $s$ and $v$ different from $v$); and $\sigma(s,t|v)$ is the number of shortest paths between $s$ and $v$ that are pass through $v$ \cite{Brandes2008}. 
 The $4$ collectors with highest betweeness centrality scores in the UB CWN are `\textit{proenca,ceb}' ($0.38$), `\textit{faria,jeq}' ($0.18$), `\textit{mendes,vc}' ($0.14$), `\textit{ratter,ja}' ($0.13$).
-The first three collectors are also included in the degree centrality rank, in Table \ref{table:ub_cwn_degree}, although \textit{ratter,ja} is not (he occupies the $21th$ position, with $k=111$).
+The first three collectors are also included in the degree centrality rank, in Table \ref{table:ub_cwn_degree}, although `\textit{ratter,ja}' is not (he occupies the $21th$ position, with $k=111$).
 By inspecting Figure \ref{fig:ub_cwn_communities}, we verify that in fact all those collectors are in strategic positions.
 \textit{Carolyn E. Proença} (\textit{proenca,ceb}) is located at the center of the network, while `\textit{mendes,vc}' and `\textit{faria,jeq}' also interconnect nodes from many distinct communities.
-\textit{James A. Ratter} (\textit{ratter,ja}) is a very important node bridging a very relevant group (the green one, centered in \textit{irwin,hs}) to the rest of the network.
+\textit{James A. Ratter} (\textit{ratter,ja}) is a very important node bridging a very relevant group (the green one, around `\textit{irwin,hs}') to the rest of the network.
 
 \begin{figure}[h!]
   	\centering
@@ -764,14 +764,16 @@ By inspecting Figure \ref{fig:ub_cwn_communities}, we verify that in fact all th
 
 \paragraph{Coworking groups.}
 
-One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who collaborate on specimens recording in field, which we refer to as \textbf{coworking groups}. 
+One important aspect that can be investigated from the topological structure of the UB CWN is the formation of communities of collectors who co-author specimen records, which we refer to as \textbf{coworking groups}. 
 %
 In order to detect such groups we have applied the same algorithm for community detection \cite{Blondel2008} as we did for the SCN projections.
 %
 We detected a total of $30$ distinct communities, $11$ of which are detached from the giant component.
 %
-For visualization, we first filtered weaker edges ($k_w < 10$), and then filtered connected components with scores lower than $600$.
-The resulting graph $545$ nodes and $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
+For graph visualization, we first performed a filtering routine, similar to that we applied for plotting the SCN projections. 
+We first filtered out weaker edges (those with hyperbolic weight lower than $10$), which resulted in many islands. We assigned scores to each island by summing up the values of the \textit{count} attribute of all nodes composing them. 
+Islands with scores lower than $600$ were omitted.
+The resulting graph has $545$ nodes, $1158$ edges, and average degree of $4.25$ (Figure \ref{fig:ub_cwn_communities}).
 
 % same interest and same coworking
 Some of the communities we found in the CWN are formed by collectors who also compose tight communities of interests in the SCN projection (Figure \ref{fig:ub_scn_family_projCol_communities}).
@@ -783,19 +785,21 @@ Another similar example is the coworking group of herbaceous plants collectors (
 
 % same coworking but distinct interests
 Other coworking communities include collectors who happen to be strongly connected with collaborative ties in the CWN despite having distinct taxonomic interests, being weakly connected in the SCN projection.
-One such case is that of `\textit{faria,jeq}' and `\textit{zanatta,mrv}', both having recorded a total of $1524$ specimens together (comprising $64.5\%$ of all records by \textit{zanatta,mrv} and $32.5\%$ of all records by \textit{faria,jeq}).
-As the overall composition of their species bags are substantially distinct (`\textit{faria,jeq}' is more interested on family \textit{Myrtaceae} whereas `\textit{zanatta,mrv}' has a more generalist recording profile), they have been included in distinct interest communities (\textit{grp4} and \textit{grp6}, Figure \ref{fig:ub_scn_family_projCol_communities}) though belonging to the same coworking group (colored in light blue, Figure \ref{fig:ub_cwn_communities}).
+One such case is that of `\textit{faria,jeq}' and `\textit{zanatta,mrv}', both having recorded a total of $1524$ specimens together (comprising $64.5\%$ of all records by \textit{zanatta,mrv} and $32.5\%$ of all records by \textit{faria,jeq}), and thus belonging to the same coworking group (colored in light blue, Figure \ref{fig:ub_cwn_communities}).
+However, as the overall composition of their species bags are substantially distinct (`\textit{faria,jeq}' is more interested on family \textit{Myrtaceae} whereas `\textit{zanatta,mrv}' has a more generalist recording profile), they have been included in distinct interest communities (\textit{grp4} and \textit{grp6}, Figure \ref{fig:ub_scn_family_projCol_communities}).
 
 % same interest but distinct coworking
-There are also cases of collectors who, despite having very similar taxonomic interests (typically strongly tied in the SCN projection), seldom or never collaborate in field, and are not included in the same coworking groups.
+There are also cases of collectors who, despite having very similar taxonomic interests (being strongly tied in the SCN projection), seldom or never collaborate in field, and are therefore not included in the same coworking groups.
 \textit{Daniel Augusto Chaves} (\textit{Chaves,da}) and `\textit{bringel,jba}', for instance, have the majority of their species bags composed of family \textit{Asteraceae} ($54.3\%$ for `\textit{bringel,jba}' and $78.5\%$ for `\textit{chaves,da}'), being both included in the same interest community (\textit{grp0}, Figure \ref{fig:ub_scn_family_projCol_communities}).
 However, they have never collaborated on specimens recording, not being adjacent and belonging to distinct communities in the CWN (\ref{fig:ub_cwn_communities}).
 %There are apparently no temporal nor geographical impediments explaining the fact that they have never recorded together, as both have a considerable amount of records in the states of Goiás and Minas Gerais and have contemporary careers, with peaks of recording activity around $2011-12$ for \textit{bringel,jba} and around $2013-14$ for \textit{chaves,da}.
+%
+For another example, the community around `\textit{hatschbach,g}' (at the leftmost region of the figure) is an island in the CWN, as it incorporates no relevant collaborations with collectors from the giant component.
+However, given their taxonomic interests at the \textit{family} rank, members of that community are included in the giant component of the SCN (\textit{grp$6$}).
 
-There is also the community around \textit{hatschbach,g}, which are included in the generalists group in the SCN.
 
 % why communities of interest do not overlap with coworking communities
-We consider some possible factors for explaining why groups of collectors with very similar taxonomic interests would not also form collecting coworking teams.
+We consider some possible explanations for why groups of collectors with very similar taxonomic interests would not also form collecting coworking teams.
 %
 First, as coworking relations are based on the physical recording of organisms taking place at some location and date, they can only possibly exist between collectors whose recording activities overlap both in geographical and temporal spaces.
 As temporal and geographical distances between collectors increase, they consequently become more unlikely of developing collaborations, constrained by the limited lifespan of their own careers.
@@ -814,67 +818,61 @@ Subcommunities that emerge in higher-taxonomic resolution SCNs are thus not dete
 
 % Temoral evolution of the CWN
 \paragraph{Temporal evolution of the CWN.}
-
-\begin{figure}[h!]
-  	\centering
-    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption[Temporal evolution of the UB CWN.]{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). }
-    \label{fig:ub_cwn_temporal_evol}
-\end{figure}
-
-We investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1955$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
+Finally, we investigated the temporal evolution of communities in the UB CWN by rendering a sequence of frames covering the period from $1955$ to $2017$, each spanning a period of $7$ years (Figure \ref{fig:ub_cwn_temporal_evol}).
 Frames aggregate and display collaborations (edges) occurring within the respective periods, and only collectors showing significant activity within each period are plotted.
 We consider the activity of a collector to be significant if the number of occurrences recorded within the period comprises at least $5\%$ of his/her absolute number of records.
 Although our proposed CWN model does not incorporate the temporal dimension in its structure, we were able to build the frames by querying the UB species occurrence dataset from which the network was constructed.
 
+\begin{figure}[h!]
+  	\centering
+    \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
+    \caption[Temporal evolution of the UB CWN.]{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). The layout of nodes in the figure is the same as from Figure \ref{fig:ub_cwn_communities}. }
+    \label{fig:ub_cwn_temporal_evol}
+\end{figure}
+
 Three pioneer collectors groups, which we refer to as the \textbf{first generation} of botanists (with most of their recording activities concentrated from $1955$ to $1982$), were historically remarkable for having largely contributed to the early formation of the UB herbarium (frames $1-4$ in Figure \ref{fig:ub_cwn_temporal_evol}).
 % First generation (1955-82)
 % Blue group
-The first group includes \textit{heringer,ep}, \textit{eiten,g} and \textit{eiten,lt}.
+The first group (colored in blue-gray) includes `\textit{heringer,ep}', `\textit{eiten,g}' and `\textit{eiten,lt}'.
 \textit{Ezechias Paulo Heringer} (\textit{heringer,ep}) is regarded as one of the founders of the UB herbarium, having led the first exploratory expeditions for sampling the flora of the Federal District \cite{Walter2001}.
-During his earlier activities (around $1955$) he has collaborated with \textit{castellanos,a}, a renowned Argentine botanist who visited the region during the construction of the city of Brasília.
-Later in his career ($1969$ to $1975$), \textit{heringer,ep} has also teamed up with \textit{eiten,g}, recording specimens mainly in the states of Minas Gerais and Goiás.
+During his earlier activities (around $1955$) he has collaborated with `\textit{castellanos,a}', a renowned Argentine botanist who visited the region during the construction of the city of Brasília.
+Later in his career ($1969$ to $1975$), `\textit{heringer,ep}' has also teamed up with `\textit{eiten,g}', recording specimens mainly in the states of Minas Gerais and Goiás.
 \textit{George Eiten} (\textit{eiten,g}) is also considered a historically relevant collector for the herbarium, having contributed with an extensive set of plant records, mainly from the Cerrado biome \cite{Gomes2012}.
-\textit{Eiten}'s known strong collaboration with first his first wife, \textit{eiten,lt}, is captured by our network model, as shown in the first $3$ frames in Figure \ref{fig:ub_cwn_temporal_evol}.
+\textit{Eiten}'s known strong collaboration with first his first wife, `\textit{eiten,lt}', is captured by our network model, as shown in the first $3$ frames in Figure \ref{fig:ub_cwn_temporal_evol}.
 
 % Green group
-A second group which also heavily contributed to the formation of the herbarium is the one composed by \textit{irwin,hs}, \textit{anderson,wr}, \textit{ratter,ja} \textit{harley,rm}, \textit{pires,jn}, among others.
+A second group which also heavily contributed to the formation of the herbarium is the one composed by `\textit{irwin,hs}', `\textit{anderson,wr}', `\textit{ratter,ja}', `\textit{harley,rm}', `\textit{pires,jn}', among others (colored in green).
 \textit{Howard Irwin} (\textit{irwin,hs}) was the head of a series of exploratory expeditions to the Central Brazilian Highlands from $1964$ to $1971$, which were part of a collaborative program between the New York Botanical Garden (NYBG) and the University of Brasília \cite{Irwin1996}.
 Since the beginning of the of the expeditions we observe a strong association between \textit{irwin,hs} and two of his field assistants (\textit{souza,rr} and \textit{santos,rrb}), shown in frames $2$ and $3$ from Figure \ref{fig:ub_cwn_temporal_evol}.
-Other important collectors, including \textit{harley,rm}, \textit{fonseca,sf} and \textit{onishi,e}, have later on joined the team around \textit{irwin,hs}, contributing to the expedition in the period from $1969$ to $1975$.
+Other important collectors, including `\textit{harley,rm}', `\textit{fonseca,sf}' and `\textit{onishi,e}', have later on joined the team around `\textit{irwin,hs}', contributing to the expedition in the period from $1969$ to $1975$.
 %
-It is also noticeable the association between \textit{anderson,wr}, \textit{kirkbride-junior,jh} and \textit{stieber,mt}, in the time frame from $1969$ to $1975$.
-\textit{William Anderson} (\textit{anderson,wr}) was a botanist from the NYBG, who continued the expeditions initiated by his colleague \textit{irwin,hs} on $1971$ \cite{Irwin1996}, together with \textit{kirkbride-junior,jh}, a graduate student at the same institution.
+It is also noticeable the association between `\textit{anderson,wr}', `\textit{kirkbride-junior,jh}' and `\textit{stieber,mt}', in the time frame from $1969$ to $1975$.
+\textit{William Anderson} (\textit{anderson,wr}) was a botanist from the NYBG, who continued the expeditions initiated by his colleague `\textit{irwin,hs}' on $1971$ \cite{Irwin1996}, together with `\textit{kirkbride-junior,jh}', a graduate student at the same institution.
 %
-\textit{James Ratter} (\textit{ratter,ja}) was another important foreign collector of the herbarium, having collaborated with at least two different generations of botanists.
+\textit{James Ratter} (\textit{ratter,ja}) was another important collector of the herbarium, having collaborated with at least two different generations of botanists.
 We therefore consider him to be a ``temporal bridge'', connecting two important parts of the network which do not overlap temporally.
 \textit{George Eiten} (\textit{eiten,g}) has also collaborated with second-generation collectors (\textit{simon,mf}, \textit{lima,cjm} and \textit{carvalho,avm}) within a period from $1997$ to $2003$, after at least $21$ years with no recording activities.
-
+%
 % Purple group
-The third group is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1955$ to $1968$.
+The third group (colored in purple) is smaller, composed of $6$ collectors including \textit{magalhaes,m} and \textit{belem,rp}, the latter a brazilian student who has mostly collected at the state of Bahia from $1955$ to $1968$.
 
 % Second generation (1983-2003)
 The \textbf{second generation} of collectors are those more active within the period from $1983$ to $2003$ (frames $5$ to $7$), and are placed more towards the central region of the network.
 %
-Two relevant collectors from the earlier second generation are \textit{castelobranco,cw}, \textit{grando,jv} and \textit{leite,alta}, all algae collectors with most of their activity ranging from $1983$ to $1989$.
-As we previously pointed out in this text, \textit{castelobranco,cw} and \textit{grando,jv} have collaborated on all their records, whereas \textit{leite,alta} is a singleton collector, having no collaborative records at all.
-
-Other important second-generation collectors are \textit{proenca,ceb} and \textit{souza,mgm}, with most intensive activities concentrated from $1990$ to $2003$.
-They show distinct record behaviors.
-Whereas \textit{souza,mgm} has almost exclusively collected within the period from $1990$ to $1996$ and with very few collaborations, \textit{proenca,ceb} has extended has extended her collecting activities until currently, $2017$, having collaborated with a very high number of collectors, including \textit{ratter,ja}, a first-generation collector.
+Two relevant collectors from the earlier second generation are `\textit{castelobranco,cw}', `\textit{grando,jv}' and `\textit{leite,alta}', all algae collectors with most of their activity ranging from $1983$ to $1989$.
+As we previously pointed out in this text, `\textit{castelobranco,cw}' and `\textit{grando,jv}' have collaborated on all their records, whereas `\textit{leite,alta}' is a singleton collector, having no collaborative records at all. Other important second-generation collectors are `\textit{proenca,ceb}' and `\textit{souza,mgm}', with most intensive activities concentrated from $1990$ to $2003$.
+Whereas `\textit{souza,mgm}' has almost exclusively collected within the period from $1990$ to $1996$ and with very few collaborations, `\textit{proenca,ceb}' has extended has extended her collecting activities until currently, $2017$, having collaborated with a very high number of collectors, including the first-generation collector `\textit{ratter,ja}'.
+\textit{Cássia Munhoz} (\textit{munhoz,cbr}) starts her activities around $1990$, being one of the founders of a coworking community around herbaceous plants.
 
 % Third generation (2004-2017)
-Finally, we assign collectors whose activities are concentrated from $2004$ to $2017$ to the \textbf{third generation}.
-The most prominent is \textit{faria,jeq}, who has intensively collaborated with \textit{zanatta,mrv}.
-Besides, \textit{faria,jeq} has also collaborated with key collectors from distinct groups, including \textit{staggmeier,vg}, \textit{amorim,prf}, \textit{proenca,ceb}, \textit{amaral,ag}, \textit{bringel,jba} and \textit{ribeiro,aro}, mainly from $2011$ to $2017$.
-This overlaps with the of a biodiversity project involving collectors from many expertises.
-The project is represented by the node \textit{projetobiodiversidadebp}, as it was included in the collectors field. 
-
-Other important collectors from this generation are \textit{amaral,ag}, \textit{eugenio,cuo} and \textit{mello,trb}, having collaborated more intensely from $2004$ to $2010$. They form a community around the second-generation collector \textit{munhoz,cbr}, who was also their academic advisor during graduate research.
-
+Finally, we assign collectors whose activities are concentrated from $2004$ to $2017$ to the \textbf{third generation}, the most prominent one being `\textit{faria,jeq}'.
+As shown in the graph, `\textit{faria,jeq}' has intensively collaborated with important collectors from distinct coworking communities, including `\textit{zanatta,mrv}', `\textit{staggmeier,vg}', `\textit{amorim,prf}', `\textit{proenca,ceb}', `\textit{amaral,ag}', `\textit{bringel,jba}' and `\textit{ribeiro,aro}', mainly in the period from $2011$ to $2017$.
+%
+Other important collectors from this generation are `\textit{amaral,ag}', `\textit{eugenio,cuo}' and `\textit{mello,trb}', having collaborated more intensely from $2004$ to $2010$. They form a community around the second-generation collector `\textit{munhoz,cbr}', who was also their academic advisor during graduate research.
+%
 % pink group
-Another important community emerging in this period is the bryophytes lab team. 
-\textit{Paulo Eduardo Câmara} (\textit{camara,peas}) initiated his recording activities in $1997-2003$, followed by \textit{carvalhosilva,m} and \textit{soares,aer} in $2004-2010$. These three collectors formed the base of the group, which grew significantly in the period from $2011$ to $2017$, when several students joined. 
+An important community which emerged during this period is the bryophytes lab team. 
+\textit{Paulo Eduardo Câmara} (\textit{camara,peas}) initiated his recording activities in $1997-2003$, followed by `\textit{carvalhosilva,m}' and `\textit{soares,aer}' in $2004-2010$. These three collectors formed the base of the group, which grew significantly in the period from $2011$ to $2017$, as it was joined by several students. 
 
 
 % Assortativity

@@ -132,8 +132,6 @@ An alternative way to represent sparse networks is to use the \textit{adjacency 
 The adjacency list illustrated in Figure~\ref{fig:graphs} is structured as an array for which each entry represents a vertex.
 Moreover, each entry holds a reference for a linked list, containing all neighbors of the vertex. Each element in the list keeps a reference to the next element and stores the weight of the edge connecting it to the vertex in the array.
 
-\luiz{Parei minha revisão aqui}
-
 % Definitions and metrics
 As previously mentioned, one of the main benefits of adopting graphs for representing networks is the availability of a whole set of well-established metrics and definitions that allow analysts to explore and characterize the topologies of their networked systems.
 We next review some of the main concepts for network analysis that are useful in this dissertation.
@@ -144,6 +142,8 @@ For undirected graphs, there exists a \textit{path} of length $n$ between a give
 A pair of vertices is said to be \textit{connected} if at least one path exists between these vertices. The shortest path between a pair of vertices is defined as the \textit{distance} between them.
 %A graph can be described in terms of its \textit{average path length}, which is computed by averaging the path lengths between all pairs of connected vertices.
 Finally, the \textit{diameter} of a graph is given by the largest distance between any pair of vertices composing it, although some authors alternatively define \textit{diameter} of a graph as the average length of all the shortest paths between the pairs of vertices.
+
+\luiz{Parei minha revisão aqui}
 
 \paragraph*{Connected component.}
 A connected component is a subset of vertices in the graph in which all included vertices are \textit{connected} to every other one by at least one path.
