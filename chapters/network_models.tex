@@ -143,8 +143,6 @@ A pair of vertices is said to be \textit{connected} if at least one path exists 
 %A graph can be described in terms of its \textit{average path length}, which is computed by averaging the path lengths between all pairs of connected vertices.
 Finally, the \textit{diameter} of a graph is given by the largest distance between any pair of vertices composing it, although some authors alternatively define \textit{diameter} of a graph as the average length of all the shortest paths between the pairs of vertices.
 
-\luiz{Parei minha revisão aqui}
-
 \paragraph*{Connected component.}
 A connected component is a subset of vertices in the graph in which all included vertices are \textit{connected} to every other one by at least one path.
 Moreover, this subset is required to be maximal, meaning that all vertices in the network for which the inclusion property holds should also be included in the component. 
@@ -167,7 +165,7 @@ Density alone is seldom a sufficient metric for investigating relevant patterns 
 Clustering analysis is particularly useful in the context of social network analysis for identifying communities.
 %
 \textit{Clustering coefficients} are used to characterize how clustered vertices are in a graph, and can be defined as either local or global metrics.
-The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connected to $i$ and $k_i$ is the degree of $i$.
+The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connected to $i$ \luiz{$L_i$ não seria o número de arestas existentes entre vértices da vizinhança de $i$?} and $k_i$ is the degree of $i$.
 To illustrate with an intuitive example within the context of social networks, a local clustering coefficient is an answer to the question ``To what extend pairs of my friends are also friends themselves?''.
 %
 The global clustering metric $c_{\Delta}$, on the other hand, computes the fraction of triplets in the graph that compose cliques of three nodes~(\textit{i.e.}, triangles). A triplet is a set of three nodes connected by either two (open triplet) or three (closed triplet) undirected ties. A triangle therefore includes three closed triplets, one centered on each of the nodes. In short, \begin{equation}\label{eq:globalclustering}
@@ -184,7 +182,6 @@ In social networks terms, this relation represents the phenomenon that ``a frien
 Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from equation \ref{eq:globalclustering}.
 
 
-
 \paragraph*{Degree.}
 The degree (denoted $k$) of a vertex in a undirected graph is given by the total number of vertices that are adjacent to it or, in other words, the length of its neighborhood.
 We compute the degree of a particular vertex $i$ from the graph's adjacency matrix $A$ as 
@@ -197,6 +194,8 @@ The \textit{average degree}
 $\langle k \rangle$ 
 is a global property of the network, computed by averaging the degree values for each individual vertex $i$:
 $\langle k \rangle = \frac{1}{N} \sum_{i=1}^N k_i$.
+
+\luiz{Parei minha revisão aqui}
 
 \paragraph*{Degree distribution.}
 The probability distribution of vertices degrees over a graph is known as its \textit{degree distribution}.
