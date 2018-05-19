@@ -165,7 +165,7 @@ Density alone is seldom a sufficient metric for investigating relevant patterns 
 Clustering analysis is particularly useful in the context of social network analysis for identifying communities.
 %
 \textit{Clustering coefficients} are used to characterize how clustered vertices are in a graph, and can be defined as either local or global metrics.
-The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connecting direct neighbors of $i$ \luiz{$L_i$ não seria o número de arestas existentes entre vértices da vizinhança de $i$?}\ped{Bem observado, Gadelha. É isso aí. Corrigi.} and $k_i$ is the degree of $i$.
+The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connecting direct neighbors of $i$ and $k_i$ is the degree of $i$.
 
 To illustrate with an intuitive example within the context of social networks, a local clustering coefficient is an answer to the question ``To what extend pairs of my friends are also friends themselves?''.
 %
@@ -173,24 +173,21 @@ The global clustering metric $c_{\Delta}$, on the other hand, computes the fract
 c_{\Delta} = \frac{3 \times numOfTriangles}{numOfTriples}.
 \end{equation}
 
-\art{No paragrafo acima, mexi na pergunta para refletir a fracao de vizinhos (e nao numero absoluto como estava antes}
-
-\art{Tambem no paragrafo acima, triplet nao estava explicado. Estendi o texto explicando isso (adaptacao do wikipedia :-) )}
 
 %% Transitivity
 \paragraph*{Transitivity.}
 The transitivity relation for a triple of nodes $\{a,b,c\}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ implies that $a$ is connected to $c$.
-In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}
+In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}\ped{Ao meu ver o certo é `is'... A relação de transitividade significa que se A-->B e B-->C então A-->C (ou seja, forma-se um clique). Concorda?}
 Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from Equation \ref{eq:globalclustering}.
 
 \paragraph*{Degree.}
 The degree (denoted $k$) of a vertex in a undirected graph is given by the total number of vertices that are adjacent to it or, in other words, the size of its neighborhood.
 We compute the degree of a particular vertex $i$ from the graph's adjacency matrix $A$ as 
 $
-k_i = \sum_j bool(a_{i j})
+k^{(i)} = \sum_j bool(a_{i j})
 $,
-where $a_{i j}$ are elements containing the weights of each edge $(i,j)$; and the function $bool(x)$ returns $1$ if $X$ is greater than zero; and returns $0$ otherwise.
-We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_i^{w} = \sum_j a_{i j} $. \art{inverti os indices do k ponderado.}
+where $a_{i j}$ are elements containing the weights of each edge $(i,j)$; and the function $bool(x)$ returns $1$ if $X$ is greater than zero; and $0$ otherwise.
+We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_{w}^{(i)} = \sum_j a_{i j} $. \art{inverti os indices do k ponderado.}\ped{Ziviani aqui tive que reverter sua alteração... Estou usando a notação $k_w$ durante outras partes do texto para me referir ao `weighted degree', e o $i$ se refere a uma observação (um vértice particular).}
 The \textit{average degree} 
 $\langle k \rangle$ 
 is a global property of the network with $N$ vertices, computed by averaging the degree values for each individual vertex $i$:
@@ -214,8 +211,8 @@ A variety of metrics have been proposed in literature for assessing degree corre
 Generally, correlation values range from $-1$ for maximal negative correlation; to $1$ for maximal positive correlation. 
 
 \paragraph*{Mixing patterns.}
-Mixing patterns describe the effects of node characteristics on influencing \luiz{Acho que pode tirar esse {\em influencing} pois no início da frase tem {\em the effects}} link formation in networks.
-In case associations are more likely to establish \luiz{be established?} between nodes which are similar on some characteristic, the pattern is known as \textit{assortative mixing} or, in social sciences, \textit{homophyly}.
+Mixing patterns describe the influence of characteristics of nodes on the formation of links in networks.
+In case associations are more likely to be established between nodes which are similar on some characteristic, the pattern is known as \textit{assortative mixing} or, in social sciences, \textit{homophyly}.
 In contrast, \textit{dissortative mixing} is observed when nodes preferentially connect to others with opposite characteristics. 
 If node characteristics show no significant influence on link formation, we say the network is \textit{neutral}.
 Degree correlation can be understood as a specific type of mixing pattern, evaluated on vertex degrees.
