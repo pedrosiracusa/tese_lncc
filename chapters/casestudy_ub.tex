@@ -347,8 +347,7 @@ On the other hand, there are also some few collectors who have recorded much mor
 
 As opposed to random networks, in which extremely well connected nodes are unlikely to coexist with a large number of extremely poorly connected ones, the degree distribution observed for collectors in the UB SCN is better approximated by a power law $p(k) \sim k^{-\alpha}$, typically observed in many large real-world networks with the scale-free property \cite{Barabasi1999a}. 
 The dashed line in figure \ref{fig:ub_scn_degree_dist}b is a power law fit for the degree distribution of nodes from $S_{col}$, with $\alpha=1.52$. 
-An apparently similar heavy-tailed distribution was recently reported by Barnabas Daru \textit{et. al} while investigating sampling bias in the digitized datasets of three distinct herbaria from Australia, South Africa and the United States \cite{Daru2017}.
-They refer to the phenomenon in which a small subset of collectors is responsible for the majority of records as the \textbf{collector bias}.
+An apparently similar heavy-tailed distribution was recently reported by \citeonline{Daru2017} while investigating sampling bias in the digitized datasets of three distinct herbaria from Australia, South Africa and the United States.
   
 Other useful degree centrality metrics shown in Table \ref{table:ub_scn_degrees} are the weighted degree $k_w$ and normalized degree $k^*$. The weighted degree for each collector node is computed by summing up weights assigned to each of the node's edges. Edges can be weighted according to any chosen attribute of its own, depending on the aspect of the connection the user wants to emphasize. Here we use the \textit{count} attribute, which holds the number of times the association between a collector and a species occurs. Formally, $k_w^{(u)} = \sum_{v} count(e_{u,v})$ for $v \in$ $neighbors(u)$. Differently from the degree, which gives the number of distinct species that have been recorded by a collector, the weighted degree of a collector can be interpreted as the total number of specimens (or occurrence records) collected by him/her. It is also worth noting that the value of $k_w$ of a node is equivalent to its \textit{count} attribute (not to be confused to the homonymous attribute of edges).
 
@@ -607,7 +606,6 @@ The largest community is \textit{grp $0$}, containing families that are, in gene
 Most of them form a densely-connected structure, containing central families that are all recorded by a very similar set of collectors.
 However, there are some families included in the same community which are more loosely connected, and would quickly become isolated nodes if we continued to increase $\phi$. 
 This is the case for families \textit{Asteraceae}, \textit{Cyperaceae} and \textit{Orchidaceae}, which indicates that they are recorded by more specialized collectors.
-These families are also prevalent in the herbarium dataset.
 Community $2$, which is also part of the giant component, is exclusively composed of fern families (gymnosperms).
 Some of the included families are more recorded by fern specialists, as it is the case of \textit{Gleicheniaceae}, \textit{Dryopteridaceae} and \textit{Hymenophyllaceae}.
 Others as \textit{Pterydaceae}, \textit{Anemiaceae} and \textit{Polypodiacea} are recorded by collectors who also record flowering plants such as families \textit{Rubiaceae} and \textit{Iridaceae}.
@@ -615,15 +613,15 @@ Others as \textit{Pterydaceae}, \textit{Anemiaceae} and \textit{Polypodiacea} ar
 
 The remaining $12$ communities are all islands, $6$ of which formed by isolated nodes.
 %
-Community $4$ contains bryophyte families, mostly recorded by collectors within polygon $i$ in Figure \ref{fig:ub_scn_agg_family_general};
+Community $4$ contains bryophyte families, mostly recorded by collectors within polygon $i$ in Figure \ref{fig:ub_scn_agg_family_general}.
+By observing the low clustering and high diameter of this island, we conclude that bryophyte collectors vary significantly regarding their taxonomic interests, as opposed to what we observe for communities $6$ and $9$, which are very close to being fully connected (cliques).
+% Clustered Islands
+Community $6$ contains algae families, mostly diatoms (polygon $iii$);
 %
-community $6$ contains algae families, mostly diatoms (polygon $iii$ in Figure \ref{fig:ub_scn_agg_family_general});
-%
-communities $9$ and $7$ are composed by green algae families recorded by collectors within polygon $ii$ in Figure \ref{fig:ub_scn_agg_family_general}.
-As `\textit{leite,alta}' is substantially distinct from `\textit{grando,cw}' and `\textit{castelo-branco,}' regarding their recording interests, families \textit{Desmidiaceae} and \textit{Closteriaceae} are included in a distinct island.
-%
-Families \textit{Myrtaceae} (\textit{grp $3$}) and \textit{Poaceae} (\textit{grp $5$}) are both very prevalent in the herbarium and are isolated.
-This indicates that they are recorded by more specialized collectors.
+while communities $9$ and $7$ are composed by green algae families recorded by collectors within polygon $ii$ in Figure \ref{fig:ub_scn_agg_family_general}.
+The reason that nodes from polygon $ii$ give origin to two distinct islands in the SCN species projection is that the taxonomic interests of `\textit{leite,alta}' is substantially distinct from those of `\textit{grando,cw}' and `\textit{castelo-branco,}', and thus families \textit{Desmidiaceae} and \textit{Closteriaceae} are separated from the rest of green algae families.
+% isolated nodes
+Finally, families \textit{Myrtaceae} (\textit{grp $3$}), \textit{Poaceae} (\textit{grp$5$}) and \textit{Piperaceae} (\textit{grp$8$}) are typically recorded by collectors who are also more specialized in each of those families, and are thus represented as isolated nodes in the network.
 
 
 % Assortativity in SCN

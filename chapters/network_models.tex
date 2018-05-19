@@ -165,42 +165,43 @@ Density alone is seldom a sufficient metric for investigating relevant patterns 
 Clustering analysis is particularly useful in the context of social network analysis for identifying communities.
 %
 \textit{Clustering coefficients} are used to characterize how clustered vertices are in a graph, and can be defined as either local or global metrics.
-The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connected to $i$ \luiz{$L_i$ não seria o número de arestas existentes entre vértices da vizinhança de $i$?} and $k_i$ is the degree of $i$.
+The local clustering metric $c_i$ for a given vertex $i$ is calculated by evaluating how close to a clique is a subgraph composed of the vertex $i$ itself and all its $k$ neighbors~(which is known as the \textit{ego network} of vertex $i$). Thus, $c_i = \frac{2L_i}{k_i(k_i - 1)}$, where $L_i$ is the number of edges connecting direct neighbors of $i$ \luiz{$L_i$ não seria o número de arestas existentes entre vértices da vizinhança de $i$?}\ped{Bem observado, Gadelha. É isso aí. Corrigi.} and $k_i$ is the degree of $i$.
+
 To illustrate with an intuitive example within the context of social networks, a local clustering coefficient is an answer to the question ``To what extend pairs of my friends are also friends themselves?''.
 %
 The global clustering metric $c_{\Delta}$, on the other hand, computes the fraction of triplets in the graph that compose cliques of three nodes~(\textit{i.e.}, triangles). A triplet is a set of three nodes connected by either two (open triplet) or three (closed triplet) undirected ties. A triangle therefore includes three closed triplets, one centered on each of the nodes. In short, \begin{equation}\label{eq:globalclustering}
 c_{\Delta} = \frac{3 \times numOfTriangles}{numOfTriples}.
 \end{equation}
 
-\art{Parei minha revisao aqui}
+\art{No paragrafo acima, mexi na pergunta para refletir a fracao de vizinhos (e nao numero absoluto como estava antes}
 
+\art{Tambem no paragrafo acima, triplet nao estava explicado. Estendi o texto explicando isso (adaptacao do wikipedia :-) )}
 
 %% Transitivity
 \paragraph*{Transitivity.}
 The transitivity relation for a triple of nodes $\{a,b,c\}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ implies that $a$ is connected to $c$.
-In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''.
-Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from equation \ref{eq:globalclustering}.
-
+In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}
+Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from Equation \ref{eq:globalclustering}.
 
 \paragraph*{Degree.}
-The degree (denoted $k$) of a vertex in a undirected graph is given by the total number of vertices that are adjacent to it or, in other words, the length of its neighborhood.
+The degree (denoted $k$) of a vertex in a undirected graph is given by the total number of vertices that are adjacent to it or, in other words, the size of its neighborhood.
 We compute the degree of a particular vertex $i$ from the graph's adjacency matrix $A$ as 
 $
 k_i = \sum_j bool(a_{i j})
 $,
-where $a_{i j}$ are elements containing the weights of each edge $(i,j)$; and the function $bool$ evaluates to $1$ if the element is greater than zero and $0$ otherwise.
-We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_w^{(i)} = \sum_j a_{i j} $.
+where $a_{i j}$ are elements containing the weights of each edge $(i,j)$; and the function $bool(x)$ returns $1$ if $X$ is greater than zero; and returns $0$ otherwise.
+We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_i^{w} = \sum_j a_{i j} $. \art{inverti os indices do k ponderado.}
 The \textit{average degree} 
 $\langle k \rangle$ 
-is a global property of the network, computed by averaging the degree values for each individual vertex $i$:
+is a global property of the network with $N$ vertices, computed by averaging the degree values for each individual vertex $i$:
 $\langle k \rangle = \frac{1}{N} \sum_{i=1}^N k_i$.
 
-\luiz{Parei minha revisão aqui}
+\art{Parei minha revisao aqui}
 
 \paragraph*{Degree distribution.}
-The probability distribution of vertices degrees over a graph is known as its \textit{degree distribution}.
+The probability distribution of vertex degrees over a graph is known as its \textit{degree distribution}.
 From degree distribution we retrieve the probability $p_k$ that a randomly selected vertex from the graph has degree equal to $k$.
-In random graphs degree distribution is typically well approximated by a poisson model, which peaks at $\langle k \rangle$.
+In random graphs degree distribution is typically well approximated by a Poisson model, which peaks at $\langle k \rangle$.
 Thus vertices with degree equal $\langle k \rangle$ are most likely to occur, whereas those with very high and very low degrees are very unlikely. 
 As mentioned in the previous section, however, most real-world networks are majoritarily composed by low-degree nodes, coexisting with few hubs.
 Such a scenario is better described by a \textit{power law}, such that $p(k) \sim k^{-\alpha}$.
@@ -213,20 +214,22 @@ A variety of metrics have been proposed in literature for assessing degree corre
 Generally, correlation values range from $-1$ for maximal negative correlation; to $1$ for maximal positive correlation. 
 
 \paragraph*{Mixing patterns.}
-Mixing patterns describe the effects of nodes characteristics on influencing links formation in networks.
-In case associations are more likely to establish between nodes which are similar on some characteristic, the pattern is known as \textit{assortative mixing} or, in social sciences, \textit{homophyly}.
+Mixing patterns describe the effects of node characteristics on influencing \luiz{Acho que pode tirar esse {\em influencing} pois no início da frase tem {\em the effects}} link formation in networks.
+In case associations are more likely to establish \luiz{be established?} between nodes which are similar on some characteristic, the pattern is known as \textit{assortative mixing} or, in social sciences, \textit{homophyly}.
 In contrast, \textit{dissortative mixing} is observed when nodes preferentially connect to others with opposite characteristics. 
-If nodes characteristics show no signifficant influence on links formation, we say the network is \textit{neutral}.
-Degree correlation can be understood as a specific type of mixing pattern, evaluated on vertices degrees.
+If node characteristics show no significant influence on link formation, we say the network is \textit{neutral}.
+Degree correlation can be understood as a specific type of mixing pattern, evaluated on vertex degrees.
 
 \paragraph*{Centrality.}
 Centrality analysis concerns the identification of influential entities in the network, who might assume important roles in the system under different perspectives.
 \textit{Degree centrality} is perhaps the simplest centrality measure, and assumes that the relevance of a node only depends on its own degree. Nodes with many connections are thus more influential than those with fewer connections.
 If we consider, however, that the relevance of a node also depends on the relative importances of their neighbors (and that some neighbors are more influential than others), the \textit{eigenvector centrality} becomes a more realistic metric \cite{Bonacich1987}.
-In this case nodes holding fewer links to more influential ones might turn out to be more influential than those holding more links to less influential nodes.
+In this case, nodes holding fewer links to more influential ones might turn out to be more influential than those holding more links to less influential nodes.
 Other centrality metrics emphasize the importance of other topological aspects instead of node degree.
 \textit{Closeness centrality} measures the importance of a node by computing its mean distance to all other nodes in the network, and thus nodes are more influential if they can reach their peers more efficiently by taking shorter paths.
 \textit{Betweeness centrality} identifies nodes which are important strategical intermediators, if they are included in the path between many pairs of nodes in the network.  
+
+\luiz{Parei minha revisão aqui}
 
 \paragraph*{Bipartite graphs.}
 Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
@@ -512,12 +515,13 @@ The total number of occurrences of species $v_j$ in the entire dataset can be ob
 
 
 \paragraph{Taxonomic aggregation and resolution.}\label{section:taxonomic_aggregation}
+\ped{Leiam este tópico com cuidado e vejam se o texto está impreciso ou confuso. A ideia da agregação é para ser bem simples.}
 In some contexts it might be desired to simplify SCNs by grouping species nodes into higher taxonomic ranks (or levels), such as \textit{genus} or \textit{family}. This process is defined as \textit{taxonomic aggregation}, and is performed by 
 ($i$) obtaining a grouping of species using some taxonomic rank; 
 ($ii$) obtaining quorum vectors for each species; 
 ($iii$) summing up quorum vectors for all species in each group;
 ($iv$) building a new SCN model, aggregated on rank T. 
-The SCN's \textit{taxonomic resolution} is the taxonomic rank at which species are aggregated in the model. For the sake of model interpretability, all nodes in $S_{sp}$ must necessarily be represented as taxons belonging to the same rank as the SCN's taxonomic resolution.
+The \textit{taxonomic resolution} of a SCN is the taxonomic rank at which species are aggregated in the model. For the sake of model interpretability, all nodes in $S_{sp}$ must necessarily be taxa belonging to the same rank as the taxonomic resolution adopted for the model.
 
 For a more formal description let $G_T = \{g_1,g_2,..., g_n\}$ denote a taxonomic grouping at rank $T$, containing a set of $n$ rank-$T$ taxa.  In addition, let each taxon $g_i \in G_T$ itself be a set of nodes $S_{sp}^{(i)} \subseteq S_{sp}$, with the conditions that there are no empty $S_{sp}^{(i)}$ and that every node $v \in S_{sp}$ is a member of exactly one set  from $ \{ S_{sp}^{(1)}, S_{sp}^{(2)}, ..., S_{sp}^{(n)} \}$.
 Such a grouping rule makes $G_T$ a partition of $S_{sp}$, and thus the entire set $S_{sp}$ can be recreated by simply computing the union of elements in $G_T$. This guarantees that no entities are duplicated or eliminated on aggregations using it.

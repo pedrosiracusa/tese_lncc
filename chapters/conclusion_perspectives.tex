@@ -1,6 +1,4 @@
 \chapter{Conclusion and Future perspectives}\label{conclusion_perspectives}
-
-
 % ===========
 % Conclusions
 % -----------
@@ -10,62 +8,75 @@ We provided methods for structuring species occurrence data from biological coll
 % UB case study
 We demonstrated the use of our models by exploring the species occurrence dataset of the University of Brasília Herbarium.
 Using the social network analytics framework \cite{Barbier2011,Stork2015} as a theoretical foundation, we explored structural properties of the networks, 
-and investigated the formation of communities of collaboration and interests.
-We also assessed the distinctiveness of collectors regarding their taxonomic interests, their collaborativity with other and the temporal evolution of collaborative recording in the herbarium.
+and investigated the formation of communities of collaboration and common interests.
+We also assessed the distinctiveness of collectors regarding their taxonomic interests, their collaborativity with others, and the temporal evolution of collaborative recording in the herbarium.
+
 
 % Why structure collections data as networks?
-Our models provide the structure for a more realistic understanding on how collector and taxonomic biases arise in biological collections. 
-As stated by \citeonline{Marin2011}, network-based approaches allows analysts to
+We believe our models provide the structural basis for a more realistic understanding on how collector and taxonomic biases arise in biological collections. 
+As stated by \citeonline{Marin2011}, network-based approaches allow analysts to
 (\textit{i}) investigate the effects of interactions between individuals on shaping their own behaviors, rather than simply comparing static attributes of individuals within a population; and
 (\textit{ii}) investigate the formation of non-homogeneous communities, composed by individuals interacting with their groups at varying levels of commitment.
-These aspects are particularly relevant for biological collections, as collectors are...
-%Groups and communities % Stork2015 chapt3
-%Discoverying communities is very relevant as it allows us to cluster and summarize collectors with similar profiles.
-%We can also identify collectors who are most relevant in each community, and which ones bridge communities.
-%Position of the actors % Stork2015 chapt3
+We consider that these two aspects are particularly relevant in the context of biological collections.
 
-% For characterizing collector bias and taxonomic bias
+First, collectors often start their careers being supervised by one or more collectors.
+As it naturally happens in many social systems, the behavior of individuals can be strongly influenced by others at more privileged positions, and this is likely to be the case for collectors communities as well.
+A network-based approach would allow us to investigate, for instance, how the collecting behavior and taxonomic interests of novice collectors are shaped by their association with more experienced ones.
+Moreover, depending on its position on the network, a collector can interact with multiple groups of collectors at different extents, assuming the role of influencer in some cases while being influenced in others.
+The influential power of a collector depends not only on the absolute number of connections it holds with others, but also on how strongly it intermediates other connections, how close it is to every other collector in the network, and how influential are its own connections. % Influential analysis
+All these aspects can be assessed using well-known metrics (including degree, betweeness, closeness and eigenvector centralities), and could be used for investigating which collectors are most relevant for shaping the taxonomic composition of the collection. 
 
-% The case study
-We demonstrated the use of our models by exploring the dataset from the University of Brasília Herbarium.
-In that case study we explored structural properties of both network models and investigated the formation of communities of collaboration and interests.
-We also assessed the distinctiveness of collectors regarding their taxonomic interests, their colaborativity with other collectors from within and outside their collaboration and interests communities, and the temporal evolution of collaborative recording in the herbarium.
-
-
-We also investigated how strongly associated taxonomic groups are, based on their
-The model had a relatively good quality because, as the herbarium staff uses the BRAHMS system for data management, giving a quality, consistency to the field containing collectors names.
-One possible limitation is the low quality of the collectors field.
-
-
+Second, although collectors often define their own taxonomic interests and expertises in terms of natural or functional groups of organisms, those are not necessarily the groups that best split the interests of collectors in the dataset of a given collection.
+In addition, collectors (even the most specialized ones) are not restricted towards exclusively recording organisms of their expertises, nor they have uniform interest towards all of those organisms.
+%
+In this context, SCNs provide the structure for discovering groupings of taxa that perform better at characterizing and differentiating collectors based on their taxonomic interests (communities in the species projection); and for investigating associations of collectors to groups of taxa in a non-discrete manner, allowing collectors to be linked to taxa at multiple groups and at different intensities.
+%
+In fact, while some groups of taxa are more specifically recorded by distinctive communities of specialized collectors, others are recorded by a wider range of collectors, with diverse taxonomic interests.
+For instance, the SCN of the UB herbarium suggests that collectors specialized in families \textit{Myrtaceae}, \textit{Poaceae} or \textit{Piperaceae} form communities of interests which are in fact more distinctive, as those families are relatively poorly recorded by collectors who are not specialists in each of them (see Figure \ref{fig:ub_scn_family_projSp_communities}).
+In contrast, other families such as \textit{Fabaceae}, \textit{Melastomataceae} and \textit{Rubiaceae} are more widely recorded in the herbarium, and thus do not form a tight community of interest.
 
 
-% Quality of the recordedBy field
-In the scope of this work we assumed the species identity determination issue to be resolved, and handled by the data platform we used, GBIF. 
-This should also be considered if one is to use data from other sources, from which the determination issue may not be properly resolved.
-The quality of the models are essentially limited by the quality of the field containing collectors names.
-As this field is traditionally not very relevant for most biodiversity data applications, it is not surprising that it is relatively overlooked.
-Some of the most common issues with the field are naming inconsistencies and authorship omission (described in chapter 2).
+% Quality of the model
+The quality of our network models strongly depends on the quality of the species occurrence dataset which is used to build them, more specifically on the fields containing the names of the collectors (\textit{recordedBy}, in TDWG standards) and the taxonomic identity of the specimen (\textit{scientificName}, in TDWG standards) of each record.
+%
+During this study we have explored occurrence datasets from other herbaria other than the UB, including
+the RB (at the Rio de Janeiro Botanical Garden) \cite{gbif_rb}, 
+the MBML (Mello Leitão Herbarium) \cite{gbif_mbml},
+and the Hemilio Goeldi Museum Herbarium \cite{gbif_mpegh}.
+However, we decided only to use the dataset from the UB in our case study for its relatively high quality, specifically for the two fields mentioned above.
+%
+In all other herbaria, the collectors field (\textit{recordedBy}) was particularly problematic.
+Our hypothesis is that the low quality of this field is associated to its low value for most uses of species occurrence data, implying that not much effort has been employed by data curators towards improving its quality.
+While imprecise taxonomic determinations in the \textit{scientificName} field would also lead to low quality networks, this field is critical for many other applications of occurrence data, and thus improving its quality has been extensively pursued by the biodiversity informatics community.
+The most common and impacting issues associated to the collectors field are 
+($i$) using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network representing more than one collector; 
+($ii$) registering collectors names using inconsistent naming conventions, which makes it hard to systematically interpret what are the component parts of a name; 
+($iii$) using multiple names variations for a collector, leading to collectors being represented by more than one node in the network ; and 
+($iv$) only including the name of the first collector in records (and eventually aggregating all secondary collectors under the name `\textit{et. al}'), which is interpreted as an absence of collaborative ties and thus does not contribute for the formation of edges in CWNs.
+Constructing the models from a low-quality dataset can thus introduce several semantic imprecisions. 
+% RecordedBy: Two classes of issues: (1) Naming inconsistencies; (2) Authorship omission
+
+
+% Limitations of the model
+Our models as proposed in the scope of this dissertation also have a set of limitations, which should be addressed in the future.
+% The networks only reflect the view of a single institution -> joining multiple herbaria datasets
+First, as the networks are built in a single step using a single dataset (which is usually provided by a single institution), they only represent a partial view of the real interests and collaborations that collectors have accumulated during their careers.
+For obtaining more holistic representations, a mechanism for dynamically joining multiple occurrence datasets --- and eventually other types of data --- should be incorporated to the models.
+Although one might argue that multiple datasets can be simply merged before they are passed to the constructors of the models, that would still consist of a one-step construction, requiring the availability of all data at first place.
+In addition, if any other dataset were to be incorporated in the future, the model would need to be entirely reconstructed, and all necessary preprocessing routines would have to be re-executed in each one of the previous datasets.
+%
+We believe that the most challenging aspect of joining multiple datasets would be addressing the entity resolution problem across datasets from multiple sources. A possible solution would be to map entities in each dataset to unique identifiers (such as the ORCID\footnote{\url{https://orcid.org/}} or the id in Lattes platform\footnote{\url{http://lattes.cnpq.br/}}, widely adopted by the scientific community in Brazil) using a crowdsourcing strategy, described later in this chapter.
+
+% The geographic and temporal dimensions
 
 
 
-% Regarding the UB case study
-% --------------------------
-
-We chose the University of Brasília herbarium for our case study due to the relatively high quality of those fields.
-
-%% Collector bias
-We observed a strong collector bias, with few collectors responsible for a very large number of species and, conversely, many collectors recording very few species.
-
-Common species tend to be underrepresented in biological collections.
-Experienced collectors and specialists are more inclined towards recording rare species while ignoring those that are more common \cite{Nelson1990}.
-
-%% Taxonomic bias
-Collectors tend to focus on taxa that are of their direct interest and in specimens that are more conspicuous (\textit{e.g.} flowering plants), overlooking other taxa \cite{VanGemerden2005}.
 
 
 
 
-In a study, authors have built a map of collecting density using occurrence records from the INPA herbarium, and identified regions where most of records were concentrated, which they called the collection centres \cite{Nelson1990}.
+
+
 
 
 It is also important to analyze collectors communities belonging to other collections, and eventually join perspectives from distinct collections to produce a more holistic view of collectors activities.
@@ -82,11 +93,7 @@ It is also important to analyze collectors communities belonging to other collec
 
 Although we have provided a basis for the network-based framework, we present some features which we believe are essential to be incorporated in order to allow broader applications of the model.
 
-% Q1: Influential analysis
-\paragraph*{How does a influential collectors influence others?}
-In the context of our work, we could investigate how the collecting behavior and taxonomic interests of novice collectors are influenced by their association with more experienced ones, at least at the beginning of their careers.
-As it naturally happens in many social systems, actions taken by individuals can be strongly influentiated by the behavior of others at more privileged positions.
-The influential power of an individual depends not only on the absolute number of connections they hold with other members, but also on how strongly they intermediate other connections, how close they are to every other individual in the network, and how influential are their own connections.
+
 
 % Q2: Structural equivalence %  see Stork2015 ch3
 Nodes are structurally equivalent if they occupy similar positions in the network, with similar connections.
@@ -96,6 +103,7 @@ structural equivalent collectors are redundant
 Taxa recorded by collectors who do not have structural equivalence are more succeptible to stop being recorded, in the absence of its collector.
 
 
+\paragraph*{Crowdsourcing collectors identities.}
 % Entities resolution and joining with other botanist datasets
 % ------------------------------------------------------------
 % We want to validate the ids used for collectors in the occurrences dataset, using the structure of the CWN as a starting point. 
@@ -208,7 +216,22 @@ As the metrics are calculated based on published occurrence records, this would 
 
 
 
-% Ideas
-% -----
 
+
+%------
+% Ideas
+% =====
+
+% Growth forms and habits might also be a feature of preference of collectors Haripersaud2009 pg42
+
+% Collectors behavior
+% -------------------
+% Collectors do not employ uniform sampling effort towards every organism included in their respective groups of interest.
+%For instance, experienced collectors tend to focus on recording rare species during collecting expeditions, while overlooking others that are very common and thus assumed to be already well represented in the collection \cite{TerSteege2011}.
+%In the case of plant collectors, they also show a preference towards collecting flowering and fruiting materials \cite{VanGemerden2005}.
+%Defining the interests of a collector in such a way is thus imprecise, oversimplifying aspects that make taxa to assume different levels of relevance for each collector.
+
+% Collection Centres
+% ------------------
+%In a study, authors have built a map of collecting density using occurrence records from the INPA herbarium, and identified regions where most of records were concentrated, which they called the collection centres \cite{Nelson1990}.
 
