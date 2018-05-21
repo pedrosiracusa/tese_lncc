@@ -1,6 +1,5 @@
 \chapter{Network Models}\label{chapter:network_models}
 
-
 In this chapter, we present and formally describe two classes of network models that were developed during this study.
 \textbf{Species-collector networks} (SCNs) are built based on associations between collectors and the species they have recorded based on their field activities, whereas \textbf{collector coworking networks} (CWNs) describe direct collaborative associations between collectors when recording specimens in the field.
 
@@ -8,6 +7,8 @@ Although structurally distinct, SCNs and CWNs provide complementary perspectives
 From SCNs, we retrieve information on which collectors have recorded which species and, conversely, which species were recorded by which collectors. 
 On the other hand, CWNs allow us to investigate which collectors team up with whom during fieldwork, although here species are not represented as entities.
 As both network models were elaborated based on a framework for social network analytics, we first review some general concepts from the network science and graph theory domains that are used in this study.
+
+% TODO: Include a paragraph about our package CARYOCAR
 
 % ======================
 % ======================
@@ -377,7 +378,7 @@ The network models we propose in the following section help characterizing colle
 % Species-collectors Networks
 % ---------------------------
 
-\section{Species-collectors Networks}
+\section{Species-Collector Networks}
 
 In this section we introduce species-collector networks (SCNs), which provide the structure for modeling associations between collectors and species they record. 
 We first give an overview on the semantics of the modeled relationships and provide a formal definition of SCNs using graph theory, and then we describe how such networks can be built from species occurrence datasets.
@@ -630,7 +631,7 @@ As this rule outputs weight values that are bound to a known interval, filtering
 %
 % As in this model it is possible for even for collaborative collectors to record some records alone, the weighted degree is not necessarily equivalent to his/her total number of records. Instead, it is equivalent to his/her total number of collaborative records.
 
-\section{Collectors Coworking Networks} \label{section:cwn}
+\section{Collector Coworking Networks} \label{section:cwn}
 In this section we describe collector coworking networks (CWNs) as modeling collaborative associations between collectors.
 We first define CWNs using graph theory and then we describe how such models can be structured from species occurrence datasets.
 

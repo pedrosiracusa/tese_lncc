@@ -1,4 +1,4 @@
-\chapter{Conclusion and Future perspectives}\label{conclusion_perspectives}
+\chapter{Conclusion and Perspectives}\label{conclusion_perspectives}
 % ===========
 % Conclusions
 % -----------
@@ -10,6 +10,7 @@ We demonstrated the use of our models by exploring the species occurrence datase
 Using the social network analytics framework \cite{Barbier2011,Stork2015} as a theoretical foundation, we explored structural properties of the networks, 
 and investigated the formation of communities of collaboration and common interests.
 We also assessed the distinctiveness of collectors regarding their taxonomic interests, their collaborativity with others, and the temporal evolution of collaborative recording in the herbarium.
+Although in this study we specifically discuss SCNs and CWNs in the context of scientific biological collections, the same ideas here exposed can be also extended to other communities, such as those of nature observers (\textit{e.g.} wildlife photographers, bird watchers) and citizen scientists.
 
 
 % Why structure collections data as networks?
@@ -49,11 +50,11 @@ In all other herbaria, the collectors field (\textit{recordedBy}) was particular
 Our hypothesis is that the low quality of this field is associated to its low value for most uses of species occurrence data, implying that not much effort has been employed by data curators towards improving its quality.
 While imprecise taxonomic determinations in the \textit{scientificName} field would also lead to low quality networks, this field is critical for many other applications of occurrence data, and thus improving its quality has been extensively pursued by the biodiversity informatics community.
 The most common and impacting issues associated to the collectors field are 
-($i$) using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network representing more than one collector; 
+($i$) using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network that represent more than one collector; 
 ($ii$) registering collectors names using inconsistent naming conventions, which makes it hard to systematically interpret what are the component parts of a name; 
 ($iii$) using multiple names variations for a collector, leading to collectors being represented by more than one node in the network ; and 
 ($iv$) only including the name of the first collector in records (and eventually aggregating all secondary collectors under the name `\textit{et. al}'), which is interpreted as an absence of collaborative ties and thus does not contribute for the formation of edges in CWNs.
-Constructing the models from a low-quality dataset can thus introduce several semantic imprecisions. 
+Constructing the models from a low-quality dataset can therefore introduce several semantic imprecisions. 
 % RecordedBy: Two classes of issues: (1) Naming inconsistencies; (2) Authorship omission
 
 
@@ -65,89 +66,79 @@ For obtaining more holistic representations, a mechanism for dynamically joining
 Although one might argue that multiple datasets can be simply merged before they are passed to the constructors of the models, that would still consist of a one-step construction, requiring the availability of all data at first place.
 In addition, if any other dataset were to be incorporated in the future, the model would need to be entirely reconstructed, and all necessary preprocessing routines would have to be re-executed in each one of the previous datasets.
 %
-We believe that the most challenging aspect of joining multiple datasets would be addressing the entity resolution problem across datasets from multiple sources. A possible solution would be to map entities in each dataset to unique identifiers (such as the ORCID\footnote{\url{https://orcid.org/}} or the id in Lattes platform\footnote{\url{http://lattes.cnpq.br/}}, widely adopted by the scientific community in Brazil) using a crowdsourcing strategy, described later in this chapter.
+We believe that the most challenging aspect of joining multiple datasets would be addressing the entity resolution problem across datasets from multiple sources. A possible solution would be to map entities in each dataset to unique identifiers (such as the ORCID\footnote{\url{https://orcid.org/}} or the id in Lattes platform\footnote{\url{http://lattes.cnpq.br/}}, the latter widely adopted by the scientific community in Brazil) using a crowdsourcing strategy, described later in this chapter.
 
 % The geographic and temporal dimensions
-
-
-
-
-
-
-
-
-
-
-
-It is also important to analyze collectors communities belonging to other collections, and eventually join perspectives from distinct collections to produce a more holistic view of collectors activities.
-
-
-% One issue with the species bag is that it does not incorporate phylogenetic proximity of the taxa when computing the distance of two collectors.
-% It would be nice to compute collectors proximity based not only on the absolute composition of their bags but also on the phylogenetic distance of taxa themselves.
-% Look at the word2vec algorithm... may be there's some perspective there..
-
-
-% ============
-% Perspectives
-% ------------
-
-Although we have provided a basis for the network-based framework, we present some features which we believe are essential to be incorporated in order to allow broader applications of the model.
-
-
-
-% Q2: Structural equivalence %  see Stork2015 ch3
-Nodes are structurally equivalent if they occupy similar positions in the network, with similar connections.
-Is a simplistic measure of the role of the node
-Collectors in SCNs are equivalent if they collect similar 
-structural equivalent collectors are redundant
-Taxa recorded by collectors who do not have structural equivalence are more succeptible to stop being recorded, in the absence of its collector.
-
-
-\paragraph*{Crowdsourcing collectors identities.}
-% Entities resolution and joining with other botanist datasets
-% ------------------------------------------------------------
-% We want to validate the ids used for collectors in the occurrences dataset, using the structure of the CWN as a starting point. 
-% We select a subset of most influential collectors (and we manually resolve their identities) and ask them to identify and forward a message to 5 of their acquainted we suggest. The acquaintances are suggested based on the strengtheness of their links in the CWN.
-% We must discover a set of nodes which would make the messages flow more efficiently, reducing the chance of being ignored.
-% If the messages are directed from a more influential collector to a less influential one, we expect it to be less likely to be answered and forwarded.
-% The CWN provides a structure of collaborations, such that botanists who have collaborated in field are expected to be acquainted to each other.
-% We can identify key collectors from which information spreads most efficiently, and message them asking them to identify their collaborators, pointing out more structured references on the web, such as in the lattes platform, orcid....
-% Stork2015 chapt.2 -> transmission 
-
-% Including the temporal and geographic dimensions
-% ------------------------------------------------
-% Including the temporal dimension
-% Social network are by nature dynamic, as they evolve over time. New interactions between entities form continuously whereas other ties break.
-% Observers' perception is liable to change over time, being influenced by factors such as his/her own interests, motivations, age in career, available resources and location of residence.
-% In our study, however, we haven't yet included the temporal dimension. 
-
-% Including the geographic dimension
-% The study of collectors carreer trajectories cite{Borgatti2015, conclusion} depends on incorporating temporal and geographic dimensions.
+Another important limitation of our models as here defined is that they are static and non-spatialized (\textit{i.e.} temporally and geographically invariant), and limited to representing relationships of a single type each.
+This implies that relationships modeled in both networks are assumed to occur irrespective of temporal and geographic dimensions, which is clearly unrealistic for the phenomena they model.
+As the careers of collectors have limited lifespans, they can only possibly collaborate with others if their periods of activities overlap in time.
+In addition, both coworking (between collectors) and interest (involving a collector and a taxon) relationships derive from collecting events --- each happening at a determined geographic location and at some point in time ---, being thus temporally and spatially constrained.
+Incorporating these two dimensions to our models is also central for capturing network evolution in their structure.
+%
+As in many other social systems, relationships in SCNs and CWNs change in time, as new ties are constantly formed while older ones are broken.
+It is reasonable to consider that collectors interact with distinct groups of people throughout their careers, assuming distinct roles in each relationship.
+For instance, we hypothesize that earlier in their careers, collectors are more likely to assume relationships and have their interests influenced by their academic supervisors or other collectors who are more experienced.
+On the other hand, relationships assumed by collectors later in their careers tend to be the opposite, as they assume the role of the more experienced collector (and thus, the influencer).
+Also, depending on the stage of a collector's career and the groups of collectors she interacts at that moment, we might observe substantial shifts in her taxonomic interests (while changes in her taxonomic interests can also lead to collaborating with different groups).
+Other factors can also influence the patterns of recording activity of a collector, including oscillations in the availability of financial resources for field expeditions, and changes in her residence location.
+% A diversity of representations for temporal networks have been proposed, which can be categorized as either lossless representations, or lossy representations \cite{Holme2015}.
 
 
 % Adopting an unifying structure
 % SCNs and CWNs should be stored in an unified structure, for example using the structure of multiaspect graphs (MAGs).
 % MAGs allow representing edges composed of multiple features by using general graph theory, instead of tensor algebra.
 % Important dimensions can be included as aspects, such as temporal and spatial, and different types of edges. 
+As many applications using our models would need to combine the perspectives of both SCNs and CWNs, we also recognize the importance of adopting an unifying model for seamlessly integrating the two networks into a single structure.
+Such a model should represent two types of connections (interest and coworking) and two distinct sets of nodes (collectors and species), besides incorporating the temporal and geographical dimensions into its structure.
+Although the concept of \textit{multilayer networks} provides a solution for modeling dynamic complex systems with many aspects of connectivity, literature around this topic is still incipient, with many proposals though little consensus on the best way to represent them \cite{Kivela2014}.
+In this context, \citeonline{Wehmuth2014} introduce the concept of \textit{Multiaspect Graphs} (MAGs), as multilayer graph abstractions that operate on the same structure as traditional directed graphs.
+By using the structure of a MAG, we would represent the set of vertices, layers, time instants and geographic locations as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
+Moreover, key properties and algorithms that have been widely used for analyzing directed graphs are also extended to MAGs, which makes them a relatively simple representation for higher-order graphs.
 
 
-% Identification of homonymous collectors
-% ---------------------------------------
-% We could use the CWN structure as one additional resource for screening possible homonymous collectors: ?? think about it
-% Collectors that are the only link between two communities are candidates, especially when they link to many collectors in each of those communities. 
-% In our CWN, for example, carvalho,avm is known to be a homonymous at least for for Antônio Mendes de Carvalho (bus driver and field assistant at UB) and André Maurício de Carvalho (a well known collector from Bahia) (Carolyn personal communication).
 
-
+Finally, we indicate some of the possible applications of our models.
 
 % ============
 % Applications
 % ------------
-Here we briefly discuss some of the possible further developments from our models.
+\newcounter{ApplicationCase}
+
+% Collectors Profiling and activities history
+% -------------------------------------------
+% Profiling collectors in terms of their activities and interests can be a way of further detecting anomalies (activity monitoring, Fawcett and Provost 1999).
+% Collectors temporal, geographic and taxonomic ranges \cite{}.
+% The study of collectors career trajectories cite{Borgatti2015 conclusion}.
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Context inference.}
+One of the main limitations of occurrence records is that they are obtained opportunistically, in a high diversity of contexts.
+Even though contextual information can be associated to records (the field \textit{occurrenceRemarks}, TDWG), systematically interpreting them is complex, as it is in text format; and, moreover, this field is usually not filled.
+%
+The factor that leads a collector to record a specimen depends on many factors: 
+the taxonomic interests and level of expertise of the collector at that time, 
+the goals of the collection expedition, 
+%
+dataset enrichment, by associating contextual data to each occurrence record, based on information of collectors.
+
+
+% Validation of collectors IDs
+% ----------------------------
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Crowdsourcing the validation of collectors identities.}
+Given the complexity of resolving the identities of names in the collector field of occurrence datasets, one possible solution would be using a network-based \textit{collaborative validation}, in which the records validation task is distributed through many collaborators.
+The general idea of the method consists of using the structure of a CWN, initially built from the non-validated dataset, for propagating a message requesting the collaboration of collectors themselves as validators.
+Starting from an initial subset of influential collectors whose identities are already resolved, collectors recursively resolve the identities of as few as $5$ of their most acquainted and, in sequence, forward them the collaboration request message. % we assume collectors who collaborate in field are acquainted to each other
+The process of resolving names consists of assigning unique identifiers to them, such as the ORCID or Lattes id.
+Assuming that the probability that a receiver does not ignore the message depends on its esteem towards the sender, a central requirement for an efficient diffusion of the messages in the network is to start with an initial set of vertices which not only occupy central positions in the network, but which are also influential in their respective communities and, moreover, are available and willing to collaborate with the validation process.
+This is analogous to studying the dynamics of contagion in network systems \cite{Gibson2005}.
 
 
 
-% Ellaboration of red lists
-% -------------------------
+
+% Team Formation
+% --------------
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Formation of teams of specialists.}
 % Red lists are necessary for pointing prioritary species for conservation e.g. the Brazilian flora red list
 % Besides data, it is also necessary to include a team of specialists for validating and evaluating the conservation status of species.
 % We can use interest networks for systematically selecting potential collaborators
@@ -158,17 +149,41 @@ Here we briefly discuss some of the possible further developments from our model
 % Species-determiners networks
 % Also model species-identifiers network, where people are linked to species they identify.
 % We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
+Given the diversity and complexity of life on Earth, approaching biological problems often requires the involvement of many experts in different areas.
+Moreover, experts must must not be only have a substantial expertise in their respective areas, but must also be prone to collaborate.
+One aspect that our models could help is in recommending the formation of teams of specialists.
+The Expert team formation problem:
+Given a set of requirements, the problem consists of assessing the expertise of individuals in the network (expert location problem) and recommending the formation of a team for best covering given requirement and achieving a common goal, considering how effectively they can collaborate \cite{Lappas2001}.
+We can use the SCN for assessing expertises and the CWN for refining the the ranking or suggesting teams that include many collectors who have already worked together (we assume that collectors who have successfully collaborated in the past are likely to successfully collaborating in the future).
+%
+One application is the formation of teams of experts for big biodiversity surveys.
+Coordinators of such initiatives might be interested on systems for helping choosing the most concise team to obtain the greatest diversity of experts, who have collaborated in the past.
+%
+One possible application is on the elaboration of red lists.
+Evaluation (by the scientific community) of the conservation status of species for the elaboration of red lists (IUCN), which are important for supporting the elaboration of conservation plans, prioritizing conservation efforts.
+Species are evaluated regarding their risk of becoming extinct.
+The elaboration of red lists uses occurrence data intensively, and also requires the collaboration of teams of specialists, for a task-force: validating and evaluating the conservation status of species \cite{Martinelli2013}.
+Species profiles are assigned to specialists.
+Selecting a high number of specialists distributes the workload better, avoiding overloading specialists.
+Specialists act in diverse stages of the process, since the evaluation of data quality (such as suspicious occurrences) to the evaluation of the final profiles of species of their expertise.
+Specialists that are personally invited for collaborating.
+During their careers, collectors develop good intuition about the communities at locations where they have been \cite{Noss1996}, which make them good validators for occurrence data.
+The geographic dimension in this case is also central, as we choose teams of specialists while trying to maximize the geographical coverage recordings.
+From SCN models, we could systematically obtain recommendations of specialists who are more experienced, and have most actively recorded taxonomic groups of interest.
+We first evaluate their expertise
+Algorithms have been proposed in literature for computing the expertise of individuals based on their positions in the network \cite{Lappas2011}
 
 
-% Collectors Profiling and activities history
-% -------------------------------------------
-% Profiling collectors in terms of their activities and interests can be a way of further detecting anomalies (activity monitoring, Fawcett and Provost 1999).
-% Collectors temporal, geographic and taxonomic ranges \cite{}.
+
+
+
+
 
 
 % Building Recommender Systems
 % ----------------------------
-\paragraph*{Building recommender systems.}
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Building recommender systems.}
 % Sampling Site Recommendation
 % Assisted planning of future biodiversity surveying is key for improving herbarium data \cite{Graham2004}.
 % Strategic sampling in unsurveyed areas: identify gaps in environmental and geographic coverages \cite{Graham2004}.
@@ -186,22 +201,51 @@ Here we briefly discuss some of the possible further developments from our model
 
 % Collector's productivity Score
 % ------------------------------
-\paragraph*{Assessing collectors productivity.}
-On their duty of managing the application of public resources to scientific initiatives, research funding agencies deal with the problem of prioritizing proposals from researchers who are most capable of prividing signifficant advance in their respective fields.
-Metrics for assessing the academic productivity of researchers usually take into account metrics such as the number of papers published in high-impact journals. 
-In this sense, the work of field naturalists has been largely unappreciated by financing agencies.
-As a consequence, researches have directed their careers towards activities that are
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Assessing collectors productivity.}
+Pursuing careers as field naturalists are being highly discouraged within the conservation biology scientific community \cite{Noss1996}.
+We currently face a shortage of researchers willing to pursue careers as field naturalists.
+Their work is unappreciated by research funding agencies.
+This is partially due to the high costs of field expeditions for collecting biological materials, which do not necessarily produces publishable work.
+As a result, we currently face a shortage of researches exploring new areas is decreasing, and this data is critical for the construction of models.
+Funding agencies must therefore incentivate the formation of new field naturalists (especially in megadiverse countries), and this can be done by incorporating metrics that value their importance as collectors.
+
+On their duty of managing the application of public resources to scientific initiatives, research funding agencies deal with the problem of prioritizing proposals from researchers who are most capable of providing significant advance in their respective fields.
+In order to assess the academic quality of researchers, agencies mainly take into account bibliometric measures including the number of papers published in high-impact journals. 
+%
+As the work of field naturalists require the investment of a considerable amount of time and do not necessarily revert to things that are evaluated by agencies, their work has been largely unappreciated by financing agencies.
+As a consequence, we currently observe a reduction in the number of researchers who dedicate their careers to field collecting.
+%
 Another possible application of the network models is assigning scores to collectors based on their recording patterns, which could become produtivity metrics.
 Those metrics can be used by science financing agencies, to incentivate scientists to invest in their careers as naturalists, aggregate scientific value to it.
 Their metrics depends on centrality scores.
 As the metrics are calculated based on published occurrence records, this would incentivate data curators towards sharing their data, supporting open science.
+% Insufficient financial support for biological collections Suarez2004
 
 
 % SDM
 % ---
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Background data selection in SDM}
 % Background data selection
 % Which records can we use as background data? 
 % Pseudo-absences are more likely if a group of collectors potentially intereste in the species (or taxonomic group) have searched the area.
+Species Distribution Modeling is one of the main uses of species occurrence data.
+The goal is to correlate the occurrence of species with environmental variables.
+We then project the probable distribution of species by using environmental predictors.
+%
+Many algorithms used in SDM are based on both presence and absence data.
+Occurrence data from biological collections have been intensely used for building SDMs.
+However, given the opportunistic nature of species occurrence data, the fact that a species has not been recorded at some place does not imply that they do not occur there.
+True absences are not available for occurrence data.
+It could simply be out of the interest of the collectors who have sampled that areas.
+Pseudo-absences can be inferred. 
+Some studies have selected background data based on taxonomic groups \cite{}
+%
+We believe that our models can be used for background data selection.
+For assessing the probability that a taxon occurs in a given place, we look at the collectors who have worked near the area.
+True-absence is more likely if collectors which was potentially interested in the taxon has searched the area.
+Moreover, the interest of a collector towards that taxon can change depending on the time (shift in taxonomic interests), or the team ().
 
 
 
@@ -209,9 +253,8 @@ As the metrics are calculated based on published occurrence records, this would 
 
 
 
-% Extending to other types of biodiversity data
-% ---------------------------------------------
-% Although here we have tackled the specific class of collection (herbarium), this framework can be extended to others communities, such as citizen scientists, photographers...
+
+
 
 
 
@@ -234,4 +277,10 @@ As the metrics are calculated based on published occurrence records, this would 
 % Collection Centres
 % ------------------
 %In a study, authors have built a map of collecting density using occurrence records from the INPA herbarium, and identified regions where most of records were concentrated, which they called the collection centres \cite{Nelson1990}.
+
+% Phylogeny and Species Bags
+% --------------------------
+% One issue with the species bag is that it does not incorporate phylogenetic proximity of the taxa when computing the distance of two collectors.
+% It would be nice to compute collectors proximity based not only on the absolute composition of their bags but also on the phylogenetic distance of taxa themselves.
+% Look at the word2vec algorithm... may be there's some perspective there..
 
