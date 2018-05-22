@@ -89,10 +89,10 @@ Other factors can also influence the patterns of recording activity of a collect
 % MAGs allow representing edges composed of multiple features by using general graph theory, instead of tensor algebra.
 % Important dimensions can be included as aspects, such as temporal and spatial, and different types of edges. 
 As many applications using our models would need to combine the perspectives of both SCNs and CWNs, we also recognize the importance of adopting an unifying model for seamlessly integrating the two networks into a single structure.
-Such a model should represent two types of connections (interest and coworking) and two distinct sets of nodes (collectors and species), besides incorporating the temporal and geographical dimensions into its structure.
+The requirement for such a model is that it represents two types of connections (interest and coworking) and two distinct sets of nodes (collectors and species), besides incorporating the temporal and geographical dimensions into its structure.
 Although the concept of \textit{multilayer networks} provides a solution for modeling dynamic complex systems with many aspects of connectivity, literature around this topic is still incipient, with many proposals though little consensus on the best way to represent them \cite{Kivela2014}.
-In this context, \citeonline{Wehmuth2014} introduce the concept of \textit{Multiaspect Graphs} (MAGs), as multilayer graph abstractions that operate on the same structure as traditional directed graphs.
-By using the structure of a MAG, we would represent the set of vertices, layers, time instants and geographic locations as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
+In this context, \citeonline{Wehmuth2014} have introduced the concept of \textit{Multiaspect Graphs} (MAGs) as a multilayer graph abstraction that operates on the same structure as traditional directed graphs.
+By using the structure of a MAG, theset of vertices, layers, time instants and geographic locations can be represented as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
 Moreover, key properties and algorithms that have been widely used for analyzing directed graphs are also extended to MAGs, which makes them a relatively simple representation for higher-order graphs.
 
 
@@ -110,9 +110,9 @@ Finally, we indicate some of the possible applications of our models.
 % Collectors temporal, geographic and taxonomic ranges \cite{}.
 % The study of collectors career trajectories cite{Borgatti2015 conclusion}.
 \stepcounter{ApplicationCase}
-\paragraph*{\theApplicationCase. Context inference.}
+\paragraph*{\theApplicationCase. Occurrence context inference.}
 One of the main limitations of occurrence records is that they are obtained opportunistically, in a high diversity of contexts.
-Even though contextual information can be associated to records (the field \textit{occurrenceRemarks}, TDWG), systematically interpreting them is complex, as it is in text format; and, moreover, this field is usually not filled.
+Even though contextual information can be optionally associated to records as text (the field \textit{occurrenceRemarks}, TDWG), systematically interpreting text is complex.
 %
 The factor that leads a collector to record a specimen depends on many factors: 
 the taxonomic interests and level of expertise of the collector at that time, 
@@ -173,8 +173,9 @@ From SCN models, we could systematically obtain recommendations of specialists w
 We first evaluate their expertise
 Algorithms have been proposed in literature for computing the expertise of individuals based on their positions in the network \cite{Lappas2011}
 
-
-
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Assessing the accuracy in taxonomic determinations.}
+\cite{Chapman2005} %pg.22
 
 
 
@@ -197,6 +198,9 @@ Algorithms have been proposed in literature for computing the expertise of indiv
 
 % Use Case: "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
 % < add illustration >
+
+\citeonline{Carine2012} suggest that the discovery of new species is mainly done by very experienced collectors, and that funding them selectively would boost the discovery of new species. 
+They have correlated productive 
 
 
 % Collector's productivity Score

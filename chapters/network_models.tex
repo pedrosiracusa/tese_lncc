@@ -111,7 +111,7 @@ Figure \ref{fig:graphs} shows an illustrative undirected weighted graph and thre
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/network_models/graphs.png}
-    \caption{Undirected weighted graph with six vertices and six edges (the thickness of an edge represents its weight); and three of its possible representations.}
+    \caption[Undirected weighted graph and three of its possible representations]{Undirected weighted graph with six vertices and six edges (the thickness of an edge represents its weight); and three of its possible representations.}
     \label{fig:graphs}
   \end{figure}
   
@@ -178,7 +178,7 @@ c_{\Delta} = \frac{3 \times numOfTriangles}{numOfTriples}.
 %% Transitivity
 \paragraph*{Transitivity.}
 The transitivity relation for a triple of nodes $\{a,b,c\}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ implies that $a$ is connected to $c$.
-In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}\ped{Ao meu ver o certo é `is'... A relação de transitividade significa que se A-->B e B-->C então A-->C (ou seja, forma-se um clique). Concorda?}
+In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}\ped{Ao meu ver o certo é `is'... A relação de transitividade significa que se A-->B e B-->C então A-->C (ou seja, forma-se um clique). Concorda?}\art{A definicao estah certa... entretanto, a afirmacao social ilustrativa eh que  faz pensar em nivel de transitividade (como seria para clustering), justamente pela afirmacao nao ser sempre verdadeira. Acho que pode ser mais seguro simplesmente omitir essa frase. Acho que resolveria, deixando a medicao de nivel de transitividade/clustering para o item anterior que estah OK.}
 Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from Equation \ref{eq:globalclustering}.
 
 \paragraph*{Degree.}
@@ -188,75 +188,78 @@ $
 k^{(i)} = \sum_j bool(a_{i j})
 $,
 where $a_{i j}$ are elements containing the weights of each edge $(i,j)$; and the function $bool(x)$ returns $1$ if $X$ is greater than zero; and $0$ otherwise.
-We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_{w}^{(i)} = \sum_j a_{i j} $. \art{inverti os indices do k ponderado.}\ped{Ziviani aqui tive que reverter sua alteração... Estou usando a notação $k_w$ durante outras partes do texto para me referir ao `weighted degree', e o $i$ se refere a uma observação (um vértice particular).}
+We can similarly compute the \textit{weighted degree} for vertex $i$ as $ k_{w}^{(i)} = \sum_j a_{i j} $.
 The \textit{average degree} 
 $\langle k \rangle$ 
 is a global property of the network with $N$ vertices, computed by averaging the degree values for each individual vertex $i$:
 $\langle k \rangle = \frac{1}{N} \sum_{i=1}^N k_i$.
 
-\art{Parei minha revisao aqui}
 
 \paragraph*{Degree distribution.}
-The probability distribution of vertex degrees over a graph is known as its \textit{degree distribution}.
-From degree distribution we retrieve the probability $p_k$ that a randomly selected vertex from the graph has degree equal to $k$.
-In random graphs degree distribution is typically well approximated by a Poisson model, which peaks at $\langle k \rangle$.
-Thus vertices with degree equal $\langle k \rangle$ are most likely to occur, whereas those with very high and very low degrees are very unlikely. 
-As mentioned in the previous section, however, most real-world networks are majoritarily composed by low-degree nodes, coexisting with few hubs.
+The probability distribution of the degrees of vertices over a graph is known as its \textit{degree distribution}.
+From the degree distribution we retrieve the probability $p_k$ that a randomly selected vertex from the graph has degree equal to $k$.
+In random graphs, the degree distribution is typically well approximated by a Poisson model, which peaks at $\langle k \rangle$.
+Thus, vertices with degree equal to $\langle k \rangle$ are most likely to occur, followed by vertices with degree close to the this value, whereas those with very high and very low degrees are very unlikely. 
+As mentioned in the previous section, however, many real-world networks are mainly composed of low-degree nodes, coexisting with few hubs.
 Such a scenario is better described by a \textit{power law}, such that $p(k) \sim k^{-\alpha}$.
 
 \paragraph*{Degree correlation.}
-A graph shows degree correlation if vertices degree determines the degrees of its neighbors with a certain magnitude.
-A positive correlation indicates that edges are more likely to connect pairs of either high-degree or low-degree vertices.
-On the other hand, a negative correlation indicates that connections are more likely to exist between high-degree and low-degree vertices.
-A variety of metrics have been proposed in literature for assessing degree correlation in a graph \cite{Newman2003b}, being the \textit{Pearson correlation coefficient} one of the most widely used.
-Generally, correlation values range from $-1$ for maximal negative correlation; to $1$ for maximal positive correlation. 
+%A graph shows degree correlation if the degree of vertices determines the degrees of its neighbors with a certain magnitude.
+A positive degree correlation indicates that edges are more likely to connect pairs of either high-degree or low-degree vertices.
+On the other hand, a negative degree correlation indicates that connections are more likely to exist between high-degree and low-degree vertices.
+A variety of metrics have been proposed in the literature for assessing degree correlation in a graph~\cite{Newman2003b}, being the \textit{Pearson correlation coefficient} one of the most widely used choices. Generally, correlation values range from $-1$ for maximal negative correlation; to $1$ for maximal positive correlation. 
 
 \paragraph*{Mixing patterns.}
-Mixing patterns describe the influence of characteristics of nodes on the formation of links in networks.
-In case associations are more likely to be established between nodes which are similar on some characteristic, the pattern is known as \textit{assortative mixing} or, in social sciences, \textit{homophyly}.
-In contrast, \textit{dissortative mixing} is observed when nodes preferentially connect to others with opposite characteristics. 
+Mixing patterns describe the influence of node characteristics on the formation of links in networks.
+In the case associations are more likely to be established between nodes which are similar on some characteristic, the pattern is known as having an \textit{assortative mixing} or, in social sciences, \textit{network homophily}.
+In contrast, \textit{dissortative mixing} is observed when nodes preferentially connect to other nodes with opposite characteristics. 
 If node characteristics show no significant influence on link formation, we say the network is \textit{neutral}.
-Degree correlation can be understood as a specific type of mixing pattern, evaluated on vertex degrees.
+Degree correlation can be understood as a specific type of mixing pattern, evaluated based on the degree of the vertices.
 
 \paragraph*{Centrality.}
-Centrality analysis concerns the identification of influential entities in the network, who might assume important roles in the system under different perspectives.
-\textit{Degree centrality} is perhaps the simplest centrality measure, and assumes that the relevance of a node only depends on its own degree. Nodes with many connections are thus more influential than those with fewer connections.
-If we consider, however, that the relevance of a node also depends on the relative importances of their neighbors (and that some neighbors are more influential than others), the \textit{eigenvector centrality} becomes a more realistic metric \cite{Bonacich1987}.
-In this case, nodes holding fewer links to more influential ones might turn out to be more influential than those holding more links to less influential nodes.
+Centrality measures the the relative importance of vertices in a network. Different definitions of network centrality typically refer to ranking influential nodes under different perspectives.
+%Centrality analysis concerns the identification of influential entities in the network, who might assume important roles in the system under different perspectives.
+\textit{Degree centrality} is perhaps the simplest centrality measure, and defines that the relevance of a node depends only on its own degree. Nodes with many connections are thus more influential than those with fewer connections.
+If we consider, however, that the relevance of a node also depends on the relative importances of their neighbors (and that some neighbors are more influential than others), the \textit{eigenvector centrality} becomes a more realistic metric~\cite{Bonacich1987}.
+In this case, nodes holding fewer links to more influential nodes might turn out to be more influential than those holding more links to less influential nodes.
 Other centrality metrics emphasize the importance of other topological aspects instead of node degree.
 \textit{Closeness centrality} measures the importance of a node by computing its mean distance to all other nodes in the network, and thus nodes are more influential if they can reach their peers more efficiently by taking shorter paths.
-\textit{Betweeness centrality} identifies nodes which are important strategical intermediators, if they are included in the path between many pairs of nodes in the network.  
-
-\luiz{Parei minha revisão aqui}
+\textit{Betweeness centrality} identifies nodes which are important strategical intermediators, if they are included in the shortest path between many pairs of nodes in the network.  
 
 \paragraph*{Bipartite graphs.}
-Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed by two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
-We define bipartite graphs as triples 
+Bipartite graphs, also known as bigraphs or two-mode graphs, are a special class of graphs composed of two distinct sets of vertices $U$ and $V$, with the constraint that no vertices within the same set are allowed to be adjacent to each other. 
+Bipartite graphs are defined as triples 
 $
 B = (U, V, E) \mbox{, }
 $
 where $E$ is the set of edges between vertices from $U$ and $V$.
-Using sets theory terms, $U$ and $V$ are both \textit{disjoint} and \textit{independent} sets.
-This means vertices must be assigned to exactly one vertices set and, moreover, all edges in $E$ necessarily connect vertices from opposite sets. 
-Such features make bipartite graphs particularly useful for representing interactions that only make sense to exist between entities of different classes. 
+Using set theory terms, $U$ and $V$ are both \textit{disjoint} and \textit{independent} sets.
+This means vertices must be assigned to exactly one vertex set and, moreover, all edges in $E$ necessarily connect vertices from opposite sets. 
+Such features make bipartite graphs particularly useful for representing interactions that only make sense to exist between entities of different classes. Figure \ref{fig:bipartite_general}(a) presents an example of bipartite graph.
 
-  \begin{figure}[h!]
-  	\centering
-    \includegraphics[width=0.5\linewidth]{figures/bipartite_general.png}
-    \caption{General aspect of a bipartite graph (a). All vertices in the graph belong to exactly one of $U$ and $V$ vertices sets. In addition edges are only established between vertices from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together vertices that are at a length-2 distance in the bipartite graph, while omitting vertices from the opposite set.}
-    \label{fig:bipartite_general}
-  \end{figure}
-
-%% Biadjacency matrix
-The \textit{biadjacency matrix} (or \textit{incidence matrix}) is the matrix representation of a bipartite graph, being equivalent to adjacency matrices defined for one-mode graphs (those composed by a unique vertices set). 
-Differently from one-mode graphs for which the adjacency matrix is necessarily square, biadjacency matrices are usually rectangular, unless both vertices sets have the same size.
+  %% Biadjacency matrix
+The \textit{biadjacency matrix} (or \textit{incidence matrix}) is the matrix representation of a bipartite graph, being equivalent to adjacency matrices defined for one-mode graphs (those composed by a single vertex set). 
+Differently from one-mode graphs for which the adjacency matrix is necessarily squared, biadjacency matrices are usually rectangular, unless both vertex sets have the same size.
 
 %% Bipartite projection
 As most algorithms and metrics in literature are primarily designed for one-mode graphs, it is often convenient to summarize a bipartite graph by directly linking vertices that belong to the same set based on indirect associations they might have. 
-This operation, in which vertices from one set get directly linked if they are intermediated by at least one vertex from the opposite set, is called a \textit{bipartite projection} (Figure \ref{fig:bipartite_general}b).
+This operation, in which vertices from one set get directly linked if they are intermediated by at least one vertex from the opposite set, is called a \textit{bipartite projection}, as in Figure \ref{fig:bipartite_general}(b).
 Projections thus compress a bipartite graph into a one-mode graph by only representing vertices from the projected set, while those from the opposite set are omitted.
-Therefore, bipartite projections into each vertices set provide complementary perspectives on the relationships modeled.
+Therefore, bipartite projections into each vertex set provide complementary perspectives on the modeled relationships.
 %
+
+\begin{figure}[h!]
+  	\centering
+    \includegraphics[width=0.5\linewidth]{figures/bipartite_general.png}
+    \caption[General aspect of bipartite graphs and their projections.]{General aspect of a bipartite graph (a). All vertices in the graph belong to exactly one of $U$ and $V$ vertex sets. In addition, edges are only established between vertices from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together vertices that are at a length-2 distance in the bipartite graph, while omitting vertices from the opposite set.}
+    \label{fig:bipartite_general}
+  \end{figure}
+
+\art{Pedro, o usual é o (a) e (b) ficarem *abaixo* das subfiguras. Eh facil de mudar na figura acima?}
+
+\art{Parei aqui.}
+
+\luiz{Parei minha revisão aqui}
 
 
 
@@ -267,8 +270,8 @@ Therefore, bipartite projections into each vertices set provide complementary pe
 % Mark Granovetter paper (1973)
 %% Which types of analyses are most common in social networks?
 
-\subsection{The Social Network Analytics framework}
-In the context of this work we refer to the \textit{social networks analytics framework} as a set of concepts, methods and algorithms which can be directly applied or slightly adapted for modeling and analyzing social networks in diverse and independent contexts and knowledge domains.
+\subsection{Social network analytics}
+In the context of this work we refer to the \textit{social network analytics} framework as a set of concepts, methods and algorithms which can be directly applied or slightly adapted for modeling and analyzing social networks in diverse and independent contexts and knowledge domains.
 %
 In our definition, we refer to \textit{social networks} as systems in which entities (mostly people) interact with each other through some type of \textit{social tie}.
 
@@ -320,7 +323,7 @@ From a network of listeners interests towards music groups, \textit{Lambiotte} f
 % ========================
 % Networks in Biodiversity
 % ------------------------
-\subsection{Networks in Biodiversity}
+\subsection{Networks and biodiversity}
 Network modeling has been widely adopted in the context of biodiversity research, especially for investigating ecological and evolutionary aspects of ecosystems and natural communities. 
 Efforts towards this goal have led to the creation of the field of \textit{network ecology}, which has undergone a noticeable growth over the last few years \cite{Borrett2014}.
 % Interaction networks
@@ -384,7 +387,7 @@ In this section we introduce species-collector networks (SCNs), which provide th
 We first give an overview on the semantics of the modeled relationships and provide a formal definition of SCNs using graph theory, and then we describe how such networks can be built from species occurrence datasets.
 Finally, we define attributes and operations for SCNs that facilitate obtaining domain-specific insights from network structure.
 
-\subsection{General Description}
+\subsection{General description}
 %% Model semantics
 \textbf{Species-Collector networks} are a particular type of \textit{interest networks} describing relationships of type ``\textbf{collector} samples \textbf{species}'' or, conversely, ``\textbf{species} is sampled by \textbf{collector}'' (Figure \ref{fig:scn_general}). 
 The network is thus composed by collectors holding links to every single species they have ever recorded or alternatively, species holding links to every collector who have ever recorded them.
@@ -397,7 +400,7 @@ Nevertheless each species is uniquely represented as a node in the network.
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=.7\linewidth]{figures/network_models/scn_generalaspect.pdf}
-    \caption{Multiple perspectives of a Species-collectors Network model (SCN).
+    \caption[General aspect of a Species-Collector Network (SCN)]{Multiple perspectives of a Species-Collector Network (SCN).
     (a) Unprojected network, where collectors (green nodes) are linked to the species (red nodes) they've recorded. The total number of records of a given species by some collector is reflected in the strength of their link. (b) SCN projection onto the species set. Species are linked together if they've been collected by common collectors. Link strength is proportional to the number of collectors two species share. (c) SCN projection onto the collectors set. Collectors are linked together if they've recorded species in common. Link strength is proportional to the number of species two collectors share. 
     Link strength for both projections were obtained using the \textit{simple weighting} rule (eq. \ref{eq:simple_weighting}), and are graphically displayed as edges thickness. Nodes sizes reflect collectors' and species' degrees in each perspective.}
     \label{fig:scn_general}
@@ -635,7 +638,7 @@ As this rule outputs weight values that are bound to a known interval, filtering
 In this section we describe collector coworking networks (CWNs) as modeling collaborative associations between collectors.
 We first define CWNs using graph theory and then we describe how such models can be structured from species occurrence datasets.
 
-\subsection{General Description}
+\subsection{General description}
 \textbf{Collector Coworking Networks} are a particular instance of \textit{collaboration networks} describing coauthoring relationships between collectors from species occurrence records (Figure \ref{fig:cwn_general}).
 We consider two collectors to be coauthors in a given record if they are both included in the collectors field for that record. The collectors field holds a list collectors names who have authored each record in the dataset, and is equivalent to the \textit{recordedBy} field in a dataset following \textit{Darwin Core} terms standards (check an example in Table \ref{table:cwn_example_dataset}). We refer to each distinct list of collectors in this context as a \textbf{team}.
 
@@ -646,7 +649,7 @@ For records with team size equal to $1$, which we refer to as non-collaborative 
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=.4\linewidth]{figures/network_models/cwn_generalaspect.pdf}
-    \caption{General aspect of a Collectors Coworking Network (CWN). Coauthoring relationships between collectors (green nodes) are structured as edges in the graph, and are graphically represented as gray links.
+    \caption[General aspect of a Collector Coworking Network (CWN).]{General aspect of a Collector Coworking Network (CWN). Coauthoring relationships between collectors (green nodes) are structured as edges in the graph, and are graphically represented as gray links.
     Here collectors nodes are sized according to the total number of records they've authored; and edges are weighted according to the number of collaborative records coauthored by both nodes.}
     \label{fig:cwn_general}
   \end{figure}

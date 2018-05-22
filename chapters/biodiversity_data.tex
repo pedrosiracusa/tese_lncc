@@ -9,24 +9,26 @@
 %  Main assets of a occurrence record: taxon, location, datetime {Graham2004} -> for us, also collectors
 %  Biological collections
 %  Data collection is typically opportunistic.
-%  In scientific biological collections specimens are vouchered \cite{}.
-%  However, we still face the challenge of digitizing specimens in biological collections \cite{Hardisty2013}.
+% \cite{Hardisty2013}.
 
 % Biological collections
 Biological collections (mainly herbaria and natural history museums) are repositories where biological materials, in the form of physical specimens, are systematically deposited and preserved to be used for scientific purposes. 
 Throughout this text we use biological collections as a synonym for \textit{Natural History Collections (NHC)}, the later term being more widely adopted in biodiversity informatics literature.
 Such collections are typically hosted and curated by institutions like herbaria and natural history museums, which provide appropriate physical infrastructure and human resources for ensuring both the long-term preservation of the collections and their accessibility to the scientific community.
 %In addition, these institutions usually count with large networks of associated contributors, including professional collectors and taxonomists.
+% Data acquisition: (1) New collecting expeditions; (2) Collections exchanges materials with other institutions
 
 In this chapter we give an overview of how data in biological collections is structured.
 We describe the semantics of species occurrence records in section \ref{section:occurrence_data}.
-We also discuss some aspects regarding the quality and limitations of such data.
+We also discuss some aspects regarding the quality and limitations of such data, and how we deal with these limitations.
 Before delving into the characterization of biodiversity data we first review the definitions of some domain-specific terms that will be used throughout this text. 
 
 % =====================
 % Terms and Definitions
 % ---------------------
-\section{Biodiversity Terms and Definitions} \label{section:biodiversity_terms}
+\section{Biodiversity-related terms and definitions} \label{section:biodiversity_terms}
+\ped{Acham que devo colocar esta seção como apêndice?}
+
 In this work we specifically use definitions from the \textit{International Code of Nomenclature for algae, fungi and plants} (ICN) \cite{McNeill2012}. This document outlines a set of rules and guidelines for scientifically naming and grouping plants, fungi and algae, consisting of a universally adopted reference by the botanical scientific community. Nomenclature best-practices for other groups of organisms are governed by other (though similar) documents.
 
 \paragraph*{Taxonomy.}
@@ -43,6 +45,9 @@ For instance, if a sample has been determined up to the level of \textit{species
 As taxa relate to each other on a tree-like hierarchical structure (with each child taxon having exactly one parent, while a parent taxon can have one or more children), taxonomic identities of a specimen at ranks higher than its resolution can be directly determined.
 Although this term is not included in the ICN document, we use this definition throughout this text.
 
+\paragraph*{Taxon.}
+A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{Art.1.1}), which are considered by professional taxonomists to form a \textit{taxonomic unit}. Plural is \textbf{taxa}.
+
 \paragraph*{Species.}
 Species is one of the taxonomic ranks organisms can be determined by professional taxonomists as belonging to. It is regarded to be a basic unit of taxonomic classification, although organisms can be further classified in lower-hierarchy taxonomic ranks (infraspecific ranks).
 Differently from other ranks, the name of a species is composed using a binomial nomenclature system, in which the name of the genus it belongs to is appended to a \textit{specific epithet}.
@@ -54,8 +59,7 @@ Any of these collected biological materials is an evidence of the existence of a
 Although a specimen could be classified by a taxonomist as being a representative of a given species, this is not a requirement for it to be included in scientific collections. Although taxonomists classify specimens in a best effort manner (the most taxonomically precise as possible), sometimes only higher ranks can be determined. The highest taxonomic rank at which the specimen could be identified is known as its \textbf{taxonomic resolution}.
 After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a taxonomic group (a taxon), in a best-effort manner.
 
-\paragraph*{Taxon.}
-A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{Art.1.1}). Notice that the plural is \textbf{taxa}.
+
 
 
 
@@ -65,78 +69,102 @@ A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{
 % Occurrence Data
 % ---------------
 \section{Species occurrence data} \label{section:occurrence_data}
-Physical specimens stored in biological collections (also referred to as \textit{vouchers}) are often associated to complementary contextual information, either annotated by the responsible collectors during the collecting act; or annotated at later stages, after the specimen is deposited in the collection \cite{Chapman2005}. %Metadata?
-Information from the collection event include the date and time and location where the specimen was collected; the names of the collectors who were involved in the collection; and eventual field notes describing contextual remarks, such as weather conditions, habitat features, or the sampling method used.
-Other types of information, such as the taxonomic identity of the specimen, are determined by taxonomists after its deposition, and can be re-evaluated by specialists several times.
-In order to facilitate the management and improve the accessibility of such information, most institutions currently maintain it organized in digital spreadsheets or in relational database systems, while also keeping references to the physical specimens they refer to.
-Some institutions are even deploying efforts towards digitizing the physical specimens \cite{}.
-
-species occurrence records, which represent punctual collecting events where a specimen is recorded by a collector (or a team of collectors) at some geographic location, date and time (Figure \ref{fig:occurrences_er}).
-Recorded specimens are vouchered.
-An advantage of having vouchered specimens is that the taxonomic identity can be later verified, which is not possible in many cases when no physical specimens are available.
-Biological collections are composed of records which have been obtained by distinct people in distinct contexts, having been usually obtained in opportunistic fashion, as opposed to having random sampling designs % cite{}
-We consider specimen occurrence records the primary biodiversity data (or museum data), although occurrence records are not exclusive of biological collections.
-
+Physical specimens stored in biological collections (also referred to as \textit{vouchers}) are often associated to complementary information, either annotated by the responsible collectors during the collecting act; or annotated at later stages, after the specimen is deposited in the collection \cite{Chapman2005}.
+Information from the collection event include the \textit{date, time} and the \textit{geographic location} where the specimen was collected; the names of the \textit{collectors} who were involved in the collection event; and eventual \textit{field notes} describing contextual remarks, such as weather conditions, habitat features, or the sampling method used.
+Other types of information, such as the \textit{taxonomic identity} of the specimen, are determined by taxonomists after the biological material is incorporated to the collection.
+The taxonomic identity of a specimen includes not only the taxon name assigned to the sample, but also its nomenclatural status and authorship, the name of the taxonomist who has identified the specimen, and other quality-related information.
+As the taxonomic identity of a specimen can be re-evaluated by specialists several times after the first determination (though it requires that the investigator has access to the physical specimen), a history of determinations is usually stored in the collection.
 % Occurrence data
-Species occurrence records represent punctual collecting events, where a specimen is recorded by a collector or a team of collectors, at some geographic location, date and time (Figure \ref{fig:occurrences_er}).
-Records may include additional contextual information from field notes taken by collectors during the collection act.
+Vouchered specimens, together with their associated data, is what scientifically testifies a punctual observation of a species at some location and at some point in time, and is thus referred to as a \textit{species occurrence} record (Figure \ref{fig:occurrences_er}).
+
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/collections_data/occurrences_er.pdf}
-    \caption{Entity-relationship diagram illustrating the main features of occurrence records. The cardinality of relationships is represented using the Crow's foot notation.}
+    \caption[Entity-relationship diagram illustrating the main features of occurrence records]{Entity-relationship diagram illustrating the main features of occurrence records. The cardinality of relationships is represented using the Crow's foot notation.}
     \label{fig:occurrences_er}
 \end{figure}
 
-% Sources of occurrence data
-%% Biological collections
-In biological collections, specimens are physically stored in the collections, becoming vouchers that can be further referred to for a multitude of purposes, including for verifying their taxonomic identity.
-Once a record is properly handled and deposited in the collection, the taxonomic identity of the collected specimen can be determined by professional taxonomists and incorporated to the original record. 
-During this process the specimen is assigned to a single taxon, at the highest taxonomic resolution as possible.
-%% Informal
-Although biological collections are the major sources of occurrence data, occurrence data can be also gathered more informally by non-professional collectors.
-A key difference, in this case, is that specimens are usually not physically collected. Thus, no vouchers are obtained.
-This limits the application of this data in some contexts, but does not impact in others.
- e.g. citizen science and crowdsourcing projects.
+
+With the development of electronic databases over the last $40$ years, many institutions have adopted computerized systems for improving the management and accessibility of specimens-related data \cite{Sunderland2013}.
+However, in many regions (including Brazil and China) we face challenges on digitizing information, information is not yet digitized or integrated \cite{Meyer2016}.
+% Data sharing intiiatives
 
 
-Occurrence records are often recorded without random sampling, leading to biases in data.
+%% Citizen science and informal collectors
+Although biological collections have traditionally been the most traditional sources of species occurrence data, recent advances in mobile computing technology, associated to connectivity of devices to the wide web, have leveraged the participation of informal groups of nature observers in recording biodiversity \cite{Silvertown2009}.
+The nature of such records is similar to those from biological collections in that they are punctual observations of specimens in nature, but also have some important differences: (i) as nature observers usually do not collect biological materials, there are no vouchered specimens, which difficults the taxonmoic determination of the recorded specimen; (ii) taxonomic determinations result from a collaborative community, not and not by professional taxonomists. 
 
 
-%% Limitations and caveats % Graham2004-box3, Newbold2010
-%%   - Stages in which we can have loss of data quality Chapman2005 intro
-Distinct aspects of data quality can be affected in multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it can be deposited, the taxonomic determination, data digitization, data storage and analysis.
-%%   - Biases: collector bias, taxonomic bias, (geographic bias, trait bias, historical bias, seasonal bias) % Daru2017, Haripersaud2009, [Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models] [Schulman2007 (collecting bias)->  A mechanism for spatially characterizing collecting bias using Thiessen polygons] 
-%%   - Errors:
 
-%%   - Presence/absence data:
+
+
 
  
 
+Data aggregators publish occurrence datasets, making them more accessible.
 
 % Data issues
-Although information about the occurrence of specimen in regions is turning massive and freely available, users of such data must be aware of some inherent caveats, coming from how the context in which data was recorded. 
-Not all questions can be readily answered with such data, as there might be taxonomic, spatial,... biases.
+Users of occurrence data must be aware of some inherent caveats.
+Not all questions can be readily answered with such data, and users must be aware of the impact of those limitations before using it .
 
+
+ % cite{}
+This leads to a set of limitations.
+We next review some of those limitations.
 
 \section{Limitations of occurrence data}
-% Limitations in NHM data \cite{Graham2004 box3}
-% Errors
-% Biases
 % Presence vc presence-absence data
 % Collectors Behavior (TerSteege2011)
-% 
+% Newbold2010
+Species occurrence data from biological collections are limited in two important aspects.
+First, biological collections contain very limited information on the geographic distribution of organisms, especially for the most imperiled ones, a scenario which is referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}.
+Many applications of occurrence data require an intensive amount of data to be available.
+%
+Besides the limitation on the availability of data, another limitation concerns its \textit{quality}.
+
+
+
+Distinct aspects of data quality can be affected in multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it can be deposited, the taxonomic determination, data digitization, data storage and analysis.
 
 \subsection{Errors}
+Errors in biological collections datasets can be of distinct types, and are more common on the taxonomic identity and spatial information, and can be manually inspected by comparing with collector field notes \cite{Graham2004}.
+Determination issues: many specimens are incorrectly identified;
+%
+\paragraph*{Taxonomic errors.}
+The accuracy of taxonomic determinations depend on the expertise of the taxonomists who evaluate the specimens.
+Many 
+Determination issue, as many specimens are incorrectly identified;
+The accuracy of the taxonomic determination depends on the expertise of the taxonomist.
+if the identification of the specimen is incorrect, and can be reevaluated if the physical specimen is available.
+Typographic (misspelling) errors are particularly common.
+They can be dealt with by including authority files containing accepted names 
+
+\textit{geographic errors}, commonly associated to wrong coordinates, imprecise coordinates, unknown datum, null values being interpreted as (0,0) coordinates.
+%
+\textit{temporal errors}.
+%
+There are also \textit{typographic} errors, which are common for example in the taxonomic names and in other fields, such as the collector field.
+
+
 
 \subsection{Biases}
+% collector bias, taxonomic bias, (geographic bias, trait bias, historical bias, seasonal bias) % Daru2017, Haripersaud2009 [Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models] [Schulman2007 (collecting bias)->  A mechanism for spatially characterizing collecting bias using Thiessen polygons]
+Biological collections are composed of records which have been obtained by distinct people in distinct contexts, having been usually obtained in opportunistic fashion, as opposed to having random sampling designs
+Occurrence records are often recorded without random sampling, leading to biases in data.
+Biases are introduced in the dataset as an effect of elements that make sampling non-random, such as the detectability, the facility to access areas...
+We briefly introduce 4 types of bias (although there are other types as well).
+In the context of this work, collector and taxonomic biases are the most relevant.
 
-\paragraph*{Collector Bias.}
-Collector bias refers to the fact that not all collectors contribute to the same extent with specimens records to the biological collection.
-Collector bias is the phenomenon in which a small subset of collectors is responsible for the majority of records.
-This has been observed by \cite{Daru2017}.
+\paragraph*{Collector bias.}
+Not all collectors contribute to the same extent to biological collections.
+In fact, a scenario in which a considerable percentage of records are gathered by only a small subset of very productive collectors has been observed in some collections \cite{Daru2017,Carine2012}.
+It is a phenomenon in which a small subset of collectors is responsible for the majority of records in a collection.
+This unbalance in the representativity of collectors in a collection is what defines the \textit{collector bias}.
+%
+As collectors have their own particular interests, they tend to prioritize the collection of some taxa, while completely ignoring taxa that are not of their interest.
+This is what taxonomic bias is.
 
-
-\paragraph*{Taxonomic Bias.}
+\paragraph*{Taxonomic bias.}
 Taxonomic bias is intrinsicaly related to collector bias, tending to reflect the interest of the most productive collectors.
 The collection is biased towards taxonomic groups most sampled by the most productive collectors.
 %
@@ -146,26 +174,38 @@ However, if we consider the herbarium itself is composed of contributions of mul
 As it is very common that collectors towards sampling the highest number of species as possible in localities they visit, the collection is non-random, and rare species tend to be overcollected and common species, undercollected \cite{TerSteege2011}.
 Biases of the most productive collectors would be hard to assess.
 
+\paragraph*{Geographic bias.}
+
+\paragraph*{Temporal bias.}
+
+\subsection{Presence/absence data}
+
+\subsection{Data completeness}
+% Funk1999 Jacobs2017 Soberon2007
+
+\subsection{Data atomicity}
+Some fields in occurrence data are not atomic, which means that multiple values
 
 
-% Citizen Science projects
-% Data from citizen science projects are structured similarly, with a few differences: (i) absence of vouchered specimens; (ii) taxonomic determinations result from a collaborative community, not necessarily composed of specialists. 
+\section{Improving data quality}
+Although data quality can be improved by either prevention or correction, being the prevention considered more effective, as correcting the data is costly\cite{Chapman2005}, prevention is out of our scope, here we limit our scope to correction.
+Here we deal with data validation and cleaning of aspects that are most relevant for the modeling we propose.
+GBIF has a set of data validation routines, that base on outlier detection, that look for inconsistencies and flag them, but do not overwrite, so that they can be inspected by data user.
 
+Data cleaning depends on the defining the intended use of data (data fit for use).
+
+In the scope of this work, we primarily deal with the entity-resolution problem.
+
+\subsection{The entity-resolution problem}
+
+
+\cite{Bhattacharya2007}
 
 % Data Aggregators
 Gbif provides a data preprocessing routine % https://www.gbif.org/infrastructure/processing
 
 
 
-% Biological collections data coverage and completeness \cite{Funk1999}.
-% Completeness: How much of data representing the real distribution of a species has actually been collected?
-% \cite{Jacobs2017}
-% Completeness of biodiversity databases \cite{Soberon2007}
-
-
-% Describing and publishing digitized datasets
-% Data description (metadata).
-% Data publication (Darwin Core).
 
 
 %% As it is common practice for botanists to record each species once during field work, some important ecological attributes such as the species abundance are not to be directly inferred from such data. {check van Gemerden 2005, from Haripersaud2009}
@@ -179,7 +219,7 @@ Gbif provides a data preprocessing routine % https://www.gbif.org/infrastructure
 
 
 
-% Data acquisition: (1) New collecting expeditions; (2) Collections exchanges materials with other institutions
+
 
 
 
@@ -254,7 +294,7 @@ In order to make data fit for its intended use the analyst must perform data cle
 
 
 % The Entity Resolution problem
-\cite{Bhattacharya2007}
+
 
 % Homonymous names, heteronymous names
 % Typographic errors

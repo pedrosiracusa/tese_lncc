@@ -136,7 +136,7 @@
 % ---
 % Título
 %\titulo{Understanding biological collections data under the perspective of social networks analytics}
-\titulo{New perspectives into analyzing data from biological collections based on social network analytics}
+\titulo{New perspectives on analyzing data from biological collections based on social network analytics}
 % Nome do aluno
 \nomeAutor{Pedro Correia de}{Siracusa}
 % Nome do orientador
@@ -340,6 +340,7 @@
    \aprovadaPor
 
    \assinatura{\textbf{Prof. \imprimirorientador, D.Sc.} \\ (Presidente)}
+   \small
    \assinatura{\textbf{Prof. Antonio Mauro Saraiva, D.Sc.}}
    \assinatura{\textbf{Prof. Eduardo Couto Dalcin, D.Sc.}}
    \assinatura{\textbf{Prof. Fábio André Machado Porto, D.Sc.}}
@@ -365,7 +366,19 @@
    \flushright
    \noindent
    \textbf{\dedicatorianame\\}
-   \textit{Pequeno texto destinado à prestação\\ de homenagem ou dedicação do trabalho do autor.\\} \vspace*{\fill}
+   \textit{To my wife Adriana and my child Nicole\\
+           To my parents Ana and Arquimedes, and sis Clara\\
+           and to all my family and friends.\\
+           All beloved.\\} \vspace*{\fill}
+   
+   \begin{footnotesize}
+   \textbf{Dedicatória}\\
+   \textit{À minha esposa Adriana e minha bebê Nicole\\
+           Aos meus pais Ana e Arquimedes, e irmã Clara\\ 
+           e a toda minha família e amigos.\\
+           Todos muito amados.\\} \vspace*{\fill}
+   \end{footnotesize}
+   
 \end{dedicatoria}
 % ---
 
@@ -373,7 +386,35 @@
 % Agradecimentos
 % ---
 \begin{agradecimentos}
-O autor manifesta reconhecimentos às pessoas e instituições que colaboraram para a execução de seu trabalho.
+I would like to profoundly thank all who have, somehow, contributed to the execution of this work.
+In first place, I thank my family for their love, encouragement, emotional and financial support during all stages of my work.
+Also, I thank all my friends at the Laboratory for the intense knowledge-sharing during these two years.
+I especially thank my flatmate Fábio Fernandes for the nice company during my stay in Petrópolis; 
+Yasmmin Côrtes for so many coffee-intensive good moments; 
+and Cauê Francisco for promptly helping me on my struggles with math.
+
+I would also like to express my most sincere gratitude to my research supervisors, Dr. Artur Ziviani and Dr. Luiz Gadelha, for their commitment, assistance and patience;
+all my professors at LNCC, in special to Dr. Fábio Porto, for the research supervision during my first year in the program;
+and all staff at LNCC, in special to Ana Néri and Roberta Machado for being always so nice and willing to help.
+
+Finally, I thank all hardworking Brazilian taxpayers for supporting science in our country and for my scholarship, granted to me through the National Council for the Scientific and Technological Development (CNPq); and the researchers who accepted our invitation for composing the dissertation defense committee. 
+\\[1\baselineskip]
+
+\begin{footnotesize}
+\textit{Gostaria de agradecer imensamente a todos que, de alguma forma, contribuíram para a execução deste trabalho.
+Primeiramente, agradeço minha família pelo amor, incentivo e apoios emocional e financeiro durante todas as etapas de meu trabalho.
+Também agradeço a todos meus amigos no Laboratório pela intensa troca de conhecimento durante estes dois anos.
+Em especial, agradeço a meu colega de apartamento Fábio Fernandes pela excelente companhia durante minha estadia em Petrópolis;
+Yasmmin Côrtes por todos os bons momentos regados a café;
+e Cauê Francisco pela disposição em me ajudar nas dificuldades matemáticas.}
+
+\textit{Também expresso minha mais sincera gratidão aos meus orientadores, Dr. Artur Ziviani e Dr. Luiz Gadelha, pelo comprometimento, assistência e paciência;
+a todos meus professores no LNCC, em especial ao Dr. Fábio Porto, pela orientação durante meu primeiro ano no programa;
+e a toda a equipe de apoio no LNCC, em especial à Ana Néri e Roberta Machado, por serem pessoas tão agradáveis e sempre dispostas a ajudar.}
+
+
+\textit{Finalmente, agradeço a todos os Brasileiros trabalhadores e pagadores de impostos, pelo apoio à ciência nacional e pela minha bolsa, concedida a mim através do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq); e aos pesquisadores que aceitaram o convite a compor a banca de avaliação desta dissertação.}
+\end{footnotesize}
 
 \end{agradecimentos}
 % ---
@@ -397,6 +438,7 @@ O autor manifesta reconhecimentos às pessoas e instituições que colaboraram p
 % resumo no idioma principal
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}
+\begin{small}
 Biological collections have been historically regarded as fundamental sources of scientific information on biodiversity, supporting a wide range of scientific and management initiatives in the scope of natural resources conservation. As they are typically composed of records of specimens (most of which derived from non-random and opportunistic sampling), biological collection datasets are commonly associated with a variety of biases, which must be characterized and mitigated before data can be consumed.
 
 In this dissertation, we focus on taxonomic and collector biases, which can be understood as the effect of particular recording preferences of key collectors on shaping the overall taxonomic composition of biological collections they contribute to. In this context, we propose two network models as the first steps towards a network-based conceptual framework for understanding the formation of biological collections as a result of the composition of collectors' interests and activities. Both models extend the well-established framework of social network analytics, benefiting from a whole set of metrics and algorithms for characterizing network topological features.
@@ -408,9 +450,8 @@ In this dissertation, we focus on taxonomic and collector biases, which can be u
 Building upon the defined network models, we also present a case study in which we use our models to explore the community of collectors and the taxonomic composition of the University of Brasília herbarium. We describe general topological features of the networks and point out some of the most relevant collectors in the biological collection as well as their taxonomic groups of interest. We also investigate the collaborative behavior of collectors while recording specimens.
 Finally, we discuss future perspectives for incorporating temporal and geographical dimensions. Moreover, we indicate some possible investigation directions that could possibly benefit from our approach based on social network analytics to model and analyze biological collections.
 
-
-
- \textbf{\palavrasChave}: Biodiversity Informatics; Biological Collections; Social Networks; Complex Networks.
+\textbf{\palavrasChave}: Biodiversity Informatics; Biological Collections; Social Networks; Complex Networks.
+\end{small}
 \end{resumo}
 
 % resumo em inglês
@@ -425,6 +466,7 @@ Finally, we discuss future perspectives for incorporating temporal and geographi
 %% resumo em português-br
 \begin{resumo}[Resumo]
  \begin{otherlanguage*}{brazil}
+ \begin{small}
 Coleções biológicas são consideradas fundamentais fontes de informação científica sobre biodiversidade, tendo historicamente suportado uma ampla gama de iniciativas para conservação de recursos naturais, tanto no âmbito acadêmico quanto em sua gestão.
 Pelo fato de serem tipicamente compostas de registros de espécies (muitos dos quais derivam de amostragem não-aleatória e oportunística), dados de coleções biológicas são comumente associados a uma variedade de viéses, que precisam ser caracterizados e mitigadospara que possam ser consumidos.
 
@@ -444,8 +486,9 @@ Nós também investigamos o comportamento colaborativo de coletores durante a co
 Ao final, discutimos perspectivas futuras para incorporar dimensões temporal e geográfica.
 Também indicamos algumas possíveis direções de investigação que poderiam se beneficiar de nossa abordagem para a modelagem e análise de coleções biológicas.
 
-   \textbf{Palavras-chave}: Informática da Biodiversidade; Coleções Biológicas; Redes Sociais; Redes Complexas.
- \end{otherlanguage*}
+\textbf{Palavras-chave}: Informática da Biodiversidade; Coleções Biológicas; Redes Sociais; Redes Complexas.
+\end{small}
+\end{otherlanguage*}
 \end{resumo}
 
 %% resumo em francês
@@ -596,10 +639,10 @@ Também indicamos algumas possíveis direções de investigação que poderiam s
 % ---
 % Inicia os anexos
 % ---
-\begin{anexosenv}
+%\begin{anexosenv}
 
 % Imprime uma página indicando o início dos anexos
-\partanexos
+%\partanexos
 
 % Inclusão dos arquivos referentes aos anexos
 % ----------------------------------------------------------
@@ -608,7 +651,7 @@ Também indicamos algumas possíveis direções de investigação que poderiam s
 %\include{anexos/anexoC}
 % ----------------------------------------------------------
 
-\end{anexosenv}
+%\end{anexosenv}
 
 %---------------------------------------------------------------------
 % INDICE REMISSIVO
