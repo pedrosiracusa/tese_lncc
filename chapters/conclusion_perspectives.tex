@@ -17,7 +17,7 @@ Although in this study we specifically discuss SCNs and CWNs in the context of s
 We believe our models provide the structural basis for a more realistic understanding on how collector and taxonomic biases arise in biological collections. 
 As stated by \citeonline{Marin2011}, network-based approaches allow analysts to
 (\textit{i}) investigate the effects of interactions between individuals on shaping their own behaviors, rather than simply comparing static attributes of individuals within a population; and
-(\textit{ii}) investigate the formation of non-homogeneous communities, composed by individuals interacting with their groups at varying levels of commitment.
+(\textit{ii}) investigate the formation of non-homogeneous communities, composed of individuals interacting with their groups at varying levels of commitment.
 We consider that these two aspects are particularly relevant in the context of biological collections.
 
 First, collectors often start their careers being supervised by one or more collectors.
@@ -30,7 +30,7 @@ All these aspects can be assessed using well-known metrics (including degree, be
 Second, although collectors often define their own taxonomic interests and expertises in terms of natural or functional groups of organisms, those are not necessarily the groups that best split the interests of collectors in the dataset of a given collection.
 In addition, collectors (even the most specialized ones) are not restricted towards exclusively recording organisms of their expertises, nor they have uniform interest towards all of those organisms.
 %
-In this context, SCNs provide the structure for discovering groupings of taxa that perform better at characterizing and differentiating collectors based on their taxonomic interests (communities in the species projection); and for investigating associations of collectors to groups of taxa in a non-discrete manner, allowing collectors to be linked to taxa at multiple groups and at different intensities.
+In this context, SCNs provide the structure for discovering groupings of taxa that are better for characterizing and differentiating collectors based on their taxonomic interests (communities in the species projection); and for investigating associations of collectors to groups of taxa in a non-discrete manner, allowing collectors to be linked to taxa at multiple groups and at different intensities.
 %
 In fact, while some groups of taxa are more specifically recorded by distinctive communities of specialized collectors, others are recorded by a wider range of collectors, with diverse taxonomic interests.
 For instance, the SCN of the UB herbarium suggests that collectors specialized in families \textit{Myrtaceae}, \textit{Poaceae} or \textit{Piperaceae} form communities of interests which are in fact more distinctive, as those families are relatively poorly recorded by collectors who are not specialists in each of them (see Figure \ref{fig:ub_scn_family_projSp_communities}).
@@ -49,7 +49,7 @@ However, we decided only to use the dataset from the UB in our case study for it
 In all other herbaria, the collectors field (\textit{recordedBy}) was particularly problematic.
 Our hypothesis is that the low quality of this field is associated to its low value for most uses of species occurrence data, implying that not much effort has been employed by data curators towards improving its quality.
 While imprecise taxonomic determinations in the \textit{scientificName} field would also lead to low quality networks, this field is critical for many other applications of occurrence data, and thus improving its quality has been extensively pursued by the biodiversity informatics community.
-The most common and impacting issues associated to the collectors field are 
+The most common and impacting issues associated to the collectors field were 
 ($i$) using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network that represent more than one collector; 
 ($ii$) registering collectors names using inconsistent naming conventions, which makes it hard to systematically interpret what are the component parts of a name; 
 ($iii$) using multiple names variations for a collector, leading to collectors being represented by more than one node in the network ; and 
@@ -95,9 +95,9 @@ In this context, \citeonline{Wehmuth2014} have introduced the concept of \textit
 By using the structure of a MAG, theset of vertices, layers, time instants and geographic locations can be represented as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
 Moreover, key properties and algorithms that have been widely used for analyzing directed graphs are also extended to MAGs, which makes them a relatively simple representation for higher-order graphs.
 
-
-
-Finally, we indicate some of the possible applications of our models.
+Finally, for a direction towards further developments of this work, we indicate the incorporation of geographic and temporal dimensions to the networks as top priorities.
+We conclude our text by briefly presenting some ideas of applications (some of them still very rough) which could potentially make use of our models. 
+Many examples below assume that temporal and geographic dimensions are already included.
 
 % ============
 % Applications
@@ -110,15 +110,45 @@ Finally, we indicate some of the possible applications of our models.
 % Collectors temporal, geographic and taxonomic ranges \cite{}.
 % The study of collectors career trajectories cite{Borgatti2015 conclusion}.
 \stepcounter{ApplicationCase}
-\paragraph*{\theApplicationCase. Occurrence context inference.}
-One of the main limitations of occurrence records is that they are obtained opportunistically, in a high diversity of contexts.
-Even though contextual information can be optionally associated to records as text (the field \textit{occurrenceRemarks}, TDWG), systematically interpreting text is complex.
+\paragraph*{\theApplicationCase. Profiling collectors.}
+An important improvement towards a systematic understanding of the roles, interests and behaviors of collectors in a biological collection is grouping them into discrete profiles.
+Profiles aggregate semantic value to the model, as they allow domain analysts to summarize the complex variety of collector features into general classes which are more comprehensible to them.
 %
-The factor that leads a collector to record a specimen depends on many factors: 
-the taxonomic interests and level of expertise of the collector at that time, 
-the goals of the collection expedition, 
+For instance, analysts may be interested on inferring \textit{academic roles} of collectors (\textit{e.g.} professor, student or field assistant), whether collectors are currently \textit{active} or \textit{retired}, or whether they are \textit{experienced} or \textit{novice}.
+Similarly, collectors can be classified as \textit{innovators} if they collect taxonomic groups that have never been recorded by others in the collection, or \textit{followers} if they follow the interests of others;
+as \textit{visitors} if they contribute to the collection in bursty patterns, or \textit{resident} if they contribute to it continuously;
+\textit{specialists} or \textit{generalists}, regarding how specific their taxonomic interests are;
+\textit{regionalists} or \textit{travelers}, regarding their interests to collect at many distinct localities.
+Compositions of each of these aspects, which we refer to as \textit{properties} of collectors, are used to define \textit{collector profiles}.
+Considering that the interests and collecting behavior of collectors change in time as they get more experienced, profiles are naturally dynamic.
+A simplistic approach for representing such variations would be to associate profile timelines to collectors, composed of multiple discrete events documenting profile changes.
 %
-dataset enrichment, by associating contextual data to each occurrence record, based on information of collectors.
+Profiling collectors can be generalized to a network problem known as the \textbf{node classification problem} \cite{Bhagat2011}.
+Starting from a subset of nodes that are previously labeled (profiled), the goal is to train a machine learning classifier that learns which compositions of features lead to each profile.
+Next, in an iterative process, non-profiled nodes have their profiles predicted based on their attributes.
+Network structure can be useful in this process, as it allows the propagation of labels (profiles) among collectors, using their positional features and patterns of association.
+
+
+\stepcounter{ApplicationCase}
+\paragraph*{\theApplicationCase. Contextual enrichment of occurrences.}
+One of the main complexities of characterizing bias in occurrence records is that they are typically obtained opportunistically, without the adoption of systematic sampling designs.
+Specimens are also collected in a high variety of contexts, from \textit{botany field classes} mainly composed of naive students to \textit{big survey projects}, involving many teams of expert collectors.
+Surveys can also be characterized as being \textit{focal}, if individuals from a specific taxonomic group are thoroughly searched; or \textit{generalist}, if the goal is to document the diversity of organisms at a location as comprehensively as possible.
+Also some records may result from \textit{herbarium exchange}.
+Considering that different contexts lead collectors to behave and collaborate differently during collection, enriching occurrence records with contextual information could make them more comparable, potentially helping to characterize biases and sampling effort. 
+%
+One idea worth investigating is whether the composition of collectors associated to a record convey contextual information about it.
+For instance, observing groups composed of many novice collectors associated to one or two who are very experienced, recording in areas relatively well explored by others, could indicate that those records have been obtained in the context of a field course.
+Records in which all collectors are substantially experienced but with distinct interests, on the other hand, could indicate the context of exploratory surveys.
+%
+Moreover, additional attributes of the recorded species can also be inferred from the composition of collectors.
+For instance, \citeonline{TerSteege2011} observed that experienced collectors tend to explore a higher diversity of vegetation types during expeditions, and thus record more rare species than novice collectors.
+Thus, the likelihood that a species represented in a record is rare can apparently be correlated with the profiles of collectors associated to it.
+%
+Assigning contexts to occurrence records could be modeled as a classification problem, analogous to that for assigning profiles to collectors.
+From a subset of records for which an analyst previously provides some class of context, the algorithm learns patterns of collectors profiles, and predicts the contexts of the remainders.
+
+
 
 
 % Validation of collectors IDs
@@ -149,33 +179,38 @@ This is analogous to studying the dynamics of contagion in network systems \cite
 % Species-determiners networks
 % Also model species-identifiers network, where people are linked to species they identify.
 % We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
-Given the diversity and complexity of life on Earth, approaching biological problems often requires the involvement of many experts in different areas.
-Moreover, experts must must not be only have a substantial expertise in their respective areas, but must also be prone to collaborate.
-One aspect that our models could help is in recommending the formation of teams of specialists.
-The Expert team formation problem:
-Given a set of requirements, the problem consists of assessing the expertise of individuals in the network (expert location problem) and recommending the formation of a team for best covering given requirement and achieving a common goal, considering how effectively they can collaborate \cite{Lappas2001}.
-We can use the SCN for assessing expertises and the CWN for refining the the ranking or suggesting teams that include many collectors who have already worked together (we assume that collectors who have successfully collaborated in the past are likely to successfully collaborating in the future).
+One more possible application of our models is for recommending teams of specialists for composing biodiversity projects.
+In many cases, experts are required not only to have a substantial expertise in their respective areas, but also to be prone to collaborate with others.
 %
-One application is the formation of teams of experts for big biodiversity surveys.
-Coordinators of such initiatives might be interested on systems for helping choosing the most concise team to obtain the greatest diversity of experts, who have collaborated in the past.
+A generalization of this problem is known as the \textbf{expert team formation}, and can be subdivided in two main steps \cite{Lappas2011}.
+The first one (the \textit{expert location problem}) consists of assessing the level of expertise of individuals in a given set of topics, or for performing a given task.
+Each individual is assigned a set of skills which characterize their expertises.
+Once experts have been located, teams of experts must be formed such that collaborators can effectively communicate and work collectively for achieving a common goal.
 %
-One possible application is on the elaboration of red lists.
-Evaluation (by the scientific community) of the conservation status of species for the elaboration of red lists (IUCN), which are important for supporting the elaboration of conservation plans, prioritizing conservation efforts.
-Species are evaluated regarding their risk of becoming extinct.
-The elaboration of red lists uses occurrence data intensively, and also requires the collaboration of teams of specialists, for a task-force: validating and evaluating the conservation status of species \cite{Martinelli2013}.
-Species profiles are assigned to specialists.
-Selecting a high number of specialists distributes the workload better, avoiding overloading specialists.
-Specialists act in diverse stages of the process, since the evaluation of data quality (such as suspicious occurrences) to the evaluation of the final profiles of species of their expertise.
-Specialists that are personally invited for collaborating.
-During their careers, collectors develop good intuition about the communities at locations where they have been \cite{Noss1996}, which make them good validators for occurrence data.
-The geographic dimension in this case is also central, as we choose teams of specialists while trying to maximize the geographical coverage recordings.
-From SCN models, we could systematically obtain recommendations of specialists who are more experienced, and have most actively recorded taxonomic groups of interest.
-We first evaluate their expertise
-Algorithms have been proposed in literature for computing the expertise of individuals based on their positions in the network \cite{Lappas2011}
+Locating potentially effective teams collectors could be useful for better \textit{planning biodiversity surveys}, maximizing the productivity of the expedition while reducing associated costs.
+Given the overall goals of a survey, a list of qualified collectors could be obtained from SCNs, while arranging teams with them should considerate how effectively they have collaborated in the past (from CWNs).  
+%
+Another example is the evaluation of conservation status of species for the \textit{elaboration of red lists}.
+This task requires the collaboration of teams of specialists, more specifically for validating species occurrence data and for evaluating profiles that are assigned to each species \cite{Martinelli2013}.
+Experienced collectors can be important data validators, as they tend to develop good intuition about the biological communities at locations where they collect \cite{Noss1996}.
+In order to better distribute the validation workload over the collaborators, occurrence records should be directed to collectors according to their profiles, considering their experience and taxonomic interests; and according to the regions where they have collected.
+In this context, potential validators could be indicated by our models according to their profiles (see \textit{profiling collectors}).
+
+
 
 \stepcounter{ApplicationCase}
 \paragraph*{\theApplicationCase. Assessing the accuracy in taxonomic determinations.}
-\cite{Chapman2005} %pg.22
+One issue with the \textit{determinavit system} of biological collections (a system where experts review the taxonomic determinations assigned to species) is that the certainty of identifications are not always documented.
+Depending on the experience of the person who assigns a taxonomic identity to a specimen, it can be more or less reliable. 
+\citeonline{Chapman2005} have proposed that collections should incorporate in their databases an indication of the certainty of identifications, by using a system of ranks of expertise. %pg.22
+For instance, a record could be identified by a world expert in that taxa, by a regional expert, a non-expert or by the person who has collected the specimen himself.
+Ranking identifiers manually, however, is no trivial task.
+%
+A network model analogous to the SCNs we propose in this work can be defined for modeling the interests of \textit{identifiers} towards \textit{species}.
+This new class of network (Species-Identifier Network) could be used for helping profiling identifiers, similarly to what we have described for collectors.
+
+
+
 
 
 
@@ -183,8 +218,8 @@ Algorithms have been proposed in literature for computing the expertise of indiv
 
 % Building Recommender Systems
 % ----------------------------
-\stepcounter{ApplicationCase}
-\paragraph*{\theApplicationCase. Building recommender systems.}
+%\stepcounter{ApplicationCase}
+%\paragraph*{\theApplicationCase. Recommender systems for collection.}
 % Sampling Site Recommendation
 % Assisted planning of future biodiversity surveying is key for improving herbarium data \cite{Graham2004}.
 % Strategic sampling in unsurveyed areas: identify gaps in environmental and geographic coverages \cite{Graham2004}.
@@ -197,10 +232,19 @@ Algorithms have been proposed in literature for computing the expertise of indiv
 % Link prediction: Trying to predict which ties are most likely to form between entities in the network in the near future.
 
 % Use Case: "From your collection activity pattern, you might be interested in collecting groups {} in places {}...we found a gap there. Why don't you contact team {}? They have extensively collected other groups in that location and are willing to collaborate in field. Otherwise you could contact land owner {}. His property is within that are and his renting fee is {} reais."
-% < add illustration >
 
-\citeonline{Carine2012} suggest that the discovery of new species is mainly done by very experienced collectors, and that funding them selectively would boost the discovery of new species. 
-They have correlated productive 
+%We introduce this application case with an illustrative example:
+%\begin{displayquote}
+%``Hello, collector. From your recent collecting activities, we thought you might be interested in collecting taxa $a,b,c$ at locations $x,y,z$. We found a significant gap of representativity of those taxa at those locations. If you wish to plan an expedition, we recommend contacting collectors $d,e,f$, as they have extensively collected other groups at that location, and are open towards establishing new collaborations''.
+%\end{displayquote}
+%One of the key aspects for improving the geographical coverage and taxonomic representativity of data from biological collections involves a better planning of future biodiversity surveying \cite{Graham2004}.
+%Although there are inaccessible regions that consequently remain unexplored for all taxonomic groups, others 
+%
+%Recommender systems provide recommendations directed to specific collectors, based on their past activities and interests.
+
+%Recommender systems are designed for predicting the preferences of users towards items, and can be readily applied to communities of collectors as well.
+%One of the most common techniques for providing recommendations is \textit{collaborative filtering}, in which the preferences of other users with similar profiles are considered for recommending new items for a particular user.
+
 
 
 % Collector's productivity Score
@@ -212,6 +256,8 @@ We currently face a shortage of researchers willing to pursue careers as field n
 Their work is unappreciated by research funding agencies.
 This is partially due to the high costs of field expeditions for collecting biological materials, which do not necessarily produces publishable work.
 As a result, we currently face a shortage of researches exploring new areas is decreasing, and this data is critical for the construction of models.
+%
+Nevertheless, museums and herbaria must increase their pace towards recording new materials, especially in megadiverse countries, as this information has been proven to be critical for improving our understanding on how to better manage natural ecosystems \cite{Soberon2004}.
 Funding agencies must therefore incentivate the formation of new field naturalists (especially in megadiverse countries), and this can be done by incorporating metrics that value their importance as collectors.
 
 On their duty of managing the application of public resources to scientific initiatives, research funding agencies deal with the problem of prioritizing proposals from researchers who are most capable of providing significant advance in their respective fields.
@@ -234,6 +280,7 @@ As the metrics are calculated based on published occurrence records, this would 
 % Background data selection
 % Which records can we use as background data? 
 % Pseudo-absences are more likely if a group of collectors potentially intereste in the species (or taxonomic group) have searched the area.
+% About SDM
 Species Distribution Modeling is one of the main uses of species occurrence data.
 The goal is to correlate the occurrence of species with environmental variables.
 We then project the probable distribution of species by using environmental predictors.
@@ -246,6 +293,8 @@ It could simply be out of the interest of the collectors who have sampled that a
 Pseudo-absences can be inferred. 
 Some studies have selected background data based on taxonomic groups \cite{}
 %
+The method used for selecting pseudo-absences has been shown to be central in SDM \cite{Barbet-Massin2012}.
+\citeonline{Phillips2009} show that subsampling background data as to reflect the biases in the occurrences dataset improves the performance of SDMs, but for that bias must be first characterized.
 We believe that our models can be used for background data selection.
 For assessing the probability that a taxon occurs in a given place, we look at the collectors who have worked near the area.
 True-absence is more likely if collectors which was potentially interested in the taxon has searched the area.
