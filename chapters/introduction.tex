@@ -35,6 +35,7 @@ Tackling this challenge requires an important analytical paradigm shift in the b
 Instead of using data for statistically corroborating or refuting an initial set of hypotheses posed by an investigator (and thus hypothesis-based), a data-based approach aims at systematic unraveling hidden patterns from data, eventually leading to insights and to the generation of new domain-specific hypotheses.
 %
 Moreover, the viability of a data-based endeavor depends on properly dealing with data during multiple stages of its \textit{life cycle}, requiring the wide adoption of standards, best practice guidelines, quality control protocols and documentation routines.
+Failing to observe and meet the requirements in any stage of the data life cycle can lead to a variety of limitations, hampering the use of data for many applications.
 
 % Data life cycle
 According to \citeonline{Michener2012}, the life cycle of ecological data is composed of eight steps, being 
@@ -48,64 +49,32 @@ According to \citeonline{Michener2012}, the life cycle of ecological data is com
 ($viii$) \textit{data analysis}, the process in which information and knowledge on natural phenomena are extracted from data.
 
 % Biodiversity Informatics
-The application of information technology for assisting researchers at each stage of biodiversity data life cycle has been the main concern of the \textbf{Biodiversity Informatics} (BI) community, which has undergone a significant expansion over the last two decades \cite{Soberon2004,Peterson2015}.
-% Notable advances
-Notable advances have been achieved in some of the stages listed above.
-% Data description -> Darwin Core
-% Remaining challenges
-
-
-Two important aspects of data that are subject of attention of the BI community concern \textit{data quality} and \textit{interoperability}.
-Data quality is defined in terms of its fitness for the intended use.
-
-% Data interoperability
-Data interoperability has been an important concern of the BI community.
-
-
-% Data quality
- 
-
+The application of information technology for assisting researchers at each stage of biodiversity data life cycle has been the main concern of the \textbf{Biodiversity~Informatics}~(BI) community, which has undergone a significant expansion over the last two decades \cite{Soberon2004}.
+Notable advances have been achieved in many of the stages listed above, although many still pose important unresolved challenges to be addressed within the next decade \cite{Peterson2015}.
 %
-Among the main 	
-Not only sharing data, but also sharing solutions (tools) for dealing with aspects of data, sharing knowledge, data integration (using standards), 
-Up to date, the main goals of BI are
-mobilizing existing knowledge, sharing knowledge, avoiding reinventing tools, tackle biodiversity challenges at appropriate scales, look for new solutions \cite{Peterson2015}.
+Among those, issues regarding the \textit{quality} (DQ) and \textit{fitness} of primary biodiversity data for their intended use have been thoroughly explored by the BI community \cite{Chapman2005a}, leading to the development of many methods and tools for assisting the process of data cleaning. 
+In this context, a conceptual framework for assessing and managing data quality has been recently proposed by \citeonline{KochVeiga2017}, providing a mechanism for improving the collaborative development and sharing of DQ solutions by the BI community.
 %
-Provide biodiversity information products, with high quality.
-The main questions concern 
-Current challenges in this field include 
-The challenges in the field 
-Besides data consumption, BI also tackles other important steps of the life cycle of data \cite{Michener2012}.
-
-Biodiversity informatics does not exclusively tackle the consumption of data.
-Three broad categories of Biodiversity Informatics are data extraction and capture, data compilation, data display and visualization \cite{Peterson2010}.
-A central goal is to allow interoperability of scattered biodiversity data, as well as support building knowledge from local systems \cite{Bisby2000}.
-Typically, primary biodiversity data that is useful for biodiversity informatics studies concern specimens occurrence records.
-There are costs associated to collecting new biodiversity data.
-We need to be able to use biodiversity data that is already available the best as we can, taking as much information as possible from data that is already available.
-% Challenges: Errors, biases, data standards..
+% Data interoperability \Bisby2000.  involves description (DwC)?
+%
+Data quality and interoperability are particularly relevant for many applications of data from biological collections, many of them based on niche models, widely investigated by the BI community.
 
 
-% Big data challenge: Data-intensive analysis
-Biodiversity research is therefore becoming a \textit{data-intensive science}, requiring the adoption of novel computational techniques and scientific workflows for systematically integrating and analyzing data from multiple sources \cite{Kelling2009}.
-%
-More traditionally, the biodiversity research community has adopted \textit{hypothesis-based approaches} for investigating phenomena of their interest.
-Starting from a hypothesis that is elaborated based on her own experience, an investigator feed her data into well-established statistical methods and models, with the goal of either corroborating or refuting her hypothesis.
-However, fully exploring the potential of massive and complex datasets requires the adoption of a complementary strategy, still not very familiar to the biodiversity community.
-Under a \textit{data-driven approach}, an investigator seeks to first unravel hidden patterns from data, which can be subsequently investigated and used for generating new domain-specific hypotheses \cite{Kelling2009}.
-%
-According to \citeonline{Kelling2009}, a data-intensive science workflow involves several steps.
-%
-\citeonline{Michener2012} provide a synthesized overview of the process by which raw data is transformed into information and knowledge, which they refer to as the \textit{data life cycle}.
-The life cycle is composed of eight distinct steps, which involve 
-($i$) planning data management; 
-($ii$) collecting data;
-($iii$) managing data quality;
-($iv$) describing data using metadata;
-($v$) preserving data;
-($vi$) discovering and 
-($vii$) integrating data and, finally,
-($viii$) analyzing data.
+
+% Species Distribution modeling -> after biodiversity informatics
+% Newbold2010 Applications and limitations of NHM data to conservation and ecology
+Species distribution modeling is a technique for estimating the geographic distribution of organisms based on environmental features.
+
+Concerned on identifying the most relevant environmental features driving the distribution of species, \textit{Species Distribution modeling} (SDM) heavily uses data from biological collections.
+These models predict the geographical distribution of species based on environmental features, such as temperature, precipitation, terrain declivity, among others.
+Species distribution in geographic space is inferred from relevant relationships discovered in environmental space.
+Species occurrence data is used in SDM for model fitting. 
+SDMs allows us to project maps of probable occurrence of species.
+Thus we can prioritize areas for allocating resources for wildlife conservation (priority areas selection).
+Priority areas selection. %[ check Schulman 2003: Nature conservation in Amazonia: the role of biological theory in reserve delimitation – Conserv- acio´n de la naturaleza en la Amazonı´a]
+Current challenge on Species Distribution Modeling include obtaining a sufficient amount of data with sufficient quality \cite{Araujo2006}.
+
+
 
 
 
