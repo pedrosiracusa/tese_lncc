@@ -13,10 +13,16 @@
 
 % Biological collections
 Biological collections are scientific repositories where biological materials, in the form of physical specimens, are systematically deposited and preserved to be used for scientific purposes. 
-Throughout this text we use the term ``biological collections'' as a synonym for \textit{Natural History Collections (NHC)}, the later being more widely adopted in biodiversity informatics literature.
+Throughout this text we use the term ``biological collections''\footnote{We occasionally also use the term ``museums'', for short.} as a synonym for \textit{Natural History Collections (NHC)}, the later being more widely adopted in biodiversity informatics literature.
 Such collections are typically hosted and curated by institutions like herbaria and natural history museums, which provide appropriate physical infrastructure and human resources for ensuring both the long-term preservation of the collections and their accessibility to the scientific community.
 %In addition, these institutions usually count with large networks of associated contributors, including professional collectors and taxonomists.
+
+A list with 72 potential uses of herbaria has been compiled by \citeonline{Funk2004}, including for research, education and training, science outreaching.
+Biological collections are also a possible data source for studying the history of explorers and expeditions for documenting biodiversity \cite{Funk2004}. 
+
 % Data acquisition: (1) New collecting expeditions; (2) Collections exchanges materials with other institutions
+
+
 
 In this chapter we give an overview of how data in biological collections is structured.
 We describe the semantics of species occurrence records in section \ref{section:occurrence_data}.
@@ -46,12 +52,11 @@ As taxa relate to each other on a tree-like hierarchical structure (with each ch
 Although this term is not included in the ICN document, we use this definition throughout this text.
 
 \paragraph*{Taxon.}
-A taxon is a taxonomic group of organisms at the level of any rank (ICN \textit{Art.1.1}), which are considered by professional taxonomists to form a \textit{taxonomic unit}. Plural is \textbf{taxa}.
+A taxon is a taxonomic group of organisms at the level of any rank, which are considered by professional taxonomists to form a \textit{taxonomic unit}. Plural is \textbf{taxa}.
 
-\paragraph*{Species.}
-Species is one of the taxonomic ranks organisms can be determined by professional taxonomists as belonging to. It is regarded to be a basic unit of taxonomic classification, although organisms can be further classified in lower-hierarchy taxonomic ranks (infraspecific ranks).
-Differently from other ranks, the name of a species is composed using a binomial nomenclature system, in which the name of the genus it belongs to is appended to a \textit{specific epithet}.
-Examples of species names are \textit{Caryocar brasiliense}, \textit{Myrcia guianensis}, \textit{Solanum lycocarpum}.
+\paragraph*{Species.} % ICN Art.23
+Species is one of the taxonomic ranks organisms can be determined by professional taxonomists as belonging to. It is regarded to be a basic unit of taxonomic classification, although organisms can be further classified in lower-hierarchy taxonomic ranks (\textit{i.e.}, infraspecific ranks).
+Differently from other ranks, the name of a species is composed using a binomial nomenclature system, composed of the name of the genus followed by a \textit{specific epithet}, \textit{e.g.} \textit{Caryocar brasiliense}, \textit{Myrcia guianensis}, \textit{Solanum lycocarpum}.
 
 \paragraph*{Specimen.}
 When botanists sample organisms in field they either collect part of the organism (\textit{e.g.} a branch of a tree), the entire organism (\textit{e.g.} the entire body of a weed) or multiple individuals of the same type (\textit{e.g.} a bunch of identical, very small-sized mosses). 
@@ -59,7 +64,7 @@ Any of these collected biological materials is an evidence of the existence of a
 A specimen is defined as one of such evidences, and refers to a punctual observation of a single kind of organism. 
 For the formal definition refer to \textit{Art. $8.2$} of ICN. 
 Although a specimen could be classified by a taxonomist as being a representative of a given species, this is not a requirement for it to be included in scientific collections. Although taxonomists classify specimens in a best effort manner (the most taxonomically precise as possible), sometimes only higher ranks can be determined. The highest taxonomic rank at which the specimen could be identified is known as its \textbf{taxonomic resolution}.
-After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a taxonomic group (a taxon), in a best-effort manner.
+After properly deposited in a biological collection, each record receives a taxonomic identification that assigns the individual to a \textbf{taxon}.
 
 
 
@@ -74,14 +79,12 @@ After properly deposited in a biological collection, each record receives a taxo
 Physical specimens stored in biological collections (also referred to as \textit{vouchers}) are often associated to complementary information, either annotated by the responsible collectors during the collecting act; or annotated at later stages, after the specimen is deposited in the collection \cite{Chapman2005}.
 Information from the collection event include the \textit{date, time} and the \textit{geographic location} where the specimen was collected; the names of the \textit{collectors} who were involved in the collection event; and eventual \textit{field notes} describing contextual remarks, such as weather conditions, habitat features, or the sampling method used.
 Other crucial piece of information is the \textit{taxonomic identity} of the specimen, determined by taxonomists after the biological material is incorporated to the collection.
-
+%
 The taxonomic identity of a specimen includes not only the taxon name assigned to the sample, but also its nomenclatural status and authorship, the name of the taxonomist who has identified the specimen, and other quality-related information.
 As the taxonomic identity of a specimen can be re-evaluated by specialists several times after the first determination (though it requires that the investigator has access to the physical specimen), a history of determinations is usually stored in the collection.
-
+%
 % Occurrence data
 Vouchered specimens, together with their associated data, is what scientifically testifies a punctual observation of a species by a collector, at some location and at some point in time, and is thus referred to as a \textit{species occurrence} record (Figure \ref{fig:occurrences_er}).
-%
-Three dimensions of occurrence data: taxonomic identity, space and time.
 
 \begin{figure}[h!]
   	\centering
@@ -90,6 +93,10 @@ Three dimensions of occurrence data: taxonomic identity, space and time.
     \label{fig:occurrences_er}
 \end{figure}
 
+% Species occurrence is not exclusive of biological collections Chapman2005b
+%% Citizen science and informal collectors
+Although biological collections have traditionally been the most traditional sources of species occurrence data, recent advances in mobile computing technology, associated to connectivity of devices to the World Wide Web, have leveraged the participation of informal groups of nature observers in recording biodiversity \cite{Silvertown2009}.
+The nature of such records is similar to those from biological collections in that they are punctual observations of specimens in nature, but also have some important distinctions: (i) as nature observers usually do not collect biological materials, there are no vouchered specimens, which difficults the taxonmoic determination of the recorded specimen; (ii) taxonomic determinations result from a collaborative community, not and not by professional taxonomists. 
 
 With the development of electronic databases over the last $40$ years, many institutions have adopted computerized systems for improving the management and accessibility of specimens-related data \cite{Sunderland2013}.
 However, in many regions (including Brazil and China) we face challenges on digitizing information, information is not yet digitized or integrated \cite{Meyer2016}.
@@ -105,130 +112,190 @@ Some intitiatives such as TDWG provide biodiversity informatics data standards f
 DwC is the Darwin Core metadata scheme, and consists of data domains. % check Veiga2014 for refs
 % TDWG first mentioned here 
 
+Darwin Core (DwC) is a body of standards, designed to provide a consistent vocabulary for representing biodiversity-related information and making it exchangeable, accessible, reusable and interoperable \cite{Wieczorek2012}.
+It has been adopted as an standard for data publishing.
+It is an extension of the Dublin Core Metadata Initiative (DCMI\footnote{\url{http://dublincore.org/}}), specifically created for dealing with biodiversity data.
+composed of many terms to designate \textit{classes} and their \textit{properties}.
+Terms are divided into record-level terms, which ; and auxiliary terms.
+The \textit{Occurrence} class is used
+An occurrence event is represented in DwC with the \textit{Occurrence} class.
 
-%% Citizen science and informal collectors
-Although biological collections have traditionally been the most traditional sources of species occurrence data, recent advances in mobile computing technology, associated to connectivity of devices to the World Wide Web, have leveraged the participation of informal groups of nature observers in recording biodiversity \cite{Silvertown2009}.
-The nature of such records is similar to those from biological collections in that they are punctual observations of specimens in nature, but also have some important distinctions: (i) as nature observers usually do not collect biological materials, there are no vouchered specimens, which difficults the taxonmoic determination of the recorded specimen; (ii) taxonomic determinations result from a collaborative community, not and not by professional taxonomists. 
 
 
 
 
 
-\section{Limitations of data} % Newbold2010
+\section{Limitations of data} % Newbold2010 James2018 Hortal2007
 % Presence vc presence-absence data
 % Collectors Behavior (TerSteege2011)
 % Limitations: sampling bias, lack of assessment of sampling effort, lack of geographic coverage
+% Name ambiguity issue Groom2014
 
+% Most species remain poorly collected , Nelson1990 TerSteege2011
+
+% ===========
 % Data issues
-Although biodiversity scientists have certainly benefited from open access to massive volumes of species occurrence data from many biological collections, the availability of detailed information is still very scarce for most known organisms.
-This scenario, referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}, is even more critical for discovering and managing threatened species in megadiverse countries, which still remain largely unexplored for many regions and taxonomic groups \cite{Soberon2004}.
-%
-% Presence-only data
-Moreover, given the non-systematic and opportunistic nature of how specimens are usually recorded, biological collections provide no reliable information on the absence of species extent of sampling effort towards each location, which makes .
-
-has been absence of species, nor on the extent of sampling effort employed across geographic space.
-The \textit{presence-only} nature of species occurrence data limits its usability for some modeling 
-
-Moreover, the \textit{presence-only} nature of species occurrence data limits its usability for some modeling approaches, which require not only information on the existence of species in geographical space, but also on their absence.
-While an occurrence record provides evidence for the existence of a species at some location, the absence of records does not mean species absence.
-
-Nevertheless, as presence-absence data are rare and usually costly to collect, some methods have been proposed for fitting the models using pseudo-absences (or background data) derived from presence-only occurrence records \cite{Phillips2009}.
-
-Second, while an occurrence record provides evidence for the existence of a species at some location and time, the absence of a record of a species does not testify for its absence.
-Occurrence data are classified as presence-only data.
-The absence of a species does not testify for its absence.
-As opposed to surveys which use grid designs, species occurrences are typically gathered in an opportunistic way.
-According to \citeonline{Zaniewsky2002}, there are two important limitations of presence-only data:
-First, the non-systematic sampling routines which characterizes such data makes it challenging to characterize biases in the data. 
-Second, sampling effort is also unknown, and thus observe a sampling bias of common vs. rare species.
-Rare species tend to be more representative in such datasets.
-
-adequate for data made available by biological collections is not always adequate for
-
-assessing the conservation status of species in such countries
-
-
-
-this limitation is even more problematic for threatened species, which tend to have few occurrences.
-
-understanding on ecological requirements of the, the lack of species data limits the modeling , This limits our ability to 
-As many applications of biodiversity data are based on ... the lack of adequate data impacts the quality of models, used for
-This imposes serious limitations for understanding ecological and evolutionary aspects of many species, specially for the most imperiled ones. 
-many applications of NHM data, especially for SDM \cite{Galante2017}, making it even harder to understand the ecological requirements of threatened species.
-Consequently, we still lack data for studying ecological and evolutionary aspects of many species (and especially the most imperilled ones).
-
+% -----------
+Biological collections are still the main sources of biodiversity data.
+Despite the many caveats associated to museum data, they cannot be ignored, as they are still the main sources of information about the distribution of species, and thus are relevant for a multitude of ecological and conservationist investigations, including for the selection of high-priority biodiversity regions \cite{Funk2002}... 
+Although biodiversity scientists have undoubtedly benefited from open access to massive volumes of species occurrence data from many biological collections, there are some caveats that must be accounted for, before using data for modeling.
+Efforts are necessary for making them usable, as biodiversity data is hard to gather \cite{}.
+Data must be cleaned before used.
 % Data quality
-dealing with so many heterogeneous data sources also introduce new complexities related to data.
+Dealing with so many heterogeneous data sources also introduce new complexities related to data.
 Data is not always adequate for investigating every aspect of natural systems.
 Using inadequate data for studying specific aspects of biological diversity can lead to erroneous or misleading results \cite{Chapman2005}, and investigators must be aware of the inherent limitations of their data before formulating their questions. % Chapman in pg. 1
 
-%($i$) the scarcity of data for many organisms in the world, which is referred to as the \textit{Wallacean Shortfall}
-%($ii$) their inability to represent the \textit{absence} of species; and
-%($iii$) the \textit{quality} of data, including errors and uncertainties.
-Three important aspects of datasets from biological collections may limit their use for their intended applications.
-% Wallacean Shortfall
-First, detailed information on the geographic distribution of most organisms is very scarce, especially for the most imperiled ones. 
-This scenario, referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}, is even more critical for megadiverse countries, which still remain relatively unexplored for many taxonomic groups \cite{Soberon2004}.
-The low availability of occurrence data for most species imposes serious limitations for many applications of NHM data, especially for SDM \cite{Galante2017}, making it even harder to understand the ecological requirements of threatened species.
-
-% Presence-only
+% charact. 1: Wallacean Shortfall (coverage of data)
+Availability of detailed information is still very scarce for most known organisms.
+This scenario, referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}, is even more critical for megadiverse countries, which still remain largely unexplored for many regions and taxonomic groups \cite{Soberon2004}.
+The lack of sufficient data for threatened species is even more concerning, as designing efficient programs for their conservation require knowledge on their geographic distribution and ecological requirements.
+This shortage of data, combined with the non-systematic sampling and insufficient quality limits the use of data from biological collections for many intended applications, many of which require an intensive amount of data to be available \cite{Guisan2007}.
+% Guisan2007 -> Many applications require high volumes of data, low sample size reduces the performance of many techniques
+% Galante2017 -> Techniques for SDM using few records
+In the context of the present work, sampling biases and the quality of data are central.
 
 
+\subsection{Sampling biases}
+% charact. 2: Non-uniform sampling effort -> Lead to bias
+One important aspect that often limits the usability of primary data from biological collections concerns the way in which it is gathered in field.
+In general, most species occurrence data composing biological collections derive from exploratory field expeditions, in which organisms are recorded in a non-systematic \textit{observational} fashion by different collectors, using different methods and at distinct circumstances (though records resulting from experimental studies are eventually incorporated in museums as well). 
+As a result, the distribution of sampling effort in such datasets is uneven and rarely quantified, leading to \textit{sampling biases}.
+
+As defined by \citeonline{Chrisman1991}, biases are uniform shifts in measured values, resulting from systematic errors that are introduced by some measurement system.
+They are expressed as unrealistic tendencies in data, and can usually be mitigated with the adoption of random sampling designs.
+%
+Sampling bias in biodiversity data can be classified into several distinct categories, depending on the aspect of data under investigation \cite{Daru2017}.
+Here we briefly present four of them, the first two (collector and taxonomic biases) being the most relevant in the scope of our work.
+%
+% collector bias, taxonomic bias, (geographic bias, trait bias, historical bias, seasonal bias) % Daru2017, Haripersaud2009 
+\paragraph*{Collector bias.}
+Not all collectors contribute to the same extent to biological collections.
+In fact, it has been observed that a considerable percentage of records in biological collections are gathered by only a small subset of very productive collectors, while the vast majority of collectors contribute with just a few records, each \cite{Daru2017,Carine2012}.
+This unbalance in the representativity of collectors is what defines the \textit{collector bias} in biological collections.
+As the overall taxonomic composition of collections --- as well as the geographical and temporal distribution of their records --- tend to reflect the particular interests and collecting behavior of their most representative collectors, collector bias propagates to other categories of biases in the collection. Therefore, we consider that characterizing collector bias is a fundamental step towards understanding other types of biases.
+
+\paragraph*{Taxonomic bias.}
+Not all taxa are quantitatively represented in biological collections in the same proportions as they occur in natural systems.
+Instead, the taxonomic composition of collections reflect the interests and collecting behavior of the communities of collectors contributing to them.
+Taxonomic bias is intrinsically related to collector bias, as the overall composition of biological collections tend to reflect the interests of their most productive collectors.
+The collection is biased towards taxonomic groups most sampled by the most productive collectors.
+%
+Rare species tend to be more overrepresented in biological collections in comparison to common species \cite{}.
+%
+%Some studies have proposed to assess taxonomic bias of collectors by comparing the representativity of each taxon on their sets of records to the herbarium \cite{Haripersaud2009}. %Such approaches give at most a view of how well a collector represents the composition of the collection.
+%However, if we consider the herbarium itself is composed of contributions of multiple collectors each with particular interests --- and therefore also biased ---, the herbarium is biased, not representing well the natural communities.
+%As it is very common that collectors towards sampling the highest number of species as possible in localities they visit, the collection is non-random, and rare species tend to be overcollected and common species, undercollected \cite{TerSteege2011}.
+%Biases of the most productive collectors would be hard to assess.
+
+\paragraph*{Geographic bias.}
+% [Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models] 
+Collection sites are not randomly selected in geographic space, nor they are all sampled to the same extent.
+As features of the landscape make some areas more accessible for collection activities than others \cite{Hijmans2000}, collectors tend to prioritize those to maximize their productivity while minimizing costs.
+Geographic bias arises as a consequence of non-uniform collecting effort in geographic space, and tends to reflect the preferred locations of the most productive collectors.
+Some regions that are more accessible being thoroughly sampled (such as areas near urban centers, roadsides and margins of rivers);
+while others which are more inaccessible, such as rainforests, being only poorly or not sampled at all.
+%
+Geographic bias is also observed at broader scales.
+A compilation of the representativity of plants in GBIF by \citeonline{Meyer2016} has shown that among the most representative countries and regions are the United States (mainly the west coast), Central America, countries in Europe (including the nordic countries), Australia, Japan, New Zealand.
+
+
+\paragraph*{Temporal bias.}
+The recording activities of collectors are not uniformly distributed over time.
+The patterns of activities of collectors change in time, in function of their personal characteristics (\textit{e.g.} age, stage in career)
+Collectors show preferences and and face difficulties on performing 
+Temporal bias can be further subdivided into two more specific classifications (although there are others):
+Historical bias. 
+Seasonal bias: Two causes: 
+Biases in higher granularities, such as weekdays/weekends...
+Collectors also tend to concentrate their activities around the best seasons for fieldwork.
 
 
 
-One important regards \textit{data quality}.
+Building models without accounting for biases in data has been observed to strongly impact their performance, leading to spurious results which can be misinterpreted and, ultimately, lead to wrong decisions.
+For instance, assessing patterns of species richness from species occurrence datasets has been shown to be particularly challenging due to geographical bias in data \cite{Hortal2007,Reddy2003}, as higher diversities tend to be observed at more accessible sites due to higher sampling effort.
+
+
+
+
+
+% Two shortcomings: presence-only data and representativity
+% Presence-only data and richness
+
+Non-uniform sampling effort also makes it hard to infer true absences from biological collection datasets.
+As the distribution of sampling effort towards locations is not known in biological collections, its data is regarded as `presence-only', which means that the absence of a record for a species at some location does not necessarily indicate that the species is truly absent \cite{Graham2004}.
+Instead, no collectors that would potentially be interested on recording it have visited the location.
+
+% Representativity
+Another problem arising from non-uniform sampling effort concerns the representativity of species in biological collections.
+Collectors seldom collect more than one exemplary of each species at the same place in the same expedition, and thus species representativity in museums do not correspond to their abundance in natural systems \cite{TerSteege2011}.
+Thus, common species are not always more representative than rare species.
+In fact, rare species are eventually more represented than common ones due to the fact that more experienced collectors tend to prioritize collecting rare over common ones \cite{Nelson1990}.
+% Problems in modeling
+Using presence-only data for assessing richness is problematic, although there are methods for overcoming this limitation, as most records available for specimens are presence-only \cite{Zaniewski2002}.
+Richness was observed to be correlated to survey effort, richness is biased towards regions that are more thoroughly sampled \cite{Hortal2007}.
+
+
+
+
+
+
+
+% charact. 3: Data quality
+% Briefly describe the limitations due to errors
+
+
+
+
+
+
+
+
+\subsection{Data quality}
+Besides the limitation on the availability of data, another limitation concerns its \textit{quality}.
+A definition for data quality which considers its \textit{fitness for the intended use} was first proposed in the context of geographical information systems \cite{Chrisman1984} and became widely adopted by the BI community.
+In BI, data quality is defined as its fitness for the intended use, and thus assessing quality depends on first defining the intended use of data (data fit for use).
+A dataset is fit for use if it is suitable (or valuable) for answering a given question.
+Data is considered to be high quality if the desired information can be obtained from it.
+Thus, quality is not an exclusive attribute of the dataset, but also depends on the requirements of users.
+%
+A framework for systematically describing the ``fitness for use'' from the perspective of the user is proposed by \cite{KochVeiga2017}. 
+The framework is based on a ``Fitness for Use Backbone'' (FFUB)
 %
 %
-Data quality loss can be affected in multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it is incorporated, the taxonomic determination, data digitization, data storage and analysis.
+Data quality loss can be affected in multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it is incorporated, the taxonomic determination, data documentation, data digitization, data storage and analysis.
 %
-Before being used, data quality must be characterized, which depends on the user needs.
-Data quality assessment depends on its intended use \cite{}.
-%
+Before being used, data quality must be assessed, which depends on the user needs.
 Users need a systematic way to both assess and manage data quality.
 \citeonline{KochVeiga2017} have proposed a framework for systematically assessing requirements that make quality acceptable for each kind intended use, in the biodiversity informatics community.
-%
-Dimensions of data quality \cite{Veiga2014}
-\citeonline{Veiga2014} have identified recurrent patterns of errors in occurrence data, among them:
-domain value redundancy;
-Nonatomic data values;
-Inconsistent data values.
+
+
+Increase the usability of a dataset, making it suitable for answering a wider range of questions.
+% Veiga2014 -> Identified and defined the main dimensions of data quality and their associated problems 
+Although data quality can be improved by either prevention or correction, being the prevention considered more effective, as correcting the data is costly\cite{Chapman2005}, prevention is out of our scope, here we limit our scope to correction.
+Here we deal with data validation and cleaning of aspects that are most relevant for the modeling we propose.
+GBIF has a set of data validation routines, that base on outlier detection, that look for inconsistencies and flag them, but do not overwrite, so that they can be inspected by data user.
+
+% Errors
+Errors in biological collections datasets can be of distinct types, and are more common on the taxonomic identity and spatial information, and can be manually inspected by comparing with collector field notes \cite{Graham2004}.
+Some of the most common problems include the wrong identification of specimens; using outdated taxonomy; bad georreferencing of records \cite{Soberon2004}.
+
+% Data problems
+\citeonline{Dalcin2005,Veiga2014} have assessed the most common data quality issues in species occurrences datasets, and identified eight recurrent patterns of problems.%, observable across multiple data domains. 
+We review five of them which are most relevant for our purpose:
+(\textit{i})~\textbf{domain value redundancy}, when multiple distinct values in the dataset redundantly represent the same real-world entity;
+(\textit{ii})~\textbf{non-atomic data values}, in case a value semantically contains multiple instances of the fundamental piece of information it should represent (an atomic value is regarded as being indivisible);
+(\textit{iii})~\textbf{inconsistent data values}, in case they do not follow a strict standard, eventually leading to contradictory information;
+(\textit{iv})~\textbf{incorrect data values}, when erroneous information are inserted in the dataset; and
+(\textit{v})~\textbf{missing data value}, in case values at some field are absent (\textit{i.e.} null values).
+
+% Data completeness: Funk1999 Jacobs2017 Soberon2007
+% Data quality dimensions
+
 They have also proposed mechanisms for preventing the inclusion of errors and uncertainities during the data entry, as a measure for the improvement of data quality.
 
 
-We have identified three important limiting aspects of biological collections. % (i) Coverage; (ii) Data quality (errors, uncertainities and biases); (iii) data biases; unavailability of absence data.
-The first one concerns its \textit{coverage}. 
-The ?lack of proper funding and financial support? make many megadiverse countries still relatively unexplored for many taxonomic groups \cite{Soberon2004}.
-Despite their efforts towards documenting life on Earth, biological collections contain very limited information on the geographic distribution of organisms, especially for the most imperiled ones, a scenario which is referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}.
-This makes it even more difficult to understand aspects of their ecology.
-% How to deal with sdm when we have few data available for species? Galante2017
 
-
-
-This shortage of data, combined with insufficient quality limits the use of data from biological collections for many intended applications, many of which require an intensive amount of data to be available \cite{Guisan2007}.
-The low availability of occurrence data for most species imposes serious limitations for many applications of NHM data, especially for SDM \cite{Galante2017}.
-
-
-Besides the limitation on the availability of data, another limitation concerns its \textit{quality}.
-
-Different data limitations for each dimension \cite{Meyer2016}.
-
-Some of the most common problems include the wrong identification of specimens; using outdated taxonomy; bad georreferencing of records \cite{Soberon2004}.
-
-
-
-
-\subsection{Errors and uncertainity}
-Errors in biological collections datasets can be of distinct types, and are more common on the taxonomic identity and spatial information, and can be manually inspected by comparing with collector field notes \cite{Graham2004}.
-Determination issues: many specimens are incorrectly identified;
-
-
-
-\paragraph*{Domain value redundancy.}
-
-\paragraph*{Data atomicity.}
-
-\paragraph*{Consistency.}
 
 %
 \paragraph*{Taxonomic errors.}
@@ -252,74 +319,72 @@ There are also \textit{typographic} errors, which are common for example in the 
 \paragraph*{inconsistencies in fields.}
 
 
-\subsection{Biases}
-% collector bias, taxonomic bias, (geographic bias, trait bias, historical bias, seasonal bias) % Daru2017, Haripersaud2009 
-Biological collections are composed of records which have been obtained by distinct people in distinct contexts, having been usually obtained in opportunistic fashion, as opposed to having random sampling designs
-Occurrence records are often recorded without random sampling, leading to biases in data.
-Biases are introduced in the dataset as an effect of elements that make sampling non-random, such as the detectability, the facility to access areas...
-We briefly introduce 4 types of bias (although there are other types as well).
-In the context of this work, collector and taxonomic biases are the most relevant.
 
-\paragraph*{Collector bias.}
-Not all collectors contribute to the same extent to biological collections.
-In fact, it has been observed that, for many biological collections, a considerable percentage of records are gathered by only a small subset of very productive collectors, while the vast majority of collectors contribute with just a few records, each \cite{Daru2017,Carine2012}.
-This unbalance in the representativity of collectors is what defines the \textit{collector bias} in biological collections.
-As the overall taxonomic composition of collections --- as well as the geographical and temporal distribution of their records --- tend to reflect the particular interests and collecting behavior of their most representative collectors, collector bias is strongly related to other types of biases in the collection.
 
-\paragraph*{Taxonomic bias.}
-Not all taxa are quantitatively represented in biological collections in the same proportions as they occur in natural systems.
-Instead, the taxonomic composition of collections reflect the interests of the communities of collectors contributing to them.
-Taxonomic bias is intrinsically related to collector bias, as the overall composition of biological collections tend to reflect the interests of their most productive collectors.
-The collection is biased towards taxonomic groups most sampled by the most productive collectors.
+\section{Preparing data for network modeling} % What should I do for improving data quality for SCN and CWN modeling
+
+Here we define the \textit{data quality needs} \cite{KochVeiga2017} for modeling SCNs and CWNs.
+
+% Use case
+Our models are constructed based on species occurrence datasets, as illustrated in Figure~\ref{fig:occurrences_er}, and basically require information on the names of collectors and the taxonomic identity of the specimen at each occurrence record.
+In a dataset following the DwC standards body, collector names and taxonomic identities should be found under the terms \textit{recordedBy} (class \textit{Occurrence}) and \textit{scientificName} (class \textit{Taxon}), respectively.
 %
-Rare species tend to be more overrepresented in biological collections in comparison to common species \cite{}.
+In SCNs, each record containing a set of collectors and a taxon. 
+Interest ties are extracted from each record, linking each collector to the taxon.
+More details in section \ref{subsec:scn-model-construction}
 %
-%Some studies have proposed to assess taxonomic bias of collectors by comparing the representativity of each taxon on their sets of records to the herbarium \cite{Haripersaud2009}. %Such approaches give at most a view of how well a collector represents the composition of the collection.
-%However, if we consider the herbarium itself is composed of contributions of multiple collectors each with particular interests --- and therefore also biased ---, the herbarium is biased, not representing well the natural communities.
-%As it is very common that collectors towards sampling the highest number of species as possible in localities they visit, the collection is non-random, and rare species tend to be overcollected and common species, undercollected \cite{TerSteege2011}.
-%Biases of the most productive collectors would be hard to assess.
-
-\paragraph*{Geographic bias.}
-% [Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models] 
-Collection sites are not randomly selected in geographic space, nor they are all sampled to the same extent.
-As features of the landscape make some areas more accessible for collection activities than others \cite{Hijmans2000}, collectors tend to prioritize those to maximize their productivity while minimizing costs.
-Geographic bias arises as a consequence of non-uniform collecting effort in geographic space, and tends to reflect the preferred locations of the most productive collectors.
-Some regions that are more accessible being thoroughly sampled (such as areas near urban centers, roadsides and margins of rivers);
-while others which are more inaccessible, such as rainforests, being only poorly or not sampled at all.
+In CWNs, only the collector field is required.
+For each record, collaboration ties are created (or reinforced) by combining all collectors in a pairwise fashion.
+More details  of the construction process are provided in section \ref{section:cwn_construction_fromdata}
 %
-Also, some countries are more sampled than others.
-A compilation of the representativity of plants in GBIF by \citeonline{Meyer2016} has shown that among the most representative countries and regions are the United States (mainly the west coast), Central America, countries in Europe (including the nordic countries), Australia, Japan, New Zealand.
-%
-Assessing patterns of species richness from species occurrence datasets has been shown to be particularly challenging due to geographical bias \cite{Hortal2007,Reddy2003}, as higher diversities of species observed in regions that are more accessible is a consequence of more intensive sampling effort.
+Here we discuss data requirements for modeling our network models, and how to manage data quality for that purpose.
 
 
-\paragraph*{Temporal bias.}
-Collection activity is not uniform over time.
-Temporal bias can be further subdivided into two more specific classifications (although there are others):
-Historical bias. 
-Seasonal bias: Two causes: 
-Biases in higher granularities, such as weekdays/weekends...
 
 
-\subsection{Data completeness}
-% Funk1999 Jacobs2017 Soberon2007
+% The collector field
+\subsection{Collectors names}
+According to DwC standards recommendations, this field should contain a list of collectors names, concatenated into a string using the vertical bar (' | ') as delimiter.
+Therefore, this field contains non-atomic values (the `non-atomic data values' problem).
 
-\subsection{Data atomicity}
-Some fields in occurrence data are not atomic, which means that multiple values
+As the collectors field is not very often used for BI applications, its quality is seldom assessed, neglected by data curators.
 
 
-\section{Improving data quality}
-Although data quality can be improved by either prevention or correction, being the prevention considered more effective, as correcting the data is costly\cite{Chapman2005}, prevention is out of our scope, here we limit our scope to correction.
-Here we deal with data validation and cleaning of aspects that are most relevant for the modeling we propose.
-GBIF has a set of data validation routines, that base on outlier detection, that look for inconsistencies and flag them, but do not overwrite, so that they can be inspected by data user.
+However, this is not necessarily adopted in all datasets.
+Some datasets only include the name of the first collectors, and thus lead to errors of omission: completeness issue.
+Names are typically included in an abbreviated form, and the rules for abbreviation depend on the institution.
+included as a string abbreviated.
+Two issues are the existence of \textit{homonymous} collectors, or different collectors that receive the same name.
+For some collectors, there are many variations of names associated to them.
 
-Data cleaning depends on the defining the intended use of data (data fit for use).
+The \textbf{entity-resolution} problem concerns the disambiguation of name variants that refer to the same real-world entity.
+\citeonline{Groom2014} came across the same problematic, considerable variations in the formats of names.
+They used a names cleaning routine in which they merged all variants of names which could be unambiguously mapped to a single person, while excluding those which could not.
+This problem was also tackled by \citeonline{EstevaoDaSilva2016} by using a data mining methodology, based on association rules analysis, for identifying possible name variants.
+The method consists of observing 
+
+\cite{Bhattacharya2007}
+
+The most common and impacting issues associated with the collectors field were: 
+($i$)~using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network that represent more than one collector; 
+($ii$)~registering collectors names using inconsistent naming conventions, which makes it hard to systematically interpret what are the component parts of a name; 
+($iii$)~using multiple name variations for a collector, leading to collectors being represented by more than one node in the resulting network; and 
+($iv$)~only including the name of the first collector in records (and eventually aggregating all secondary collectors under the expression `\textit{et al.}'), which is interpreted as an absence of collaborative ties and thus does not contribute for the formation of edges in CWNs.
+
+
+
+
+% Taxonomic names
+\subsection{Taxonomic names}
+In a dataset following DwC, the taxonomic identities assigned to specimens are assigned to the term \textit{scientificName}, which is part of the \textit{Taxon} class.
+Other terms under \textit{Taxon} class are eventually also relevant, such as \textit{taxonRank},
+
+
 
 In the scope of this work, we primarily deal with the entity-resolution problem.
 
-\subsection{The entity-resolution problem}
-\citeonline{EstevaoDaSilva2016} has proposed a data mining methodology based on association rules analysis for identifying possible name variants.
-\cite{Bhattacharya2007}
+
+
 
 % Data Aggregators
 Gbif provides a data preprocessing routine % https://www.gbif.org/infrastructure/processing

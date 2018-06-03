@@ -15,7 +15,7 @@ As both network models were elaborated based on a framework for social network a
 % Network Science Theory
 % ----------------------
 
-\section{Network science: A theoretical background}\label{section:networkscience}
+\section{Network science: a theoretical background}\label{section:networkscience}
 
 Network science refers to a relatively new domain of scientific investigation, which aims at describing emergent properties and patterns from complex systems of interacting entities.
 Such relational systems are naturally represented as networks, in which interactions are represented as pairwise connections (\textit{links}) between entities (\textit{nodes}) and assume particular semantics depending on the nature of the modeled phenomenon.
@@ -139,10 +139,10 @@ We next review some of the main concepts for network analysis that are useful in
 
 \paragraph*{Path.}
 A path can be thought of as a chain of adjacent vertices composing a route through which information may flow in a graph.
-For undirected graphs, there exists a \textit{path} of length $n$ between a given pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
+For undirected graphs, there exists a \textit{path} of length $n$ between a pair of vertices if they are mutually reachable by following a sequence of $n$ edges.
 A pair of vertices is said to be \textit{connected} if at least one path exists between these vertices. The shortest path between a pair of vertices is defined as the \textit{distance} between them.
 %A graph can be described in terms of its \textit{average path length}, which is computed by averaging the path lengths between all pairs of connected vertices.
-Finally, the \textit{diameter} of a graph is given by the largest distance between any pair of vertices composing it, although some authors alternatively define \textit{diameter} of a graph as the average length of all the shortest paths between the pairs of vertices.
+Finally, the \textit{diameter} of a graph is given by the largest distance between any pair of vertices, although some authors alternatively define \textit{diameter} of a graph as the average length of all the shortest paths between the pairs of vertices.
 
 \paragraph*{Connected component.}
 A connected component is a subset of vertices in the graph in which all included vertices are \textit{connected} to every other one by at least one path.
@@ -178,7 +178,7 @@ c_{\Delta} = \frac{3 \times numOfTriangles}{numOfTriples}.
 %% Transitivity
 \paragraph*{Transitivity.}
 The transitivity relation for a triple of nodes $\{a,b,c\}$ is observed if the fact that node $a$ is connected to $b$ and $b$ to $c$ implies that $a$ is connected to $c$.
-In social networks terms, this relation represents the phenomenon that ``a friend of my friend is also my friend''. \art{'is' OU 'tends to' ???}\ped{Ao meu ver o certo é `is'... A relação de transitividade significa que se A-->B e B-->C então A-->C (ou seja, forma-se um clique). Concorda?}\art{A definicao estah certa... entretanto, a afirmacao social ilustrativa eh que  faz pensar em nivel de transitividade (como seria para clustering), justamente pela afirmacao nao ser sempre verdadeira. Acho que pode ser mais seguro simplesmente omitir essa frase. Acho que resolveria, deixando a medicao de nivel de transitividade/clustering para o item anterior que estah OK.} \ped{Entendi seu ponto. Na verdade aqui eu quis dizer que a interpretação, no contexto de redes sociais, é que transitvidade entre tres individuos ocorre quando há esta relação. Vamos discutir e vou tentar refrasear.}
+In social networks, transitivity can be interpreted as the phenomenon in which ``a friend of my friend is also my friend''.
 Network transitivity is often used as a synonym for \textit{clustering}, and thus the overall transitivity of a network can be quantified through the global clustering coefficient from Equation \ref{eq:globalclustering}.
 
 \paragraph*{Degree.}
