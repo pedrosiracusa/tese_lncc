@@ -321,61 +321,87 @@ There are also \textit{typographic} errors, which are common for example in the 
 
 
 
-\section{Preparing data for network modeling} % What should I do for improving data quality for SCN and CWN modeling
-
-Here we define the \textit{data quality needs} \cite{KochVeiga2017} for modeling SCNs and CWNs.
-
-% Use case
-Our models are constructed based on species occurrence datasets, as illustrated in Figure~\ref{fig:occurrences_er}, and basically require information on the names of collectors and the taxonomic identity of the specimen at each occurrence record.
+\section{Data requirements for network modeling} % What should I do for improving data quality for SCN and CWN modeling
+In this section we describe some potential issues and requirements that must be observed in species occurrence datasets (Figure~\ref{fig:occurrences_er}) for the purpose of modeling Species-Collector Networks (SCNs) and Collector CoWorking Networks (CWNs).
+We base our description on the \textit{data quality needs} as recommended by \citeonline{KochVeiga2017} for modeling SCNs and CWNs.
+Our models are constructed basically require two \textbf{information elements}: the names of collectors and the taxonomic identity of the specimen at each occurrence record.
 In a dataset following the DwC standards body, collector names and taxonomic identities should be found under the terms \textit{recordedBy} (class \textit{Occurrence}) and \textit{scientificName} (class \textit{Taxon}), respectively.
 %
 In SCNs, each record containing a set of collectors and a taxon. 
 Interest ties are extracted from each record, linking each collector to the taxon.
-More details in section \ref{subsec:scn-model-construction}
+More details in section \ref{subsec:scn-model-construction}.
 %
 In CWNs, only the collector field is required.
 For each record, collaboration ties are created (or reinforced) by combining all collectors in a pairwise fashion.
-More details  of the construction process are provided in section \ref{section:cwn_construction_fromdata}
+More details of the construction process are provided in section \ref{section:cwn_construction_fromdata}.
 %
 Here we discuss data requirements for modeling our network models, and how to manage data quality for that purpose.
-
-
-
-
-% The collector field
-\subsection{Collectors names}
-According to DwC standards recommendations, this field should contain a list of collectors names, concatenated into a string using the vertical bar (' | ') as delimiter.
-Therefore, this field contains non-atomic values (the `non-atomic data values' problem).
 
 As the collectors field is not very often used for BI applications, its quality is seldom assessed, neglected by data curators.
 
 
-However, this is not necessarily adopted in all datasets.
-Some datasets only include the name of the first collectors, and thus lead to errors of omission: completeness issue.
-Names are typically included in an abbreviated form, and the rules for abbreviation depend on the institution.
-included as a string abbreviated.
-Two issues are the existence of \textit{homonymous} collectors, or different collectors that receive the same name.
-For some collectors, there are many variations of names associated to them.
 
-The \textbf{entity-resolution} problem concerns the disambiguation of name variants that refer to the same real-world entity.
+% The collector field
+\subsection{Collectors' names}\label{section:data_req_collector}
+This information element contains the names of all collectors who were responsible for a species occurrence record.
+From the field data domain \cite{Dalcin2005}.
+In a DwC-compliant dataset, collectors names should be found under the term (or field) \textit{dwc:recordedBy} (within class \textit{dwc:Occurrence}), formatted as a list of collectors names concatenated into a string, using the vertical bar (` | ') as the delimiter.
+For instance, a record authored by `M.A. Silva' and `N.T. Souza' would contain a string with value ``M.A. Silva | N.T. Souza''.
+However, storing multiple names into a single string makes values in this field \textit{non-atomic}, thus requiring additional processing for the retrieval of individual names.
+
+% names atomization
+We refer to the process of extracting multiple names by splitting the string on a delimiter character as the \textbf{names atomization} routine, which is mandatory for our use case.
+Applying the names atomization process to an entire dataset should be a trivial task if a consistent and non-conflicting delimiter (though not necessarily the vertical bar) is adopted throughout the entire dataset.
+However, we suspect this is rarely the case for most species occurrence datasets.
+Atomization issues arise when the atomization routine is unable to systematically distinguish names in a string, leading to the representation of unrealistic entities in the model.
+
+% naming conventions
+Using inconsistent (or ignoring) \textbf{naming conventions} while registering collectors names in a dataset is also potentially problematic, as it makes it more difficult to systematically interpret names and extract their component parts.
+Naming conventions are rules used for shortening (or simplifying) names before they are inserted in the database.
+One common practice is to abbreviate the first and middle names of collectors, while keeping the last name unabbreviated.
+Under this convention, for instance, the name `João Souza Silva' would be mapped to `J.S. Silva'.
+As collectors are not always aware of the naming convention adopted at the collection, they often include collectors names in their field notes using their own convention or, in the worse case, not using conventions at all.
+The task to assure that all records are properly formated is therefore assigned to system managers, who must inspect and fix each entry manually before including them in the dataset.
+As a result, names are eventually registered with typographical errors or being inconsistent with the adopted convention, although some database management systems are able to assist users in this aspect by parsing input names or by suggesting similar names that have already been registered.
+
+% Heteronymous: result of unconsistent naming convention
+Another negative effect of inconsistently formating collector names is the insertion of multiple \textbf{name variants} to the same real-world entity.
+This can also be the result of typos (e.g. souza becoming souza), or simply omiting parts of the name (e.g. if there are two collectors, A.M.Souza and A.P.Souza, omitting the middle initial makes their names indistinguishable).
+%
+The \textbf{entity-resolution} problem concerns the mapping of name variants that refer to the same real-world entity.
 \citeonline{Groom2014} came across the same problematic, considerable variations in the formats of names.
 They used a names cleaning routine in which they merged all variants of names which could be unambiguously mapped to a single person, while excluding those which could not.
 This problem was also tackled by \citeonline{EstevaoDaSilva2016} by using a data mining methodology, based on association rules analysis, for identifying possible name variants.
 The method consists of observing 
 
-\cite{Bhattacharya2007}
+% Homonymous
+Assuming that all records in a dataset are consistent with some naming convention and that they use the same character for delimiting names (\textit{i.e.}, names can be properly atomized), distinct real-world entities may still end up being registered under the same name.
+These entities, which we refer to as being \textbf{homonymous}, are also problematic for our use case, as they are incorrectly represented in the network models as a single entity.
+In case the naming convention requires the abbreviation of parts of the names, homonymous can be created in the database from two names that are originally distinct.
+For instance, `João Souza Silva' and `Jorge Soares Silva' would be mapped to a homonymous `J.S. Silva', if both the first and middle names were abbreviated.
+%
+Some collections include mechanisms in their naming conventions for disambiguating homonymous.
+For instance, a complementary field containing unique identifiers for collectors can be appended to each record in the dataset, allowing the identification and resolution of homonymous entities.
+Another approach would be making a
+assigned to each for collectors can be included in the associated to each collector in the database management system, such that 
 
-The most common and impacting issues associated with the collectors field were: 
-($i$)~using inconsistent delimiter characters for separating the names of each collector in a record, leading to many non-atomized names and consequently to the existence of nodes in the network that represent more than one collector; 
-($ii$)~registering collectors names using inconsistent naming conventions, which makes it hard to systematically interpret what are the component parts of a name; 
-($iii$)~using multiple name variations for a collector, leading to collectors being represented by more than one node in the resulting network; and 
-($iv$)~only including the name of the first collector in records (and eventually aggregating all secondary collectors under the expression `\textit{et al.}'), which is interpreted as an absence of collaborative ties and thus does not contribute for the formation of edges in CWNs.
+
+% Omission
+Finally, some collectors only include their own names in records in which they are first collectors, omitting the names of secondary collectors or, eventually, aggregating them under the expression `et al.'.
+We refer to this issue as \textbf{names omission} (within the \textit{completeness} DQ dimension), which strongly impacts as it fails to represent collaborative ties and collecting activities of the collectors who are not listed.
+
+
+\subsection{Taxon name}
+This information element contains the taxonomic identity assigned to the specimen from an occurrence record, being included into the taxonomic data domain \cite{Dalcin2005}.
+In a DwC-compliant dataset, the taxon identity should be  DwC, the taxonomic identities assigned to specimens are assigned to the term \textit{dwc:scientificName}, which is part of the \textit{dwc:Taxon} class.
+Other relevant elements are \textit{dwc:taxonRank}
+
+
 
 
 
 
 % Taxonomic names
-\subsection{Taxonomic names}
 In a dataset following DwC, the taxonomic identities assigned to specimens are assigned to the term \textit{scientificName}, which is part of the \textit{Taxon} class.
 Other terms under \textit{Taxon} class are eventually also relevant, such as \textit{taxonRank},
 
@@ -435,15 +461,10 @@ Gbif provides a data preprocessing routine % https://www.gbif.org/infrastructure
 % Some standards provide guidelines for including collectors names: last name + first initials...
 % However different standards give distinct guidelines and thus name variants are common.
 % How to map all name variants to the same entity? -> This leads to the Entity-resolution problem
-Some common issues are: (i) including only the name of the first author of the occurrence, and eventually et.al grouping all other collectors;
-(ii) format inconsistences when including multiple collectors. Some datasets do not use unique delimiter characters for separating collectors names, and thus affects the process of names atomization.
-(iii) As collectors names are usually included in the form of last name followed by first initials, there are many cases of homonymous, especially for very common surnames (e.g. silva, souza,...).
-There are also heteronymous, when distinct names variants are assigned to the same person. It can happen that two people have the same last name and their initials are the same (e.g. André Machado Souza or Ana Maria Souza leads to A.M.Souza).
-This can also be the result of typos (e.g. souza becoming souza), or simply omiting parts of the name (e.g. if there are two collectors, A.M.Souza and A.P.Souza, omitting the middle initial makes their names indistinguishable).
+
 
 % Data fit for use
 
-In order to make data fit for its intended use the analyst must perform data cleaning.
 
 % =============
 % Data cleaning
@@ -465,24 +486,3 @@ In order to make data fit for its intended use the analyst must perform data cle
 
 
 
-
-
-
-
-
-
-% Data Quality
-
-% Preparing data 
-% Data Selection
-% Data Cleaning
-
-
-% The Entity Resolution problem
-
-
-% Homonymous names, heteronymous names
-% Typographic errors
-First, using different naming conventions or occasionally including typographic errors while entering the data in the database leads to multiple variants of name.
-Examples of typographic errors are mis
-(such as names with typographic errors) homonymous names (a name

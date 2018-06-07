@@ -4,55 +4,57 @@
 % -----
 % Intro
 
-In this chapter, we use the models we proposed in chapter \ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and the collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
+In this chapter, we use the network models proposed in Chapter~\ref{chapter:network_models} to understand aspects regarding the taxonomic preferences and the collecting behavior of collectors who have contributed to the University of Brasília Herbarium with specimens records.
 By exploring basic topological features of the networks, we investigate the formation of
 (\textit{i}) groups of collectors with similar taxonomic interests;
-(\textit{ii}) groups of taxa which are often recorded by similar sets of collectors;
+(\textit{ii}) groups of taxa which are often recorded by similar sets of collectors; and
 (\textit{iii}) groups of collectors who collaborate by recording specimens together in collecting expeditions. 
-From network structure we also identify collectors that are most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group in the collection.
-Taxa that are either widely collected or collected by very specific groups of collectors are also easily identified from network structure.
+From the resulting network structure, we also identify collectors who are the most relevant for the herbarium, and how they contribute for the representativeness of each taxonomic group in the collection.
+Taxa that are either widely collected or collected by very specific groups of collectors are also easily identified from the network structure.
 
-The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae} and \textit{Fabaceae}; and for cryptogams (algae, mosses and lichens).
+The University of Brasília Herbarium (UB) is a reference collection for the flora of the Cerrado biome, being noticeably representative for families \textit{Cyperaceae}, \textit{Myrtaceae}, and \textit{Fabaceae}; as well as for cryptogams~(algae, mosses, and lichens).
 %
 The herbarium is physically located at the Biology Department of the University of Brasília (UnB-IB) since its foundation in 1963.
-Table \ref{table:ub_collectors_florescer} lists some historically relevant collectors who have intensively contributed to the herbarium, according to the \textit{Florescer} project \cite{florescer}. 
+Table \ref{table:ub_collectors_florescer} lists some historically relevant collectors who have intensively contributed to the herbarium, according to the \textit{Florescer} project \cite{florescer}.
+
+\art{Pedro, ha algo de estranho na Tabela 3... George Eiten nao tem anos de atividade; entre JAmes e Joseph ha uma linha sem nome; Xavantina-Cachimbo expedition nao seria um ``coletor''??? Enfim, veriica a tabela.}
+\ped{Na tabela original, do projeto Florescer, não tem informação sobre período de atividades do George Eiten (embora eu tenha esta informação a partir das redes, mas ainda n as apresentei no texto). No caso do gap entre James e Joseph, é pq a linha abaixo do James ainda se refere a ele (um outro período de atividades). Como é a melhor maneira de representar isso?}
 
 \begin{table}[H]
-  \caption{Historically important collectors for the UB herbarium.}
+  \caption{Historically important collectors for the University of Brasília Herbarium~(UB).}
+  \footnotesize
   \begin{center}
   \begin{tabular}{l l l}
-      & activity years & contribution\\
+      & Activity years & Contribution\\
       \hline
       William R. Anderson & 1962-1976 & Central Brazil Expedition (NYBG)\\
       Howard S. Irwin & 1962-1976 & Central Brazil Expedition (NYBG)\\
-      George Eiten &  & Cerrado biome, mainly in MA state \\
+      George Eiten & \multicolumn{1}{c}{---} & Cerrado biome, mainly in MA state \\
       James Alexander Ratter & 
       	\begin{tabular}[t]{{@{}l@{}}}1968-1976 \\ 1996-2006\end{tabular} &
         \begin{tabular}[t]{{@{}l@{}}}Xavantina-Cachimbo expedition \\ Cerrado biome\end{tabular} \\
-      Joseph Harold Kirkbride Junior & 1976-1983 & Flora of DF \\
-      Ana Lúcia Tostes Leite & 1982-1984 & Continental algae of DF \\
+      Joseph Harold Kirkbride Junior & 1976-1983 & Flora of DF state\\
+      Ana Lúcia Tostes Leite & 1982-1984 & Continental algae of DF state\\
       Carolyn Elinores Barnes Proença & 1981-current & Cerrado biome \\
-      Maria das Graças Machado de Souza & 1982-current & Continental algae of DF and GO\\
+      Maria das Graças Machado de Souza & 1982-current & Continental algae of DF and GO states\\
       \hline
   \end{tabular}
   \\[1.5em]
-  \hfill Source: Florescer Project webpage \footnotemark
+  \hfill Source: Florescer Project (\url{http://www.florescer.unb.br})
   %[\getrefnumber{footnote:florescer}]
   \end{center}
   \label{table:ub_collectors_florescer}
+  \normalsize
 \end{table}
-\footnotetext{\url{http://florescer.unb.br/janela4.html}}
+
 %\footnote{\label{footnote:florescer} \url{http://florescer.unb.br/janela4.html}}.
 
-In this case study we have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}. 
-After downloading the entire dataset through the portal we first performed a quick exploratory analysis, for a general overview on its taxonomic composition, the temporal and geographical distribution of the records, as well as the main issues associated to the dataset (section \ref{section:ub_exploration}).
-We also performed data cleaning and transformation routines for dealing with the names atomization and entity resolution problems (as described in chapter \ref{}) and improving the quality of the fields from which the network models are constructed (section \ref{section:ub_data_preparation}).
-Finally, in sections \ref{section:ub_scn} and \ref{section:ub_cwn} we present the SCN and CWN models built from the UB dataset and explore some of their topological features. 
+In this case study, we have used the entire digitized collection of records from the UB herbarium \cite{gbif_ubdataset}, which is publicly available for download through the Global Biodiversity Information Facility (GBIF) data portal \cite{gbif}. 
+After downloading the entire dataset through the portal, we first performed a quick exploratory analysis, for a general overview on its taxonomic composition, the temporal and geographical distribution of the records, as well as the main issues associated with the dataset~(Section~\ref{section:ub_exploration}).
+We have also performed data cleaning and transformation routines for atomizing and mapping variants of collectors' names, improving the quality of data from which the network models are constructed~(Section \ref{section:ub_data_preparation}).
+Finally, in Sections~\ref{section:ub_scn} and~\ref{section:ub_cwn}, we present the SCN and CWN models built from the UB dataset and explore some of their topological features. 
 %
-We used the \textit{Python v.3.6} language loaded with packages \textit{Pandas}, \textit{Numpy}, \textit{Matplotlib} for exploring the occurrences dataset; and the \textit{Caryocar} package (built by us, in the context of this dissertation) for programatically constructing the SCN and CWN models from occurrence data.
-
-
-
+We have used the \textit{Python v.3.6} language loaded with packages \textit{Pandas}, \textit{Numpy}, and \textit{Matplotlib} for exploring the occurrence dataset; and the \textit{Caryocar} package (designed and implemented by us, in the context of this dissertation) for programatically constructing the SCN and CWN models from occurrence data.
 
 % -------------------------------
 % -------------------------------
@@ -63,13 +65,13 @@ We used the \textit{Python v.3.6} language loaded with packages \textit{Pandas},
 
 At the time of this study, the entire occurrences dataset from the UB herbarium had a total of $185311$ records and $235$ fields.
 For our application, however, only a small subset of those fields were considered to be relevant and were thus included in our exploratory analysis.
-Most of these fields (except for \textit{issue}), which we briefly describe below, follow \textit{Darwin Core} terms standards\footnote{\url{http://rs.tdwg.org/dwc/terms}}:
+Most of these fields (except for \textit{issue}), which we briefly describe below, follow \textit{Darwin Core} terms standards.\footnote{\url{http://rs.tdwg.org/dwc/terms}} The relevant fields we take into account in this work are:
 
 % Terms definitions
 \begin{description}[align=left,labelindent=1cm]
-\item [recordedBy.] A string containing names of people or groups who have authored an occurrence record, separated by some delimiter character. 
+\item [recordedBy.] A string containing names of people or groups who have authored an occurrence record, separated by some delimiter character.
 Although the vertical bar (` | ') bar is officially recommended by \textit{TDWG}, names are separated by a semicolon character (` ; ') in the UB dataset. 
-The UB convention for collectors names makes each of them composed of two parts, separated by a comma (` , ').
+The UB convention for collector names makes each of them composed of two parts, separated by a comma (` , ').
 The first part is the collector's last name, with the first character capitalized; and the second part corresponds to the first initials of the names, all capitalized and appended with a period.
 A collector named `\textit{João da Silva Simão}', for instance, would be included as `\textit{Simão, J. S.}'.
 %
@@ -98,7 +100,7 @@ This field is included by GBIF during data preprocessing, and is not part of the
 \paragraph*{Taxonomic composition.}
 % 
 For exploring the taxonomic composition of the dataset we first removed $10$ records with missing values for the \textit{scientificName} field.
-From the remaining $185301$ records, most had a taxonomic resolution at the \textit{species} level ($75.96\%$), followed by \textit{genus} ($13.17\%$) and \textit{variety}($4.82\%$), as shown by absolute metrics in Table~\ref{table:dset_taxonomicres_counts}. 
+From the remaining $185301$ records, most had a taxonomic resolution at the \textit{species} level ($75.96\%$), followed by \textit{genus} ($13.17\%$), and \textit{variety}($4.82\%$), as shown by absolute metrics in Table~\ref{table:dset_taxonomicres_counts}. 
 However, the percentage of records which can be determined at the rank of \textit{species} is slightly higher ($82.23\%$), and is given by the cumulative metrics in the table. 
 This happens because the \textit{species} identity of records at higher taxonomic resolutions (in this case \textit{form}, \textit{variety} and \textit{subspecies}) are directly determined, as explained in section \ref{section:biodiversity_terms}.
 Similarly, although only $1.08\%$ of the records have the taxonomic resolution at the \textit{kingdom} level, all records are determined at that rank.
@@ -106,7 +108,7 @@ Similarly, although only $1.08\%$ of the records have the taxonomic resolution a
 \begin{table}
   \caption[Number of records with taxonomic resolution at each rank.]{Number of records with taxonomic resolution at each rank. Ranks are ordered hierarchically, being \textit{FORM} the most restrictive (higher resolution) and \textit{KINGDOM} the broader (lower resolution) one. Absolute metrics show the number and percentage of records at each taxonomic resolution, while cumulative metrics show the number and percentage of records that are taxonomically determined at each rank.}
   \begin{center}
-  \begin{tabular}{l c c c c}
+  \begin{tabular}{l r r r r}
        & count & \% & cumulative count & cumulative \% \\
       \hline
       FORM & 1000 & 0.5397 & 1000 & 0.5397\\
@@ -116,20 +118,22 @@ Similarly, although only $1.08\%$ of the records have the taxonomic resolution a
       GENUS & 24397 & 13.1661 & 176776 & 95.3994\\
       FAMILY & 6223 & 3.3583 & 182999 & 98.7577\\
       PHYLUM & 294 & 0.1587 & 183293 & 98.9164\\
-      KINGDOM & 2008 & 1.0836 & 185301 & 100\\
+      KINGDOM & 2008 & 1.0836 & 185301 & 100.0000\\
       \hline
-      total & 185301 & 100 & &
+      Total & 185301 & 100.0000 & &
   \end{tabular}
   \end{center}
   \label{table:dset_taxonomicres_counts}
 \end{table}
 
+\luiz{parei a revisão aqui} 
 
-Table \ref{table:taxa_counts} shows the number of distinct taxa at each rank and lists those with the highest numbers of records.
-The herbarium is mostly composed of plants (kingdom \textit{Plantae}, representing $96.72\%$ of the records), followed by \textit{Chromista} (including some phyla of algae), \textit{Funghi} and \textit{Bacteria}.
-Vascular plants (phylum \textit{Tracheophyta}) compose $82.89\%$ of the herbarium, although \textit{Bryohpyta} (mosses), \textit{Ochrophyta} (algae from kingdom \textit{Chromista}) and \textit{Charophtya} (algae from kingdom \textit{Plantae}) are also respresentative.
+
+Table \ref{table:taxa_counts} shows the number of distinct taxa at each rank and lists those with the highest amounts of records.
+The herbarium is mostly composed of plants~(kingdom \textit{Plantae}, representing $96.72\%$ of the records), followed by \textit{Chromista}~(including some phyla of algae), \textit{Funghi}, and \textit{Bacteria}.
+Vascular plants~(phylum \textit{Tracheophyta}) compose $82.89\%$ of the herbarium, although \textit{Bryohpyta} (mosses), \textit{Ochrophyta} (algae from kingdom \textit{Chromista}) and \textit{Charophtya} (algae from kingdom \textit{Plantae}) are also representative.
 At the family rank, \textit{Fabaceae}, is the most representative one ($10.39\%$), followed by \textit{Myrtaceae} ($6.93\%$), \textit{Asteraceae} ($6.08\%$) and \textit{Rubiaceae} ($5.10\%$). 
-The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia} and \textit{Sematophyllum subpinnatum}, the first three flowering plants and the latter a species of moss.
+The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianensis}, \textit{Eugenia punicifolia}, and \textit{Sematophyllum subpinnatum}, the first three flowering plants and the latter a species of moss.
 
 \begin{table}[t]
   \caption[Number of distinct taxa at each taxonomic rank in the dataset.]{Number of distinct taxa at each taxonomic rank in the dataset. For each rank a list with its top-4 most recorded taxa is included with their respective counts.}
@@ -176,46 +180,46 @@ The most collected species are \textit{Myrcia splendens}, \textit{Myrcia guianen
 % Geographic characterization
 \paragraph*{Geographic distribution.}
 
-Next we explored the geographic distribution of the herbarium records.
-From the set of $185301$ records approximately $48\%$ (a total of $89216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform \cite{gbif_dataprocessing}.
-Routines perform geospatial validation by checking, for each record, (\textit{i}) if geographical coordinates are erroneously assigned to zero latitude and longitude; (\textit{ii}) if geographic coordinates are in fact placed within the boundaries of the country if indicated; and (\textit{iii}) if lat/long values are likely to having been swapped or negated during recording.
-If inconsistencies are detected during the execution of such routines, issues are registered for each record, priorly to making the dataset available for download or query via API. 
+We then explored the geographic distribution of the herbarium records.
+From the set of $185,301$ records, approximately $48\%$ (a total of $89,216$) were interpreted and tagged as having geospatial issues during internal preprocessing routines in the \textit{GBIF} platform~\cite{gbif_dataprocessing}.
+Routines perform geospatial validation by checking, for each record: (\textit{i})~if geographical coordinates are erroneously assigned to zero latitude and longitude; (\textit{ii})~if geographic coordinates are in fact placed within the boundaries of the country, if the country is indicated; and (\textit{iii})~if the lat/long values are likely to having been accidentally swapped or negated during recording.
+If inconsistencies are detected during the execution of such routines, issues are registered for each record, priorly to making the dataset available for download or query via an API. 
 % http://www-old.gbif.org/infrastructure/processing
 
-As shown in Figure \ref{fig:venn_geospatial_issues} most geospatial issues are due to records being assigned to zero coordinates (zero latitude and longitude), which also makes them laying outside of the country boundaries. 
-As a consequence they are tagged as having both the ``Zero Coordinates'' (ZC) and ``Country Coordinates Mismatch'' (CCM) issues, being represented in the figure as the intersection between CCM and ZC.
+As shown in Figure \ref{fig:venn_geospatial_issues}, most geospatial issues are due to records being assigned to zero coordinates (zero latitude and longitude), which also makes them laying outside the country boundaries. 
+As a consequence, they are tagged as having both the ``Zero Coordinates'' (ZC) and ``Country Coordinates Mismatch'' (CCM) issues, being represented in the Figure~\ref{fig:venn_geospatial_issues} as the intersection between CCM and ZC.
 Some records with only the CCM issue were not misplaced in coordinates $(0,0)$, but were still improperly placed outside country frontiers. 
-On the other hand, records with only the ZC issue are those which were misplaced in coordinates $(0,0)$ but were lacking information about the country, and therefore couldn't be classified as being outside the country frontiers.
-Records which were not interpreted as having geospatial issues comprise approximately $52\%$ of the dataset, and the coordinates of those which are located around the Brazilian territory are shown in Figure \ref{fig:occurrence_map}. 
+On the other hand, records with only the ZC issue are those which were misplaced in coordinates $(0,0)$, but were lacking information about the country, and therefore couldn't be classified as being outside the country frontiers.
+Records that were not interpreted as having geospatial issues comprise approximately $52\%$ of the dataset, and the coordinates of those records that are located around the Brazilian territory are shown in Figure~\ref{fig:occurrence_map}. 
 
-  \begin{figure}[h!]
+  \begin{figure}[ht]
   	\centering
     \includegraphics[width=0.6\linewidth]{figures/venn_geospatial_issues.png}
     \caption[Number of occurrences from the UB herbarium dataset classified within each geospatial issue class.]{Number of occurrences from the UB herbarium dataset classified within each geospatial issue class. \textit{NGI}: Records with no geospatial issues; \textit{CCM}: Country Coordinates Mismatch issue; \textit{ZC}: Zero Coordinates issue.}
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
-Most records deposited in the UB herbarium were collected in Brazil ($94.47\%$), from which the Federal District (DF) is the most sampled federative unit despite its relatively small area (Figure \ref{fig:recs_by_cntry_state}b).
-Records in the Federal District comprise $30.56\%$ of those falling within the Brazilian territory. 
-Other states with relatively high collecting effort are Goiás ($22.10\%$), Minas Gerais ($14.51\%$) and Mato Grosso ($7.86\%$), which, together with the Federal District, correspond to $75\%$ of all records from Brazil.
-Such a geographical bias in the occurrences distribution can be explained by the fact that UB is physically located at the University of Brasilia, making it more viable for associated collectors to perform collecting expeditions in nearby locations.
-Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas nearby might become more inclined towards depositing their recordings in the institution.
-Figure \ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region.
-The UB herbarium also includes a total of $10252$ records from other countries (Figure \ref{fig:recs_by_cntry_state}a), which are are derived from exchanges with foreign herbaria (under the curatorship of \textit{Dr. George Eiten} \cite{florescer}) and from international recording expeditions performed by collectors associated to UB.
 
-
-\begin{figure}[!htb]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/occurrence_map.png}
 \caption[Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory.]{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
 \label{fig:occurrence_map}
 \end{figure}
 
+Most records deposited in the UB herbarium were collected in Brazil ($94.47\%$), from which the Federal District (DF) is the most sampled federative unit despite its relatively small area~(Figure \ref{fig:recsbycntrystate}(b)).
+Records in the Federal District comprise $30.56\%$ of those falling within the Brazilian territory. 
+Other states with relatively high collecting effort are Goiás ($22.10\%$), Minas Gerais ($14.51\%$), and Mato Grosso ($7.86\%$), which, together with the Federal District, correspond to $75\%$ of all records from Brazil in the UB herbarium.
+Such a geographical bias in the occurrence distribution can be explained by the fact that UB is physically located at the University of Brasilia, making it more viable for associated collectors to perform collecting expeditions in nearby locations.
+Moreover, as UB is a national reference herbarium for species occurring the Cerrado biome, botanists working in Cerrado areas nearby might become more inclined towards depositing their recordings in that institution.
+Figure~\ref{fig:occurrence_map} shows that UB records are more densely concentrated within the Cerrado biome, mostly in the Central Brazil region.
+The UB herbarium also includes a total of $10,252$ records from other countries~(Figure \ref{fig:recsbycntrystate}(a)), which are derived from exchanges with foreign herbaria (under the curatorship of \textit{Dr. George Eiten}~\cite{florescer}) and from international recording expeditions performed by collectors associated with the UB herbarium.
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\linewidth]{figures/recs_by_cntry_state.png}
 \caption[Top-10 countries and Brazilian states with most occurrence records deposited in the UB herbarium]{Top-10 countries (a) and top-10 Brazilian states (b) with most occurrence records deposited in the UB herbarium. Records from countries and states beyond the $10th$ position in the respective ranks are summed and assigned to \textit{OTHERS}.}
-\label{fig:recs_by_cntry_state}
+\label{fig:recsbycntrystate}
 \end{figure}
 
   
@@ -239,7 +243,7 @@ The first is around years $1966$ and $1968$, the second around $1988$, and the t
 \end{figure}
 
 
-\clearpage
+%\clearpage
 
 
 % ---------------------------

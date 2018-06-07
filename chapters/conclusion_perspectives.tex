@@ -11,9 +11,7 @@ Using the social network analytics framework \cite{Barbier2011,Stork2015} as a t
 investigated the formation of communities of collaboration and common interests.
 We also assessed the distinctiveness of collectors regarding their taxonomic interests, their collaborativity with others, and the temporal evolution of collaborative recording in the herbarium.
 Although in this study we specifically discuss SCNs and CWNs in the context of scientific biological collections, the same ideas here exposed can be also extended to other communities, such as those of nature observers (\textit{e.g.} wildlife photographers, bird watchers) and citizen scientists.
-\art{Vi que voce colocou o e.g. em italico no paragrafo anterior... para uniformizar precisa verificar ao longo de todo o texto de e.g. ou i.e. estao em italico tambem}
-\ped{Estou colocando todos i.e. ou e.g. em itálico. E os números nas listas tmb}
-
+% TODO: check uniformity of using italics in e.g., i.e. and itemized lists.
 
 % Why structure collections data as networks?
 We believe our network models provide the structural basis for a more realistic understanding on how collector and taxonomic biases arise in biological collections. 
@@ -21,7 +19,6 @@ As stated by \citeonline{Marin2011}, network-based approaches allow analysts
 (\textit{i})~to investigate the effects of interactions between individuals on shaping their own behaviors, rather than simply comparing static attributes of individuals within a population; and
 (\textit{ii})~to investigate the formation of non-homogeneous communities, composed of individuals interacting with their groups at varying levels of commitment.
 We consider that these two aspects are particularly relevant in the context of biological collections.
-\art{De forma similar com o comentario anterior, no paragrafo acime estah em italico o (i) e o (ii) da lista itemizada... tem que verificar a uniformidade disso ao longo do texto}
 
 First, collectors often start their careers being supervised by one or more experienced collectors.
 As it naturally happens in many social systems, the behavior of individuals can be strongly influenced by others at more privileged positions, and this is likely to be the case for collector communities as well.
@@ -58,47 +55,43 @@ The most common and impacting issues associated with the collectors field were:
 Constructing the network models from a low-quality dataset can therefore introduce several semantic imprecisions. 
 % RecordedBy: Two classes of issues: (1) Naming inconsistencies; (2) Authorship omission
 
-\art{Parei aqui}
-
 % Limitations of the model
-Our models as proposed in the scope of this dissertation also have a set of limitations, which should be addressed in the future.
+Our network models, as proposed in this dissertation, also have a set of limitations, which should be addressed in the future.
 % The networks only reflect the view of a single institution -> joining multiple herbaria datasets
 First, as the networks are built in a single step using a single dataset (which is usually provided by a single institution), they only represent a partial view of the real interests and collaborations that collectors have accumulated during their careers.
-For obtaining more holistic representations, a mechanism for dynamically joining multiple occurrence datasets --- and eventually other types of data --- should be incorporated to the models.
-Although one might argue that multiple datasets can be simply merged before they are passed to the constructors of the models, that would still consist of a one-step construction, requiring the availability of all data at first place.
+For obtaining a more holistic representations, a mechanism for dynamically joining multiple occurrence datasets---and eventually other types of data---should be incorporated to the models.
+Although one might argue that multiple datasets can be simply merged before they are passed to the constructors of the models, that would still consist of a one-step construction, requiring the availability of all data at the first place.
 In addition, if any other dataset were to be incorporated in the future, the model would need to be entirely reconstructed, and all necessary preprocessing routines would have to be re-executed in each one of the previous datasets.
 %
-We believe that the most challenging aspect of joining multiple datasets would be addressing the entity resolution problem across datasets from multiple sources. A possible solution would be to map entities in each dataset to unique identifiers (such as the ORCID\footnote{\url{https://orcid.org/}} or the id in Lattes platform\footnote{\url{http://lattes.cnpq.br/}}, the latter widely adopted by the scientific community in Brazil) using a crowdsourcing strategy, described later in this chapter.
+We believe that the most challenging aspect of joining multiple datasets would be addressing the entity resolution problem across different datasets from multiple sources. A possible solution would be to map entities in each dataset to unique identifiers (such as those from the ORCID\footnote{\url{https://orcid.org/}} initiative or the id in the Lattes platform,\footnote{\url{http://lattes.cnpq.br/}} the latter widely adopted by the Brazilian scientific community) using a crowdsourcing strategy, described later in this chapter.
 
 % The geographic and temporal dimensions
-Another important limitation of our models as here defined is that they are static and non-spatialized (\textit{i.e.} temporally and geographically invariant), and limited to representing relationships of a single type each.
-This implies that relationships modeled in both networks are assumed to occur irrespective of temporal and geographic dimensions, which is clearly unrealistic for the phenomena they model.
-As the careers of collectors have limited lifespans, they can only possibly collaborate with others if their periods of activities overlap in time.
-In addition, both coworking (between collectors) and interest (involving a collector and a taxon) relationships derive from collecting events --- each happening at a determined geographic location and at some point in time ---, being thus temporally and spatially constrained.
+Another important limitation of our network models is that they are static and non-spatialized~(\textit{i.e.}, they are temporally and geographically invariant), and limited to representing relationships of a single type each. This implies that relationships modeled in both networks are assumed to occur irrespective of temporal and geographic dimensions, which is clearly limiting for the phenomena they model.
+As the careers of collectors have limited lifespans, they can only possibly collaborate with others if their activity periods overlap in time.
+In addition, both coworking~(between collectors) and interest~(involving a collector and a taxon) relationships derive from collecting events---each happening at a determined geographic location and at some point in time---, being thus temporally and spatially constrained.
 Incorporating these two dimensions to our models is also central for capturing network evolution in their structure.
 %
 As in many other social systems, relationships in SCNs and CWNs change in time, as new ties are constantly formed while older ones are broken.
 It is reasonable to consider that collectors interact with distinct groups of people throughout their careers, assuming distinct roles in each relationship.
 For instance, we hypothesize that earlier in their careers, collectors are more likely to assume relationships and have their interests influenced by their academic supervisors or other collectors who are more experienced.
-On the other hand, relationships assumed by collectors later in their careers tend to be the opposite, as they assume the role of the more experienced collector (and thus, the influencer).
-Also, depending on the stage of a collector's career and the groups of collectors she interacts at that moment, we might observe substantial shifts in her taxonomic interests (while changes in her taxonomic interests can also lead to collaborating with different groups).
-Other factors can also influence the patterns of recording activity of a collector, including oscillations in the availability of financial resources for field expeditions, and changes in her residence location.
+On the other hand, relationships assumed by collectors later in their careers tend to be the opposite, as they assume the role of the more experienced collector~(and thus, the influencer).
+Further, depending on the stage of a collector's career and the groups of collectors he/she interacts at that moment, we might observe substantial shifts in his/her taxonomic interests (while changes in his/her taxonomic interests can also lead to collaborating with different groups).
+Other factors can also influence the patterns of recording activity of a collector, including oscillations in the availability of financial resources for field expeditions, and changes in his/her residence location.
 % A diversity of representations for temporal networks have been proposed, which can be categorized as either lossless representations, or lossy representations \cite{Holme2015}.
-
 
 % Adopting an unifying structure
 % SCNs and CWNs should be stored in an unified structure, for example using the structure of multiaspect graphs (MAGs).
 % MAGs allow representing edges composed of multiple features by using general graph theory, instead of tensor algebra.
 % Important dimensions can be included as aspects, such as temporal and spatial, and different types of edges. 
-As many applications using our models would need to combine the perspectives of both SCNs and CWNs, we also recognize the importance of adopting an unifying model for seamlessly integrating the two networks into a single structure.
+As many applications using our network models would need to combine the perspectives of both SCNs and CWNs, we also recognize the importance of adopting an unifying model for seamlessly integrating the two networks into a single structure.
 The requirement for such a model is that it represents two types of connections (interest and coworking) and two distinct sets of nodes (collectors and species), besides incorporating the temporal and geographical dimensions into its structure.
-Although the concept of \textit{multilayer networks} provides a solution for modeling dynamic complex systems with many aspects of connectivity, literature around this topic is still incipient, with many proposals though little consensus on the best way to represent them \cite{Kivela2014}.
-In this context, \citeonline{Wehmuth2014} have introduced the concept of \textit{Multiaspect Graphs} (MAGs) as a multilayer graph abstraction that operates on the same structure as traditional directed graphs.
-By using the structure of a MAG, theset of vertices, layers, time instants and geographic locations can be represented as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
-Moreover, key properties and algorithms that have been widely used for analyzing directed graphs are also extended to MAGs, which makes them a relatively simple representation for higher-order graphs.
+Although the concept of \textit{multilayer networks} provides a solution for modeling dynamic complex systems with many aspects of connectivity, literature around this topic is still incipient, with many proposals though little consensus on the best way to represent them~\cite{Kivela2014}.
+In this context, \citeonline{Wehmuth2014} have introduced the concept of \textit{Multiaspect Graphs} (MAGs) as a graph extended abstraction for high order networks that operates on a structure that is proved to be isomorphic to traditional directed graphs.
+By using the structure of a MAG, the set of vertices, layers, time instants, and geographic locations can be then represented as 4 distinct \textit{aspects}; and edges as $8$-tuples, composed of pairs of elements of each aspect.
+Moreover, key properties and algorithms that have been widely used for analyzing directed graphs are also extended to MAGs, which makes them a relatively simple representation for higher-order graphs \cite{Wehmuth2015}.
 
 Finally, for a direction towards further developments of this work, we indicate the incorporation of geographic and temporal dimensions to the networks as top priorities.
-We conclude our text by briefly presenting some ideas of applications (some of them still very rough) which could potentially make use of our models. 
+We also conclude our text by briefly presenting some possible new perspectives of ideas for applications (some of them still very rough) that could potentially make use of our network models. 
 Many examples below assume that temporal and geographic dimensions are already included.
 
 % ============
@@ -113,19 +106,19 @@ Many examples below assume that temporal and geographic dimensions are already i
 % The study of collectors career trajectories cite{Borgatti2015 conclusion}.
 \stepcounter{ApplicationCase}
 \paragraph*{\theApplicationCase. Profiling collectors.}
-An important improvement towards a systematic understanding of the roles, interests and behaviors of collectors in a biological collection is grouping them into discrete profiles.
-Profiles aggregate semantic value to the model, as they allow domain analysts to summarize the complex variety of collector features into general classes which are more comprehensible to them.
+An important improvement towards a systematic understanding of the roles, interests, and behaviors of collectors in a biological collection is grouping them into discrete profiles.
+Profiles aggregate semantic value to the model, as they allow domain analysts to summarize the complex variety of collector features into general classes that are more comprehensible to them.
 %
-For instance, analysts may be interested on inferring \textit{academic roles} of collectors (\textit{e.g.} professor, student or field assistant), whether collectors are currently \textit{active} or \textit{retired}, or whether they are \textit{experienced} or \textit{novice}.
+For instance, analysts may be interested on inferring \textit{academic roles} of collectors (\textit{e.g.} professor, student, or field assistant), whether collectors are currently \textit{active} or \textit{retired}, or still whether they are \textit{experienced} or \textit{novice}.
 Similarly, collectors can be classified as \textit{innovators} if they collect taxonomic groups that have never been recorded by others in the collection, or \textit{followers} if they follow the interests of others;
-as \textit{visitors} if they contribute to the collection in bursty patterns, or \textit{resident} if they contribute to it continuously;
+as \textit{visitors} if they contribute to the collection in bursty patterns, or \textit{residents} if they contribute to it a regular basis;
 \textit{specialists} or \textit{generalists}, regarding how specific their taxonomic interests are;
 \textit{regionalists} or \textit{travelers}, regarding their interests to collect at many distinct localities.
-Compositions of each of these aspects, which we refer to as \textit{properties} of collectors, are used to define \textit{collector profiles}.
+Compositions of each of these aspects, which we refer to as \textit{characteristics} of collectors, are used to define \textit{collector profiles}.
 Considering that the interests and collecting behavior of collectors change in time as they get more experienced, profiles are naturally dynamic.
-A simplistic approach for representing such variations would be to associate profile timelines to collectors, composed of multiple discrete events documenting profile changes.
+A simplistic approach for representing such variations would be to associate profile timelines with collectors, composed of multiple discrete events documenting profile changes.
 %
-Profiling collectors can be generalized to a network problem known as the \textbf{node classification problem} \cite{Bhagat2011}.
+Profiling collectors can be generalized to a network problem known as the \textbf{node classification problem}~\cite{Bhagat2011}.
 Starting from a subset of nodes that are previously labeled (profiled), the goal is to train a machine learning classifier that learns which compositions of features lead to each profile.
 Next, in an iterative process, non-profiled nodes have their profiles predicted based on their attributes.
 Network structure can be useful in this process, as it allows the propagation of labels (profiles) among collectors, using their positional features and patterns of association.
@@ -133,14 +126,14 @@ Network structure can be useful in this process, as it allows the propagation of
 
 \stepcounter{ApplicationCase}
 \paragraph*{\theApplicationCase. Contextual enrichment of occurrences.}
-One of the main complexities of characterizing bias in occurrence records is that they are typically obtained opportunistically, without the adoption of systematic sampling designs.
+One of the main complexities of characterizing bias in occurrence records is that they are typically obtained in an opportunistic way, without the adoption of systematic sampling designs.
 Specimens are also collected in a high variety of contexts, from \textit{botany field classes} mainly composed of naive students to \textit{big survey projects}, involving many teams of expert collectors.
 Surveys can also be characterized as being \textit{focal}, if individuals from a specific taxonomic group are thoroughly searched; or \textit{generalist}, if the goal is to document the diversity of organisms at a location as comprehensively as possible.
-Also some records may result from \textit{herbarium exchange}.
-Considering that different contexts lead collectors to behave and collaborate differently during collection, enriching occurrence records with contextual information could make them more comparable, potentially helping to characterize biases and sampling effort. 
+Also some records may result from a \textit{herbarium exchange}.
+Considering that different contexts lead collectors to behave and collaborate differently during collection activities, enriching occurrence records with contextual information could make them more comparable, potentially helping to characterize biases and sampling efforts. 
 %
-One idea worth investigating is whether the composition of collectors associated to a record convey contextual information about it.
-For instance, observing groups composed of many novice collectors associated to one or two who are very experienced, recording in areas relatively well explored by others, could indicate that those records have been obtained in the context of a field course.
+One idea worth investigating is whether the composition of collectors associated with a record convey contextual information about it.
+For instance, observing groups composed of many novice collectors associated with one or two who are very experienced, recording in areas relatively well explored by others, could indicate that those records have been obtained in the context of a field course.
 Records in which all collectors are substantially experienced but with distinct interests, on the other hand, could indicate the context of exploratory surveys.
 %
 Moreover, additional attributes of the recorded species can also be inferred from the composition of collectors.
@@ -151,21 +144,16 @@ Assigning contexts to occurrence records could be modeled as a classification pr
 From a subset of records for which an analyst previously provides some class of context, the algorithm learns patterns of collectors profiles, and predicts the contexts of the remainders.
 
 
-
-
 % Validation of collectors IDs
 % ----------------------------
 \stepcounter{ApplicationCase}
 \paragraph*{\theApplicationCase. Crowdsourcing the validation of collectors identities.}
-Given the complexity of resolving the identities of names in the collector field of occurrence datasets, one possible solution would be using a network-based \textit{collaborative validation}, in which the records validation task is distributed through many collaborators.
-The general idea of the method consists of using the structure of a CWN, initially built from the non-validated dataset, for propagating a message requesting the collaboration of collectors themselves as validators.
-Starting from an initial subset of influential collectors whose identities are already resolved, collectors recursively resolve the identities of as few as $5$ of their most acquainted and, in sequence, forward them the collaboration request message. % we assume collectors who collaborate in field are acquainted to each other
+Given the complexity of resolving the identities of names in the collector field of occurrence datasets, one possible solution would be to use a network-based \textit{collaborative validation}, in which the record validation task is distributed through many collaborators.
+The general idea of the method consists of using the structure of a CWN, initially built from the non-validated dataset, for propagating a message requesting the collaboration of collectors themselves as information validators.
+Starting from an initial subset of influential collectors, whose identities are already resolved, collectors recursively may resolve the identities of as few as $5$ of their most acquainted colleagues and, in sequence, forward them the collaboration request message. % we assume collectors who collaborate in field are acquainted to each other
 The process of resolving names consists of assigning unique identifiers to them, such as the ORCID or Lattes id.
-Assuming that the probability that a receiver does not ignore the message depends on its esteem towards the sender, a central requirement for an efficient diffusion of the messages in the network is to start with an initial set of vertices which not only occupy central positions in the network, but which are also influential in their respective communities and, moreover, are available and willing to collaborate with the validation process.
-This is analogous to studying the dynamics of contagion in network systems \cite{Gibson2005}.
-
-
-
+Assuming that the probability that a receiver does not ignore the message depends on its esteem towards the sender, a central requirement for an efficient diffusion of the messages in the network is to start with an initial set of vertices (collectors) that not only occupy central positions in the network, but which are also influential in their respective communities and, moreover, are available and willing to collaborate with the validation process.
+This is analogous to studying the dynamics of contagion in network systems~\cite{Gibson2005} and the network seeding problem, \textit{i.e.} properly choosing a set of nodes to start an efficient diffusion. 
 
 % Team Formation
 % --------------
@@ -181,35 +169,36 @@ This is analogous to studying the dynamics of contagion in network systems \cite
 % Species-determiners networks
 % Also model species-identifiers network, where people are linked to species they identify.
 % We could additionally model networks of species and determiners, similarly to what we've present for species and collectors.
-One more possible application of our models is for recommending teams of specialists for composing biodiversity projects.
+One more possible application of our network models is for recommending teams of specialists for composing biodiversity projects.
 In many cases, experts are required not only to have a substantial expertise in their respective areas, but also to be prone to collaborate with others.
 %
-A generalization of this problem is known as the \textbf{expert team formation}, and can be subdivided in two main steps \cite{Lappas2011}.
-The first one (the \textit{expert location problem}) consists of assessing the level of expertise of individuals in a given set of topics, or for performing a given task.
+A generalization of this problem is known as the \textbf{expert team formation}, and can be subdivided in two main steps~\cite{Lappas2011}. 
+%\art{Nao estah claro onde estah descrito o segundo passo. Eh preciso claramente indicar quando comeca a falar do segundo passo (eu fiquei na duvida sem a marcacao explicita)}\ped{e agora?}
+The first one~(the \textit{expert location problem}) consists of assessing the level of expertise of individuals in a given set of topics, or for performing a given task.
 Each individual is assigned a set of skills which characterize their expertises.
-Once experts have been located, teams of experts must be formed such that collaborators can effectively communicate and work collectively for achieving a common goal.
+Once experts have been located, the second step consists of forming teams of experts such that collaborators can effectively communicate and work collectively for achieving a common goal.
 %
-Locating potentially effective teams collectors could be useful for better \textit{planning biodiversity surveys}, maximizing the productivity of the expedition while reducing associated costs.
-Given the overall goals of a survey, a list of qualified collectors could be obtained from SCNs, while arranging teams with them should considerate how effectively they have collaborated in the past (from CWNs).  
+Locating potentially effective teams of collectors could be useful for better \textit{planning biodiversity surveys}, maximizing the productivity of the expeditions while reducing associated costs.
+Given the overall goals of a survey, a list of qualified collectors could be obtained from SCNs, while arranging teams with them should considerate how effectively they have collaborated in the past~(from CWNs).  
 %
 Another example is the evaluation of conservation status of species for the \textit{elaboration of red lists}.
-This task requires the collaboration of teams of specialists, more specifically for validating species occurrence data and for evaluating profiles that are assigned to each species \cite{Martinelli2013}.
-Experienced collectors can be important data validators, as they tend to develop good intuition about the biological communities at locations where they collect \cite{Noss1996}.
+This task requires the collaboration of teams of specialists, more specifically for validating species occurrence data and for evaluating profiles that are assigned to each species~\cite{Martinelli2013}.
+Experienced collectors can be important data validators, as they tend to develop good intuition about the biological communities at locations where they collect~\cite{Noss1996}.
 In order to better distribute the validation workload over the collaborators, occurrence records should be directed to collectors according to their profiles, considering their experience and taxonomic interests; and according to the regions where they have collected.
-In this context, potential validators could be indicated by our models according to their profiles (see \textit{profiling collectors}).
-
-
+In this context, potential validators could be indicated by our network models according to their profiles~(see \textit{profiling collectors}).
 
 \stepcounter{ApplicationCase}
 \paragraph*{\theApplicationCase. Assessing the accuracy in taxonomic determinations.}
-One issue with the \textit{determinavit system} of biological collections (a system where experts review the taxonomic determinations assigned to species) is that the certainty of identifications are not always documented.
+One issue with the \textit{determinavit system} 
+%\art{eh determinavit mesmo? eh o nome de um sistema?}\ped{Explico entre parênteses aqui em baixo... ainda está confuso?} 
+of biological collections (\textit{i.e. }a system where experts review the taxonomic determinations assigned to species) is that the certainty  of identifications are not always documented.
 Depending on the experience of the person who assigns a taxonomic identity to a specimen, it can be more or less reliable. 
-\citeonline{Chapman2005} have proposed that collections should incorporate in their databases an indication of the certainty of identifications, by using a system of ranks of expertise. %pg.22
-For instance, a record could be identified by a world expert in that taxa, by a regional expert, a non-expert or by the person who has collected the specimen himself.
+In this context, \citeonline{Chapman2005} have proposed that collections should incorporate in their databases an indication of the certainty of identifications, by using a system of ranks of expertise. %pg.22
+For instance, a record could be identified by a world expert in that taxa, by a regional expert, a non-expert, or by the person who has collected the specimen himself/herself.
 Ranking identifiers manually, however, is no trivial task.
 %
-A network model analogous to the SCNs we propose in this work can be defined for modeling the interests of \textit{identifiers} towards \textit{species}.
-This new class of network (Species-Identifier Network) could be used for helping profiling identifiers, similarly to what we have described for collectors.
+A network model, analogous to the SCNs we propose in this work, can be defined for modeling the interests of \textit{identifiers} towards \textit{species}.
+This new class of network (Species-Identifier Network) could be used for helping profiling identifiers, similarly to what we have described for collectors, thus associating a certain identifier reputation to the reliability of the identification.
 
 
 
