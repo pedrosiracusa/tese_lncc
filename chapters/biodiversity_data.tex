@@ -23,8 +23,7 @@ Such biological collections are typically hosted and curated by institutions lik
 
 In this chapter, we provide an overview of how data in biological collections is structured. 
 Before delving into the characterization of biodiversity data, we first review in Section~\ref{section:biodiversity_terms} the definitions of some domain-specific terms that will be used throughout this text. We then describe the semantics of species occurrence records in Section~\ref{section:occurrence_data}.
-In Section~\ref{section:limitdata}, we also discuss some aspects regarding the quality and limitations of such data. Finally, in Section~\ref{section:datareq}, we describe how we deal with these limitations.
-\art{Pedro, o roadmap do paragrafo acima estava parcial. Completei, refraseando. Verifique se estah OK.} 
+In Section~\ref{section:limitdata}, we discuss some aspects regarding the quality and limitations of such data. Finally, in Section~\ref{section:datareq}, we describe how we deal with these limitations.
  
 % =====================
 % Terms and Definitions
@@ -88,48 +87,35 @@ Vouchered specimens, together with their associated data, is what scientifically
     \label{fig:occurrences_er}
 \end{figure}
 
-%\clearpage
+\clearpage
 
 
-Over the last 40 years, most institutions have adopted database management systems---or in the simplest cases, electronic spreadsheets---for improving the management and accessibility of their specimens-related data~\cite{Sunderland2013}.
-Some initiatives~(\textit{e.g.} Reflora\footnote{\url{http://reflora.jbrj.gov.br}}) have also devoted significant effort towards the large-scale digitization of physical specimens from the collections, making high-resolution photos digitally available.
+Over the last 40 years, many institutions have adopted digital database management systems---or in the simplest cases, electronic spreadsheets---for improving the management and accessibility of their specimens-related data~\cite{Sunderland2013}.
+Occurrence-related information is digitally stored in relational databases, while keeping references to the physical vouchers.
+Each row corresponds to an occurrence, and includes contextual information such as the collectors' names, the geographic coordinates, date and time of the occurrence and the taxonomic identity of the recorded specimen.
+Some initiatives~(\textit{e.g.} Reflora\footnote{\url{http://reflora.jbrj.gov.br}}) have also devoted significant effort towards the large-scale digitalization of physical specimens from biological collections, making high-resolution photos of the specimens digitally available for researchers.
+
+One important upside of storing species occurrence information digitally is that institutions can more easily replicate and share their data with others, thus supporting wide ranges of applications using biodiversity information \cite{Newbold2010}.
+Some data aggregation initiatives, such as the Global Biodiversity Information Facility (GBIF), have provided technological solutions for serving data from multiple collections to researchers through programmatic and visual interfaces \cite{gbif}.
+In this context, it becomes relevant to represent data in an standardized and interchangeable format, such that records from distinct collections can be more seamlessly integrated.
+
+Darwin Core (DwC)\footnote{\url{http://rs.tdwg.org/dwc/}} is a body of standards designed to provide a consistent vocabulary for representing biodiversity-related information and making it exchangeable, accessible, reusable and interoperable \cite{Wieczorek2012}.
+An extension of the Dublin Core Metadata Initiative~(DCMI)\footnote{\url{http://dublincore.org}}, DwC has been specifically created and adopted as a standard for publishing biodiversity data, composed of many terms to designate \textit{classes} of entities and their \textit{properties}.
+The \textit{Occurrence} class includes terms for representing many aspects of the gathering act \textit{per se}, documenting the existence of organisms at particular places and times.
+Taxonomic information of organisms is represented under the \textit{Taxon} class.
+Throughout this chapter, we refer to darwin core terms by prepending `\textit{dwc:}' to names (\textit{e.g.} the \textit{Occurrence} class becomes \textit{dwc:Occurrence} and the \textit{Taxon} class, \textit{dwc:Taxon}). \luiz{Tem também a classe {\em Event}, usada para amostragens periódicas, mas aí já foge um pouco de coleções biológicas, acho que pode deixar de fora. Talvez seja interessante mencionar que o futuro aponta para ontologias (p.ex. DOI:10.1371/journal.pone.0089606)}
+
+
 
 % Species occurrence is not exclusive of biological collections Chapman2005b
 %% Citizen science and informal collectors
 % Hardisty2013
-Although biological collections have been traditionally regarded as the main sources of species occurrence data, recent advances in mobile computing technology, associated with the increasing connectivity of electronic devices to the World Wide Web, have leveraged the participation of informal groups of nature observers towards recording and sharing biodiversity data in online platforms~\cite{Silvertown2009}.
+Last, it is worth noting that, although biological collections have been traditionally regarded as the main sources of species occurrence data, recent advances in mobile computing technology, associated with the increasing connectivity of electronic devices to the World Wide Web, have leveraged the participation of informal groups of nature observers towards recording and sharing biodiversity data in online platforms~\cite{Silvertown2009}.
 Many of these communities also collaborate with researchers by sharing large amounts of records of their target organisms, in extents that would be otherwise impracticable to obtain, without enormous financial support.
 The nature of such records is similar to those from biological collections in that they are punctual observations of specimens in nature, but also have some important distinctions.
 First, nature observers usually materialize their observations through digital recordings~(audio, photo or video) instead of collecting physical biological samples.
 The absence of physical specimens in many cases makes the identification of the observed organisms inaccurate, thus limiting the use of such data for scientific purposes.
 In addition, identifications are often provided by a collaborative community of individuals with practical experience, not necessarily professional taxonomists and specialists.
-
-
-
-
-
-% Data sharing/integration
-With the high demand for making data from distinct collections interoperable:
-Data aggregation initiatives have addressed this limitation by facilitating data sharing and integrating many data sources (data aggregators). % data ggregators have already been mentioned
-Relevant examples are the Global Biodiversity Information Facility (\textbf{GBIF}).
-Some aggregators provide mechanisms for quality control.
-However, integration can only happen when we have data \textit{interoperability}.
-Some intitiatives such as TDWG provide biodiversity informatics data standards for data integration and sharing.
-DwC is the Darwin Core metadata scheme, and consists of data domains. % check Veiga2014 for refs
-% TDWG first mentioned here 
-
-Darwin Core (DwC) is a body of standards, designed to provide a consistent vocabulary for representing biodiversity-related information and making it exchangeable, accessible, reusable and interoperable \cite{Wieczorek2012}.
-It has been adopted as a standard for data publishing.
-It is an extension of the Dublin Core Metadata Initiative~(DCMI),\footnote{\url{http://dublincore.org/}} specifically created for dealing with biodiversity data.
-composed of many terms to designate \textit{classes} and their \textit{properties}.
-Terms are divided into record-level terms and auxiliary terms.
-The \textit{Occurrence} class is used
-An occurrence event is represented in DwC with the \textit{Occurrence} class. \art{1-2 ultimas frases incompletas aqui!!!!! Verificar!}
-
-
-
-
-
 
 \section{Limitations of data} 
 \label{section:limitdata}
@@ -144,33 +130,22 @@ An occurrence event is represented in DwC with the \textit{Occurrence} class. \a
 % ===========
 % Data issues
 % -----------
-Biological collections are still the main sources of biodiversity data. % Chapman2005 p.1
-Despite the many caveats associated with museum data, they cannot be ignored, as they are still the main sources of information about the distribution of species, and thus are relevant for a multitude of ecological and conservationist investigations, including for the selection of high-priority biodiversity regions~\cite{Funk2002}. 
-Although biodiversity scientists have undoubtedly benefited from open access to massive volumes of species occurrence data from many biological collections, there are some caveats that must be accounted for, before using data for modeling.
-Efforts are necessary for making them usable, as biodiversity data is hard to gather \cite{}. \art{Falta citacao na frase anterior!!!}
-Data must be cleaned before used.
-% Data quality
-Dealing with so many heterogeneous data sources also introduce new complexities related to data.
-Data is not always adequate for investigating every aspect of natural systems.
-Using inadequate data for studying specific aspects of biological diversity can lead to erroneous or misleading results~\cite{Chapman2005}, and investigators must be aware of the inherent limitations of their data before formulating their questions. % Chapman in pg. 1
 
-\art{Parei aqui}
-
-% charact. 1: Wallacean Shortfall (coverage of data)
-Availability of detailed information is still very scarce for most known organisms.
-This scenario, referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}, is even more critical for megadiverse countries, which still remain largely unexplored for many regions and taxonomic groups \cite{Soberon2004}.
+Besides the remarkable relevance of biological collections as sources of biodiversity information, they are far from being adequate for investigating every aspect of natural systems.
+This is partially a consequence of the fact that detailed information is unavailable or very scarce for most known organisms.
+This scenario, referred to as the \textit{Wallacean Shortfall} \cite{Lomolino2004}, is even more critical for megadiverse countries, such as Brazil, which still remain largely unexplored for many regions and taxonomic groups \cite{Soberon2004}.
 The lack of sufficient data for threatened species is even more concerning, as designing efficient programs for their conservation require knowledge on their geographic distribution and ecological requirements.
-This shortage of data, combined with the non-systematic sampling and insufficient quality limits the use of data from biological collections for many intended applications, many of which require an intensive amount of data to be available \cite{Guisan2007}.
+This shortage of data, combined with the non-systematic sampling and insufficient quality, limits the use of data from biological collections for many intended applications, many of which require an intensive amount of data to be available~\cite{Guisan2007}.
+Failing to account for the inherent limitations of such data while posing and investigating their hypotheses, researchers may obtain erroneous or misleading results, eventually impacting the success of management policies that rely on such information \cite{Chapman2005}.
 % Guisan2007 -> Many applications require high volumes of data, low sample size reduces the performance of many techniques
 % Galante2017 -> Techniques for SDM using few records
-In the context of the present work, sampling biases and the quality of data are central.
 
 
 \subsection{Sampling biases}
 % charact. 2: Non-uniform sampling effort -> Lead to bias
-One important aspect that often limits the usability of primary data from biological collections concerns the way in which it is gathered in field.
+One important aspect that often limits the usability of primary data from biological collections concerns the way in which it is gathered in the field.
 In general, most species occurrence data composing biological collections derive from exploratory field expeditions, in which organisms are recorded in a non-systematic \textit{observational} fashion by different collectors, using different methods and at distinct circumstances (though records resulting from experimental studies are eventually incorporated in museums as well). 
-As a result, the distribution of sampling effort in such datasets is uneven and rarely quantified, leading to \textit{sampling biases}.
+As a result, the distribution of the sampling effort in such datasets is uneven and rarely quantified, leading to \textit{sampling biases}.
 
 Building models without accounting for biases in data has been observed to strongly impact their performance, leading to spurious results which can be misinterpreted and, ultimately, lead to wrong decisions.
 For instance, assessing patterns of species richness from species occurrence datasets has been shown to be particularly challenging due to geographical bias in data \cite{Hortal2007,Reddy2003}, as higher diversities tend to be observed at more accessible sites due to higher sampling effort.
@@ -184,17 +159,16 @@ Here we briefly present four of them, the first two (collector and taxonomic bia
 % collector bias, taxonomic bias, (geographic bias, trait bias, historical bias, seasonal bias) % Daru2017, Haripersaud2009 
 \paragraph*{Collector bias.}
 Not all collectors contribute to the same extent to biological collections.
-In fact, it has been observed that a considerable percentage of records in biological collections are gathered by only a small subset of very productive collectors, while the vast majority of collectors contribute with just a few records, each \cite{Daru2017,Carine2012}.
-This unbalance in the representativity of collectors is what defines the \textit{collector bias} in biological collections.
-As the overall taxonomic composition of collections --- as well as the geographical and temporal distribution of their records --- tend to reflect the particular interests and collecting behavior of their most representative collectors, collector bias propagates to other categories of biases in the collection. Therefore, we consider that characterizing collector bias is a fundamental step towards understanding other types of biases.
+In fact, it has been observed that a considerable percentage of records in biological collections are gathered by only a small subset of very productive collectors, while the vast majority of collectors contribute with just a few records each~\cite{Daru2017,Carine2012}.
+This imbalance in the representativity of collectors is what defines the \textit{collector bias} in biological collections.
+As the overall taxonomic composition of collections---as well as the geographical and temporal distribution of their records---tend to reflect the particular interests and collecting behavior of their most representative collectors, collector bias propagates to other categories of biases in the collection. Therefore, we consider that characterizing collector bias is a fundamental step towards understanding other types of biases.
 
 \paragraph*{Taxonomic bias.}
 Not all taxa are quantitatively represented in biological collections in the same proportions as they occur in natural systems.
 Instead, the taxonomic composition of collections reflect the interests and collecting behavior of the communities of collectors contributing to them.
-Taxonomic bias is intrinsically related to collector bias, as the overall composition of biological collections tend to reflect the interests of their most productive collectors.
-The collection is biased towards taxonomic groups most sampled by the most productive collectors.
-%
-Rare species tend to be more overrepresented in biological collections in comparison to common species \cite{}.
+Moreover, rare species tend to be overrepresented in biological collections, as experienced collectors tend to prioritize collecting them over those which are more common \cite{Nelson1990}.
+In addition, as collectors usually avoid collecting more than one exemplary of each species at the same place in a given expedition \cite{TerSteege2011}, common species tend to be underrepresented.
+As the overall taxonomic composition of biological collections tend to reflect the interests and collecting behavior of their most productive collectors, taxonomic bias is intrinsically related to collector bias.
 %
 %Some studies have proposed to assess taxonomic bias of collectors by comparing the representativity of each taxon on their sets of records to the herbarium \cite{Haripersaud2009}. %Such approaches give at most a view of how well a collector represents the composition of the collection.
 %However, if we consider the herbarium itself is composed of contributions of multiple collectors each with particular interests --- and therefore also biased ---, the herbarium is biased, not representing well the natural communities.
@@ -205,50 +179,42 @@ Rare species tend to be more overrepresented in biological collections in compar
 % [Kadmon, R., O. Farber, and A. Danin. 2004. Effect of roadside bias on the accuracy of predictive maps produced by bioclimatic models] 
 Collection sites are not randomly selected in geographic space, nor they are all sampled to the same extent.
 As features of the landscape make some areas more accessible for collection activities than others \cite{Hijmans2000}, collectors tend to prioritize those to maximize their productivity while minimizing costs.
-Geographic bias arises as a consequence of non-uniform collecting effort in geographic space, and tends to reflect the preferred locations of the most productive collectors.
+Geographic bias thus arises as a consequence of non-uniform collecting effort in geographic space, and tends to reflect the preferred locations of the most productive collectors.
 Some regions that are more accessible being thoroughly sampled (such as areas near urban centers, roadsides and margins of rivers);
-while others which are more inaccessible, such as rainforests, being only poorly or not sampled at all.
+while others that are more inaccessible, such as rainforests, being only poorly or not sampled at all.
 %
 Geographic bias is also observed at broader scales.
-A compilation of the representativity of plants in GBIF by \citeonline{Meyer2016} has shown that among the most representative countries and regions are the United States (mainly the west coast), Central America, countries in Europe (including the nordic countries), Australia, Japan, New Zealand.
+A compilation of the representativity of plants in GBIF by~\citeonline{Meyer2016} has shown that among the most representative countries and regions are the United States (mainly the west coast), Central America, countries in Europe (including the nordic countries), Australia, Japan, and New Zealand.
 
 
 \paragraph*{Temporal bias.}
-The recording activities of collectors are not uniformly distributed over time.
-The patterns of activities of collectors change in time, in function of their personal characteristics (\textit{e.g.} age, stage in career)
-Collectors show preferences and and face difficulties on performing 
-Temporal bias can be further subdivided into two more specific classifications (although there are others):
-Historical bias. 
-Seasonal bias: Two causes: 
-Biases in higher granularities, such as weekdays/weekends...
-Collectors also tend to concentrate their activities around the best seasons for fieldwork. \\
-
-
-
-
-
-
-
-
+The patterns of the recording activities of collectors are not uniform over time.
+Instead, collectors often show preferences towards performing field work in periods when they can get more productive, have more financial resources, or can find more organisms of their interests.
+For instance, wet seasons possibly impact the performance of collectors in the field, and thus it would be natural to observe a relative drop on collecting activity during these periods.
+Nevertheless, some organisms are better collected during wet periods~(such as \textit{Rivulidae} temporal fish), pushing collectors towards performing fieldwork despite unfavorable conditions.
+Further, the availability of a naturalist for spending time in the field as a collector varies with their age, position, and stage in career.
+While professional collectors would be available for collecting during weekdays, amateurs or students would be more available in weekends or vacation periods~\cite{Daru2017}.
+The historical of records in biological collections therefore reflects the periods of activities of the most productive collectors.
 
 % Two shortcomings: presence-only data and representativity
-% Presence-only data and richness
 
-Non-uniform sampling effort also makes it hard to infer true absences from biological collection datasets.
-As the distribution of sampling effort towards locations is not known in biological collections, its data is regarded as `presence-only', which means that the absence of a record for a species at some location does not necessarily indicate that the species is truly absent \cite{Graham2004}.
-Instead, no collectors that would potentially be interested on recording it have visited the location.
 
 % Representativity
-Another problem arising from non-uniform sampling effort concerns the representativity of species in biological collections.
-Collectors seldom collect more than one exemplary of each species at the same place in the same expedition, and thus species representativity in museums do not correspond to their abundance in natural systems \cite{TerSteege2011}.
-Thus, common species are not always more representative than rare species.
-In fact, rare species are eventually more represented than common ones due to the fact that more experienced collectors tend to prioritize collecting rare over common ones \cite{Nelson1990}.
+%Besides biases, another problem arising from non-uniform sampling effort concerns the representativity of species in biological collections.
+%Collectors usually avoid collecting more than one exemplary of each species at the same place in the same expedition, and thus species representativity in museums do not correspond to their abundance in natural systems \cite{TerSteege2011}.
+%In fact, rare species have been observed to be more represented than common ones due to the fact that more experienced collectors tend to prioritize collecting rare over common ones \cite{Nelson1990}.
+%Moreover, non-uniform sampling effort hampers the assessment of species absences from `presence-only' occurrence data.
+%As the sampling effort deployed over each location is usually not known for data in biological collections, the absence of a record for a species does not necessarily mean it does not occur there \cite{Graham2004}.
+%Instead, it could be the case that no collectors who would potentially be interested on recording it have visited the location; or the species could not be detected at the time of the expedition.
 % Problems in modeling
-Using presence-only data for assessing richness is problematic, although there are methods for overcoming this limitation, as most records available for specimens are presence-only \cite{Zaniewski2002}.
-Richness was observed to be correlated to survey effort, richness is biased towards regions that are more thoroughly sampled \cite{Hortal2007}.
+%Using presence-only data for assessing richness is problematic, although there are methods for overcoming this limitation, as most records available %for specimens are presence-only \cite{Zaniewski2002}.
+%Richness was observed to be correlated to survey effort, richness is biased towards regions that are more thoroughly sampled \cite{Hortal2007}.
 
-
-
+% Presence-only data and richness
+%Non-uniform sampling effort also makes it hard to infer true absences from biological collection datasets.
+%Species occurrence data is regarded as `presence-only', as they do not explicitly represent the absence of species.
+%As the distribution of sampling effort towards locations is not known in biological collections, its data is regarded as `presence-only', which means that the absence of a record for a species at some location does not necessarily indicate that the species is truly absent \cite{Graham2004}.
+%Instead, no collectors that would potentially be interested on recording it have visited the location.
 
 
 
@@ -258,36 +224,31 @@ Richness was observed to be correlated to survey effort, richness is biased towa
 
 
 
-
-
-
-
-
 \subsection{Data quality}
-Besides the limitation on the availability and biases of data in biological collections, another important concern is on its \textit{quality}.
+Besides biases, another important limitation in biological collection datasets concerns the \textit{quality} of data.
 A definition for data quality (DQ) based on its \textit{fitness for the intended use} was first proposed in the context of geographical information systems \cite{Chrisman1984}, and became widely adopted by the BI community.
-According to this definition, quality is not an absolute attribute of a dataset, but rather its potential to provide users with valuable information in specific contexts.
-Assessing quality attributes of data is a fundamental step for any applications that might use it, and requires that users previously delimit the purpose, scope and requirements of their investigation.
+According to this definition, quality is not an absolute attribute of a dataset, but is rather given by its potential to provide users with valuable information, in specific contexts.
+Assessing quality attributes of data is a fundamental step for any applications that might use it, and requires that users previously delimit the purpose, scope, and requirements of their investigation.
 Data is considered to be of high quality if it is suitable for supporting a given investigation.
-Depending on the application, users might need to improve the fitness of the data they have in hand, which is data quality management.
+Depending on the application, users might need to improve the fitness of the data they have in hand, which is part of the data quality management process.
 
-Loss of quality in biodiversity data can occur during multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it is incorporated in the collection, its documentation, dizitization and storage.
+Loss of quality in biodiversity data can occur during multiple stages of its life cycle \cite{Chapman2005}, including the moment of the recording event, its preparation before it is incorporated in the collection, its documentation, digitalization, and storage.
 % Include about data domains
 Some of the most common problems are observed in the taxonomic and geospatial data domains, including the wrong identification of specimens, in part due to using outdated taxonomy; and bad georreferencing of records \cite{Soberon2004}.
-In some cases, errors can be manually corrected by referring to supplementary information such as the field notes of collectors \cite{Graham2004}.
+In some cases, errors can be manually corrected by referring to supplementary information, such as the field notes of collectors \cite{Graham2004}.
 However, this approach turns out impractical for large datasets, and methods for systematically assessing quality issues are required.
 
 
 % Data problems
 \citeonline{Dalcin2005,Veiga2014} have assessed the most common data quality issues in species occurrences datasets, and identified eight recurrent patterns of problems. %, observable across multiple data domains. 
-During our study we have identified five of them, which we considered to be most relevant:
+During our study, we have identified five of them, which we considered to be most relevant:
 (\textit{i})~\textbf{domain value redundancy}, when multiple distinct values in the dataset redundantly represent the same real-world entity;
 (\textit{ii})~\textbf{non-atomic data values}, in case a value semantically contains multiple instances of the fundamental piece of information it should represent (an atomic value is regarded as being indivisible);
 (\textit{iii})~\textbf{inconsistent data values}, in case they do not follow a strict standard, eventually leading to contradictory information;
 (\textit{iv})~\textbf{incorrect data values}, when erroneous information are inserted in the dataset; and
 (\textit{v})~\textbf{missing data value}, in case values at some field are absent (\textit{i.e.} null values).
 
-A framework for systematically assessing and managing the ``fitness for use'' of biodiversity data from a user-centered perspective was recently proposed by \citeonline{KochVeiga2017}, and is based on three main components: \textbf{DQ Needs}, \textbf{DQ Solutions} and \textbf{DQ Report}.
+A framework for systematically assessing and managing the ``fitness for use'' of biodiversity data from a user-centered perspective was recently proposed by \citeonline{KochVeiga2017}, and is based on three main components: \textbf{DQ Needs}, \textbf{DQ Solutions}, and \textbf{DQ Report}.
 %
 While defining DQ needs, users specify their \textit{use case}, comprising the main goals and scope of their investigation; the relevant \textit{information elements} that should be explicitly represented; and the \textit{dimensions} of data that should be assessed while measuring its quality.
 Users also specify \textit{criteria} for defining acceptable measurements in each dimension; and activities for improving the suitability of data for the use case (\textit{enhancement}).
@@ -297,63 +258,35 @@ Within the scope of DQ solutions, users specify methods and implements tools for
 Finally, DQ reports are produced as documentations of the data quality assessment and management process in different contexts.
 Users can therefore refer to such reports in order to evaluate whether their data is fit for their intended use, providing a basis for the collaborative development of data quality solutions (which authors refer to as a ``Fitness for Use Backbone'' (FFUB)).
 
-
-
-
-Increase the usability of a dataset, making it suitable for answering a wider range of questions.
-% Veiga2014 -> Identified and defined the main dimensions of data quality and their associated problems 
-Although data quality can be improved by either prevention or correction, being the prevention considered more effective, as correcting the data is costly\cite{Chapman2005}, prevention is out of our scope, here we limit our scope to correction.
-Here we deal with data validation and cleaning of aspects that are most relevant for the modeling we propose.
-GBIF has a set of data validation routines, that base on outlier detection, that look for inconsistencies and flag them, but do not overwrite, so that they can be inspected by data user.
-
-
-
-% Data completeness: Funk1999 Jacobs2017 Soberon2007
-% Data quality dimensions
-
-They have also proposed mechanisms for preventing the inclusion of errors and uncertainities during the data entry, as a measure for the improvement of data quality.
-
-
-
-
-
-
-
-
-
 \section{Data requirements for network modeling} % What should I do for improving data quality for SCN and CWN modeling
 \label{section:datareq}
-In this section we describe some potential issues and requirements that must be observed in species occurrence datasets (Figure~\ref{fig:occurrences_er}) for the purpose of modeling Species-Collector Networks (SCNs) and Collector CoWorking Networks (CWNs).
-We base our description on the \textit{data quality needs} as recommended by \citeonline{KochVeiga2017} for modeling SCNs and CWNs.
-Our models are constructed basically require two \textbf{information elements}: the names of collectors and the taxonomic identity of the specimen at each occurrence record.
-In a dataset following the DwC standards body, collector names and taxonomic identities should be found under the terms \textit{recordedBy} (class \textit{Occurrence}) and \textit{scientificName} (class \textit{Taxon}), respectively.
+In this section, we briefly characterize aspects of data quality that are relevant for the network models presented in this dissertation.
+Our models are constructed based on two \textbf{information elements}: the names of collectors and the taxonomic identity of the specimen at each occurrence record.
+In a dataset following the DwC standards body, collector names and taxonomic identities should be found under the terms \textit{dwc:recordedBy} (class \textit{dwc:Occurrence}) and \textit{dwc:scientificName} (class \textit{dwc:Taxon}), respectively.
 %
 In SCNs, each record containing a set of collectors and a taxon. 
 Interest ties are extracted from each record, linking each collector to the taxon.
-More details in section \ref{subsec:scn-model-construction}.
+More details on the construction process are provided in Section~\ref{subsec:scn-model-construction}.
 %
 In CWNs, only the collector field is required.
 For each record, collaboration ties are created (or reinforced) by combining all collectors in a pairwise fashion.
-More details of the construction process are provided in section \ref{section:cwn_construction_fromdata}.
+More details of the construction process are provided in Section~\ref{section:cwn_construction_fromdata}.
 %
-Here we discuss data requirements for modeling our network models, and how to manage data quality for that purpose.
-
-As the collectors field is not very often used for BI applications, its quality is seldom assessed, neglected by data curators.
-
+Below we describe both information elements and highlight some of the main issues and requirements associated with them. 
 
 % ========================================
 % Information element: The collector field
 % ----------------------------------------
 \subsection{Collector names}\label{section:data_req_collector}
 This information element contains the names of all collectors who were responsible for a species occurrence record.
-From the field data domain \cite{Dalcin2005}.
+From the field data domain \cite{Dalcin2005} \luiz{Essa frase ficou perdida ou não entendi}
 In a DwC-compliant dataset, collectors names should be found under the term (or field) \textit{dwc:recordedBy} (within class \textit{dwc:Occurrence}), formatted as a list of collectors names concatenated into a string, using the vertical bar (` | ') as the delimiter.
 For instance, a record authored by `M.A. Silva' and `N.T. Souza' would contain a string with value ``M.A. Silva | N.T. Souza''.
 However, storing multiple names into a single string makes values in this field \textit{non-atomic}, thus requiring additional processing for the retrieval of individual names.
 
 % names atomization
-We refer to the process of extracting multiple names by splitting the string on a delimiter character as the \textbf{names atomization} routine, which is mandatory for our use case.
-Applying the names atomization process to an entire dataset should be a trivial task if a consistent and non-conflicting delimiter (though not necessarily the vertical bar) is adopted throughout the entire dataset.
+We refer to the process of extracting multiple names by splitting the string on a delimiter character as the \textbf{names atomization} \luiz{name atomization?} routine, which is mandatory for our use case.
+Applying the names atomization \luiz{name atomization?} process to an entire dataset should be a trivial task if a consistent and non-conflicting delimiter (though not necessarily the vertical bar) is adopted throughout the entire dataset.
 However, we suspect this is rarely the case for most species occurrence datasets.
 Atomization issues arise when the atomization routine is unable to systematically distinguish names in a string, leading to the representation of unrealistic entities in the model.
 
@@ -368,13 +301,12 @@ As a result, names are eventually registered with typographical errors or being 
 
 % Heteronymous: result of inconsistent naming convention
 Another negative effect of inconsistently formating collector names is the insertion of multiple \textbf{name variants} referring to the same real-world entity (domain value redundance).
-This can also be the result of typos (e.g. souza becoming souza), or simply omiting parts of the name (e.g. if there are two collectors, A.M.Souza and A.P.Souza, omitting the middle initial makes their names indistinguishable).
+This can also be the result of typos (e.g. souza becoming souza) \luiz{souza becoming sousa?}, or simply omitting parts of the name (e.g. if there are two collectors, A.~M.~Souza and A.~P.~Souza, omitting the middle initial makes their names indistinguishable).
 %
 The \textbf{entity-resolution} problem concerns the mapping of name variants that refer to the same real-world entity.
 \citeonline{Groom2014} came across the same problematic, considerable variations in the formats of names.
-They used a names cleaning routine in which they merged all variants of names which could be unambiguously mapped to a single person, while excluding those which could not.
+They used a name cleaning routine in which they merged all variants of names that could be unambiguously mapped to a single person, while excluding those which could not.
 This problem was also tackled by \citeonline{EstevaoDaSilva2016} by using a data mining methodology, based on association rules analysis, for identifying possible name variants.
-The method consists of observing 
 
 % Homonymous
 Assuming that all records in a dataset are consistent with some naming convention and that they use the same character for delimiting names (\textit{i.e.}, names can be properly atomized), distinct real-world entities may still end up being registered under the same name.
@@ -385,12 +317,12 @@ For instance, `João Souza Silva' and `Jorge Soares Silva' would be mapped to a 
 Some collections include mechanisms in their naming conventions for disambiguating homonymous.
 For instance, a complementary field containing unique identifiers for collectors can be appended to each record in the dataset, allowing the identification and resolution of homonymous entities.
 Another approach would be making a
-assigned to each for collectors can be included in the associated to each collector in the database management system, such that 
+assigned to each for collectors can be included in the associated to each collector in the database management system, such that \luiz{frase não foi concluída}
 
 
 % Omission
 Finally, some collectors only include their own names in records in which they are first collectors, omitting the names of secondary collectors or, eventually, aggregating them under the expression `et al.'.
-We refer to this issue as \textbf{names omission} (within the \textit{completeness} DQ dimension), which strongly impacts as it fails to represent collaborative ties and collecting activities of the collectors who are not listed.
+We refer to this issue as a \textbf{name omission} (within the \textit{completeness} DQ dimension), which strongly impacts as it fails to represent collaborative ties and collecting activities of the collectors who are not listed.
 
 % Check Chapman2005a p.23
 
@@ -405,7 +337,7 @@ the rank of the taxon (\textit{dwc:taxonRank});
 the names of higher-rank taxa within which the the taxon is classified (\textit{dwc:kingdom}, \textit{dwc:phylum}, \textit{dwc:order}, \textit{dwc:family}, \textit{dwc:genus}, \textit{dwc:specificEpithet});
 the name of the author of the scientific name of the taxon\footnote{not to be confused with the author of the identification, in \textit{dwc:identifiedBy} (\textit{dwc:Identification} class).} (\textit{dwc:scientificNameAuthorship}).
 %
-Two important dimensions that possibly impact the fitness of taxonomic information for our use case concern the \textit{accuracy} and \textit{precision} of identifications; as well as \textit{mispelling errors}.
+Two important dimensions that possibly impact the fitness of taxonomic information for our use case concern the \textit{accuracy} and \textit{precision} of identifications; as well as \textit{misspelling errors}.
 
 As exposed by \citeonline{Chapman2005a}, the \textbf{accuracy of taxonomic identifications} depends on the level of expertise of the professionals providing them.
 For instance, a determination of taxonomic identity can be provided by the collector; by a professional taxonomist who is not an expert in the taxonomic group; or by a professional taxonomist who is either a regional or world specialist in that group.
@@ -414,17 +346,17 @@ Although information about the level of expertise of the determiners is typicall
 
 \textbf{Misspelling errors} are also included in the accuracy dimension of taxonomic data quality \cite{Veiga2014}, and are introduced in the datasets in a variety of ways, including typographic errors (typos), encoding issues, and from the incorrect transcription of names from how they sound \cite{Dalcin2005}.
 Taxonomic authority files (files containing accepted taxonomic names) have been widely used for preventing the insertion of new invalid names during data entry; or for checking the validity of names already included in databases \cite{Chapman2005a}.
-In addition, \citeonline{Dalcin2005} has proposed the use of both phonetic and string similarity algorithms for automatically screening potential spelling errors, by matching pairs of slightly different names with high degrees of similarity.
+In addition, \citeonline{Dalcin2005} \luiz{o Taxamatch (DOI:10.1371/journal.pone.0107510) aprofundou as técnicas do Dalcin e ganhou o prêmio Ebbe Nielsen do GBIF em 2014, vale à pena adicionar a ref.} has proposed the use of both phonetic and string similarity algorithms for automatically screening potential spelling errors, by matching pairs of slightly different names with high degrees of similarity.
 
 The \textbf{precision dimension of taxonomic data} is related to the most specific rank at which a specimen can be identified, \textit{i.e.}, its taxonomic resolution \cite{Veiga2014}.
 Depending on the modeling requirements, a minimal taxonomic resolution may be necessary for the construction of the networks, making datasets more or less adequate for use.
 Some applications using our models might require the representation of taxa at higher taxonomic resolutions  (\textit{e.g.} at the level of species), whereas for others it could suffice to use lower resolutions, such as the family level.
 The precision of identifications is also related to the level of expertise of the determiners, although some groups of organisms are naturally more difficult to identify than others.
 For instance, identifying mammals to the rank of species is far easier than insects.
-Also, higher levels of expertise are often required for identifying organisms within larger families, which comprise a higher number of species.
+Furthermore, higher levels of expertise are often required for identifying organisms within larger families, which comprise a higher number of species.
 %
 Therefore, assessing the proportion of records in a dataset that qualify for our network-based approach requires first defining the taxonomic resolution to be adopted during modeling.
-In that sense, the \textbf{completeness of taxonomic information} (the proportion of records that are usable) is intrinsically associated to precision of data.
+In that sense, the \textbf{completeness of taxonomic information} (the proportion of records that are usable) is intrinsically associated with data precision.
 
 Last, there are cases in which a taxon is referred to by to distinct names, although only one of them is accepted at any given time, according to the \textit{code of nomenclature} adopted.
 Such names are said to be \textbf{synonyms}, and are an example of the domain value redundancy problem in the taxonomic data domain.
