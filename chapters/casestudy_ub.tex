@@ -194,7 +194,7 @@ Records that were not interpreted as having geospatial issues comprise approxima
   \begin{figure}[ht]
   	\centering
     \includegraphics[width=0.6\linewidth]{figures/venn_geospatial_issues.png}
-    \caption[Number of occurrences from the UB herbarium dataset classified within each geospatial issue class.]{Number of occurrences from the UB herbarium dataset classified within each geospatial issue class. \textit{NGI}: Records with no geospatial issues; \textit{CCM}: Country Coordinates Mismatch issue; \textit{ZC}: Zero Coordinates issue.}
+    \caption[Number of occurrences from the UB herbarium dataset classified within each geospatial issue class]{Number of occurrences from the UB herbarium dataset classified within each geospatial issue class. \textit{NGI}: Records with no geospatial issues; \textit{CCM}: Country Coordinates Mismatch issue; \textit{ZC}: Zero Coordinates issue.}
     \label{fig:venn_geospatial_issues}
   \end{figure}
 
@@ -202,7 +202,7 @@ Records that were not interpreted as having geospatial issues comprise approxima
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/occurrence_map.png}
-\caption[Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory.]{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
+\caption[Geographic distribution of the occurrences from the UB Herbarium dataset]{Geographic distribution of the occurrences from the UB Herbarium dataset near the Brazilian territory. Records without geospatial issues are placed in the map as blue dots. The area outlined in red represents the boundaries of the Cerrado biome.}
 \label{fig:occurrence_map}
 \end{figure}
 
@@ -239,7 +239,7 @@ The first is around years $1966$ and $1968$, the second around $1988$, and the t
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/casestudy_ub/ub_records_timeseries.pdf}
-\caption[Recording activities registered in the UB herbarium aggregated by year, since $1930$.]{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
+\caption[Recording activities registered in the UB herbarium aggregated by year, since $1930$]{Recording activities registered in the UB herbarium aggregated by year, since $1930$. Both the absolute (blue line) and the cumulative (red line) record counts for each year are shown.}
 \label{fig:ub_records_timeseries}
 \end{figure}
 
@@ -291,7 +291,7 @@ For dealing with these issues, we included new entries in the same \textit{names
 Finally, after the networks were built, the last step was to remove entities which we considered to be ``noise'' in the network, such as `\textit{etal}' (from \textit{et. al}), `\textit{incognito}', `\textit{ignorado}', `\textit{ilegivel}' or `\textit{?}'.
 
 % ==========================
-% Species-collectors Network
+% Species-collector Network
 % --------------------------
 \subsection{The UB Species-Collector Network} \label{section:ub_scn}
 
@@ -338,7 +338,7 @@ On the other hand, there are also some few collectors who have recorded much mor
   \begin{figure}[t]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_degree_dist}
-    \caption[Degree distribution for both species and collectors nodes.]{Degree distribution for both species nodes, in red in ($a$) and ($c$), and collector nodes, in blue in ($b$) and ($d$). The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws (note that ($a$) has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots ($a$) and ($b$), respectively. The exponential cutoff in ($a$) is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $(c)$ and $(d)$, respectively.}
+    \caption[Degree distribution for both species and collectors nodes in the UB SCN]{Degree distribution for both species nodes, in red in ($a$) and ($c$), and collector nodes, in blue in ($b$) and ($d$) in the UB SCN. The upper row plots show the probability $p_k$ of finding nodes with each degree value, using a log-log scale. The dashed curves represent power laws (note that ($a$) has a tail cutoff) that best fit the SCN data, with $\alpha=1.38$ and $\alpha=1.52$ for plots ($a$) and ($b$), respectively. The exponential cutoff in ($a$) is obtained by using $\lambda=0.014$. Plots in the lower row show the total number $N_k$ of nodes with each degree value, using a lin-log scale for enhancing interpretability. Histograms in the background group collectors using bin sizes $s=10$ and $s=100$ for plots $(c)$ and $(d)$, respectively.}
     \label{fig:ub_scn_degree_dist}
   \end{figure}
 
@@ -371,7 +371,7 @@ The dashed curve in Figure~\ref{fig:ub_scn_degree_dist}(a) represents a truncate
 \paragraph{How densely connected are species and collectors?}
 The density of the network is the ratio between the actual number of edges in the network and the maximum possible number of edges, in case every collector were linked to every species. This metric informs us how far the network is of being complete, in which case its density becomes $d=1$. For a bipartite network, density can be computed as $d = \frac{|E|}{|S_{col}| |S_{sp}|}$, where $|E|$ is the number of edges in the network and $|S_{col}|$ and $|S_{sp}|$ are the number of collectors and species, respectively.
 %
-The observed density for the overall UB species-collectors network is approximately $1.37 \times 10^{-3}$, meaning that the probability that we find an edge linking two arbitrary nodes from opposite sets is about $0.14\%$. Additionally, as shown in Figure~\ref{fig:ub_scn_tax_agg_curves}, network density increases as we perform taxonomic aggregations onto successively higher-hierarchy ranks.
+The observed density for the overall UB species-collector network is approximately $1.37 \times 10^{-3}$, meaning that the probability that we find an edge linking two arbitrary nodes from opposite sets is about $0.14\%$. Additionally, as shown in Figure~\ref{fig:ub_scn_tax_agg_curves}, network density increases as we perform taxonomic aggregations onto successively higher-hierarchy ranks.
 %
 In most social networks, however, not all regions are equally dense, as entities usually do not connect to others randomly. Instead, entities with similar attributes or interests are more likely to establish new ties with each other than with dissimilar ones, leading to the formation of communities in an assortative network.
 % find parameters for network density (compare with other networks in literature)
@@ -390,7 +390,7 @@ As this edge filtering routine resulted in many isolated collectors, most of whi
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_tax_agg_curves.pdf}
-    \caption{Number of taxa ($S_{sp}$ nodes), edges and network density for the UB SCN aggregations onto successive taxonomic ranks.}
+    \caption[Number of taxa, edges and network density for the UB SCN aggregations onto successive taxonomic ranks]{Number of taxa ($S_{sp}$ nodes), edges and network density for the UB SCN aggregations onto successive taxonomic ranks.}
     \label{fig:ub_scn_tax_agg_curves}
   \end{figure}
 
@@ -402,7 +402,7 @@ Those who have sampled organisms from many distinct families (and are thus consi
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_agg_family_general.pdf}
-\caption[General aspect of the UB SCN taxonomically aggregated at the family rank.]{ General aspect of the UB SCN taxonomically aggregated at the family rank. Species and collectors are respectively represented as pink and green nodes, and edges are weighted according to their \textit{count} attribute. Nodes sizing is based on their \textit{count} attribute, whilst edges color and width reflect their weight. For improving visualization we first filtered out edges with weight lower than $20$ and then omitted isolated nodes from the resulting graph. Nodes within dashed shapes $(i)$, $(ii)$, and $(iii)$ compose visually distinguishable communities. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_scn}). }
+\caption[General aspect of the UB SCN taxonomically aggregated at the family rank]{ General aspect of the UB SCN taxonomically aggregated at the family rank. Species and collectors are respectively represented as pink and green nodes, and edges are weighted according to their \textit{count} attribute. Nodes sizing is based on their \textit{count} attribute, whilst edges color and width reflect their weight. For improving visualization we first filtered out edges with weight lower than $20$ and then omitted isolated nodes from the resulting graph. Nodes within dashed shapes $(i)$, $(ii)$, and $(iii)$ compose visually distinguishable communities. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_scn}). }
 \label{fig:ub_scn_agg_family_general}
 \end{figure}
 
@@ -456,7 +456,7 @@ We used the species bag / quorum similarity rule~(Expression \ref{equation:cosin
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projCol_communities.pdf}
-    \caption[Communities in the collector projection of the family-aggregated SCN.]{ Communities in the collectors projection of the family-aggregated SCN in Figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $500$ were also omitted from the figure. Colors are used to distinguish communities, and nodes are sized according to their total number of records in the dataset.
+    \caption[Communities of common interests in the collector projection of the family-aggregated UB SCN]{ Communities of common interests in the collectors projection of the family-aggregated UB SCN (from Figure \ref{fig:ub_scn_agg_family_general}). In order to improve visualization, communities with scores lower than $500$ were omitted from the figure. Colors are used to distinguish communities, and nodes are sized according to their total number of records in the dataset.
     Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_scn_projCol}).}
     \label{fig:ub_scn_family_projCol_communities}
 \end{figure}
@@ -484,7 +484,7 @@ In addition, we verify that higher-rank aggregations lead to denser networks for
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_filter_thresh.pdf}
-    \caption[Reduction in the density of the species and collectors projections of the UB SCN, as a consequence of increasing filtering threshold.]{ Reduction in the density of the collectors (a) and species (b) projections of the UB SCN, as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange), and at the original taxonomic resolution of species (green).}
+    \caption[Reduction in the density of the species and collectors projections of the UB SCN, as a consequence of increasing filtering threshold]{ Reduction in the density of the collectors (a) and species (b) projections of the UB SCN, as a consequence of increasing filtering threshold $\phi$. Curves represent the SCN networks aggregated by family (blue), genus (orange), and at the original taxonomic resolution of species (green).}
     \label{fig:ub_scn_filter_thresh}
 \end{figure}
 
@@ -504,7 +504,7 @@ We also computed the overall taxa composition for each group by summing up the s
 
 \begin{sidewaystable}
 \begin{table}[H]
-  \caption{Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}. The total number of distinct taxa, together with the percentages of the top-3 most recorded ones in each community are given.}
+  \caption[Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}.]{Taxa composition for each community as illustrated in Figure \ref{fig:ub_scn_family_projCol_communities}. The total number of distinct taxa, together with the percentages of the top-3 most recorded ones in each community are given.}
   \begin{center}
   \begin{tabular}{r r l l l l}
       community & num of taxa & top taxon & 2nd taxon & 3rd taxon \\
@@ -567,7 +567,7 @@ A better approach for identifying such groupings of taxa is described next, and 
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/scn_family_projSp_communities.pdf}
-    \caption[Communities in the species projection of the family-aggregated SCN.]{ Communities in the species projection of the family-aggregated SCN in Figure \ref{fig:ub_scn_agg_family_general}, in which edges with weights lower than $20$ were removed as well as isolated nodes. In order to improve visualization, communities with scores lower than $600$ were also omitted from the figure. Colors are used to distinguish communities and nodes sizes reflect families prevalence in the dataset.
+    \caption[Communities in the species projection of the family-aggregated UB SCN]{ Communities in the species projection of the family-aggregated UB SCN (from Figure \ref{fig:ub_scn_agg_family_general}). In order to improve visualization, communities with scores lower than $600$ were omitted from the figure. Colors are used to distinguish communities and nodes sizes reflect families prevalence in the dataset.
         Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_scn_projSp}).}
     \label{fig:ub_scn_family_projSp_communities}
 \end{figure}
@@ -666,7 +666,7 @@ The number of records as a function of team size seems to decay logarithmically.
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/casestudy_ub/team_sizes.pdf}
-    \caption[Percentage of occurrence records in the UB dataset for each team size.]{ Percentage of occurrence records in the UB dataset for each team size. The dashed line represents an exponential fit to the data (using team sizes from $1$ to $8$) using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records individualist collectors typically hold, with records numbers logarithmically binned using base $2$. }
+    \caption[Percentage of occurrence records in the UB dataset for each team size]{ Percentage of occurrence records in the UB dataset for each team size. The dashed line represents an exponential fit to the data (using team sizes from $1$ to $8$) using function $f(x) = 10^{\beta_0 + \beta_1 x}$ and parameters $\beta_0=0.16$ and $\beta_1=-0.38$. The inset figure shows the number of records individualist collectors typically hold, with records numbers logarithmically binned using base $2$. }
     \label{fig:ub_team_sizes}
 \end{figure}
 %
@@ -684,7 +684,7 @@ Such a topology suggests the existence of non-random processes ruling the probab
 \begin{figure}[!ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_degree_dist.pdf}
-    \caption[Degree distribution for the UB CWN.]{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
+    \caption[Degree distribution for the UB CWN]{ Degree distribution for the UB herbarium CWN network. Plot (a) shows, using a log-log scale, the probability $p_k$ of finding collectors with each value for $k$. The black line represents a power law function $p(k) \sim k^{-\alpha}$ fit to the data, with $\alpha=2.2$. Purple dots are linearly binned, showing the absolute number of nodes with each degree value. Black circles aggregate degree values by using logarithmic binning. Nodes with $k=0$ were omitted from this plot. Plot (b) shows the absolute number $N_k$ of nodes with each degree (including nodes with $k=0$) in a lin-log scale. The histogram in the background groups nodes degrees in bins of size $5$. }
     \label{fig:ub_cwn_degree_dist}
 \end{figure}
 
@@ -745,7 +745,7 @@ By inspecting Figure \ref{fig:ub_cwn_communities}, we verify that in fact all th
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_communities.pdf}
-    \caption[Coworking groups in the UB CWN.]{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Nodes sizes \luiz{Node sizes?} are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_cwn}).}
+    \caption[Coworking groups in the UB CWN]{ Coworking groups in a subset of the UB CWN. A total of $30$ distinct communities are differentiated by color. Sizes of nodes are proportional to the total number of records of collectors in the dataset. The strength of the ties between each pair of collectors is represented as links thickness. Graph layout was computed using the \textit{ForceAtlas2} algorithm \cite{Jacomy2014}. For a better visualization experience refer to the interactive version of the graph (\url{https://lncc-netsci.github.io/pedrocs/networks/ub_cwn}).}
     \label{fig:ub_cwn_communities}
 \end{figure}
 
@@ -812,7 +812,7 @@ Although our proposed CWN model does not incorporate the temporal dimension in i
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=\linewidth]{figures/casestudy_ub/cwn_temporal_evol.png}
-    \caption[Temporal evolution of the UB CWN.]{ Temporal evolution of the CWN shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). The layout of nodes in the figure is the same as from Figure \ref{fig:ub_cwn_communities}. For a better visualization experience refer to the animation in \url{https://lncc-netsci.github.io/pedrocs/video/ub_cwn_evo.mp4}}
+    \caption[Temporal evolution of the UB CWN]{ Temporal evolution of the UB CWN, shown in Figure \ref{fig:ub_cwn_communities}. Each frame corresponds to a period of $7$ years, and only collectors with significant activities in the respective periods are drawn in each frame. Nodes sizes are proportional to the total number of records of each collector up to the end of each period; and the thickness of ties are proportional to how intensively collectors have collaborated during each period (using the hyperbolic weighting rule). The layout of nodes in the figure is the same as from Figure \ref{fig:ub_cwn_communities}. For a better visualization experience refer to the animation in \url{https://lncc-netsci.github.io/pedrocs/video/ub_cwn_evo.mp4}}
     \label{fig:ub_cwn_temporal_evol}
 \end{figure}
 

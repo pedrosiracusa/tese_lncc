@@ -23,7 +23,8 @@ Such biological collections are typically hosted and curated by institutions lik
 
 In this chapter, we provide an overview of how data in biological collections is structured. 
 Before delving into the characterization of biodiversity data, we first review in Section~\ref{section:biodiversity_terms} the definitions of some domain-specific terms that will be used throughout this text. We then describe the semantics of species occurrence records in Section~\ref{section:occurrence_data}.
-In Section~\ref{section:limitdata}, we discuss some aspects regarding the quality and limitations of such data. Finally, in Section~\ref{section:datareq}, we describe how we deal with these limitations.
+In Section~\ref{section:limitdata}, we discuss some aspects regarding the quality and limitations of such data. 
+Finally, in Section~\ref{section:datareq}, we present the main data quality requirements for our modeling approach.
  
 % =====================
 % Terms and Definitions
@@ -83,11 +84,11 @@ Vouchered specimens, together with their associated data, is what scientifically
 \begin{figure}[ht]
   	\centering
     \includegraphics[width=\linewidth]{figures/collections_data/occurrences_er.pdf}
-    \caption[Entity-relationship diagram illustrating the main features of occurrence records]{Entity-relationship diagram illustrating the main features of occurrence records. The cardinality of relationships is represented using the Crow's foot notation.}
+    \caption[Entity-relationship diagram illustrating the main features of species occurrence records]{Entity-relationship diagram illustrating the main features of species occurrence records. The cardinality of relationships is represented using the Crow's foot notation.}
     \label{fig:occurrences_er}
 \end{figure}
 
-\clearpage
+%\clearpage
 
 
 Over the last 40 years, many institutions have adopted digital database management systems---or in the simplest cases, electronic spreadsheets---for improving the management and accessibility of their specimens-related data~\cite{Sunderland2013}.
@@ -99,11 +100,13 @@ One important upside of storing species occurrence information digitally is that
 Some data aggregation initiatives, such as the Global Biodiversity Information Facility (GBIF), have provided technological solutions for serving data from multiple collections to researchers through programmatic and visual interfaces \cite{gbif}.
 In this context, it becomes relevant to represent data in an standardized and interchangeable format, such that records from distinct collections can be more seamlessly integrated.
 
-Darwin Core (DwC)\footnote{\url{http://rs.tdwg.org/dwc/}} is a body of standards designed to provide a consistent vocabulary for representing biodiversity-related information and making it exchangeable, accessible, reusable and interoperable \cite{Wieczorek2012}.
+Darwin Core (DwC)\footnote{\url{http://rs.tdwg.org/dwc/}} is a body of standards designed to provide a consistent vocabulary for describing biodiversity-related information and making it exchangeable, accessible, reusable and interoperable \cite{Wieczorek2012}.
 An extension of the Dublin Core Metadata Initiative~(DCMI)\footnote{\url{http://dublincore.org}}, DwC has been specifically created and adopted as a standard for publishing biodiversity data, composed of many terms to designate \textit{classes} of entities and their \textit{properties}.
 The \textit{Occurrence} class includes terms for representing many aspects of the gathering act \textit{per se}, documenting the existence of organisms at particular places and times.
 Taxonomic information of organisms is represented under the \textit{Taxon} class.
-Throughout this chapter, we refer to darwin core terms by prepending `\textit{dwc:}' to names (\textit{e.g.} the \textit{Occurrence} class becomes \textit{dwc:Occurrence} and the \textit{Taxon} class, \textit{dwc:Taxon}). \luiz{Tem também a classe {\em Event}, usada para amostragens periódicas, mas aí já foge um pouco de coleções biológicas, acho que pode deixar de fora. Talvez seja interessante mencionar que o futuro aponta para ontologias (p.ex. DOI:10.1371/journal.pone.0089606)}
+Throughout this chapter, we refer to darwin core terms by prepending `\textit{dwc:}' to names (\textit{e.g.} the \textit{Occurrence} class becomes \textit{dwc:Occurrence} and the \textit{Taxon} class, \textit{dwc:Taxon}).
+However, the set of terms and definitions provided by DwC does not allow for the representation of semantic structures involving multiple classes of concepts.
+The development of biodiversity \textit{ontologies}, which consist of domain-specific concepts, data and entities linked in an hierarchical structure, is a promising step towards overcoming such limitation \cite{Walls2014}.
 
 
 
@@ -279,14 +282,13 @@ Below we describe both information elements and highlight some of the main issue
 % ----------------------------------------
 \subsection{Collector names}\label{section:data_req_collector}
 This information element contains the names of all collectors who were responsible for a species occurrence record.
-From the field data domain \cite{Dalcin2005} \luiz{Essa frase ficou perdida ou não entendi}
 In a DwC-compliant dataset, collectors names should be found under the term (or field) \textit{dwc:recordedBy} (within class \textit{dwc:Occurrence}), formatted as a list of collectors names concatenated into a string, using the vertical bar (` | ') as the delimiter.
 For instance, a record authored by `M.A. Silva' and `N.T. Souza' would contain a string with value ``M.A. Silva | N.T. Souza''.
 However, storing multiple names into a single string makes values in this field \textit{non-atomic}, thus requiring additional processing for the retrieval of individual names.
 
 % names atomization
-We refer to the process of extracting multiple names by splitting the string on a delimiter character as the \textbf{names atomization} \luiz{name atomization?} routine, which is mandatory for our use case.
-Applying the names atomization \luiz{name atomization?} process to an entire dataset should be a trivial task if a consistent and non-conflicting delimiter (though not necessarily the vertical bar) is adopted throughout the entire dataset.
+We refer to the process of extracting multiple names by splitting the string on a delimiter character as the \textbf{name atomization} routine, which is mandatory for our use case.
+Applying the name atomization process to an entire dataset should be a trivial task if a consistent and non-conflicting delimiter (though not necessarily the vertical bar) is adopted throughout the entire dataset.
 However, we suspect this is rarely the case for most species occurrence datasets.
 Atomization issues arise when the atomization routine is unable to systematically distinguish names in a string, leading to the representation of unrealistic entities in the model.
 
@@ -301,7 +303,7 @@ As a result, names are eventually registered with typographical errors or being 
 
 % Heteronymous: result of inconsistent naming convention
 Another negative effect of inconsistently formating collector names is the insertion of multiple \textbf{name variants} referring to the same real-world entity (domain value redundance).
-This can also be the result of typos (e.g. souza becoming souza) \luiz{souza becoming sousa?}, or simply omitting parts of the name (e.g. if there are two collectors, A.~M.~Souza and A.~P.~Souza, omitting the middle initial makes their names indistinguishable).
+This can also be the result of typos (e.g. souza becoming sousa), or simply omitting parts of the name (e.g. if there are two collectors, A.~M.~Souza and A.~P.~Souza, omitting the middle initial makes their names indistinguishable).
 %
 The \textbf{entity-resolution} problem concerns the mapping of name variants that refer to the same real-world entity.
 \citeonline{Groom2014} came across the same problematic, considerable variations in the formats of names.
@@ -316,9 +318,8 @@ For instance, `João Souza Silva' and `Jorge Soares Silva' would be mapped to a 
 %
 Some collections include mechanisms in their naming conventions for disambiguating homonymous.
 For instance, a complementary field containing unique identifiers for collectors can be appended to each record in the dataset, allowing the identification and resolution of homonymous entities.
-Another approach would be making a
-assigned to each for collectors can be included in the associated to each collector in the database management system, such that \luiz{frase não foi concluída}
-
+Also, suspect homonymous entities that are already introduced in the dataset can be screened by applying anomaly detection techniques to other collector-related fields.
+For instance, an entity in the model displaying very improbable patterns of collecting activity (\textit{e.g.} activity peaks temporally spaced by 70 years) is likely to refer to multiple real-world entities.
 
 % Omission
 Finally, some collectors only include their own names in records in which they are first collectors, omitting the names of secondary collectors or, eventually, aggregating them under the expression `et al.'.
@@ -346,7 +347,8 @@ Although information about the level of expertise of the determiners is typicall
 
 \textbf{Misspelling errors} are also included in the accuracy dimension of taxonomic data quality \cite{Veiga2014}, and are introduced in the datasets in a variety of ways, including typographic errors (typos), encoding issues, and from the incorrect transcription of names from how they sound \cite{Dalcin2005}.
 Taxonomic authority files (files containing accepted taxonomic names) have been widely used for preventing the insertion of new invalid names during data entry; or for checking the validity of names already included in databases \cite{Chapman2005a}.
-In addition, \citeonline{Dalcin2005} \luiz{o Taxamatch (DOI:10.1371/journal.pone.0107510) aprofundou as técnicas do Dalcin e ganhou o prêmio Ebbe Nielsen do GBIF em 2014, vale à pena adicionar a ref.} has proposed the use of both phonetic and string similarity algorithms for automatically screening potential spelling errors, by matching pairs of slightly different names with high degrees of similarity.
+In addition, \citeonline{Dalcin2005} has proposed the use of both phonetic and string similarity algorithms for automatically screening potential spelling errors, by matching pairs of slightly different names with high degrees of similarity.
+Further development towards this direction has led to the development of \textit{Taxamatch} algorithm, having achieved remarkable results \cite{Rees2014a}. 
 
 The \textbf{precision dimension of taxonomic data} is related to the most specific rank at which a specimen can be identified, \textit{i.e.}, its taxonomic resolution \cite{Veiga2014}.
 Depending on the modeling requirements, a minimal taxonomic resolution may be necessary for the construction of the networks, making datasets more or less adequate for use.

@@ -111,7 +111,7 @@ Figure \ref{fig:graphs} shows an illustrative undirected weighted graph and thre
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.9\linewidth]{figures/network_models/graphs.png}
-    \caption[Undirected weighted graph and three of its possible representations]{Undirected weighted graph with six vertices and six edges (the thickness of an edge represents its weight); and three of its possible representations.}
+    \caption[Undirected weighted graph and three of its possible representations]{Undirected weighted graph and three of its possible representations. The graph is composed of six vertices and six edges, with edge thickness representing its weight.}
     \label{fig:graphs}
   \end{figure}
   
@@ -252,7 +252,7 @@ Therefore, bipartite projections into each vertex set provide complementary pers
 \begin{figure}[h!]
   	\centering
     \includegraphics[width=0.5\linewidth]{figures/bipartite_general.png}
-    \caption[General aspect of bipartite graphs and their projections.]{General aspect of a bipartite graph (a). All vertices in the graph belong to exactly one of $U$ and $V$ vertex sets. In addition, edges are only established between vertices from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together vertices that are at a length-2 distance in the bipartite graph, while omitting vertices from the opposite set.}
+    \caption[General aspect of bipartite graphs and their projections]{General aspect of a bipartite graph (a). All vertices in the graph belong to exactly one of $U$ and $V$ vertex sets. In addition, edges are only established between vertices from distinct sets. (b) Bipartite projections. Projections onto each node set are constructed by linking together vertices that are at a length-2 distance in the bipartite graph, while omitting vertices from the opposite set.}
     \label{fig:bipartite_general}
   \end{figure}
 
@@ -369,7 +369,7 @@ The network models we propose in the following section help characterizing colle
 
 % ===========================
 % ===========================
-% Species-collectors Networks
+% Species-collector Networks
 % ---------------------------
 
 \section{Species-Collector Networks}
@@ -418,7 +418,7 @@ The network is built up from the dataset in an iterative process, in which weigh
 For each new record containing $n$ collectors, $n$ links connecting each individual collector to the recorded species are created (or strengthened, in case they already exist).
 In the end of the process, the strength of each link is equivalent to the number of times each species-collector association appears in the original dataset.
 The more often a given collector records a particular species, the stronger becomes the link between them.
-Moreover, as at least one additional link is necessarily either created or reinforced for each new row, the construction process guarantees that no disconnected species or collector nodes can possibly exist in a species-collectors network.
+Moreover, as at least one additional link is necessarily either created or reinforced for each new row, the construction process guarantees that no disconnected species or collector nodes can possibly exist in a species-collector network.
 For a concrete example, the dataset used for creating Figure \ref{fig:scn_general} is given in Table \ref{table:scn_example_dataset}.
 
 \begin{table}[!ht]
@@ -601,7 +601,7 @@ sim(\iota_{v_s},\iota_{v_t}) &\equiv
 \end{equation}
 
 Therefore, each element in the similarity matrix holds the edge weight for a pair of nodes, with a value ranging within the interval $[0,1]$. Edge weights are zero-valued if no direct link exists between two nodes,  whereas nodes linked by edges with a weight of $1$ have identical species bags or quorum vectors. Intermediate values reflect the cosine similarity measure obtained for each node pair.
-As this rule outputs weight values that are ranged in a known interval, filtering less relevant links becomes much more straightforward. Depending on the aspects regarding the species-collectors system an investigator might be interested in, a filtering threshold $\phi$ can be set based on the minimum similarity value he/she considers acceptable, such that only the most relevant relationships for that particular analysis are kept.
+As this rule outputs weight values that are ranged in a known interval, filtering less relevant links becomes much more straightforward. Depending on the aspects regarding the species-collector system an investigator might be interested in, a filtering threshold $\phi$ can be set based on the minimum similarity value he/she considers acceptable, such that only the most relevant relationships for that particular analysis are kept.
 %%% check neighborhood similarity functions in literature
 %% Edges pruning
 
@@ -617,7 +617,7 @@ As this rule outputs weight values that are ranged in a known interval, filterin
 
 % =============================
 % =============================
-% Collectors Coworking Networks
+% Collector Coworking Networks
 % -----------------------------
 %
 % As in this model it is possible for even for collaborative collectors to record some records alone, the weighted degree is not necessarily equivalent to his/her total number of records. Instead, it is equivalent to his/her total number of collaborative records.
@@ -637,7 +637,7 @@ For records with team size equal to $1$, which we refer to as non-collaborative 
   \begin{figure}[h!]
   	\centering
     \includegraphics[width=.4\linewidth]{figures/network_models/cwn_generalaspect.pdf}
-    \caption[General illustration of a Collector CoWorking Network (CWN).]{General aspect of a Collector CoWorking Network (CWN). Coauthoring relationships between collectors (nodes) are structured as edges in the graph, graphically represented as gray lines.
+    \caption[General aspect of a Collector CoWorking Network (CWN)]{General aspect of a Collector CoWorking Network (CWN). Coauthoring relationships between collectors (nodes) are structured as edges in the graph, graphically represented as gray lines.
     Nodes are sized according to the absolute number of records collectors have authored; and edge weight represents the strengtheness of collaborative ties between two collectors.}
     \label{fig:cwn_general}
   \end{figure}
@@ -700,7 +700,7 @@ The field containing species identities, although not required, can be optionall
 Table~\ref{table:cwn_example_dataset} shows the species occurrence dataset that was used to build the graph in Figure~\ref{fig:cwn_general}.
 
 \begin{table}[!ht]
-  \caption{Species occurrence dataset from which the CWN model in Figure \ref{fig:cwn_general} was built. The \textit{species} field is not strictly required for building CWN models.}
+  \caption[Species occurrence dataset from which the CWN model in Figure \ref{fig:cwn_general} was built]{Species occurrence dataset from which the CWN model in Figure \ref{fig:cwn_general} was built. The \textit{species} field is not strictly required for building CWN models.}
   \begin{center}
   \begin{tabular}{r l c}
       id & recordedBy & species \\

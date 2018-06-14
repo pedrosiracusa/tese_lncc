@@ -397,8 +397,8 @@ I would also like to express my most sincere gratitude to my research supervisor
 all my professors at LNCC, in special to Dr. Fábio Porto, for the research supervision during my first year in the program;
 and all staff at LNCC, in special to Ana Néri and Roberta Machado for being always so nice and willing to help.
 
-Finally, I thank all hardworking Brazilian taxpayers for supporting science in our country and for my scholarship, granted to me through the National Council for the Scientific and Technological Development (CNPq); Dr. Carolyn Proença and Dr. Cássia Munhoz for some thoughts in the case study; and the researchers who accepted our invitation for composing the dissertation defense committee. 
-\\[1\baselineskip]
+Finally, I thank all hardworking Brazilian taxpayers for supporting science in our country and for my scholarship, granted to me through the National Council for the Scientific and Technological Development (CNPq); Dr. Eduardo Dalcin and Dr. Marinez Siqueira for providing insightful comments along the development of this work; Dr. Carolyn Proença and Dr. Cássia Munhoz for some thoughts in the case study; and the researchers who accepted our invitation for composing the dissertation defense committee. 
+\\[.2\baselineskip]
 
 \begin{footnotesize}
 \textit{Gostaria de agradecer imensamente a todos que, de alguma forma, contribuíram para a execução deste trabalho.
@@ -412,7 +412,7 @@ a todos meus professores no LNCC, em especial ao Dr. Fábio Porto, pela orienta�
 e a toda a equipe de apoio no LNCC, em especial à Ana Néri e Roberta Machado, por serem pessoas tão agradáveis e sempre dispostas a ajudar.}
 
 
-\textit{Finalmente, agradeço a todos os Brasileiros trabalhadores e pagadores de impostos, pelo apoio à ciência nacional e pela minha bolsa, concedida a mim através do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq); Dra. Carolyn Proença e Dra. Cássia Munhoz por algumas ideias no estudo de caso; e aos pesquisadores que aceitaram o convite a compor a banca de avaliação desta dissertação.}
+\textit{Finalmente, agradeço a todos os Brasileiros trabalhadores e pagadores de impostos, pelo apoio à ciência nacional e pela minha bolsa, concedida a mim através do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq); Dr. Eduardo Dalcin e Dra. Marinez Siqueira por terem fornecido comentários valiosos ao longo do desenvolvimento deste trabalho; Dra. Carolyn Proença e Dra. Cássia Munhoz por algumas ideias no estudo de caso; e aos pesquisadores que aceitaram o convite a compor a banca de avaliação desta dissertação.}
 \end{footnotesize}
 
 \end{agradecimentos}
@@ -438,16 +438,17 @@ e a toda a equipe de apoio no LNCC, em especial à Ana Néri e Roberta Machado, 
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}
 \begin{small}
-Biological collections have been historically regarded as fundamental sources of scientific information on biodiversity, supporting a wide range of scientific and management initiatives in the scope of natural resources conservation. As they are typically composed of records of specimens (most of which derived from non-random and opportunistic sampling), biological collection datasets are commonly associated with a variety of biases, which must be characterized and mitigated before data can be consumed.
+Biological collections have been historically regarded as fundamental sources of scientific information on biodiversity, supporting a wide range of scientific and management initiatives in the scope of natural resources conservation. As they are typically composed of punctual records of specimens (most of which derived from non-random and opportunistic sampling), biological collection datasets are commonly associated with a variety of biases, which must be characterized and mitigated before data can be consumed.
 
-In this dissertation, we focus on taxonomic and collector biases, which can be understood as the effect of particular recording preferences of key collectors on shaping the overall taxonomic composition of biological collections they contribute to. In this context, we propose two network models as the first steps towards a network-based conceptual framework for understanding the formation of biological collections as a result of the composition of collectors' interests and activities. Both models extend the well-established framework of social network analytics, benefiting from a whole set of metrics and algorithms for characterizing network topological features.
+In this dissertation, we are particularly motivated by taxonomic and collector biases, which can be understood as the effect of particular recording preferences of key collectors on shaping the overall taxonomic composition of biological collections they contribute to. In this context, we propose two network models as the first steps towards a network-based conceptual framework for understanding the formation of biological collections as a result of the composition of collectors' interests and activities. Both models extend the well-established framework of social network analytics, benefiting from a whole set of metrics and algorithms for characterizing network topological features.
 
 \textbf{Species-Collector Networks} (SCNs) model the interests of collectors towards particular species, and are structured by linking collectors to each species they have recorded in biological collection datasets. From complementary perspectives, SCNs allow one to investigate which collectors share common interest for sets of species; and conversely, which species are usually recorded by similar sets of collectors.
 
-\textbf{Collector CoWorking Networks} (CWNs) are a special type of collaboration networks, structured from collaborative ties  that are formed between collectors who record specimens together in field. Such collaborative ties are created between pairs of collectors whenever they are both included as collectors in the same record.
+\textbf{Collector CoWorking Networks} (CWNs) are a special type of collaboration networks, structured from collaboration ties  that are formed between collectors who record specimens together in field. Such collaborative ties are created between pairs of collectors whenever they are both included as collectors in the same record.
 
 Building upon the defined network models, we also present a case study in which we use our models to explore the community of collectors and the taxonomic composition of the University of Brasília herbarium. We describe general topological features of the networks and point out some of the most relevant collectors in the biological collection as well as their taxonomic groups of interest. We also investigate the collaborative behavior of collectors while recording specimens.
-Finally, we discuss future perspectives for incorporating temporal and geographical dimensions. Moreover, we indicate some possible investigation directions that could possibly benefit from our approach based on social network analytics to model and analyze biological collections.
+Finally, we discuss future perspectives for incorporating temporal and geographical dimensions to the models. 
+Moreover, we indicate some possible investigation directions that could possibly benefit from our approach based on social network analytics to model and analyze biological collections.
 
 \textbf{\palavrasChave}: Biodiversity Informatics; Biological Collections; Social Networks; Complex Networks.
 \end{small}
@@ -469,12 +470,12 @@ Finally, we discuss future perspectives for incorporating temporal and geographi
 Coleções biológicas são consideradas fundamentais fontes de informação científica sobre biodiversidade, tendo historicamente suportado uma ampla gama de iniciativas para conservação de recursos naturais.
 Por serem tipicamente compostas de registros pontuais de espécies (muitos dos quais derivam de amostragem não-aleatória e oportunística), dados de coleções biológicas são comumente associados a uma variedade de vieses, que precisam ser caracterizados e mitigados antes que dados possam ser consumidos.
 
-Nesta dissertação focamos nos vieses taxonômico e de coletor, que podem ser compreendidos como o efeito de preferências pessoais de coletores-chave na composição taxonômica das coleções com as quais eles contribuem.
+Nesta dissertação temos como principal motivação os vieses taxonômico e de coletor, que podem ser compreendidos como o efeito de preferências pessoais de coletores-chave na composição taxonômica das coleções com as quais eles contribuem.
 Neste contexto, propomos dois modelos de redes como um primeiro passo para um modelo conceitual, com o objetivo de compreender a formação de coleções biológicas como resultado da composição dos interesses e atividades de seus coletores.
-Os modelos extendem o campo bem estabelecido da análise de redes sociais, se beneficiando de uma variedade de métricas e algoritmos para a caracterização de aspectos topológicos.
+Os modelos extendem o campo bem estabelecido da análise de redes sociais, beneficiando de uma variedade de métricas e algoritmos para a caracterização de aspectos topológicos.
 
 \textbf{Redes Espécie-Coletor} (SCNs) modelam os interesses dos coletores em espécies, e se estruturam por meio de enlaces entre coletores e espécies que eles registram.
-De forma complementar, SCNs permitem tanto a investigação de coletores compartilhando interesses comuns em conjuntos de espécies; quanto quais espécies são normalmente coletadas por conjuntos similares de coletores.
+De forma complementar, SCNs permitem tanto a investigação de coletores compartilhando interesses comuns em conjuntos de espécies; quanto de espécies normalmente coletadas por conjuntos similares de coletores.
 
 \textbf{Redes Colaborativas de Coletores} (CWNs) são um tipo especial de redes de colaboração, estruturadas a partir de enlaces colaborativos que se formam entre coletores que registram espécies em conjunto em campo.
 Tais relações de colaboração são criadas entre pares de coletores caso ambos tenham sido incluídos como coletores responsáveis pelo mesmo registro.
@@ -482,7 +483,7 @@ Tais relações de colaboração são criadas entre pares de coletores caso ambo
 Com base nos modelos definidos, nós também apresentamos um estudo de caso em que exploramos a comunidae de coletores e a composição taxonômica dos herbário da Universidade de Brasília.
 Descrevemos aspectos toplógicos gerais das redes e indicamos alguns dos coletores mais relevantes na coleção, bem como grupos taxonômicos de seus respectivos interesses.
 Nós também investigamos o comportamento colaborativo de coletores durante a coleta de espécimes.
-Ao final, discutimos perspectivas futuras para incorporar dimensões temporal e geográfica.
+Ao final, discutimos perspectivas futuras para a incorporação das dimensões temporal e geográfica nos modelos.
 Também indicamos algumas possíveis direções de investigação que poderiam se beneficiar de nossa abordagem para a modelagem e análise de coleções biológicas.
 
 \textbf{Palavras-chave}: Informática na Biodiversidade; Coleções Biológicas; Redes Sociais; Redes Complexas.
